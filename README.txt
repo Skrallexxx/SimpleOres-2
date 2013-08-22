@@ -1,18 +1,19 @@
 Version 1.0.2
--Core:
-	-Fusion Furnace is now an optional plugin. Added far better plugin support.
-	-Fixed a localisation bug (there were 2 sections for bow tooltips)
-	-Added coal blocks to the fuel list for Mythril and Onyx Furnaces.
-	-Fixed the fatal onyx door bug.
-	-I have re-done most of the textures, including alloy textures, to be a bit more consistent.
-	-The new Plugin API includes support for adding blocks, items, tools, armor and loot.
--Fusion Furnace Plugin:
-	-Fusion Furnace now gives experience when you create a chunk.
-	-Added coal blocks to the fuel list for the Fusion Furnace.
-	-Small and medium chunks now craft into a large chunk. The large chunk can then be smelted into an ingot.
-	-Reduced smelting time by 25% (because you have to smelt it in a regular furnace again, which adds that 25% 	back on :P)
-	-Changed the enchantability of the alloys. They are now 6, 28 and 11 for bronze, thyrium and sinisite 	respectively.
-	-Other plugins can add recipes to the Fusion Furnace.
+Core:
+-Fusion Furnace is now an optional plugin. Added far better plugin support.
+-Fixed a localisation bug (there were 2 sections for bow tooltips)
+-Added coal blocks to the fuel list for Mythril and Onyx Furnaces.
+-Fixed the fatal onyx door bug.
+-I have re-done most of the textures, including alloy textures, to be a bit more consistent.
+-The new Plugin API includes support for adding blocks, items, tools, armor and loot.
+
+Fusion Furnace Plugin:
+-Fusion Furnace now gives experience when you create a chunk.
+-Added coal blocks to the fuel list for the Fusion Furnace.
+-Small and medium chunks now craft into a large chunk. The large chunk can then be smelted into an ingot.
+-Reduced smelting time by 25% (because you have to smelt it in a regular furnace again, which adds that 25% 	back on :P)
+-Changed the enchantability of the alloys. They are now 6, 28 and 11 for bronze, thyrium and sinisite 	respectively.
+-Other plugins can add recipes to the Fusion Furnace.
 	
 Version 1.0.1
 -Fixed tin smelting recipe.
