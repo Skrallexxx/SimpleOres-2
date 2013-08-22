@@ -1,9 +1,3 @@
-SimpleOres-2
-============
-
-Changelog:
-
-
 Version 1.0.2
 -Core:
 	-Fusion Furnace is now an optional plugin. Added far better plugin support.
