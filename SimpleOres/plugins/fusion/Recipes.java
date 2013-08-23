@@ -164,7 +164,7 @@ public class Recipes
 	
 		    //Regular Furnace
 				GameRegistry.addSmelting(Content.largeBronzeChunk.itemID, new ItemStack(Content.bronzeIngot, 1, 0), 0.3F);
-				GameRegistry.addSmelting(Content.largeThyriumChunk.itemID, new ItemStack(Content.bronzeIngot, 1, 0), 0.6F);
-				GameRegistry.addSmelting(Content.largeSinisiteChunk.itemID, new ItemStack(Content.bronzeIngot, 1, 0), 1.0F);
+				GameRegistry.addSmelting(Content.largeThyriumChunk.itemID, new ItemStack(Content.thyriumIngot, 1, 0), 0.6F);
+				GameRegistry.addSmelting(Content.largeSinisiteChunk.itemID, new ItemStack(Content.sinisiteIngot, 1, 0), 1.0F);
 	}
 }
