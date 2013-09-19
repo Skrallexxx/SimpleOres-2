@@ -14,39 +14,38 @@ import SimpleOres.core.SimpleOres;
 import SimpleOres.core.Tools;
 import SimpleOres.core.conf.IDs;
 import SimpleOres.core.conf.Localisation;
-import net.minecraft.block.Block;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
+import net.minecraftforge.oredict.OreDictionary;
 
 public class FusionRecipes
 {
-	/**
-	 * Linking to the classes for easier reference.
-	 */
-	public static SimpleOres mod;
-	public static Achievements achievements;
-	public static Armor armor;
-	public static Blocks blocks;
-	public static IDs config;
-	public static Items items;
-	public static Localisation local;
-	public static Recipes recipes;
-	public static Tools tools;
-	
-	public static FurnaceRecipes furnaceRecipes;
-	public static int size;
-	
+    /**
+     * Linking to the classes for easier reference.
+     */
+    public static SimpleOres mod;
+    public static Achievements achievements;
+    public static Armor armor;
+    public static Blocks blocks;
+    public static IDs config;
+    public static Items items;
+    public static Localisation local;
+    public static Recipes recipes;
+    public static Tools tools;
+    
+    public static FurnaceRecipes furnaceRecipes;
+    public static int size;
+    
     private static final FusionRecipes smeltingBase = new FusionRecipes();
 
     /** The list of smelting and experience results. */
-    private Map recipeList = new HashMap();
+    private Map<String, ItemStack> recipeList = new HashMap<String, ItemStack>();
     private HashMap<List<Integer>, Float> experienceList = new HashMap<List<Integer>, Float>();
 
     /**
      * Used to call methods addSmelting and getSmeltingResult.
      */
-    public static final FusionRecipes smelting()
+    public static FusionRecipes smelting()
     {
         return smeltingBase;
     }
@@ -61,6 +60,53 @@ public class FusionRecipes
     {
 
     }
+
+    private String ingredientsToKey(ItemStack input1, ItemStack input2, ItemStack catalyst)
+    {
+        StringBuilder ingredients = new StringBuilder(32);
+
+        String strInput1;
+        String strInput2;
+        String strInput3;
+
+        if( input1!=null && input1.getItem()!=null ) {
+            int oreId1 = OreDictionary.getOreID(input1);
+            if( oreId1 > 0 )
+                strInput1 = "d:" + oreId1;
+            else
+                strInput1 = "" + input1.getItem().itemID;
+        }
+        else {
+            strInput1 = "null";
+        }
+
+        if( input2!=null && input2.getItem()!=null ) {
+            int oreId2 = OreDictionary.getOreID(input2);
+            if( oreId2 > 0 )
+                strInput2 = "d:" + oreId2;
+            else
+                strInput2 = "" + input2.getItem().itemID;
+        }
+        else {
+            strInput2 = "null";
+        }
+
+        if( catalyst!=null && catalyst.getItem()!=null ) {
+            int oreId3 = OreDictionary.getOreID(catalyst);
+            if( oreId3 > 0 )
+                strInput3 = "d:" + oreId3;
+            else
+                strInput3 = "" + catalyst.getItem().itemID;
+        }
+        else {
+            strInput3 = "null";
+        }
+
+        return ingredients
+                .append(strInput1).append("%")
+                .append(strInput2).append("%")
+                .append(strInput3).toString();
+    }
     
     /**
      * Adds the smelting recipes. It converts input1, input2 and catalyst into the form id1_id2_id3.
@@ -72,18 +118,15 @@ public class FusionRecipes
      */
     public void addSmelting(ItemStack input1, ItemStack input2, ItemStack catalyst, ItemStack output, float experience)
     {
-    	StringBuffer ingredients = new StringBuffer(32);
-    	StringBuffer ingredients1 = new StringBuffer(32);
-    	
-    	ingredients.append(input1.getItem().itemID).append("_").append(input2.getItem().itemID).append("_").append(catalyst.getItem().itemID);
-    	ingredients1.append(input2.getItem().itemID).append("_").append(input1.getItem().itemID).append("_").append(catalyst.getItem().itemID);
-    	
-    	recipeList.put(ingredients.toString(), output);
-    	recipeList.put(ingredients1.toString(), output);
-    	
-    	experienceList.put(Arrays.asList(output.itemID, output.getItemDamage()), experience);
-    	
-    	size = recipeList.size();
+        String ingredients1 = this.ingredientsToKey(input1, input2, catalyst);
+        String ingredients2 = this.ingredientsToKey(input2, input1, catalyst);
+
+        recipeList.put(ingredients1, output);
+        recipeList.put(ingredients2, output);
+        
+        experienceList.put(Arrays.asList(output.itemID, output.getItemDamage()), experience);
+        
+        size = recipeList.size();
     }
     
     /**
@@ -92,11 +135,9 @@ public class FusionRecipes
      */
     public ItemStack getSmeltingResult(ItemStack input1, ItemStack input2, ItemStack catalyst)
     {
-    	StringBuffer ingredients = new StringBuffer(32);
-    	
-    	ingredients.append(input1.getItem().itemID).append("_").append(input2.getItem().itemID).append("_").append(catalyst.getItem().itemID);
-    	
-    	return (ItemStack) recipeList.get(ingredients.toString());
+        String key = this.ingredientsToKey(input1, input2, catalyst);
+
+        return recipeList.get(key);
     }
     
     /**
