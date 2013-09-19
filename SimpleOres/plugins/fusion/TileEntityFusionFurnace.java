@@ -344,16 +344,17 @@ public class TileEntityFusionFurnace extends TileEntity implements ISidedInvento
      */    
     private boolean canSmelt()
     {
-        if(this.furnaceItemStacks[0] != null && this.furnaceItemStacks[3] != null && this.furnaceItemStacks[4] != null)
-        {
-        	ItemStack itemstack = FusionRecipes.smelting().getSmeltingResult(this.furnaceItemStacks[0], this.furnaceItemStacks[3], this.furnaceItemStacks[4]);
-       		if (itemstack == null) return false;
-    		if (this.furnaceItemStacks[2] == null) return true;
-    		if (!this.furnaceItemStacks[2].isItemEqual(itemstack)) return false;
-    		int result = furnaceItemStacks[2].stackSize + itemstack.stackSize;
-    		return (result <= getInventoryStackLimit() && result <= itemstack.getMaxStackSize());
-        }
-		return false;
+        if( this.furnaceItemStacks[0]==null && this.furnaceItemStacks[3]==null && this.furnaceItemStacks[4]==null )
+            return false;
+        ItemStack itemstack = FusionRecipes.smelting().getSmeltingResult(
+                this.furnaceItemStacks[0],
+                this.furnaceItemStacks[3],
+                this.furnaceItemStacks[4]);
+        if (itemstack == null) return false;
+        if (this.furnaceItemStacks[2] == null) return true;
+        if (!this.furnaceItemStacks[2].isItemEqual(itemstack)) return false;
+        int result = furnaceItemStacks[2].stackSize + itemstack.stackSize;
+        return (result <= getInventoryStackLimit() && result <= itemstack.getMaxStackSize());
     }
     
 
