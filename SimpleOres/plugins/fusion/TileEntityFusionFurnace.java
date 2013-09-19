@@ -344,6 +344,8 @@ public class TileEntityFusionFurnace extends TileEntity implements ISidedInvento
      */    
     private boolean canSmelt()
     {
+        if( this.furnaceItemStacks[0]==null && this.furnaceItemStacks[3]==null && this.furnaceItemStacks[4]==null )
+            return false;
         ItemStack itemstack = FusionRecipes.smelting().getSmeltingResult(
                 this.furnaceItemStacks[0],
                 this.furnaceItemStacks[3],
