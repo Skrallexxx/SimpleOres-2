@@ -39,7 +39,7 @@ public class FusionRecipes
     private static final FusionRecipes smeltingBase = new FusionRecipes();
 
     /** The list of smelting and experience results. */
-    private Map<String, ItemStack> recipeList = new HashMap<String, ItemStack>();
+    private Map<FusionRecipeInput, ItemStack> recipeList = new HashMap<FusionRecipeInput, ItemStack>();
     private HashMap<List<Integer>, Float> experienceList = new HashMap<List<Integer>, Float>();
 
     /**
@@ -48,6 +48,11 @@ public class FusionRecipes
     public static FusionRecipes smelting()
     {
         return smeltingBase;
+    }
+
+    public Map<FusionRecipeInput, ItemStack> getRecipes()
+    {
+        return this.recipeList;
     }
 
     /**
@@ -61,53 +66,6 @@ public class FusionRecipes
 
     }
 
-    private String ingredientsToKey(ItemStack input1, ItemStack input2, ItemStack catalyst)
-    {
-        StringBuilder ingredients = new StringBuilder(32);
-
-        String strInput1;
-        String strInput2;
-        String strInput3;
-
-        if( input1!=null && input1.getItem()!=null ) {
-            int oreId1 = OreDictionary.getOreID(input1);
-            if( oreId1 > 0 )
-                strInput1 = "d:" + oreId1;
-            else
-                strInput1 = "" + input1.getItem().itemID;
-        }
-        else {
-            strInput1 = "null";
-        }
-
-        if( input2!=null && input2.getItem()!=null ) {
-            int oreId2 = OreDictionary.getOreID(input2);
-            if( oreId2 > 0 )
-                strInput2 = "d:" + oreId2;
-            else
-                strInput2 = "" + input2.getItem().itemID;
-        }
-        else {
-            strInput2 = "null";
-        }
-
-        if( catalyst!=null && catalyst.getItem()!=null ) {
-            int oreId3 = OreDictionary.getOreID(catalyst);
-            if( oreId3 > 0 )
-                strInput3 = "d:" + oreId3;
-            else
-                strInput3 = "" + catalyst.getItem().itemID;
-        }
-        else {
-            strInput3 = "null";
-        }
-
-        return ingredients
-                .append(strInput1).append("%")
-                .append(strInput2).append("%")
-                .append(strInput3).toString();
-    }
-    
     /**
      * Adds the smelting recipes. It converts input1, input2 and catalyst into the form id1_id2_id3.
      * 
@@ -118,12 +76,9 @@ public class FusionRecipes
      */
     public void addSmelting(ItemStack input1, ItemStack input2, ItemStack catalyst, ItemStack output, float experience)
     {
-        String ingredients1 = this.ingredientsToKey(input1, input2, catalyst);
-        String ingredients2 = this.ingredientsToKey(input2, input1, catalyst);
+        FusionRecipeInput fri = new FusionRecipeInput(input1, input2, catalyst);
 
-        recipeList.put(ingredients1, output);
-        recipeList.put(ingredients2, output);
-        
+        recipeList.put(fri, output);
         experienceList.put(Arrays.asList(output.itemID, output.getItemDamage()), experience);
         
         size = recipeList.size();
@@ -135,9 +90,9 @@ public class FusionRecipes
      */
     public ItemStack getSmeltingResult(ItemStack input1, ItemStack input2, ItemStack catalyst)
     {
-        String key = this.ingredientsToKey(input1, input2, catalyst);
+        FusionRecipeInput fri = new FusionRecipeInput(input1, input2, catalyst);
 
-        return recipeList.get(key);
+        return recipeList.get(fri);
     }
     
     /**
@@ -167,6 +122,69 @@ public class FusionRecipes
     public Map getRecipeList()
     {
         return recipeList;
+    }
+
+    public static class FusionRecipeInput extends Object {
+        public ItemStack leftInput;
+        public ItemStack rightInput;
+        public ItemStack catalyst;
+
+        public FusionRecipeInput(ItemStack left, ItemStack right, ItemStack catalyst) {
+            this.leftInput = (left);
+            this.rightInput = (right);
+            this.catalyst = (catalyst);
+        }
+
+        public boolean utilizes(ItemStack is) {
+            boolean matches = false;
+            matches = OreDictionary.itemMatches(is, leftInput, false);
+            if( matches )
+                return true;
+
+            matches = OreDictionary.itemMatches(is, rightInput, false);
+            if( matches )
+                return true;
+
+            matches = OreDictionary.itemMatches(is, catalyst, false);
+            return matches;
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if( ! (o instanceof FusionRecipeInput) )
+                return false;
+            return this.hashCode()==o.hashCode();
+        }
+
+        @Override
+        public int hashCode() {
+            int hash = 1;
+            int l = OreDictionary.getOreID(this.leftInput);
+            int r = OreDictionary.getOreID(this.rightInput);
+            int c = OreDictionary.getOreID(this.catalyst);
+
+            if( l > 0 )
+                hash = hash + 18 * l;
+            else if( leftInput!=null )
+                hash = hash + 18*(leftInput.getItem().itemID + leftInput.getItemDamage());
+
+            if( r > 0 )
+                hash = hash + 18 * r;
+            else if( rightInput!=null )
+                hash = hash + 18*(rightInput.getItem().itemID + rightInput.getItemDamage());
+
+            if( c > 0 )
+                hash = hash * 43*(catalyst.getItem().itemID + 13*catalyst.getItemDamage());
+            else if( catalyst!=null )
+                hash = hash * 43*(catalyst.getItem().itemID + 13*catalyst.getItemDamage());
+
+            return hash;
+        }
+
+        @Override
+        public String toString() {
+            return "fri-" + hashCode();
+        }
     }
        
 }
