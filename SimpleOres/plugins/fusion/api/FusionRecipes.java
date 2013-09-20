@@ -14,41 +14,45 @@ import SimpleOres.core.SimpleOres;
 import SimpleOres.core.Tools;
 import SimpleOres.core.conf.IDs;
 import SimpleOres.core.conf.Localisation;
-import net.minecraft.block.Block;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
+import net.minecraftforge.oredict.OreDictionary;
 
 public class FusionRecipes
 {
-	/**
-	 * Linking to the classes for easier reference.
-	 */
-	public static SimpleOres mod;
-	public static Achievements achievements;
-	public static Armor armor;
-	public static Blocks blocks;
-	public static IDs config;
-	public static Items items;
-	public static Localisation local;
-	public static Recipes recipes;
-	public static Tools tools;
-	
-	public static FurnaceRecipes furnaceRecipes;
-	public static int size;
-	
+    /**
+     * Linking to the classes for easier reference.
+     */
+    public static SimpleOres mod;
+    public static Achievements achievements;
+    public static Armor armor;
+    public static Blocks blocks;
+    public static IDs config;
+    public static Items items;
+    public static Localisation local;
+    public static Recipes recipes;
+    public static Tools tools;
+    
+    public static FurnaceRecipes furnaceRecipes;
+    public static int size;
+    
     private static final FusionRecipes smeltingBase = new FusionRecipes();
 
     /** The list of smelting and experience results. */
-    private Map recipeList = new HashMap();
+    private Map<FusionRecipeInput, ItemStack> recipeList = new HashMap<FusionRecipeInput, ItemStack>();
     private HashMap<List<Integer>, Float> experienceList = new HashMap<List<Integer>, Float>();
 
     /**
      * Used to call methods addSmelting and getSmeltingResult.
      */
-    public static final FusionRecipes smelting()
+    public static FusionRecipes smelting()
     {
         return smeltingBase;
+    }
+
+    public Map<FusionRecipeInput, ItemStack> getRecipes()
+    {
+        return this.recipeList;
     }
 
     /**
@@ -61,7 +65,7 @@ public class FusionRecipes
     {
 
     }
-    
+
     /**
      * Adds the smelting recipes. It converts input1, input2 and catalyst into the form id1_id2_id3.
      * 
@@ -72,18 +76,12 @@ public class FusionRecipes
      */
     public void addSmelting(ItemStack input1, ItemStack input2, ItemStack catalyst, ItemStack output, float experience)
     {
-    	StringBuffer ingredients = new StringBuffer(32);
-    	StringBuffer ingredients1 = new StringBuffer(32);
-    	
-    	ingredients.append(input1.getItem().itemID).append("_").append(input2.getItem().itemID).append("_").append(catalyst.getItem().itemID);
-    	ingredients1.append(input2.getItem().itemID).append("_").append(input1.getItem().itemID).append("_").append(catalyst.getItem().itemID);
-    	
-    	recipeList.put(ingredients.toString(), output);
-    	recipeList.put(ingredients1.toString(), output);
-    	
-    	experienceList.put(Arrays.asList(output.itemID, output.getItemDamage()), experience);
-    	
-    	size = recipeList.size();
+        FusionRecipeInput fri = new FusionRecipeInput(input1, input2, catalyst);
+
+        recipeList.put(fri, output);
+        experienceList.put(Arrays.asList(output.itemID, output.getItemDamage()), experience);
+        
+        size = recipeList.size();
     }
     
     /**
@@ -92,11 +90,9 @@ public class FusionRecipes
      */
     public ItemStack getSmeltingResult(ItemStack input1, ItemStack input2, ItemStack catalyst)
     {
-    	StringBuffer ingredients = new StringBuffer(32);
-    	
-    	ingredients.append(input1.getItem().itemID).append("_").append(input2.getItem().itemID).append("_").append(catalyst.getItem().itemID);
-    	
-    	return (ItemStack) recipeList.get(ingredients.toString());
+        FusionRecipeInput fri = new FusionRecipeInput(input1, input2, catalyst);
+
+        return recipeList.get(fri);
     }
     
     /**
@@ -126,6 +122,69 @@ public class FusionRecipes
     public Map getRecipeList()
     {
         return recipeList;
+    }
+
+    public static class FusionRecipeInput extends Object {
+        public ItemStack leftInput;
+        public ItemStack rightInput;
+        public ItemStack catalyst;
+
+        public FusionRecipeInput(ItemStack left, ItemStack right, ItemStack catalyst) {
+            this.leftInput = (left);
+            this.rightInput = (right);
+            this.catalyst = (catalyst);
+        }
+
+        public boolean utilizes(ItemStack is) {
+            boolean matches = false;
+            matches = OreDictionary.itemMatches(is, leftInput, false);
+            if( matches )
+                return true;
+
+            matches = OreDictionary.itemMatches(is, rightInput, false);
+            if( matches )
+                return true;
+
+            matches = OreDictionary.itemMatches(is, catalyst, false);
+            return matches;
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if( ! (o instanceof FusionRecipeInput) )
+                return false;
+            return this.hashCode()==o.hashCode();
+        }
+
+        @Override
+        public int hashCode() {
+            int hash = 1;
+            int l = OreDictionary.getOreID(this.leftInput);
+            int r = OreDictionary.getOreID(this.rightInput);
+            int c = OreDictionary.getOreID(this.catalyst);
+
+            if( l > 0 )
+                hash = hash + 18 * l;
+            else if( leftInput!=null )
+                hash = hash + 18*(leftInput.getItem().itemID + leftInput.getItemDamage());
+
+            if( r > 0 )
+                hash = hash + 18 * r;
+            else if( rightInput!=null )
+                hash = hash + 18*(rightInput.getItem().itemID + rightInput.getItemDamage());
+
+            if( c > 0 )
+                hash = hash * 43*(catalyst.getItem().itemID + 13*catalyst.getItemDamage());
+            else if( catalyst!=null )
+                hash = hash * 43*(catalyst.getItem().itemID + 13*catalyst.getItemDamage());
+
+            return hash;
+        }
+
+        @Override
+        public String toString() {
+            return "fri-" + hashCode();
+        }
     }
        
 }

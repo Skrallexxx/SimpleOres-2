@@ -53,6 +53,11 @@ public class TileEntityFusionFurnace extends TileEntity implements ISidedInvento
 
     /**
      * The ItemStacks that hold the items currently being used in the furnace
+     * index 0 = left side input
+     * index 1 = fuel (coal, etc)
+     * index 2 = output
+     * index 3 = right side input
+     * index 4 = catalyst
      */
     private ItemStack[] furnaceItemStacks = new ItemStack[5];
 
@@ -344,16 +349,17 @@ public class TileEntityFusionFurnace extends TileEntity implements ISidedInvento
      */    
     private boolean canSmelt()
     {
-        if(this.furnaceItemStacks[0] != null && this.furnaceItemStacks[3] != null && this.furnaceItemStacks[4] != null)
-        {
-        	ItemStack itemstack = FusionRecipes.smelting().getSmeltingResult(this.furnaceItemStacks[0], this.furnaceItemStacks[3], this.furnaceItemStacks[4]);
-       		if (itemstack == null) return false;
-    		if (this.furnaceItemStacks[2] == null) return true;
-    		if (!this.furnaceItemStacks[2].isItemEqual(itemstack)) return false;
-    		int result = furnaceItemStacks[2].stackSize + itemstack.stackSize;
-    		return (result <= getInventoryStackLimit() && result <= itemstack.getMaxStackSize());
-        }
-		return false;
+        if( this.furnaceItemStacks[0]==null && this.furnaceItemStacks[3]==null && this.furnaceItemStacks[4]==null )
+            return false;
+        ItemStack itemstack = FusionRecipes.smelting().getSmeltingResult(
+                this.furnaceItemStacks[0],
+                this.furnaceItemStacks[3],
+                this.furnaceItemStacks[4]);
+        if (itemstack == null) return false;
+        if (this.furnaceItemStacks[2] == null) return true;
+        if (!this.furnaceItemStacks[2].isItemEqual(itemstack)) return false;
+        int result = furnaceItemStacks[2].stackSize + itemstack.stackSize;
+        return (result <= getInventoryStackLimit() && result <= itemstack.getMaxStackSize());
     }
     
 
@@ -364,36 +370,38 @@ public class TileEntityFusionFurnace extends TileEntity implements ISidedInvento
     {
         if (this.canSmelt())
         {
-        	ItemStack itemstack = FusionRecipes.smelting().getSmeltingResult(this.furnaceItemStacks[0], this.furnaceItemStacks[3], this.furnaceItemStacks[4]);
+        	ItemStack itemstack = FusionRecipes.smelting().getSmeltingResult(
+                    this.furnaceItemStacks[0],
+                    this.furnaceItemStacks[3],
+                    this.furnaceItemStacks[4]);
 
 
             if (this.furnaceItemStacks[2] == null)
             {
                 this.furnaceItemStacks[2] = itemstack.copy();
             }
-            
             else if (this.furnaceItemStacks[2].isItemEqual(itemstack))
             {
                 furnaceItemStacks[2].stackSize += itemstack.stackSize;
             }
 
-            --this.furnaceItemStacks[0].stackSize;
-            --this.furnaceItemStacks[3].stackSize;
-            --this.furnaceItemStacks[4].stackSize;
-
-            if (this.furnaceItemStacks[0].stackSize <= 0)
+            if( this.furnaceItemStacks[0]!=null )
             {
-                this.furnaceItemStacks[0] = null;
+                --this.furnaceItemStacks[0].stackSize;
+                if (this.furnaceItemStacks[0].stackSize <= 0)
+                    this.furnaceItemStacks[0] = null;
             }
-            
-            if (this.furnaceItemStacks[3].stackSize <= 0)
+            if( this.furnaceItemStacks[3]!=null )
             {
-                this.furnaceItemStacks[3] = null;
+                --this.furnaceItemStacks[3].stackSize;
+                if (this.furnaceItemStacks[3].stackSize <= 0)
+                    this.furnaceItemStacks[3] = null;
             }
-            
-            if (this.furnaceItemStacks[4].stackSize <= 0)
+            if( this.furnaceItemStacks[4]!=null )
             {
-                this.furnaceItemStacks[4] = null;
+                --this.furnaceItemStacks[4].stackSize;
+                if (this.furnaceItemStacks[4].stackSize <= 0)
+                    this.furnaceItemStacks[4] = null;
             }
         }
     }
@@ -427,7 +435,7 @@ public class TileEntityFusionFurnace extends TileEntity implements ISidedInvento
                     return 300 * 2;
                 }
                 
-                if (block == Block.field_111034_cE)
+                if (block == Block.coalBlock)
                 {
                     return 16000;
                 }
