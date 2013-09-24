@@ -6,6 +6,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.item.Item;
 import SimpleOres.core.conf.IDs;
 import SimpleOres.core.conf.Localisation;
+import SimpleOres.core.conf.Settings;
 import SimpleOres.core.item.SimpleBucket;
 import SimpleOres.core.item.SimpleDoorItem;
 import SimpleOres.core.api.SimpleIngot;
@@ -61,16 +62,19 @@ public class Items
 		onyxDoorItem = new SimpleDoorItem(config.onyxDoorItemID, "onyx").setUnlocalizedName("onyxDoor");
 		
 		//Item Naming
-		LanguageRegistry.addName(copperIngot, local.copperIngotName);
-		LanguageRegistry.addName(tinIngot, local.tinIngotName);
-		LanguageRegistry.addName(mythrilIngot, local.mythrilIngotName);
-		LanguageRegistry.addName(adamantiumIngot, local.adamantiumIngotName);	
-		LanguageRegistry.addName(onyxGem, local.onyxGemName);
-		LanguageRegistry.addName(copperBucket, local.copperBucketName);
-		LanguageRegistry.addName(copperBucketWater, local.copperBucketWaterName);
-		LanguageRegistry.addName(mythrilRod, local.mythrilRodName);
-		LanguageRegistry.addName(onyxRod, local.onyxRodName);
-		LanguageRegistry.addName(copperDoorItem, local.copperDoorName);
-		LanguageRegistry.addName(onyxDoorItem, local.onyxDoorName);
+		if(Settings.enableOldLocalisation)
+		{
+			LanguageRegistry.addName(copperIngot, local.copperIngotName);
+			LanguageRegistry.addName(tinIngot, local.tinIngotName);
+			LanguageRegistry.addName(mythrilIngot, local.mythrilIngotName);
+			LanguageRegistry.addName(adamantiumIngot, local.adamantiumIngotName);	
+			LanguageRegistry.addName(onyxGem, local.onyxGemName);
+			LanguageRegistry.addName(copperBucket, local.copperBucketName);
+			LanguageRegistry.addName(copperBucketWater, local.copperBucketWaterName);
+			LanguageRegistry.addName(mythrilRod, local.mythrilRodName);
+			LanguageRegistry.addName(onyxRod, local.onyxRodName);
+			LanguageRegistry.addName(copperDoorItem, local.copperDoorName);
+			LanguageRegistry.addName(onyxDoorItem, local.onyxDoorName);
+		}
 	}
 }

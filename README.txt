@@ -1,3 +1,20 @@
+Version 1.1.0
+Core:
+-Updated to Minecraft 1.6.4 and Forge 9.11.0.884.
+-SimpleOres 2 now has an integrated localisation which will change the language of SimpleOres when you change the language of Minecraft (if there is a language file available for your language).
+-Added a new Settings toggle to enable the old Localisation file if you wish.
+-Added an update checker. It will let you know if there is a new version of SimpleOres available. It won't do any updating itself.
+-Added a Settings toggle to turn off the update checker.
+-Changed the recipes involving sticks (ie. tools) to use OreDictionary sticks rather than normal ones. This will make them compatible with other mods that add different wood sticks, etc.
+-Tweaked spawn rates of copper and tin.
+-Tweaked tin stats very slightly.
+-[API] Split the SimpleOre class into SimpleOre and SimpleGemOre to allow support for dropping an item rather than the block itself.
+
+Fusion Plugin:
+Fixed it so that 5 items can be fused with no remaining energy.
+[API] Added proper meta-data compatibility for Fusion Furnace recipes.
+[API] Allowed the Fusion Furnace to use OreDictionary alternatives to items. This Furnace checks if there are any alternatives ingredients in the Dictionary, so no recipes will need to be modified.
+
 Version 1.0.2
 Core:
 -Fusion Furnace is now an optional plugin. Added far better plugin support.

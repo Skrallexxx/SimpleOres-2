@@ -1,6 +1,5 @@
 package SimpleOres.plugins.fusion;
 
-import SimpleOres.plugins.fusion.api.FusionRecipes;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.entity.item.EntityXPOrb;
 import net.minecraft.entity.player.EntityPlayer;

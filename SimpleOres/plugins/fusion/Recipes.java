@@ -1,6 +1,5 @@
 package SimpleOres.plugins.fusion;
 
-import SimpleOres.plugins.fusion.api.FusionRecipes;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
@@ -24,6 +23,8 @@ public class Recipes
 		OreDictionary.registerOre("ingotBronze", new ItemStack(Content.bronzeIngot));
 		OreDictionary.registerOre("ingotThyrium", new ItemStack(Content.thyriumIngot));
 		OreDictionary.registerOre("ingotSinisite", new ItemStack(Content.sinisiteIngot));
+		
+		OreDictionary.registerOre("ingotCopper", new ItemStack(Content.smallThyriumChunk));
 		
 		//Block Recipes
 			//Storage Content
@@ -74,39 +75,39 @@ public class Recipes
 		//Tool Recipes
 			//Bronze Tool Recipes
 			CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(Content.bronzePick, true, new Object[]{
-				"XXX", " Y ", " Y ", Character.valueOf('X'), "ingotBronze", Character.valueOf('Y'), Item.stick}));
+				"XXX", " Y ", " Y ", Character.valueOf('X'), "ingotBronze", Character.valueOf('Y'), "stickWood"}));
 			CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(Content.bronzeAxe, true, new Object[]{
-				"XX ", "XY ", " Y ", Character.valueOf('X'), "ingotBronze", Character.valueOf('Y'), Item.stick}));
+				"XX ", "XY ", " Y ", Character.valueOf('X'), "ingotBronze", Character.valueOf('Y'), "stickWood"}));
 			CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(Content.bronzeShovel, true, new Object[]{
-				"X", "Y", "Y", Character.valueOf('X'), "ingotBronze", Character.valueOf('Y'), Item.stick}));
+				"X", "Y", "Y", Character.valueOf('X'), "ingotBronze", Character.valueOf('Y'), "stickWood"}));
 			CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(Content.bronzeSword, true, new Object[]{
-				"X", "X", "Y", Character.valueOf('X'), "ingotBronze", Character.valueOf('Y'), Item.stick}));
+				"X", "X", "Y", Character.valueOf('X'), "ingotBronze", Character.valueOf('Y'), "stickWood"}));
 			CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(Content.bronzeHoe, true, new Object[]{
-				"XX ", " Y ", " Y ", Character.valueOf('X'), "ingotBronze", Character.valueOf('Y'), Item.stick}));
+				"XX ", " Y ", " Y ", Character.valueOf('X'), "ingotBronze", Character.valueOf('Y'), "stickWood"}));
 			
 			//Thyrium Tool Recipes
 			CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(Content.thyriumPick, true, new Object[]{
-				"XXX", " Y ", " Y ", Character.valueOf('X'), "ingotThyrium", Character.valueOf('Y'), Item.stick}));
+				"XXX", " Y ", " Y ", Character.valueOf('X'), "ingotThyrium", Character.valueOf('Y'), "stickWood"}));
 			CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(Content.thyriumAxe, true, new Object[]{
-				"XX ", "XY ", " Y ", Character.valueOf('X'), "ingotThyrium", Character.valueOf('Y'), Item.stick}));
+				"XX ", "XY ", " Y ", Character.valueOf('X'), "ingotThyrium", Character.valueOf('Y'), "stickWood"}));
 			CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(Content.thyriumShovel, true, new Object[]{
-				"X", "Y", "Y", Character.valueOf('X'), "ingotThyrium", Character.valueOf('Y'), Item.stick}));
+				"X", "Y", "Y", Character.valueOf('X'), "ingotThyrium", Character.valueOf('Y'), "stickWood"}));
 			CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(Content.thyriumSword, true, new Object[]{
-				"X", "X", "Y", Character.valueOf('X'), "ingotThyrium", Character.valueOf('Y'), Item.stick}));
+				"X", "X", "Y", Character.valueOf('X'), "ingotThyrium", Character.valueOf('Y'), "stickWood"}));
 			CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(Content.thyriumHoe, true, new Object[]{
-				"XX ", " Y ", " Y ", Character.valueOf('X'), "ingotThyrium", Character.valueOf('Y'), Item.stick}));
+				"XX ", " Y ", " Y ", Character.valueOf('X'), "ingotThyrium", Character.valueOf('Y'), "stickWood"}));
 			
 			//Sinisite Tool Recipes
 			CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(Content.sinisitePick, true, new Object[]{
-				"XXX", " Y ", " Y ", Character.valueOf('X'), "ingotSinisite", Character.valueOf('Y'), Item.stick}));
+				"XXX", " Y ", " Y ", Character.valueOf('X'), "ingotSinisite", Character.valueOf('Y'), "stickWood"}));
 			CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(Content.sinisiteAxe, true, new Object[]{
-				"XX ", "XY ", " Y ", Character.valueOf('X'), "ingotSinisite", Character.valueOf('Y'), Item.stick}));
+				"XX ", "XY ", " Y ", Character.valueOf('X'), "ingotSinisite", Character.valueOf('Y'), "stickWood"}));
 			CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(Content.sinisiteShovel, true, new Object[]{
-				"X", "Y", "Y", Character.valueOf('X'), "ingotSinisite", Character.valueOf('Y'), Item.stick}));
+				"X", "Y", "Y", Character.valueOf('X'), "ingotSinisite", Character.valueOf('Y'), "stickWood"}));
 			CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(Content.sinisiteSword, true, new Object[]{
-				"X", "X", "Y", Character.valueOf('X'), "ingotSinisite", Character.valueOf('Y'), Item.stick}));
+				"X", "X", "Y", Character.valueOf('X'), "ingotSinisite", Character.valueOf('Y'), "stickWood"}));
 			CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(Content.sinisiteHoe, true, new Object[]{
-				"XX ", " Y ", " Y ", Character.valueOf('X'), "ingotSinisite", Character.valueOf('Y'), Item.stick}));
+				"XX ", " Y ", " Y ", Character.valueOf('X'), "ingotSinisite", Character.valueOf('Y'), "stickWood"}));
 			
 			//Bow Recipes
 			CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(Content.thyriumBow, true, new Object[]{
@@ -148,20 +149,20 @@ public class Recipes
 		//Smelting Recipes
 			//Fusion Furnace
 				//Bronze
-		    	FusionRecipes.smelting().addSmelting(new ItemStack(coreItems.copperIngot), new ItemStack(coreItems.tinIngot), new ItemStack(Item.dyePowder, 15), new ItemStack(Content.smallBronzeChunk), 2.0F);
+		    	FusionRecipes.smelting().addSmelting(new ItemStack(coreItems.copperIngot), new ItemStack(coreItems.tinIngot), new ItemStack(Item.dyePowder, 1, 15), new ItemStack(Content.smallBronzeChunk), 2.0F);
 		    	FusionRecipes.smelting().addSmelting(new ItemStack(coreItems.copperIngot), new ItemStack(coreItems.tinIngot), new ItemStack(Item.gunpowder), new ItemStack(Content.mediumBronzeChunk), 3.0F);
 		    	FusionRecipes.smelting().addSmelting(new ItemStack(coreItems.copperIngot), new ItemStack(coreItems.tinIngot), new ItemStack(Item.redstone), new ItemStack(Content.largeBronzeChunk), 10.0F);
 		    	
 		    	//Thyrium
 		    	FusionRecipes.smelting().addSmelting(new ItemStack(coreItems.mythrilIngot), new ItemStack(coreItems.adamantiumIngot), new ItemStack(Item.redstone), new ItemStack(Content.smallThyriumChunk), 6.0F);
-		    	FusionRecipes.smelting().addSmelting(new ItemStack(coreItems.mythrilIngot), new ItemStack(coreItems.adamantiumIngot), new ItemStack(Item.dyePowder, 4), new ItemStack(Content.mediumThyriumChunk), 10.0F);
+		    	FusionRecipes.smelting().addSmelting(new ItemStack(coreItems.mythrilIngot), new ItemStack(coreItems.adamantiumIngot), new ItemStack(Item.dyePowder, 1, 4), new ItemStack(Content.mediumThyriumChunk), 10.0F);
 		    	FusionRecipes.smelting().addSmelting(new ItemStack(coreItems.mythrilIngot), new ItemStack(coreItems.adamantiumIngot), new ItemStack(Item.glowstone), new ItemStack(Content.largeThyriumChunk), 30.0F);
 		    	
 		    	//Sinisite				    	
 		    	FusionRecipes.smelting().addSmelting(new ItemStack(coreItems.onyxGem), new ItemStack(coreItems.mythrilIngot), new ItemStack(Item.glowstone), new ItemStack(Content.smallSinisiteChunk), 12.0F);
 		    	FusionRecipes.smelting().addSmelting(new ItemStack(coreItems.onyxGem), new ItemStack(coreItems.mythrilIngot), new ItemStack(Item.blazePowder), new ItemStack(Content.mediumSinisiteChunk), 20.0F);
 		    	FusionRecipes.smelting().addSmelting(new ItemStack(coreItems.onyxGem), new ItemStack(coreItems.mythrilIngot), new ItemStack(Item.ghastTear), new ItemStack(Content.largeSinisiteChunk), 60.0F);
-	
+		    	
 		    //Regular Furnace
 				GameRegistry.addSmelting(Content.largeBronzeChunk.itemID, new ItemStack(Content.bronzeIngot, 1, 0), 0.3F);
 				GameRegistry.addSmelting(Content.largeThyriumChunk.itemID, new ItemStack(Content.thyriumIngot, 1, 0), 0.6F);

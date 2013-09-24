@@ -9,7 +9,6 @@ import SimpleOres.core.SimpleOres;
 import SimpleOres.core.Tools;
 import SimpleOres.core.conf.IDs;
 import SimpleOres.core.conf.Localisation;
-import SimpleOres.plugins.fusion.api.FusionRecipes;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -419,29 +418,29 @@ public class TileEntityFusionFurnace extends TileEntity implements ISidedInvento
 
                 if (block == Block.woodSingleSlab)
                 {
-                    return 150 * 2;
+                    return 150 * 18750 / 10000;
                 }
 
                 if (block.blockMaterial == Material.wood)
                 {
-                    return 300 * 2;
+                    return 300 * 18750 / 10000;
                 }
                 
-                if (block == Block.field_111034_cE)
+                if (block == Block.coalBlock)
                 {
-                    return 16000;
+                    return 16000 * 18750 / 10000;
                 }
             }
 
-            if (item instanceof ItemTool && ((ItemTool) item).getToolMaterialName().equals("WOOD")) return 200 * 2;
-            if (item instanceof ItemSword && ((ItemSword) item).getToolMaterialName().equals("WOOD")) return 200 * 2;
-            if (item instanceof ItemHoe && ((ItemHoe) item).getMaterialName().equals("WOOD")) return 200 * 2;
-            if (i == Item.stick.itemID) return 100 * 2;
-            if (i == Item.coal.itemID) return 1600 * 2;
-            if (i == Item.bucketLava.itemID) return 20000 * 2;
-            if (i == Block.sapling.blockID) return 100 * 2;
-            if (i == Item.blazeRod.itemID) return 2400 * 2;
-            return GameRegistry.getFuelValue(par0ItemStack) * 2;
+            if (item instanceof ItemTool && ((ItemTool) item).getToolMaterialName().equals("WOOD")) return 200 * 18750 / 10000;
+            if (item instanceof ItemSword && ((ItemSword) item).getToolMaterialName().equals("WOOD")) return 200 * 18750 / 10000;
+            if (item instanceof ItemHoe && ((ItemHoe) item).getMaterialName().equals("WOOD")) return 200 * 18750 / 10000;
+            if (i == Item.stick.itemID) return 100 * 18750 / 10000;
+            if (i == Item.coal.itemID) return 1600 * 18750 / 10000;
+            if (i == Item.bucketLava.itemID) return 20000 * 18750 / 10000;
+            if (i == Block.sapling.blockID) return 100 * 18750 / 10000;
+            if (i == Item.blazeRod.itemID) return 2400 * 18750 / 10000;
+            return GameRegistry.getFuelValue(par0ItemStack) * 18750 / 10000;
         }
     }
 

@@ -11,7 +11,7 @@ import net.minecraftforge.oredict.ShapelessOreRecipe;
 import SimpleOres.core.conf.IDs;
 import SimpleOres.core.conf.Localisation;
 import SimpleOres.core.conf.Settings;
-import SimpleOres.plugins.fusion.api.FusionRecipes;
+import SimpleOres.plugins.fusion.FusionRecipes;
 
 public class Recipes
 {
@@ -112,63 +112,63 @@ public class Recipes
 		//Tool Recipes
 			//Copper Tool Recipes
 				CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(tools.copperPick, true, new Object[]{
-						"XXX", " Y ", " Y ", Character.valueOf('X'), "ingotCopper", Character.valueOf('Y'), Item.stick}));
+						"XXX", " Y ", " Y ", Character.valueOf('X'), "ingotCopper", Character.valueOf('Y'), "stickWood"}));
 				CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(tools.copperAxe, true, new Object[]{
-						"XX ", "XY ", " Y ", Character.valueOf('X'), "ingotCopper", Character.valueOf('Y'), Item.stick}));
+						"XX ", "XY ", " Y ", Character.valueOf('X'), "ingotCopper", Character.valueOf('Y'), "stickWood"}));
 				CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(tools.copperShovel, true, new Object[]{
-						"X", "Y", "Y", Character.valueOf('X'), "ingotCopper", Character.valueOf('Y'), Item.stick}));
+						"X", "Y", "Y", Character.valueOf('X'), "ingotCopper", Character.valueOf('Y'), "stickWood"}));
 				CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(tools.copperSword, true, new Object[]{
-						"X", "X", "Y", Character.valueOf('X'), "ingotCopper", Character.valueOf('Y'), Item.stick}));
+						"X", "X", "Y", Character.valueOf('X'), "ingotCopper", Character.valueOf('Y'), "stickWood"}));
 				CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(tools.copperHoe, true, new Object[]{
-						"XX ", " Y ", " Y ", Character.valueOf('X'), "ingotCopper", Character.valueOf('Y'), Item.stick}));
+						"XX ", " Y ", " Y ", Character.valueOf('X'), "ingotCopper", Character.valueOf('Y'), "stickWood"}));
 				
 			//Tin Tool Recipes
 				CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(tools.tinPick, true, new Object[]{
-						"XXX", " Y ", " Y ", Character.valueOf('X'), "ingotTin", Character.valueOf('Y'), Item.stick}));
+						"XXX", " Y ", " Y ", Character.valueOf('X'), "ingotTin", Character.valueOf('Y'), "stickWood"}));
 				CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(tools.tinAxe, true, new Object[]{
-						"XX ", "XY ", " Y ", Character.valueOf('X'), "ingotTin", Character.valueOf('Y'), Item.stick}));
+						"XX ", "XY ", " Y ", Character.valueOf('X'), "ingotTin", Character.valueOf('Y'), "stickWood"}));
 				CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(tools.tinShovel, true, new Object[]{
-						"X", "Y", "Y", Character.valueOf('X'), "ingotTin", Character.valueOf('Y'), Item.stick}));
+						"X", "Y", "Y", Character.valueOf('X'), "ingotTin", Character.valueOf('Y'), "stickWood"}));
 				CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(tools.tinSword, true, new Object[]{
-						"X", "X", "Y", Character.valueOf('X'), "ingotTin", Character.valueOf('Y'), Item.stick}));
+						"X", "X", "Y", Character.valueOf('X'), "ingotTin", Character.valueOf('Y'), "stickWood"}));
 				CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(tools.tinHoe, true, new Object[]{
-						"XX ", " Y ", " Y ", Character.valueOf('X'), "ingotTin", Character.valueOf('Y'), Item.stick}));
+						"XX ", " Y ", " Y ", Character.valueOf('X'), "ingotTin", Character.valueOf('Y'), "stickWood"}));
 				
 			//Mythril Tool Recipes
 				CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(tools.mythrilPick, true, new Object[]{
-						"XXX", " Y ", " Y ", Character.valueOf('X'), "ingotMythril", Character.valueOf('Y'), Item.stick}));
+						"XXX", " Y ", " Y ", Character.valueOf('X'), "ingotMythril", Character.valueOf('Y'), "stickWood"}));
 				CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(tools.mythrilAxe, true, new Object[]{
-						"XX ", "XY ", " Y ", Character.valueOf('X'), "ingotMythril", Character.valueOf('Y'), Item.stick}));
+						"XX ", "XY ", " Y ", Character.valueOf('X'), "ingotMythril", Character.valueOf('Y'), "stickWood"}));
 				CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(tools.mythrilShovel, true, new Object[]{
-						"X", "Y", "Y", Character.valueOf('X'), "ingotMythril", Character.valueOf('Y'), Item.stick}));
+						"X", "Y", "Y", Character.valueOf('X'), "ingotMythril", Character.valueOf('Y'), "stickWood"}));
 				CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(tools.mythrilSword, true, new Object[]{
-						"X", "X", "Y", Character.valueOf('X'), "ingotMythril", Character.valueOf('Y'), Item.stick}));
+						"X", "X", "Y", Character.valueOf('X'), "ingotMythril", Character.valueOf('Y'), "stickWood"}));
 				CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(tools.mythrilHoe, true, new Object[]{
-						"XX ", " Y ", " Y ", Character.valueOf('X'), "ingotMythril", Character.valueOf('Y'), Item.stick}));
+						"XX ", " Y ", " Y ", Character.valueOf('X'), "ingotMythril", Character.valueOf('Y'), "stickWood"}));
 				
 			//Adamantium Tool Recipes
 				CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(tools.adamantiumPick, true, new Object[]{
-						"XXX", " Y ", " Y ", Character.valueOf('X'), "ingotAdamantium", Character.valueOf('Y'), Item.stick}));
+						"XXX", " Y ", " Y ", Character.valueOf('X'), "ingotAdamantium", Character.valueOf('Y'), "stickWood"}));
 				CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(tools.adamantiumAxe, true, new Object[]{
-						"XX ", "XY ", " Y ", Character.valueOf('X'), "ingotAdamantium", Character.valueOf('Y'), Item.stick}));
+						"XX ", "XY ", " Y ", Character.valueOf('X'), "ingotAdamantium", Character.valueOf('Y'), "stickWood"}));
 				CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(tools.adamantiumShovel, true, new Object[]{
-						"X", "Y", "Y", Character.valueOf('X'), "ingotAdamantium", Character.valueOf('Y'), Item.stick}));
+						"X", "Y", "Y", Character.valueOf('X'), "ingotAdamantium", Character.valueOf('Y'), "stickWood"}));
 				CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(tools.adamantiumSword, true, new Object[]{
-						"X", "X", "Y", Character.valueOf('X'), "ingotAdamantium", Character.valueOf('Y'), Item.stick}));
+						"X", "X", "Y", Character.valueOf('X'), "ingotAdamantium", Character.valueOf('Y'), "stickWood"}));
 				CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(tools.adamantiumHoe, true, new Object[]{
-						"XX ", " Y ", " Y ", Character.valueOf('X'), "ingotAdamantium", Character.valueOf('Y'), Item.stick}));
+						"XX ", " Y ", " Y ", Character.valueOf('X'), "ingotAdamantium", Character.valueOf('Y'), "stickWood"}));
 				
 			//Onyx Tool Recipes
 				CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(tools.onyxPick, true, new Object[]{
-						"XXX", " Y ", " Y ", Character.valueOf('X'), "gemOnyx", Character.valueOf('Y'), Item.stick}));
+						"XXX", " Y ", " Y ", Character.valueOf('X'), "gemOnyx", Character.valueOf('Y'), "stickWood"}));
 				CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(tools.onyxAxe, true, new Object[]{
-						"XX ", "XY ", " Y ", Character.valueOf('X'), "gemOnyx", Character.valueOf('Y'), Item.stick}));
+						"XX ", "XY ", " Y ", Character.valueOf('X'), "gemOnyx", Character.valueOf('Y'), "stickWood"}));
 				CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(tools.onyxShovel, true, new Object[]{
-						"X", "Y", "Y", Character.valueOf('X'), "gemOnyx", Character.valueOf('Y'), Item.stick}));
+						"X", "Y", "Y", Character.valueOf('X'), "gemOnyx", Character.valueOf('Y'), "stickWood"}));
 				CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(tools.onyxSword, true, new Object[]{
-						"X", "X", "Y", Character.valueOf('X'), "gemOnyx", Character.valueOf('Y'), Item.stick}));
+						"X", "X", "Y", Character.valueOf('X'), "gemOnyx", Character.valueOf('Y'), "stickWood"}));
 				CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(tools.onyxHoe, true, new Object[]{
-						"XX ", " Y ", " Y ", Character.valueOf('X'), "gemOnyx", Character.valueOf('Y'), Item.stick}));
+						"XX ", " Y ", " Y ", Character.valueOf('X'), "gemOnyx", Character.valueOf('Y'), "stickWood"}));
 				
 			//Bow Recipes
 				CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(tools.mythrilBow, true, new Object[]{

@@ -98,7 +98,7 @@ public class SimpleShears extends Item
     }
     
     @Override
-    public boolean func_111207_a(ItemStack itemstack, EntityPlayer player, EntityLivingBase entity)
+    public boolean itemInteractionForEntity(ItemStack itemstack, EntityPlayer player, EntityLivingBase entity)
     {
         if (entity.worldObj.isRemote)
         {

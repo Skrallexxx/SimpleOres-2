@@ -1,11 +1,15 @@
 package SimpleOres.core;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.logging.Level;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.EnumArmorMaterial;
 import net.minecraft.item.EnumToolMaterial;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.StatCollector;
 import SimpleOres.core.api.HandlerLoot;
 import SimpleOres.core.conf.IDs;
 import SimpleOres.core.conf.Localisation;
@@ -19,10 +23,11 @@ import SimpleOres.core.gui.TabTools;
 import SimpleOres.core.gui.TileEntityMythrilFurnace;
 import SimpleOres.core.gui.TileEntityOnyxFurnace;
 import SimpleOres.core.handlers.HandlerJoinWorld;
+import SimpleOres.core.handlers.HandlerUpdateChecker;
 import SimpleOres.core.handlers.ProxyCommon;
 import SimpleOres.core.handlers.SimpleOresGenerator;
+import SimpleOres.plugins.fusion.FusionRecipes;
 import SimpleOres.plugins.fusion.TileEntityFusionFurnace;
-import SimpleOres.plugins.fusion.api.FusionRecipes;
 import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -40,7 +45,7 @@ import net.minecraftforge.common.MinecraftForge;
 
 //======================================= FORGE STUFF ====================================================
 @NetworkMod(clientSideRequired = true, serverSideRequired = false)
-@Mod(modid = "simpleores", name = "SimpleOres 2", version = "1.0.2")
+@Mod(modid = ModInfo.ID, name = ModInfo.NAME, version = ModInfo.VERSION)
 
 public class SimpleOres 
 {
@@ -51,22 +56,13 @@ public class SimpleOres
 	 * Linking to the classes for easier reference.
 	 */
 	public static SimpleOres mod;
-	public static Achievements achievements;
-	public static Armor armor;
-	public static Blocks blocks;
-	public static IDs config;
-	public static Items items;
-	public static Localisation local;
-	public static Recipes recipes;
-	public static Settings settings;
-	public static Tools tools;
 	
 //======================================= CREATION =======================================================	
 	/**
 	 * EnumToolMaterial. In form ("NAME", mining level, max uses, speed, damage to entity, enchantability)
 	 */
     public static EnumToolMaterial toolCopper = EnumHelper.addToolMaterial("COPPER", 1, 185, 4.0F, 1, 8);
-    public static EnumToolMaterial toolTin = EnumHelper.addToolMaterial("TIN", 1, 200, 3.5F, 1, 8);
+    public static EnumToolMaterial toolTin = EnumHelper.addToolMaterial("TIN", 1, 220, 3.5F, 1, 8);
     public static EnumToolMaterial toolMythril = EnumHelper.addToolMaterial("MYTHRIL", 2, 800, 8.0F, 3, 12);
     public static EnumToolMaterial toolAdamantium = EnumHelper.addToolMaterial("ADAMANTIUM", 2, 1150, 14.0F, 3, 3);
     public static EnumToolMaterial toolOnyx = EnumHelper.addToolMaterial("ONYX", 4, 3280, 10.0F, 5, 15);
@@ -109,18 +105,18 @@ public class SimpleOres
     	 * Calling the various parts of the mod. Moved to different files for neatness. Pretty self explanatory what they all are :P
     	 */
     	//Configuration
-    	config.doConfig(event);
-    	local.doLocalisation(event);
-    	settings.doSettings(event);
+    	IDs.doConfig(event);
+    	Localisation.doLocalisation(event);
+    	Settings.doSettings(event);
     	
     	//Content
     	doTabs();
-    	blocks.doBlocks();
-    	items.doItems();
-    	tools.doTools();
-    	armor.doArmor();
-    	recipes.doRecipes();	
-    	achievements.doAchievements();
+    	Blocks.doBlocks();
+    	Items.doItems();
+    	Tools.doTools();
+    	Armor.doArmor();
+    	Recipes.doRecipes();	
+    	Achievements.doAchievements();
     	
     }
     
@@ -130,7 +126,7 @@ public class SimpleOres
 		 * This is so that the custom tabs can be toggled. If the boolean returns true, blocks, items, tools etc are seperated into separate tabs.
 		 * If the boolean returns false, they will all be placed into a single custom tab.
 		 */
-    	if(settings.enableSeparateTabs == true)
+    	if(Settings.enableSeparateTabs == true)
     	{
     		tabSimpleBlocks = new TabBlocks("tabSimpleBlocks");
     	    tabSimpleDecoration = new TabDecoration("tabSimpleDecoration");
@@ -144,8 +140,21 @@ public class SimpleOres
     @EventHandler
     public void Init(FMLInitializationEvent event)
     {	    	
+    	NetworkRegistry.instance().registerConnectionHandler(new HandlerUpdateChecker());
+    	
+    	if(Settings.enableUpdateChecker){HandlerUpdateChecker.checkUpdates();}	
+    	
 		mod = this;
 			
+		/**
+		 * Adding localisation files.
+		 */
+		LanguageRegistry.instance().loadLocalization(new ResourceLocation("/assets/simpleores/langs/en_US.xml").getResourcePath(), "en_US", true);
+		LanguageRegistry.instance().loadLocalization(new ResourceLocation("/assets/simpleores/langs/en_AU.xml").getResourcePath(), "en_AU", true);
+		LanguageRegistry.instance().loadLocalization(new ResourceLocation("/assets/simpleores/langs/en_PT.xml").getResourcePath(), "en_PT", true);
+		LanguageRegistry.instance().loadLocalization(new ResourceLocation("/assets/simpleores/langs/ru_RU.xml").getResourcePath(), "ru_RU", true);
+		LanguageRegistry.instance().loadLocalization(new ResourceLocation("/assets/simpleores/langs/de_DE.xml").getResourcePath(), "de_DE", true);
+		
 		/**
 		 * Registering things such as the world generator, tile entities and GUI's.
 		 */
@@ -171,36 +180,22 @@ public class SimpleOres
          * This sets what item can be used to repair tools/armor of that type. ie. Copper Ingot to repair copper tools and items.
          */     
         //Repair Materials
-        toolCopper.customCraftingMaterial = items.copperIngot;
-        toolTin.customCraftingMaterial = items.tinIngot;
-        toolMythril.customCraftingMaterial = items.mythrilIngot;
-        toolAdamantium.customCraftingMaterial = items.adamantiumIngot;
-        toolOnyx.customCraftingMaterial = items.onyxGem;
+        toolCopper.customCraftingMaterial = Items.copperIngot;
+        toolTin.customCraftingMaterial = Items.tinIngot;
+        toolMythril.customCraftingMaterial = Items.mythrilIngot;
+        toolAdamantium.customCraftingMaterial = Items.adamantiumIngot;
+        toolOnyx.customCraftingMaterial = Items.onyxGem;
 
-        armorCopper.customCraftingMaterial = items.copperIngot;
-        armorTin.customCraftingMaterial = items.tinIngot;
-        armorMythril.customCraftingMaterial = items.mythrilIngot;
-        armorAdamantium.customCraftingMaterial = items.adamantiumIngot;
-        armorOnyx.customCraftingMaterial = items.onyxGem;
+        armorCopper.customCraftingMaterial = Items.copperIngot;
+        armorTin.customCraftingMaterial = Items.tinIngot;
+        armorMythril.customCraftingMaterial = Items.mythrilIngot;
+        armorAdamantium.customCraftingMaterial = Items.adamantiumIngot;
+        armorOnyx.customCraftingMaterial = Items.onyxGem;
        
         /**
          * Adds SimpleOres items to the various dungeon chests.
          */
         //Loot
         HandlerLoot.addLoot();
-        
-        /**
-         * Sets the pop-up text when you hover over the custom Creative Inventory tabs.
-         */
-		//Custom Tabs
-        if(settings.enableSeparateTabs == true)
-        {
-			LanguageRegistry.instance().addStringLocalization("itemGroup.tabSimpleBlocks", "en_US", "SimpleOres Blocks");
-			LanguageRegistry.instance().addStringLocalization("itemGroup.tabSimpleDecoration", "en_US", "SimpleOres Decorations");
-			LanguageRegistry.instance().addStringLocalization("itemGroup.tabSimpleTools", "en_US", "SimpleOres Tools");
-			LanguageRegistry.instance().addStringLocalization("itemGroup.tabSimpleCombat", "en_US", "SimpleOres Combat");
-			LanguageRegistry.instance().addStringLocalization("itemGroup.tabSimpleMaterials", "en_US", "SimpleOres Materials");
-        }
-        else LanguageRegistry.instance().addStringLocalization("itemGroup.tabSimpleBlocks", "en_US", "SimpleOres");
     }
 }

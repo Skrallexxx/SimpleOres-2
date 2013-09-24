@@ -7,6 +7,7 @@ import net.minecraft.stats.Achievement;
 import net.minecraft.stats.AchievementList;
 import SimpleOres.core.conf.IDs;
 import SimpleOres.core.conf.Localisation;
+import SimpleOres.core.conf.Settings;
 import SimpleOres.core.handlers.HandlerCrafting;
 import SimpleOres.core.handlers.HandlerPickup;
 
@@ -49,7 +50,10 @@ public class Achievements
 		
 		GameRegistry.registerCraftingHandler(new HandlerCrafting());
 		GameRegistry.registerPickupHandler(new HandlerPickup());
-		addAchievementLocalizations();
+		if(Settings.enableOldLocalisation)
+		{
+			addAchievementLocalizations();
+		}
 	}
 	
 	private static void addAchievementName(String ach, String name)

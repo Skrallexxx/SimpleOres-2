@@ -31,6 +31,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemBow;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Icon;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.ArrowLooseEvent;
@@ -213,14 +214,30 @@ public class SimpleBow extends ItemBow
 		
 		if(itemID == tools.mythrilBow.itemID)
 		{
-			par3List.add(local.damageTooltip);
-			par3List.add(local.efficiencyTooltip);
+			if(Settings.enableOldLocalisation)
+			{
+				par3List.add(local.damageTooltip);
+				par3List.add(local.efficiencyTooltip);
+			}
+			else
+			{
+				par3List.add(StatCollector.translateToLocal("tips.damageTooltip"));
+				par3List.add(StatCollector.translateToLocal("tips.efficiencyTooltip"));
+			}
 		}
 		
 		if(itemID == tools.onyxBow.itemID)
 		{
-			par3List.add(local.damageTooltip);
-			par3List.add(local.flameTooltip);
+			if(Settings.enableOldLocalisation)
+			{
+				par3List.add(local.damageTooltip);
+				par3List.add(local.flameTooltip);
+			}
+			else
+			{
+				par3List.add(StatCollector.translateToLocal("tips.damageTooltip"));
+				par3List.add(StatCollector.translateToLocal("tips.flameTooltip"));
+			}
 		}
 	}
 		

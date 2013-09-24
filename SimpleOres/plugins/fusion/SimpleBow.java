@@ -22,6 +22,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemBow;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Icon;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.ArrowLooseEvent;
@@ -190,14 +191,14 @@ public class SimpleBow extends ItemBow
 	{	
 		if(itemID == Content.thyriumBow.itemID)
 		{
-			par3List.add(Localisation.damageTooltip);
-			par3List.add(Localisation.zoomTooltip);
+			par3List.add(StatCollector.translateToLocal("tips.damageTooltip"));
+			par3List.add(StatCollector.translateToLocal("tips.zoomTooltip"));
 		}
 		
 		if(itemID == Content.sinisiteBow.itemID)
 		{
-			par3List.add(Localisation.damageTooltip);
-			par3List.add(Localisation.knockbackTooltip);
+			par3List.add(StatCollector.translateToLocal("tips.damageTooltip"));
+			par3List.add(StatCollector.translateToLocal("tips.knockbackTooltip"));
 		}
 	}
 		

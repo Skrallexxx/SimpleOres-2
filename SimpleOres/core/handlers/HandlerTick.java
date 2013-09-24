@@ -12,10 +12,10 @@ import SimpleOres.core.Tools;
 import SimpleOres.core.conf.IDs;
 import SimpleOres.core.conf.Localisation;
 import SimpleOres.core.conf.Settings;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
-
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import cpw.mods.fml.common.ITickHandler;
 import cpw.mods.fml.common.TickType;
 
@@ -48,6 +48,7 @@ public class HandlerTick implements ITickHandler
 	public void tickStart(EnumSet<TickType> type, Object... tickData) 
 	{
 		EntityPlayer player = Minecraft.getMinecraft().thePlayer; 
+		
 		if(type.equals(EnumSet.of(TickType.RENDER))) 
 		{
 			if(player != null && player.isUsingItem())

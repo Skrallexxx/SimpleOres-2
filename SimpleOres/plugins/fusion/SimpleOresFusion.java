@@ -2,10 +2,10 @@ package SimpleOres.plugins.fusion;
 
 import net.minecraft.item.EnumArmorMaterial;
 import net.minecraft.item.EnumToolMaterial;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.EnumHelper;
 import SimpleOres.core.SimpleOres;
 import SimpleOres.core.api.HandlerLoot;
-import SimpleOres.plugins.fusion.api.FusionRecipes;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -14,10 +14,11 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
+import cpw.mods.fml.common.registry.LanguageRegistry;
 
 //======================================= FORGE STUFF ====================================================
 @NetworkMod(clientSideRequired = true, serverSideRequired = false)
-@Mod(modid = "simpleoresfusion", name = "SimpleOres 2 Fusion Plugin", version = "1.0.0", dependencies = "required-after:simpleores")
+@Mod(modid = "simpleoresfusion", name = "SimpleOres 2 Fusion Plugin", version = "1.1.0", dependencies = "required-after:simpleores")
 
 public class SimpleOresFusion 
 {
@@ -81,6 +82,11 @@ public class SimpleOresFusion
     public void Init(FMLInitializationEvent event)
     {
 		INSTANCE = this;
+		
+		/**
+		 * Adding localisation files.
+		 */
+		LanguageRegistry.instance().loadLocalization(new ResourceLocation("/assets/simpleoresfusion/langs/en_US.xml").getResourcePath(), "en_US", true);
 		
 		/**
 		 * Registering things such as the world generator, tile entities and GUI's.

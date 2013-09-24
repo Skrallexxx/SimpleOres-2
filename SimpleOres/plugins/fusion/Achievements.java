@@ -24,7 +24,10 @@ public class Achievements
 		
 		GameRegistry.registerCraftingHandler(new HandlerCrafting());
 		GameRegistry.registerPickupHandler(new HandlerPickup());
-		addAchievementLocalizations();
+		if(Settings.enableOldLocalisation)
+		{
+			addAchievementLocalizations();
+		}
 	}
 		
 	private static void addAchievementName(String ach, String name)

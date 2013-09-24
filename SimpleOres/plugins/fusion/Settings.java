@@ -19,6 +19,9 @@ public class Settings
 	public static int sinisiteBowDamageModifier;
 	public static int sinisiteBowKnockbackModifier;
 	
+	//Toggles
+	public static boolean enableOldLocalisation;
+	
 	/**
 	 * The method that loads/creates the settings file. Values can be changed from true to false depending on user preference, and certain other values can be set. This is called by the main SimpleOresFusion class.
 	 */
@@ -34,6 +37,9 @@ public class Settings
 		try 
 	    {
 			settings.load();
+			
+			//Toggles
+			enableOldLocalisation = settings.get("Toggles", "Enable Old (Configurable) Localisation?", false).getBoolean(enableOldLocalisation);
 			
         	//Bow Modifiers
         	thyriumBowDamageModifier = settings.get("Bow Modifiers", "Thyrium Bow Damage Modifier", 5).getInt();

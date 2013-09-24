@@ -35,6 +35,8 @@ public class Settings
 //======================================= CREATION ======================================================= 	
 	//Toggles
 	public static boolean enableSeparateTabs;
+	public static boolean enableOldLocalisation;
+	public static boolean enableUpdateChecker;
 	
 	//Ore Spawn Rates
 	public static int copperSpawnRate;
@@ -81,9 +83,11 @@ public class Settings
 	    	
 	    	//Toggles
 	    	enableSeparateTabs = settings.get("Toggles", "Use Separate Creative Tabs?", true).getBoolean(enableSeparateTabs);
+	    	enableOldLocalisation = settings.get("Toggles", "Use Old (Configurable) Localisation?", false).getBoolean(enableOldLocalisation);
+	    	enableUpdateChecker = settings.get("Toggles", "Enable Update Checker?", true).getBoolean(enableUpdateChecker);
 	    	
         	//Adjustable Ore Spawn Rates 
-        	copperSpawnRate = settings.get("Spawn Rates", "Copper Spawn Rate", 45).getInt();
+        	copperSpawnRate = settings.get("Spawn Rates", "Copper Spawn Rate", 35).getInt();
         	tinSpawnRate = settings.get("Spawn Rates", "Tin Spawn Rate", 30).getInt();
         	mythrilSpawnRate = settings.get("Spawn Rates", "Mythril Spawn Rate", 8).getInt();
         	adamantiumSpawnRate = settings.get("Spawn Rates", "Adamantium Spawn Rate", 4).getInt();

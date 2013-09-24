@@ -6,11 +6,13 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockDoor;
 import net.minecraft.block.BlockPane;
 import net.minecraft.block.material.Material;
+import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
 import SimpleOres.core.block.MythrilFurnace;
 import SimpleOres.core.block.OnyxFurnace;
 import SimpleOres.core.block.SimpleBars;
 import SimpleOres.core.block.SimpleDoor;
+import SimpleOres.core.api.SimpleGemOre;
 import SimpleOres.core.api.SimpleOre;
 import SimpleOres.core.conf.IDs;
 import SimpleOres.core.conf.Localisation;
@@ -78,7 +80,7 @@ public class Blocks
 		mythrilBlock = new SimpleOre(config.mythrilBlockID, Material.iron, "simpleores").setHardness(7.0F).setResistance(12.0F).setCreativeTab(mod.tabSimpleBlocks).setUnlocalizedName("mythrilBlock");
 		adamantiumOre = new SimpleOre(config.adamantiumOreID, Material.rock, "simpleores").setHardness(5.0F).setResistance(5.0F).setCreativeTab(mod.tabSimpleBlocks).setUnlocalizedName("adamantiumOre");
 		adamantiumBlock = new SimpleOre(config.adamantiumBlockID, Material.iron, "simpleores").setHardness(7.0F).setResistance(12.0F).setCreativeTab(mod.tabSimpleBlocks).setUnlocalizedName("adamantiumBlock");
-		onyxOre = new SimpleOre(config.onyxOreID, Material.rock, "simpleores").setHardness(7.0F).setResistance(5.0F).setCreativeTab(mod.tabSimpleBlocks).setUnlocalizedName("onyxOre");
+		onyxOre = new SimpleGemOre(config.onyxOreID, Material.rock, "simpleores", config.onyxGemID).setHardness(7.0F).setResistance(5.0F).setCreativeTab(mod.tabSimpleBlocks).setUnlocalizedName("onyxOre");
 		onyxBlock = new SimpleOre(config.onyxBlockID, Material.iron, "simpleores").setHardness(25.0F).setResistance(40.0F).setCreativeTab(mod.tabSimpleBlocks).setUnlocalizedName("onyxBlock");
 		mythrilFurnace = new MythrilFurnace(config.mythrilFurnaceID, false).setHardness(3.5F).setResistance(10.0F).setUnlocalizedName("mythrilFurnace");
 		mythrilFurnaceOn = new MythrilFurnace(config.mythrilFurnaceOnID, true).setHardness(3.5F).setLightValue(1.0F).setResistance(10F).setUnlocalizedName("mythrilFurnaceOn");
@@ -93,27 +95,30 @@ public class Blocks
 	    onyxBars = new SimpleBars(config.onyxBarsID, "simpleores:" + "onyxBars", "simpleores:" + "onyxBars", Material.iron, true).setHardness(10.0F).setResistance(40.0F).setStepSound(Block.soundMetalFootstep).setUnlocalizedName("onyxBars");
 	    
 		//Block Naming
-		LanguageRegistry.addName(copperOre, local.copperOreName);
-		LanguageRegistry.addName(copperBlock, local.copperBlockName);
-		LanguageRegistry.addName(tinOre, local.tinOreName);
-		LanguageRegistry.addName(tinBlock, local.tinBlockName);
-		LanguageRegistry.addName(mythrilOre, local.mythrilOreName);
-		LanguageRegistry.addName(mythrilBlock, local.mythrilBlockName);
-		LanguageRegistry.addName(adamantiumOre, local.adamantiumOreName);
-		LanguageRegistry.addName(adamantiumBlock, local.adamantiumBlockName);
-		LanguageRegistry.addName(onyxOre, local.onyxOreName);
-		LanguageRegistry.addName(onyxBlock, local.onyxBlockName);	
-		LanguageRegistry.addName(mythrilFurnace, local.mythrilFurnaceName);
-		LanguageRegistry.addName(mythrilFurnaceOn, local.mythrilFurnaceOnName);
-		LanguageRegistry.addName(onyxFurnace, local.onyxFurnaceName);
-		LanguageRegistry.addName(onyxFurnaceOn, local.onyxFurnaceOnName);	
-		LanguageRegistry.addName(copperDoor, local.copperDoorName);
-		LanguageRegistry.addName(onyxDoor, local.onyxDoorName);
-		LanguageRegistry.addName(copperBars, local.copperBarsName);
-		LanguageRegistry.addName(tinBars, local.tinBarsName);
-		LanguageRegistry.addName(mythrilBars, local.mythrilBarsName);
-		LanguageRegistry.addName(adamantiumBars, local.adamantiumBarsName);
-		LanguageRegistry.addName(onyxBars, local.onyxBarsName);
+	    if(Settings.enableOldLocalisation)
+	    {
+			LanguageRegistry.addName(copperOre, local.copperOreName);
+			LanguageRegistry.addName(copperBlock, local.copperBlockName);
+			LanguageRegistry.addName(tinOre, local.tinOreName);
+			LanguageRegistry.addName(tinBlock, local.tinBlockName);
+			LanguageRegistry.addName(mythrilOre, local.mythrilOreName);
+			LanguageRegistry.addName(mythrilBlock, local.mythrilBlockName);
+			LanguageRegistry.addName(adamantiumOre, local.adamantiumOreName);
+			LanguageRegistry.addName(adamantiumBlock, local.adamantiumBlockName);
+			LanguageRegistry.addName(onyxOre, local.onyxOreName);
+			LanguageRegistry.addName(onyxBlock, local.onyxBlockName);	
+			LanguageRegistry.addName(mythrilFurnace, local.mythrilFurnaceName);
+			LanguageRegistry.addName(mythrilFurnaceOn, local.mythrilFurnaceOnName);
+			LanguageRegistry.addName(onyxFurnace, local.onyxFurnaceName);
+			LanguageRegistry.addName(onyxFurnaceOn, local.onyxFurnaceOnName);	
+			LanguageRegistry.addName(copperDoor, local.copperDoorName);
+			LanguageRegistry.addName(onyxDoor, local.onyxDoorName);
+			LanguageRegistry.addName(copperBars, local.copperBarsName);
+			LanguageRegistry.addName(tinBars, local.tinBarsName);
+			LanguageRegistry.addName(mythrilBars, local.mythrilBarsName);
+			LanguageRegistry.addName(adamantiumBars, local.adamantiumBarsName);
+			LanguageRegistry.addName(onyxBars, local.onyxBarsName);
+	    }
 		
 		//Block Harvest Levels
         MinecraftForge.setBlockHarvestLevel(copperOre, "pickaxe", 1);
