@@ -28,7 +28,7 @@ public class SimpleGemOre extends Block
 	{
 		super(id, material);
 		this.modName = mod;
-		this.itemIDToDrop = itemDropID;
+		this.itemIDToDrop = itemDropID + 256;
 	}
 	
 	/**
@@ -47,15 +47,11 @@ public class SimpleGemOre extends Block
 	 */
     public int idDropped(int i, Random random, int j)
     {
-    	try
+    	if(itemIDToDrop != 0)
     	{
             return itemIDToDrop; 
     	}
-    	catch(Exception e)
-    	{
-    		
-    	}
-    	return this.blockID;
+    	else return this.blockID;
     }
     
     /**
