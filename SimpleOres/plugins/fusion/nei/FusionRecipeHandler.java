@@ -119,10 +119,11 @@ public class FusionRecipeHandler extends TemplateRecipeHandler {
 	
 	@Override public void loadCraftingRecipes(String outputId, Object... results) {
 		BasicEntry b;
-		if (outputId.equals(ID))
+		if (outputId.equals(ID)) {
 			for (Entry e : FusionRecipes.getRecipeList())
 				if ((b = e.basicEntry()) != null)
 					arecipes.add(new CachedFusionRecipe(b).computeVisuals());
+		}
 		else
 			super.loadCraftingRecipes(outputId, results);
 	}
