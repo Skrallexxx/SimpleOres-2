@@ -21,6 +21,8 @@ public class FusionRecipes {
 	 */
 	public static final int WILDCARD_VALUE = OreDictionary.WILDCARD_VALUE;
 	
+	
+	
 	/**
 	 * An abstract class to integrate ItemStack and OreDictionary entries. @author zot
 	 */
@@ -77,15 +79,15 @@ public class FusionRecipes {
 		public static Material of(Block block, int amount, int metadata) {
 			return of(block.blockID, amount, metadata);
 		}
-
-		/**
-		 * Private constructor to prevent external inheritance. @author zot
-		 */
-		private Material() {}
 		
 		public abstract boolean matches(ItemStack item);
 		
 		protected abstract void reduceStackSize(ItemStack item);
+		
+		/**
+		 * Give a list of the representing items for display. @author zot
+		 */
+		public abstract List<ItemStack> getItems();
 	}
 	
 	/**
@@ -98,6 +100,10 @@ public class FusionRecipes {
 		}
 		
 		@Override protected void reduceStackSize(ItemStack item) {}
+		
+		@Override public List<ItemStack> getItems() {
+			return Lists.newArrayList();
+		}
 	}
 	
 	/**
@@ -124,6 +130,10 @@ public class FusionRecipes {
 		@Override protected void reduceStackSize(ItemStack item) {
 			item.stackSize -= amount;
 		}
+		
+		@Override public List<ItemStack> getItems() {
+			return OreDictionary.getOres(ore);
+		}
 	}
 	
 	/**
@@ -148,6 +158,10 @@ public class FusionRecipes {
 		@Override protected void reduceStackSize(ItemStack item) {
 			item.stackSize -= stack.stackSize;
 		}
+		
+		@Override public List<ItemStack> getItems() {
+			return Lists.newArrayList(stack);
+		}
 	}
 	
 	public static boolean matches(ItemStack target, ItemStack item) {
@@ -155,6 +169,8 @@ public class FusionRecipes {
 				&& (target.getItemDamage() == WILDCARD_VALUE || target.getItemDamage() == item.getItemDamage())
 				&& (target.stackTagCompound == null || target.stackTagCompound.equals(item.stackTagCompound));
 	}
+	
+	
 	
 	/**
 	 * An interface to represent entries of fusion recipe. @author zot
@@ -172,9 +188,9 @@ public class FusionRecipes {
 		public boolean isItemCatalyst(ItemStack item);
 		
 		/**
-		 * A method to give a BasicEntry equivalent for the ease of recipe displaying. @author zot
+		 * A method to give an EntryInfo for recipe displaying. @author zot
 		 */
-		public BasicEntry getBasicEntry();
+		public EntryInfo getInfo();
 	}
 	
 	public static class BasicEntry implements Entry {
@@ -193,6 +209,9 @@ public class FusionRecipes {
 			this.input2 = Material.of(input2);
 			this.catalyst = Material.of(catalyst);
 			this.output = output.copy();
+		}
+		public ItemStack getOutput() {
+			return output.copy();
 		}
 		
 		@Override public boolean matches(ItemStack input1, ItemStack input2, ItemStack catalyst) {
@@ -227,10 +246,30 @@ public class FusionRecipes {
 			return catalyst.matches(item);
 		}
 		
-		@Override public BasicEntry getBasicEntry() {
-			return this;
+		@Override public EntryInfo getInfo() {
+			return new EntryInfo(input1, input2, catalyst, Material.of(output));
 		}
 	}
+	
+	
+	
+	/**
+	 * Use for recipe display. @author zot
+	 */
+	public static class EntryInfo {
+		public final Material input1;
+		public final Material input2;
+		public final Material catalyst;
+		public final Material output;
+		public EntryInfo(Material input1, Material input2, Material catalyst, Material output) {
+			this.input1 = input1;
+			this.input2 = input2;
+			this.catalyst = catalyst;
+			this.output = output;
+		}
+	}
+	
+	
 	
 	/**
 	 * A hack to identify between ItemStack's. TagCompound aware and stack size unaware. @author zot
