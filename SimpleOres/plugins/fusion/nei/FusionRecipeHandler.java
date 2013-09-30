@@ -80,6 +80,10 @@ public class FusionRecipeHandler extends TemplateRecipeHandler {
 			result.generatePermutations();
 			return this;
 		}
+		public CachedFusionRecipe setIngredientPermutation(ItemStack ingredient) {
+			setIngredientPermutation(ingredients, ingredient);
+			return this;
+		}
 	}
 	
 	protected static PositionedStack convertFuelStack(PositionedStack stack) {
@@ -130,7 +134,7 @@ public class FusionRecipeHandler extends TemplateRecipeHandler {
 		for(Entry e : FusionRecipes.getRecipeList()) {
 			BasicEntry b = e.basicEntry();
 			if (b.isItemIput(ingredient) || b.isItemCatalyst(ingredient))
-				arecipes.add(new CachedFusionRecipe(b).computeVisuals());
+				arecipes.add(new CachedFusionRecipe(b).computeVisuals().setIngredientPermutation(ingredient));
 		}
 	}
 	
