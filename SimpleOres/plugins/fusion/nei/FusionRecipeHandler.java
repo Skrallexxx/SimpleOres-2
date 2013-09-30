@@ -4,6 +4,7 @@ import static codechicken.core.gui.GuiDraw.changeTexture;
 import static codechicken.core.gui.GuiDraw.drawTexturedModalRect;
 import static codechicken.nei.recipe.FurnaceRecipeHandler.afuels;
 
+import java.awt.Rectangle;
 import java.util.List;
 
 import net.minecraft.client.gui.inventory.GuiContainer;
@@ -40,7 +41,11 @@ public class FusionRecipeHandler extends TemplateRecipeHandler {
 	protected static int y(int y) {
 		return y + Y1 - Y2;
 	}
-	
+
+	@Override public void loadTransferRects() {
+    	transferRects.add(new RecipeTransferRect(new Rectangle(x(51), y(34), 24, 18), ID));
+    	transferRects.add(new RecipeTransferRect(new Rectangle(x(100), y(34), 24, 18), ID));
+	}
 	@Override public void drawExtras(int recipe) {
 		drawProgressBar(x(105), y(55), 176, 0, 190 - 176, 14, 48, 7); // Left Flames
 		drawProgressBar(x(55), y(55), 176, 0, 190 - 176, 14, 48, 7); // Right Flames
