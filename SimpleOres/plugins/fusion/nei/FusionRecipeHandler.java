@@ -67,7 +67,6 @@ public class FusionRecipeHandler extends TemplateRecipeHandler {
 			return getCycledIngredients(cycleticks / 20, ingredients);
 		}
 		@Override public PositionedStack getResult() {
-			randomRenderPermutation(result, cycleticks / 20);
 			return result;
 		}
 		
