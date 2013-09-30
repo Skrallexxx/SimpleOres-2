@@ -1,5 +1,7 @@
 package SimpleOres.plugins.fusion;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -202,9 +204,9 @@ public class FusionRecipes {
 			return output.copy();
 		}
 		public BasicEntry(Material input1, Material input2, Material catalyst, ItemStack output) {
-			this.input1 = input1;
-			this.input2 = input2;
-			this.catalyst = catalyst;
+			this.input1 = checkNotNull(input1);
+			this.input2 = checkNotNull(input2);
+			this.catalyst = checkNotNull(catalyst);
 			this.output = output.copy();
 		}
 		public BasicEntry(ItemStack input1, ItemStack input2, ItemStack catalyst, ItemStack output) {
