@@ -85,7 +85,7 @@ public class FusionRecipes {
 		protected abstract void reduceStackSize(ItemStack item);
 		
 		/**
-		 * Give a list of the representing items for display. @author zot
+		 * Giving a list of the representing items to display. @author zot
 		 */
 		public abstract List<ItemStack> getItems();
 	}
@@ -141,13 +141,13 @@ public class FusionRecipes {
 	 */
 	public static class StackMaterial extends Material {
 		private final ItemStack stack;
+		public ItemStack getStack() {
+			return stack.copy();
+		}
 		private StackMaterial(ItemStack stack) {
 			if (stack.stackSize < 0)
 				throw new IllegalArgumentException(stack.toString());
 			this.stack = stack.copy();
-		}
-		public ItemStack getStack() {
-			return stack.copy();
 		}
 		@Override public boolean matches(ItemStack item) {
 			if (item == null || item.stackSize < stack.stackSize)
@@ -173,7 +173,7 @@ public class FusionRecipes {
 	
 	
 	/**
-	 * An interface to represent entries of fusion recipe. @author zot
+	 * Implement this interface to customize recipes. @author zot
 	 */
 	public static interface Entry {
 		public boolean matches(ItemStack input1, ItemStack input2, ItemStack catalyst);
@@ -188,9 +188,9 @@ public class FusionRecipes {
 		public boolean isItemCatalyst(ItemStack item);
 		
 		/**
-		 * A method to give an EntryInfo for recipe displaying. @author zot
+		 * Give a BasicEntry that best represents this entry for display purpose. @author zot
 		 */
-		public EntryInfo getInfo();
+		public BasicEntry basicEntry();
 	}
 	
 	public static class BasicEntry implements Entry {
@@ -198,6 +198,9 @@ public class FusionRecipes {
 		public final Material input2;
 		public final Material catalyst;
 		private final ItemStack output;
+		public ItemStack getOutput() {
+			return output.copy();
+		}
 		public BasicEntry(Material input1, Material input2, Material catalyst, ItemStack output) {
 			this.input1 = input1;
 			this.input2 = input2;
@@ -243,26 +246,8 @@ public class FusionRecipes {
 			return catalyst.matches(item);
 		}
 		
-		@Override public EntryInfo getInfo() {
-			return new EntryInfo(input1, input2, catalyst, Material.of(output));
-		}
-	}
-	
-	
-	
-	/**
-	 * Use for recipe display. @author zot
-	 */
-	public static class EntryInfo {
-		public final Material input1;
-		public final Material input2;
-		public final Material catalyst;
-		public final Material output;
-		public EntryInfo(Material input1, Material input2, Material catalyst, Material output) {
-			this.input1 = input1;
-			this.input2 = input2;
-			this.catalyst = catalyst;
-			this.output = output;
+		@Override public BasicEntry basicEntry() {
+			return this;
 		}
 	}
 	
