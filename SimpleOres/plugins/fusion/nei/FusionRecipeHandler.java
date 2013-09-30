@@ -23,23 +23,23 @@ import com.google.common.collect.ImmutableList;
 
 public class FusionRecipeHandler extends TemplateRecipeHandler {
 
-	private static final int X1 = 0;
-	private static final int Y1 = 15;
+	private static final int X0 = 0;
+	private static final int Y0 = 15;
 	
-	private static final int X2 = 5;
-	private static final int Y2 = 5;
+	private static final int X1 = 5;
+	private static final int Y1 = 5;
 	
 	@Override public void drawBackground(int i) {
 		GL11.glColor4f(1, 1, 1, 1);
 		changeTexture(getGuiTexture());
-		drawTexturedModalRect(X1, Y1, X2, Y2, 166, 78);
+		drawTexturedModalRect(X0, Y0, X1, Y1, 166, 78);
 	}
 	
 	protected static int x(int x) {
-		return x + X1 - X2;
+		return x + X0 - X1;
 	}
 	protected static int y(int y) {
-		return y + Y1 - Y2;
+		return y + Y0 - Y1;
 	}
 
 	@Override public void loadTransferRects() {
