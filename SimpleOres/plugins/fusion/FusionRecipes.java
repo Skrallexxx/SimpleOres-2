@@ -160,7 +160,7 @@ public class FusionRecipes {
 		}
 		
 		@Override public List<ItemStack> getItems() {
-			return Lists.newArrayList(stack);
+			return Lists.newArrayList(stack.copy());
 		}
 	}
 	
