@@ -119,7 +119,7 @@ public class SimpleOresFusion
         /**
          * Simply prints to console the number of Fusion Furnace recipes that were loaded, then prints that all content was loaded successfully.
          */
-		System.out.println("[SimpleOres] " + FusionRecipes.size / 2 + " Fusion Furnace recipes were loaded.");
+		System.out.println("[SimpleOres] " + FusionRecipes.size() / 2 + " Fusion Furnace recipes were loaded.");
     	System.out.println("[SimpleOres] SimpleOres 2 Fusion Plugin loaded all content successfully.");
     }
 }
