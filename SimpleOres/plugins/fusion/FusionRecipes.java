@@ -210,9 +210,6 @@ public class FusionRecipes {
 			this.catalyst = Material.of(catalyst);
 			this.output = output.copy();
 		}
-		public ItemStack getOutput() {
-			return output.copy();
-		}
 		
 		@Override public boolean matches(ItemStack input1, ItemStack input2, ItemStack catalyst) {
 			return this.catalyst.matches(catalyst)
