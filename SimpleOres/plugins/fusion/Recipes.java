@@ -1,178 +1,374 @@
 package SimpleOres.plugins.fusion;
 
-import static SimpleOres.core.Recipes.ADAMANTIUM;
-import static SimpleOres.core.Recipes.COPPER;
-import static SimpleOres.core.Recipes.MYTHRIL;
-import static SimpleOres.core.Recipes.ONYX;
-import static SimpleOres.core.Recipes.STICK;
-import static SimpleOres.core.Recipes.TIN;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
+
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
-import net.minecraftforge.oredict.ShapedOreRecipe;
-import SimpleOres.plugins.fusion.FusionRecipes.Material;
-import cpw.mods.fml.common.registry.GameRegistry;
 
-public class Recipes 
-{
+import com.google.common.base.Function;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
+import com.google.common.collect.Ordering;
+
+public class FusionRecipes {
 	/**
-	 * The constructor for the recipes. This is called by the main mod class.
-	 * This is where all the recipes are created, from tools and armor to block and smelting recipes.
-	 * 
-	 * Forge OreDictionary results are set here.
+	 * A constant referring the current wildcard value of the metadata. @author zot
 	 */
-	public static final String BRONZE = "ingotBronze";
-	public static final String THYRIUM = "ingotThyrium";
-	public static final String SINISITE = "ingotSinisite";
+	public static final int WILDCARD_VALUE = OreDictionary.WILDCARD_VALUE;
 	
-	public static void doRecipes()
-	{
-		//Forge OreDictionary
-		OreDictionary.registerOre(BRONZE, new ItemStack(Content.bronzeIngot));
-		OreDictionary.registerOre(THYRIUM, new ItemStack(Content.thyriumIngot));
-		OreDictionary.registerOre(SINISITE, new ItemStack(Content.sinisiteIngot));
+	
+	
+	/**
+	 * An abstract class to integrate ItemStack and OreDictionary entries. @author zot
+	 */
+	public static abstract class Material {
+		/**
+		 * Use this to represent empty slots. @author zot
+		 */
+		public static Material of() {
+			return new NullMaterial();
+		}
 		
-		//Block Recipes
-			//Storage Content
-			GameRegistry.addRecipe(new ShapedOreRecipe(Content.bronzeBlock,
-				"XXX", "XXX", "XXX", 'X', BRONZE));
-			GameRegistry.addRecipe(new ShapedOreRecipe(Content.thyriumBlock,
-				"XXX", "XXX", "XXX", 'X', THYRIUM));
-			GameRegistry.addRecipe(new ShapedOreRecipe(Content.sinisiteBlock,
-				"XXX", "XXX", "XXX", 'X', SINISITE));
+		/**
+		 * Use this to represent OreDictionary entries. @author zot
+		 */
+		public static Material of(String ore, int amount) {
+			return new OreMaterial(ore, amount);
+		}
 		
-			//Special Furnace Recipes
-			GameRegistry.addRecipe(new ShapedOreRecipe(Content.fusionFurnace,
-				"XWX", "ZYZ", "XWX", 'X', Block.brick, 'Y', Block.furnaceIdle, 'W', Item.coal, 'Z', Item.ingotIron));
-			
-		//Item Recipes
-			//Ingot Recipes
-			GameRegistry.addShapelessRecipe(new ItemStack(Content.bronzeIngot, 9),
-				Content.bronzeBlock);
-			GameRegistry.addShapelessRecipe(new ItemStack(Content.thyriumIngot, 9),
-				Content.thyriumBlock);
-			GameRegistry.addShapelessRecipe(new ItemStack(Content.sinisiteIngot, 9),
-				Content.sinisiteBlock);
-			
-			//Bronze Ingot
-			GameRegistry.addShapelessRecipe(new ItemStack(Content.largeBronzeChunk, 1), 
-				Content.smallBronzeChunk, Content.smallBronzeChunk, Content.smallBronzeChunk, Content.smallBronzeChunk, Content.smallBronzeChunk);
-			GameRegistry.addShapelessRecipe(new ItemStack(Content.largeBronzeChunk, 1), 
-				Content.mediumBronzeChunk, Content.mediumBronzeChunk, Content.mediumBronzeChunk);
-			
-			//Thyrium Ingot
-			GameRegistry.addShapelessRecipe(new ItemStack(Content.largeThyriumChunk, 1), 
-				Content.smallThyriumChunk, Content.smallThyriumChunk, Content.smallThyriumChunk, Content.smallThyriumChunk, Content.smallThyriumChunk);
-			GameRegistry.addShapelessRecipe(new ItemStack(Content.largeThyriumChunk, 1), 
-				Content.mediumThyriumChunk, Content.mediumThyriumChunk, Content.mediumThyriumChunk);
-			
-			//Sinisite Ingot
-			GameRegistry.addShapelessRecipe(new ItemStack(Content.largeSinisiteChunk, 1), 
-				Content.smallSinisiteChunk, Content.smallSinisiteChunk, Content.smallSinisiteChunk, Content.smallSinisiteChunk, Content.smallSinisiteChunk);
-			GameRegistry.addShapelessRecipe(new ItemStack(Content.largeSinisiteChunk, 1), 
-				Content.mediumSinisiteChunk, Content.mediumSinisiteChunk, Content.mediumSinisiteChunk);
-			
-			//Rods
-			GameRegistry.addRecipe(new ShapedOreRecipe(Content.thyriumRod,
-				"X", "X", 'X', THYRIUM));
-			GameRegistry.addRecipe(new ShapedOreRecipe(Content.sinisiteRod,
-				"X", "X", 'X', SINISITE));
-			
-		//Tool Recipes
-			//Bronze Tool Recipes
-			GameRegistry.addRecipe(new ShapedOreRecipe(Content.bronzePick,
-				"XXX", " Y ", " Y ", 'X', BRONZE, 'Y', STICK));
-			GameRegistry.addRecipe(new ShapedOreRecipe(Content.bronzeAxe,
-				"XX ", "XY ", " Y ", 'X', BRONZE, 'Y', STICK));
-			GameRegistry.addRecipe(new ShapedOreRecipe(Content.bronzeShovel,
-				"X", "Y", "Y", 'X', BRONZE, 'Y', STICK));
-			GameRegistry.addRecipe(new ShapedOreRecipe(Content.bronzeSword,
-				"X", "X", "Y", 'X', BRONZE, 'Y', STICK));
-			GameRegistry.addRecipe(new ShapedOreRecipe(Content.bronzeHoe,
-				"XX ", " Y ", " Y ", 'X', BRONZE, 'Y', STICK));
-			
-			//Thyrium Tool Recipes
-			GameRegistry.addRecipe(new ShapedOreRecipe(Content.thyriumPick,
-				"XXX", " Y ", " Y ", 'X', THYRIUM, 'Y', STICK));
-			GameRegistry.addRecipe(new ShapedOreRecipe(Content.thyriumAxe,
-				"XX ", "XY ", " Y ", 'X', THYRIUM, 'Y', STICK));
-			GameRegistry.addRecipe(new ShapedOreRecipe(Content.thyriumShovel,
-				"X", "Y", "Y", 'X', THYRIUM, 'Y', STICK));
-			GameRegistry.addRecipe(new ShapedOreRecipe(Content.thyriumSword,
-				"X", "X", "Y", 'X', THYRIUM, 'Y', STICK));
-			GameRegistry.addRecipe(new ShapedOreRecipe(Content.thyriumHoe,
-				"XX ", " Y ", " Y ", 'X', THYRIUM, 'Y', STICK));
-			
-			//Sinisite Tool Recipes
-			GameRegistry.addRecipe(new ShapedOreRecipe(Content.sinisitePick,
-				"XXX", " Y ", " Y ", 'X', SINISITE, 'Y', STICK));
-			GameRegistry.addRecipe(new ShapedOreRecipe(Content.sinisiteAxe,
-				"XX ", "XY ", " Y ", 'X', SINISITE, 'Y', STICK));
-			GameRegistry.addRecipe(new ShapedOreRecipe(Content.sinisiteShovel,
-				"X", "Y", "Y", 'X', SINISITE, 'Y', STICK));
-			GameRegistry.addRecipe(new ShapedOreRecipe(Content.sinisiteSword,
-				"X", "X", "Y", 'X', SINISITE, 'Y', STICK));
-			GameRegistry.addRecipe(new ShapedOreRecipe(Content.sinisiteHoe,
-				"XX ", " Y ", " Y ", 'X', SINISITE, 'Y', STICK));
-			
-			//Bow Recipes
-			GameRegistry.addRecipe(new ShapedOreRecipe(Content.thyriumBow,
-				" XY", "Z Y", " XY", 'X', Content.thyriumRod, 'Y', Item.silk, 'Z', Item.ingotGold));
-			GameRegistry.addRecipe(new ShapedOreRecipe(Content.sinisiteBow,
-				" XY", "Z Y", " XY", 'X', Content.sinisiteRod, 'Y', Item.silk, 'Z', "gemOnyx"));
-			
-		//Armour Recipes
-			//Bronze Armour Recipes
-			GameRegistry.addRecipe(new ShapedOreRecipe(Content.bronzeHelm,
-				"XXX", "X X", 'X', BRONZE));
-			GameRegistry.addRecipe(new ShapedOreRecipe(Content.bronzeChest,
-				"X X", "XXX", "XXX", 'X', BRONZE));
-			GameRegistry.addRecipe(new ShapedOreRecipe(Content.bronzeLegs,
-				"XXX", "X X", "X X", 'X', BRONZE));
-			GameRegistry.addRecipe(new ShapedOreRecipe(Content.bronzeBoots,
-				"X X", "X X", 'X', BRONZE));
-			
-			//Thyrium Armour Recipes
-			GameRegistry.addRecipe(new ShapedOreRecipe(Content.thyriumHelm,
-				"XXX", "X X", 'X', THYRIUM));
-			GameRegistry.addRecipe(new ShapedOreRecipe(Content.thyriumChest,
-				"X X", "XXX", "XXX", 'X', THYRIUM));
-			GameRegistry.addRecipe(new ShapedOreRecipe(Content.thyriumLegs,
-				"XXX", "X X", "X X", 'X', THYRIUM));
-			GameRegistry.addRecipe(new ShapedOreRecipe(Content.thyriumBoots,
-				"X X", "X X", 'X', THYRIUM));
-			
-			//Sinisite Armour Recipes
-			GameRegistry.addRecipe(new ShapedOreRecipe(Content.sinisiteHelm,
-				"XXX", "X X", 'X', SINISITE));
-			GameRegistry.addRecipe(new ShapedOreRecipe(Content.sinisiteChest,
-				"X X", "XXX", "XXX", 'X', SINISITE));
-			GameRegistry.addRecipe(new ShapedOreRecipe(Content.sinisiteLegs,
-				"XXX", "X X", "X X", 'X', SINISITE));
-			GameRegistry.addRecipe(new ShapedOreRecipe(Content.sinisiteBoots,
-				"X X", "X X", 'X', SINISITE));
-			
-		//Smelting Recipes
-			//Fusion Furnace
-				//Bronze
-		    	FusionRecipes.addSmelting(Material.of(COPPER), Material.of(TIN), Material.of(Item.dyePowder, 1, 15), new ItemStack(Content.smallBronzeChunk), 2.0F);
-		    	FusionRecipes.addSmelting(Material.of(COPPER), Material.of(TIN), Material.of(Item.gunpowder), new ItemStack(Content.mediumBronzeChunk), 3.0F);
-		    	FusionRecipes.addSmelting(Material.of(COPPER), Material.of(TIN), Material.of(Item.redstone), new ItemStack(Content.largeBronzeChunk), 10.0F);
-		    	
-		    	//Thyrium
-		    	FusionRecipes.addSmelting(Material.of(MYTHRIL), Material.of(ADAMANTIUM), Material.of(Item.redstone), new ItemStack(Content.smallThyriumChunk), 6.0F);
-		    	FusionRecipes.addSmelting(Material.of(MYTHRIL), Material.of(ADAMANTIUM), Material.of(Item.dyePowder, 1, 4), new ItemStack(Content.mediumThyriumChunk), 10.0F);
-		    	FusionRecipes.addSmelting(Material.of(MYTHRIL), Material.of(ADAMANTIUM), Material.of(Item.glowstone), new ItemStack(Content.largeThyriumChunk), 30.0F);
-		    	
-		    	//Sinisite				    	
-		    	FusionRecipes.addSmelting(Material.of(ONYX), Material.of(MYTHRIL), Material.of(Item.glowstone), new ItemStack(Content.smallSinisiteChunk), 12.0F);
-		    	FusionRecipes.addSmelting(Material.of(ONYX), Material.of(MYTHRIL), Material.of(Item.blazePowder), new ItemStack(Content.mediumSinisiteChunk), 20.0F);
-		    	FusionRecipes.addSmelting(Material.of(ONYX), Material.of(MYTHRIL), Material.of(Item.ghastTear), new ItemStack(Content.largeSinisiteChunk), 60.0F);
-		    	
-		    //Regular Furnace
-				GameRegistry.addSmelting(Content.largeBronzeChunk.itemID, new ItemStack(Content.bronzeIngot, 1, 0), 0.3F);
-				GameRegistry.addSmelting(Content.largeThyriumChunk.itemID, new ItemStack(Content.thyriumIngot, 1, 0), 0.6F);
-				GameRegistry.addSmelting(Content.largeSinisiteChunk.itemID, new ItemStack(Content.sinisiteIngot, 1, 0), 1.0F);
+		public static Material of(String ore) {
+			return of(ore, 1);
+		}
+		
+		/**
+		 * Use this to represent exact items.
+		 * The metadata must be explicitly set as wildcard value in order to represent a wildcard.
+		 * @author zot
+		 */
+		public static Material of(ItemStack stack) {
+			return new StackMaterial(stack);
+		}
+		
+		/**
+		 * Some constructors resembling the ItemStack syntax, with a default stack size of 1 and a default metadata of 0.
+		 * @author zot
+		 */
+		public static Material of(int itemID, int amount, int metadata) {
+			return of(new ItemStack(itemID, amount, metadata));
+		}
+		public static Material of(Item item) {
+			return of(item.itemID, 1, 0);
+		}
+		public static Material of(Item item, int amount) {
+			return of(item.itemID, amount, 0);
+		}
+		public static Material of(Item item, int amount, int metadata) {
+			return of(item.itemID, amount, metadata);
+		}
+		public static Material of(Block block) {
+			return of(block, 1);
+		}
+		public static Material of(Block block, int amount) {
+			return of(block.blockID, amount, 0);
+		}
+		public static Material of(Block block, int amount, int metadata) {
+			return of(block.blockID, amount, metadata);
+		}
+		
+		public abstract boolean matches(ItemStack item);
+		
+		protected abstract void reduceStackSize(ItemStack item);
+		
+		/**
+		 * Give a list of the representing items for display. @author zot
+		 */
+		public abstract List<ItemStack> getItems();
 	}
+	
+	/**
+	 * The actual class that represents an empty slot. @author zot
+	 */
+	public static class NullMaterial extends Material {
+		private NullMaterial() {}
+		@Override public boolean matches(ItemStack item) {
+			return item == null;
+		}
+		
+		@Override protected void reduceStackSize(ItemStack item) {}
+		
+		@Override public List<ItemStack> getItems() {
+			return Lists.newArrayList();
+		}
+	}
+	
+	/**
+	 * The actual class that represents an OreDictionary entry. @author zot
+	 */
+	public static class OreMaterial extends Material {
+		public final String ore;
+		public final int amount;
+		private OreMaterial(String ore, int amount) {
+			if (amount < 0)
+				throw new IllegalArgumentException(Integer.valueOf(amount).toString());
+			this.ore = ore;
+			this.amount = amount;
+		}
+		@Override public boolean matches(ItemStack item) {
+			if (item == null || item.stackSize < amount)
+				return false;
+			for (ItemStack i : OreDictionary.getOres(ore))
+				if (FusionRecipes.matches(i, item))
+					return true;
+			return false;
+		}
+		
+		@Override protected void reduceStackSize(ItemStack item) {
+			item.stackSize -= amount;
+		}
+		
+		@Override public List<ItemStack> getItems() {
+			return OreDictionary.getOres(ore);
+		}
+	}
+	
+	/**
+	 * The actual class that represents an ItemStack. @author zot
+	 */
+	public static class StackMaterial extends Material {
+		private final ItemStack stack;
+		private StackMaterial(ItemStack stack) {
+			if (stack.stackSize < 0)
+				throw new IllegalArgumentException(stack.toString());
+			this.stack = stack.copy();
+		}
+		public ItemStack getStack() {
+			return stack.copy();
+		}
+		@Override public boolean matches(ItemStack item) {
+			if (item == null || item.stackSize < stack.stackSize)
+				return false;
+			return FusionRecipes.matches(stack, item);
+		}
+		
+		@Override protected void reduceStackSize(ItemStack item) {
+			item.stackSize -= stack.stackSize;
+		}
+		
+		@Override public List<ItemStack> getItems() {
+			return Lists.newArrayList(stack.copy());
+		}
+	}
+	
+	public static boolean matches(ItemStack target, ItemStack item) {
+		return target.itemID == item.itemID
+				&& (target.getItemDamage() == WILDCARD_VALUE || target.getItemDamage() == item.getItemDamage())
+				&& (target.stackTagCompound == null || target.stackTagCompound.equals(item.stackTagCompound));
+	}
+	
+	
+	
+	/**
+	 * Extend this interface to customize recipe. @author zot
+	 */
+	public static interface Entry {
+		public boolean matches(ItemStack input1, ItemStack input2, ItemStack catalyst);
+		public ItemStack getOutput(ItemStack input1, ItemStack input2, ItemStack catalyst);
+		
+		/**
+		 * Being called after matching. No need to check items. @author zot
+		 */
+		public ItemStack applyFusion(ItemStack input1, ItemStack input2, ItemStack catalyst);
+		
+		public boolean isItemIput(ItemStack item);
+		public boolean isItemCatalyst(ItemStack item);
+		
+		/**
+		 * Give a BasicEntry that best represents this entry for display purpose. @author zot
+		 */
+		public BasicEntry basicEntry();
+	}
+	
+	public static class BasicEntry implements Entry {
+		public final Material input1;
+		public final Material input2;
+		public final Material catalyst;
+		private final ItemStack output;
+		public BasicEntry(Material input1, Material input2, Material catalyst, ItemStack output) {
+			this.input1 = input1;
+			this.input2 = input2;
+			this.catalyst = catalyst;
+			this.output = output.copy();
+		}
+		public BasicEntry(ItemStack input1, ItemStack input2, ItemStack catalyst, ItemStack output) {
+			this.input1 = Material.of(input1);
+			this.input2 = Material.of(input2);
+			this.catalyst = Material.of(catalyst);
+			this.output = output.copy();
+		}
+		public ItemStack getOutput() {
+			return output.copy();
+		}
+		
+		@Override public boolean matches(ItemStack input1, ItemStack input2, ItemStack catalyst) {
+			return this.catalyst.matches(catalyst)
+					&& (this.input1.matches(input1) && this.input2.matches(input2)
+							|| this.input1.matches(input2) && this.input2.matches(input1));
+		}
+		@Override public ItemStack getOutput(ItemStack input1, ItemStack input2, ItemStack catalyst) {
+			return output.copy();
+		}
+
+		/**
+		 * Being called after matching. No need to check items. @author zot
+		 */
+		@Override public ItemStack applyFusion(ItemStack input1, ItemStack input2, ItemStack catalyst) {
+			if (this.input1.matches(input1) && this.input2.matches(input2)) {
+				this.input1.reduceStackSize(input1);
+				this.input2.reduceStackSize(input2);
+			}
+			else {
+				this.input1.reduceStackSize(input2);
+				this.input2.reduceStackSize(input1);
+			}
+			this.catalyst.reduceStackSize(catalyst);
+			return output.copy();
+		}
+		
+		@Override public boolean isItemIput(ItemStack item) {
+			return input1.matches(item) || input2.matches(item);
+		}
+		@Override public boolean isItemCatalyst(ItemStack item) {
+			return catalyst.matches(item);
+		}
+		
+		@Override public BasicEntry basicEntry() {
+			return this;
+		}
+	}
+	
+	
+	
+	/**
+	 * A hack to identify between ItemStack's. TagCompound aware and stack size unaware. @author zot
+	 */
+	public static final Ordering<ItemStack> stackOrder =
+			Ordering.natural().onResultOf(new Function<ItemStack, Integer>() {
+				@Override public Integer apply(ItemStack input) { return input.itemID; }
+			}).compound(
+					Ordering.natural().onResultOf(new Function<ItemStack, Integer>() {
+						@Override public Integer apply(ItemStack input) { return input.getItemDamage(); }
+					})).compound(
+							Ordering.natural().onResultOf(new Function<ItemStack, Integer>() {
+								@Override public Integer apply(ItemStack input) {
+									return input.stackTagCompound == null ? 0 : input.stackTagCompound.hashCode();
+								}
+							})).compound(
+									new Ordering<ItemStack>() {
+										@Override public int compare(ItemStack left, ItemStack right) {
+											if (left.stackTagCompound == right.stackTagCompound
+													|| left.stackTagCompound.equals(right.stackTagCompound))
+												return 0;
+											return 1;
+										}
+									});
+	
+	/** 
+	 * Lists of fusion recipes and experience results. @author zot
+	 */
+	private static final ArrayList<Entry> recipeList = Lists.newArrayList();
+	private static final TreeMap<ItemStack, Float> experienceList = Maps.newTreeMap(stackOrder);
+	
+	/**
+	 * Total number of the fusion recipes. @author zot
+	 */
+	public static int size() {
+		return recipeList.size();
+	}
+	
+	/**
+	 * A method remained for code compatibility. 'addSmelting' can be called without this. @author zot
+	 */
+	@Deprecated public static FusionRecipes smelting() {
+		return new FusionRecipes();
+	}
+	
+	/**
+	 * The standard method to add a fusion recipe. Use 'Material.of' to obtain required materials. @author zot
+	 */
+	public static void addSmelting(Material input1, Material input2, Material catalyst, ItemStack output, float experience) {
+		recipeList.add(new BasicEntry(input1, input2, catalyst, output));
+		setExperience(output.copy(), experience);
+	}
+	
+	/**
+	 * The ItemStack-only method to add a fusion recipe. @author zot 
+	 */
+	public static void addSmelting(ItemStack input1, ItemStack input2, ItemStack catalyst, ItemStack output, float experience) {
+		recipeList.add(new BasicEntry(input1, input2, catalyst, output));
+		setExperience(output.copy(), experience);
+	}
+	
+	public static void setExperience(ItemStack output, float experience) {
+		if (!experienceList.containsKey(output))
+			experienceList.put(output.copy(), experience);
+	}
+	
+	public static ItemStack getSmeltingResult(ItemStack input1, ItemStack input2, ItemStack catalyst) {
+		for (Entry e : recipeList)
+			if (e.matches(input1, input2, catalyst))
+				return e.getOutput(input1, input2, catalyst);
+		return null;
+	}
+	
+	/**
+	 * Reduce stack size of the stacks in the arguments and return the result. @author zot
+	 */
+	public static ItemStack applyFusion(ItemStack input1, ItemStack input2, ItemStack catalyst) {
+		for (Entry e : recipeList)
+			if (e.matches(input1, input2, catalyst))
+				return e.applyFusion(input1, input2, catalyst);
+		return null;
+	}
+	
+	/**
+	 * Grabs the amount of base experience for this item to give when pulled from the furnace slot.
+	 */
+	public static float getExperience(ItemStack item) {
+		Float exp = experienceList.get(item);
+		return exp == null ? 0 : exp;
+	}
+	
+	/**
+	 * A method to determine which slot should be put in on shift-clicks. @author zot
+	 */
+	public static boolean isItemCatalyst(ItemStack item) {
+		for (Entry e : recipeList)
+			if (e.isItemCatalyst(item))
+				return true;
+		return false;
+	}
+	
+	/**
+	 * A method to determine which slot should be put in on shift-clicks. @author zot
+	 */
+	public static boolean isItemInput(ItemStack item) {
+		for (Entry e : recipeList)
+			if (e.isItemIput(item))
+				return true;
+		return false;
+	}
+	
+	public static List<Entry> getRecipeList() {
+		return recipeList;
+	}
+	
+	public static Map<ItemStack, Float> getExperienceList() {
+		return experienceList;
+	}
+	
 }
