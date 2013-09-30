@@ -133,16 +133,16 @@ public class ContainerFusionFurnace extends Container
 			slot.onSlotChange(remained, initial);
 		}
 		else if (index >= 5 /* every slots that belong to the player's inventory */) {
-			if (FusionRecipes.isItemCatalyst(remained)) {
+			if (TileEntityFusionFurnace.isItemFuel(remained)) {
+				if (!this.mergeItemStack(remained, 1, 2, false))
+					return null;
+			}
+			else if (FusionRecipes.isItemCatalyst(remained)) {
 				if (!this.mergeItemStack(remained, 4, 5, false))
 					return null;
 			}
 			else if (FusionRecipes.isItemInput(remained)) {
 				if (!this.mergeItemStack(remained, 0, 1, false) && !this.mergeItemStack(remained, 3, 4, false))
-					return null;
-			}
-			else if (TileEntityFusionFurnace.isItemFuel(remained)) {
-				if (!this.mergeItemStack(remained, 1, 2, false))
 					return null;
 			}
 			else if (index < 32) {
