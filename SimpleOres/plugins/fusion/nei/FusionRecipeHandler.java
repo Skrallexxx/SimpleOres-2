@@ -12,8 +12,8 @@ import net.minecraft.item.ItemStack;
 import org.lwjgl.opengl.GL11;
 
 import SimpleOres.plugins.fusion.FusionRecipes;
+import SimpleOres.plugins.fusion.FusionRecipes.BasicEntry;
 import SimpleOres.plugins.fusion.FusionRecipes.Entry;
-import SimpleOres.plugins.fusion.FusionRecipes.EntryInfo;
 import SimpleOres.plugins.fusion.GuiFusionFurnace;
 import codechicken.nei.PositionedStack;
 import codechicken.nei.recipe.TemplateRecipeHandler;
@@ -55,12 +55,12 @@ public class FusionRecipeHandler extends TemplateRecipeHandler {
 		private final ImmutableList<PositionedStack> ingredients;
 		private final PositionedStack result;
 		
-		public CachedFusionRecipe(EntryInfo info) {
+		public CachedFusionRecipe(BasicEntry entry) {
 			ingredients = ImmutableList.of(
-					new PositionedStack(info.input1.getItems(), x(33), y(35)),
-					new PositionedStack(info.input2.getItems(), x(126), y(34)),
-					new PositionedStack(info.catalyst.getItems(), x(79), y(7)));
-			result = new PositionedStack(info.output.getItems(), x(79), y(34));
+					new PositionedStack(entry.input1.getItems(), x(33), y(35)),
+					new PositionedStack(entry.input2.getItems(), x(126), y(34)),
+					new PositionedStack(entry.catalyst.getItems(), x(79), y(7)));
+			result = new PositionedStack(entry.getOutput(), x(79), y(34));
 		}
 		
 		@Override public List<PositionedStack> getIngredients() {
@@ -117,21 +117,22 @@ public class FusionRecipeHandler extends TemplateRecipeHandler {
 	@Override public void loadCraftingRecipes(String outputId, Object... results) {
 		if (outputId.equals(ID))
 			for (Entry e : FusionRecipes.getRecipeList())
-				arecipes.add(new CachedFusionRecipe(e.getInfo()).computeVisuals());
+				arecipes.add(new CachedFusionRecipe(e.basicEntry()).computeVisuals());
 		else
 			super.loadCraftingRecipes(outputId, results);
 	}
 	@Override public void loadCraftingRecipes(ItemStack result) {
-		result.stackSize = Integer.MAX_VALUE;
 		for (Entry e : FusionRecipes.getRecipeList())
-			if (e.getInfo().output.matches(result))
-				arecipes.add(new CachedFusionRecipe(e.getInfo()).computeVisuals());
+			if (FusionRecipes.stackOrder.compare(e.basicEntry().getOutput(), result) == 0)
+				arecipes.add(new CachedFusionRecipe(e.basicEntry()).computeVisuals());
 	}
 	@Override public void loadUsageRecipes(ItemStack ingredient) {
 		ingredient.stackSize = Integer.MAX_VALUE;
-		for(Entry e : FusionRecipes.getRecipeList())
-			if (e.isItemIput(ingredient) || e.isItemCatalyst(ingredient))
-				arecipes.add(new CachedFusionRecipe(e.getInfo()).computeVisuals());
+		for(Entry e : FusionRecipes.getRecipeList()) {
+			BasicEntry b = e.basicEntry();
+			if (b.isItemIput(ingredient) || b.isItemCatalyst(ingredient))
+				arecipes.add(new CachedFusionRecipe(b).computeVisuals());
+		}
 	}
 	
 }
