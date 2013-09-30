@@ -57,9 +57,9 @@ public class FusionRecipeHandler extends TemplateRecipeHandler {
 		
 		public CachedFusionRecipe(BasicEntry entry) {
 			ingredients = ImmutableList.of(
-					new PositionedStack(entry.input1.getItems(), x(33), y(35)),
-					new PositionedStack(entry.input2.getItems(), x(126), y(34)),
-					new PositionedStack(entry.catalyst.getItems(), x(79), y(7)));
+					new PositionedStack(entry.input1.items(), x(33), y(35)),
+					new PositionedStack(entry.input2.items(), x(126), y(34)),
+					new PositionedStack(entry.catalyst.items(), x(79), y(7)));
 			result = new PositionedStack(entry.getOutput(), x(79), y(34));
 		}
 		
