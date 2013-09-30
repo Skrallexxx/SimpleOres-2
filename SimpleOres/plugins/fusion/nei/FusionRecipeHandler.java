@@ -55,12 +55,12 @@ public class FusionRecipeHandler extends TemplateRecipeHandler {
 		private final ImmutableList<PositionedStack> ingredients;
 		private final PositionedStack result;
 		
-		public CachedFusionRecipe(BasicEntry entry) {
+		public CachedFusionRecipe(BasicEntry b) {
 			ingredients = ImmutableList.of(
-					new PositionedStack(entry.input1.items(), x(33), y(35)),
-					new PositionedStack(entry.input2.items(), x(126), y(34)),
-					new PositionedStack(entry.catalyst.items(), x(79), y(7)));
-			result = new PositionedStack(entry.getOutput(), x(79), y(34));
+					new PositionedStack(b.input1.items(), x(33), y(35)),
+					new PositionedStack(b.input2.items(), x(126), y(34)),
+					new PositionedStack(b.catalyst.items(), x(79), y(7)));
+			result = new PositionedStack(b.getOutput(), x(79), y(34));
 		}
 		
 		@Override public List<PositionedStack> getIngredients() {
@@ -75,8 +75,8 @@ public class FusionRecipeHandler extends TemplateRecipeHandler {
 		}
 		
 		public CachedFusionRecipe computeVisuals() {
-			for(PositionedStack p : ingredients)
-				p.generatePermutations();
+			for(PositionedStack stack : ingredients)
+				stack.generatePermutations();
 			result.generatePermutations();
 			return this;
 		}
@@ -118,24 +118,26 @@ public class FusionRecipeHandler extends TemplateRecipeHandler {
 	}
 	
 	@Override public void loadCraftingRecipes(String outputId, Object... results) {
+		BasicEntry b;
 		if (outputId.equals(ID))
 			for (Entry e : FusionRecipes.getRecipeList())
-				arecipes.add(new CachedFusionRecipe(e.basicEntry()).computeVisuals());
+				if ((b = e.basicEntry()) != null)
+					arecipes.add(new CachedFusionRecipe(b).computeVisuals());
 		else
 			super.loadCraftingRecipes(outputId, results);
 	}
 	@Override public void loadCraftingRecipes(ItemStack result) {
+		BasicEntry b;
 		for (Entry e : FusionRecipes.getRecipeList())
-			if (FusionRecipes.stackOrder.compare(e.basicEntry().getOutput(), result) == 0)
-				arecipes.add(new CachedFusionRecipe(e.basicEntry()).computeVisuals());
+			if ((b = e.basicEntry()) != null && FusionRecipes.matches(b.getOutput(), result))
+				arecipes.add(new CachedFusionRecipe(b).computeVisuals());
 	}
 	@Override public void loadUsageRecipes(ItemStack ingredient) {
 		ingredient.stackSize = Integer.MAX_VALUE;
-		for(Entry e : FusionRecipes.getRecipeList()) {
-			BasicEntry b = e.basicEntry();
-			if (b.isItemIput(ingredient) || b.isItemCatalyst(ingredient))
+		BasicEntry b;
+		for(Entry e : FusionRecipes.getRecipeList())
+			if ((b = e.basicEntry()) != null && (b.isItemIput(ingredient) || b.isItemCatalyst(ingredient)))
 				arecipes.add(new CachedFusionRecipe(b).computeVisuals().setIngredientPermutation(ingredient));
-		}
 	}
 	
 }
