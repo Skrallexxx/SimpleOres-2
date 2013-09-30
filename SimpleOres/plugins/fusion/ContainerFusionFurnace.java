@@ -170,3 +170,4 @@ public class ContainerFusionFurnace extends Container
 		
 		return initial;
 	}
+}
