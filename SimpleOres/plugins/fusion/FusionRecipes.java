@@ -87,7 +87,7 @@ public class FusionRecipes {
 		/**
 		 * Giving a list of the representing items to display. @author zot
 		 */
-		public abstract List<ItemStack> getItems();
+		public abstract List<ItemStack> items();
 	}
 	
 	/**
@@ -101,7 +101,7 @@ public class FusionRecipes {
 		
 		@Override protected void reduceStackSize(ItemStack item) {}
 		
-		@Override public List<ItemStack> getItems() {
+		@Override public List<ItemStack> items() {
 			return Lists.newArrayList();
 		}
 	}
@@ -131,7 +131,7 @@ public class FusionRecipes {
 			item.stackSize -= amount;
 		}
 		
-		@Override public List<ItemStack> getItems() {
+		@Override public List<ItemStack> items() {
 			return OreDictionary.getOres(ore);
 		}
 	}
@@ -159,7 +159,7 @@ public class FusionRecipes {
 			item.stackSize -= stack.stackSize;
 		}
 		
-		@Override public List<ItemStack> getItems() {
+		@Override public List<ItemStack> items() {
 			return Lists.newArrayList(stack.copy());
 		}
 	}
