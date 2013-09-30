@@ -44,7 +44,7 @@ public class Recipes
 		
 			//Special Furnace Recipes
 			GameRegistry.addRecipe(new ShapedOreRecipe(Content.fusionFurnace,
-				"XWX", "ZYZ", "XWX", 'X', Block.brick, 'Y', Block.furnaceIdle, Character.valueOf('W'), Item.coal, 'Z', Item.ingotIron));
+				"XWX", "ZYZ", "XWX", 'X', Block.brick, 'Y', Block.furnaceIdle, 'W', Item.coal, 'Z', Item.ingotIron));
 			
 		//Item Recipes
 			//Ingot Recipes
