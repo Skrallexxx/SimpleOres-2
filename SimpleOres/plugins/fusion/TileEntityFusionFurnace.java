@@ -338,64 +338,48 @@ public class TileEntityFusionFurnace extends TileEntity implements ISidedInvento
         }
     }
 
-    /**
-     * Returns true if the furnace can smelt an item, i.e. has a source item, destination stack isn't full, etc.
-     */    
-    private boolean canSmelt()
-    {
-        if(this.furnaceItemStacks[0] != null && this.furnaceItemStacks[3] != null && this.furnaceItemStacks[4] != null)
-        {
-        	ItemStack itemstack = FusionRecipes.smelting().getSmeltingResult(this.furnaceItemStacks[0], this.furnaceItemStacks[3], this.furnaceItemStacks[4]);
-       		if (itemstack == null) return false;
-    		if (this.furnaceItemStacks[2] == null) return true;
-    		if (!this.furnaceItemStacks[2].isItemEqual(itemstack)) return false;
-    		int result = furnaceItemStacks[2].stackSize + itemstack.stackSize;
-    		return (result <= getInventoryStackLimit() && result <= itemstack.getMaxStackSize());
-        }
-		return false;
-    }
-    
+	/**
+	 * Returns true if the furnace can smelt an item, i.e. has a source item, destination stack isn't full, etc.
+	 */	
+	private boolean canSmelt() {
+		 /** 
+		  * a temporary implementation to avoid excessive checking to the recipes. @author zot
+		  */
+		if (furnaceItemStacks[0] == null && furnaceItemStacks[3] ==null && furnaceItemStacks[4] == null)
+			return false;
+		
+		ItemStack result = FusionRecipes.getSmeltingResult(furnaceItemStacks[0], furnaceItemStacks[3], furnaceItemStacks[4]);
+   		if (result == null)
+   			return false;
+		if (furnaceItemStacks[2] == null)
+			return true;
+		if (!(furnaceItemStacks[2].isStackable() && FusionRecipes.stackOrder.compare(furnaceItemStacks[2], result) == 0))
+			return false;
+		int size = furnaceItemStacks[2].stackSize + result.stackSize;
+		return size <= getInventoryStackLimit() && size <= result.getMaxStackSize();
+	}
+	
 
-    /**
-     * Turn one item from the furnace source stack into the appropriate smelted item in the furnace result stack
-     */
-    public void smeltItem()
-    {
-        if (this.canSmelt())
-        {
-        	ItemStack itemstack = FusionRecipes.smelting().getSmeltingResult(this.furnaceItemStacks[0], this.furnaceItemStacks[3], this.furnaceItemStacks[4]);
+	/**
+	 * Turn appropriate amount of materials from the input and catalyst slots into their results in the output slot @author zot
+	 */
+	public void smeltItem() {
+		if (!canSmelt())
+			return;
+		
+		ItemStack result = FusionRecipes.applyFusion(furnaceItemStacks[0], furnaceItemStacks[3], furnaceItemStacks[4]);
+		if (furnaceItemStacks[2] == null)
+			furnaceItemStacks[2] = result.copy();
+		else
+			furnaceItemStacks[2].stackSize += result.stackSize;
 
-
-            if (this.furnaceItemStacks[2] == null)
-            {
-                this.furnaceItemStacks[2] = itemstack.copy();
-            }
-            
-            else if (this.furnaceItemStacks[2].isItemEqual(itemstack))
-            {
-                furnaceItemStacks[2].stackSize += itemstack.stackSize;
-            }
-
-            --this.furnaceItemStacks[0].stackSize;
-            --this.furnaceItemStacks[3].stackSize;
-            --this.furnaceItemStacks[4].stackSize;
-
-            if (this.furnaceItemStacks[0].stackSize <= 0)
-            {
-                this.furnaceItemStacks[0] = null;
-            }
-            
-            if (this.furnaceItemStacks[3].stackSize <= 0)
-            {
-                this.furnaceItemStacks[3] = null;
-            }
-            
-            if (this.furnaceItemStacks[4].stackSize <= 0)
-            {
-                this.furnaceItemStacks[4] = null;
-            }
-        }
-    }
+		if (furnaceItemStacks[0].stackSize <= 0)
+			furnaceItemStacks[0] = null;
+		if (furnaceItemStacks[3].stackSize <= 0)
+			furnaceItemStacks[3] = null;
+		if (furnaceItemStacks[4].stackSize <= 0)
+			furnaceItemStacks[4] = null;
+	}
 
     /**
      * Returns the number of ticks that the supplied fuel item will keep the furnace burning, or 0 if the item isn't
@@ -464,31 +448,46 @@ public class TileEntityFusionFurnace extends TileEntity implements ISidedInvento
 
     public void closeChest() {}
 
-    /**
-     * Returns true if automation is allowed to insert the given stack (ignoring stack size) into the given slot.
-     */
-    public boolean isStackValidForSlot(int par1, ItemStack par2ItemStack)
-    {
-        return par1 == 2 ? false : (par1 == 1 ? isItemFuel(par2ItemStack) : true );
-    }
+	/**
+	 * Returns true if automation is allowed to insert the given stack (ignoring stack size) into the given slot.
+	 */
+	@Override public boolean isItemValidForSlot(int slot, ItemStack item) {
+		switch(slot) {
+		case 1: // fuel
+			return isItemFuel(item);
+		case 2: // output
+			return false;
+		default:
+			return true;
+		}
+	}
 
-    /**
-     * Returns an array containing the indices of the slots that can be accessed by automation on the given side of this
-     * block.
-     */
-    public int[] getAccessibleSlotsFromSide(int par1)
-    {
-        return par1 == 0 ? slots_output : (par1 == 1 ? slots_input1 : slots_fuel);
-    }
+	/**
+	 * Returns an array containing the indices of the slots that can be accessed by automation on the given side of this
+	 * block.
+	 */
+	@Override public int[] getAccessibleSlotsFromSide(int side) {
+		if (side == 0) // Down
+			return slots_output;
+		if (side == 1) // Up
+			return slots_catalyst;
+		
+		ForgeDirection blockOrientation = ForgeDirection.getOrientation(worldObj.getBlockMetadata(xCoord, yCoord, zCoord));
+		if (blockOrientation.getRotation(ForgeDirection.UP).equals(ForgeDirection.getOrientation(side))) // Left
+			return slots_input1;
+		if (blockOrientation.getRotation(ForgeDirection.DOWN).equals(ForgeDirection.getOrientation(side))) // Right
+			return slots_input2;
+		
+		return slots_fuel;
+	}
 
-    /**
-     * Returns true if automation can insert the given item in the given slot from the given side. Args: Slot, item,
-     * side
-     */
-    public boolean canInsertItem(int par1, ItemStack par2ItemStack, int par3)
-    {
-        return this.isStackValidForSlot(par1, par2ItemStack);
-    }
+	/**
+	 * Returns true if automation can insert the given item in the given slot from the given side. Args: Slot, item,
+	 * side
+	 */
+	@Override public boolean canInsertItem(int slot, ItemStack item, int side) {
+		return this.isItemValidForSlot(slot, item);
+	}
 
     /**
      * Returns true if automation can extract the given item in the given slot from the given side. Args: Slot, item,
@@ -497,14 +496,5 @@ public class TileEntityFusionFurnace extends TileEntity implements ISidedInvento
     public boolean canExtractItem(int par1, ItemStack par2ItemStack, int par3)
     {
         return par3 != 0 || par1 != 1 || par2ItemStack.itemID == Item.bucketEmpty.itemID;
-    }
-
-    /**
-     * Returns true if automation is allowed to insert the given stack (ignoring stack size) into the given slot.
-     */
-	@Override
-    public boolean isItemValidForSlot(int par1, ItemStack par2ItemStack)
-    {
-        return par1 == 2 ? false : (par1 == 1 ? isItemFuel(par2ItemStack) : true);
     }
 }
