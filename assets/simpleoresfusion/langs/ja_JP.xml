@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties version="1.0">
+		<!--Blocks-->
+	<entry key="tile.bronzeBlock.name">青銅ブロック</entry>
+	<entry key="tile.thyriumBlock.name">シリウムブロック</entry>
+	<entry key="tile.sinisiteBlock.name">シニサイトブロック</entry>
+	<entry key="tile.fusionFurnace.name">融合かまど</entry>
+	<entry key="tile.fusionFurnaceOn.name">融合かまど</entry>
+		<!--Items-->
+	<entry key="item.bronzeIngot.name">青銅インゴット</entry>
+	<entry key="item.thyriumIngot.name">シリウムインゴット</entry>
+	<entry key="item.sinisiteIngot.name">シニサイトインゴット</entry>
+	<entry key="item.thyriumRod.name">シリウムロッド</entry>
+	<entry key="item.sinisiteRod.name">シニサイトロッド</entry>
+	<entry key="item.smallBronzeChunk.name">小さな青銅の塊</entry>
+	<entry key="item.mediumBronzeChunk.name">普通の青銅の塊</entry>
+	<entry key="item.largeBronzeChunk.name">大きな青銅の塊</entry>
+	<entry key="item.smallThyriumChunk.name">小さなシリウムの塊</entry>
+	<entry key="item.mediumThyriumChunk.name">普通のシリウムの塊</entry>
+	<entry key="item.largeThyriumChunk.name">大きなシリウムの塊</entry>
+	<entry key="item.smallSinisiteChunk.name">小さなシニサイトの塊</entry>
+	<entry key="item.mediumSinisiteChunk.name">普通のシニサイトの塊</entry>
+	<entry key="item.largeSinisiteChunk.name">大きなシニサイトの塊</entry>
+		<!--Tools-->
+	<entry key="item.bronzePick.name">青銅のツルハシ</entry>
+	<entry key="item.bronzeAxe.name">青銅の斧</entry>
+	<entry key="item.bronzeShovel.name">青銅のシャベル</entry>
+	<entry key="item.bronzeSword.name">青銅の剣</entry>
+	<entry key="item.bronzeHoe.name">青銅のクワ</entry>
+	<entry key="item.thyriumPick.name">シリウムのツルハシ</entry>
+	<entry key="item.thyriumAxe.name">シリウムの斧</entry>
+	<entry key="item.thyriumShovel.name">シリウムのシャベル</entry>
+	<entry key="item.thyriumSword.name">シリウムの剣</entry>
+	<entry key="item.thyriumHoe.name">シリウムのクワ</entry>
+	<entry key="item.sinisitePick.name">シニサイトのツルハシ</entry>
+	<entry key="item.sinisiteAxe.name">シニサイトの斧</entry>
+	<entry key="item.sinisiteShovel.name">シニサイトのシャベル</entry>
+	<entry key="item.sinisiteSword.name">シニサイトの剣</entry>
+	<entry key="item.sinisiteHoe.name">シニサイトのクワ</entry>
+	<entry key="item.thyriumBow.name">シリウムボウ</entry>
+	<entry key="item.sinisiteBow.name">シニサイトボウ</entry>
+		<!--Armor-->
+	<entry key="item.bronzeHelm.name">青銅のヘルメット</entry>
+	<entry key="item.bronzeChest.name">青銅のチェストプレート</entry>
+	<entry key="item.bronzeLegs.name">青銅のレギンス</entry>
+	<entry key="item.bronzeBoots.name">青銅のブーツ</entry>
+	<entry key="item.thyriumHelm.name">シリウムのヘルメット</entry>
+	<entry key="item.thyriumChest.name">シリウムのチェストプレート</entry>
+	<entry key="item.thyriumLegs.name">シリウムのレギンス</entry>
+	<entry key="item.thyriumBoots.name">シリウムのブーツ</entry>
+	<entry key="item.sinisiteHelm.name">シニサイトのヘルメット</entry>
+	<entry key="item.sinisiteChest.name">シニサイトのチェストプレート</entry>
+	<entry key="item.sinisiteLegs.name">シニサイトのレギンス</entry>
+	<entry key="item.sinisiteBoots.name">シニサイトのブーツ</entry>
+		<!--Achievements-->
+	<entry key="achievement.fusionAch">合体</entry>
+	<entry key="achievement.fusionAch.desc">融合かまどを作って新たな可能性をひらく</entry>
+	<entry key="achievement.bronzeAch">はじめての融合</entry>
+	<entry key="achievement.bronzeAch.desc">最初の合金、青銅インゴットを作ってみる</entry>
+</properties>

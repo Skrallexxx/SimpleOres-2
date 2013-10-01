@@ -18,7 +18,7 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 
 //======================================= FORGE STUFF ====================================================
 @NetworkMod(clientSideRequired = true, serverSideRequired = false)
-@Mod(modid = "simpleoresfusion", name = "SimpleOres 2 Fusion Plugin", version = "1.1.0", dependencies = "required-after:simpleores")
+@Mod(modid = ModInfo.ID, name = ModInfo.NAME, version = ModInfo.VERSION, dependencies = "required-after:simpleores")
 
 public class SimpleOresFusion 
 {
@@ -119,7 +119,7 @@ public class SimpleOresFusion
         /**
          * Simply prints to console the number of Fusion Furnace recipes that were loaded, then prints that all content was loaded successfully.
          */
-		System.out.println("[SimpleOres] " + FusionRecipes.size / 2 + " Fusion Furnace recipes were loaded.");
+		System.out.println("[SimpleOres] " + FusionRecipes.size() / 2 + " Fusion Furnace recipes were loaded.");
     	System.out.println("[SimpleOres] SimpleOres 2 Fusion Plugin loaded all content successfully.");
     }
 }

@@ -1,257 +1,376 @@
 package SimpleOres.plugins.fusion;
 
-import java.util.Arrays;
-import java.util.HashMap;
+import static com.google.common.base.Preconditions.checkNotNull;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
-import SimpleOres.core.Achievements;
-import SimpleOres.core.Armor;
-import SimpleOres.core.Blocks;
-import SimpleOres.core.Items;
-import SimpleOres.core.Recipes;
-import SimpleOres.core.SimpleOres;
-import SimpleOres.core.Tools;
-import SimpleOres.core.conf.IDs;
-import SimpleOres.core.conf.Localisation;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraftforge.oredict.OreDictionary;
 
-public class FusionRecipes
-{
+import com.google.common.base.Function;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
+import com.google.common.collect.Ordering;
+
+public class FusionRecipes {
 	/**
-	 * Linking to the classes for easier reference.
+	 * A constant referring the current wildcard value of the metadata. @author zot
 	 */
-	public static SimpleOres mod;
-	public static Achievements achievements;
-	public static Armor armor;
-	public static Blocks blocks;
-	public static IDs config;
-	public static Items items;
-	public static Localisation local;
-	public static Recipes recipes;
-	public static Tools tools;
+	public static final int WILDCARD_VALUE = OreDictionary.WILDCARD_VALUE;
 	
-	public static FurnaceRecipes furnaceRecipes;
-	public static int size;
 	
-    private static final FusionRecipes smeltingBase = new FusionRecipes();
+	
+	/**
+	 * An abstract class to integrate ItemStack and OreDictionary entries. @author zot
+	 */
+	public static abstract class Material {
+		/**
+		 * Use this to represent empty slots. @author zot
+		 */
+		public static Material of() {
+			return new NullMaterial();
+		}
+		
+		/**
+		 * Use this to represent OreDictionary entries. @author zot
+		 */
+		public static Material of(String ore, int amount) {
+			return new OreMaterial(ore, amount);
+		}
+		
+		public static Material of(String ore) {
+			return of(ore, 1);
+		}
+		
+		/**
+		 * Use this to represent exact items.
+		 * The metadata must be explicitly set as wildcard value in order to represent a wildcard.
+		 * @author zot
+		 */
+		public static Material of(ItemStack stack) {
+			return new StackMaterial(stack);
+		}
+		
+		/**
+		 * Some constructors resembling the ItemStack syntax, with a default stack size of 1 and a default metadata of 0.
+		 * @author zot
+		 */
+		public static Material of(int itemID, int amount, int metadata) {
+			return of(new ItemStack(itemID, amount, metadata));
+		}
+		public static Material of(Item item) {
+			return of(item.itemID, 1, 0);
+		}
+		public static Material of(Item item, int amount) {
+			return of(item.itemID, amount, 0);
+		}
+		public static Material of(Item item, int amount, int metadata) {
+			return of(item.itemID, amount, metadata);
+		}
+		public static Material of(Block block) {
+			return of(block, 1);
+		}
+		public static Material of(Block block, int amount) {
+			return of(block.blockID, amount, 0);
+		}
+		public static Material of(Block block, int amount, int metadata) {
+			return of(block.blockID, amount, metadata);
+		}
+		
+		public abstract boolean matches(ItemStack item);
+		
+		public abstract void reduceStackSize(ItemStack item);
+		
+		/**
+		 * Giving a list of the representing items to display. @author zot
+		 */
+		public abstract List<ItemStack> items();
+	}
+	
+	/**
+	 * The actual class that represents an empty slot. @author zot
+	 */
+	public static class NullMaterial extends Material {
+		private NullMaterial() {}
+		@Override public boolean matches(ItemStack item) {
+			return item == null;
+		}
+		
+		@Override public void reduceStackSize(ItemStack item) {}
+		
+		@Override public List<ItemStack> items() {
+			return Lists.newArrayList();
+		}
+	}
+	
+	/**
+	 * The actual class that represents an OreDictionary entry. @author zot
+	 */
+	public static class OreMaterial extends Material {
+		public final String ore;
+		public final int amount;
+		private OreMaterial(String ore, int amount) {
+			if (amount < 0)
+				throw new IllegalArgumentException(Integer.valueOf(amount).toString());
+			this.ore = ore;
+			this.amount = amount;
+		}
+		@Override public boolean matches(ItemStack item) {
+			if (item == null || item.stackSize < amount)
+				return false;
+			for (ItemStack i : OreDictionary.getOres(ore))
+				if (FusionRecipes.matches(i, item))
+					return true;
+			return false;
+		}
+		
+		@Override public void reduceStackSize(ItemStack item) {
+			item.stackSize -= amount;
+		}
+		
+		@Override public List<ItemStack> items() {
+			return OreDictionary.getOres(ore);
+		}
+	}
+	
+	/**
+	 * The actual class that represents an ItemStack. @author zot
+	 */
+	public static class StackMaterial extends Material {
+		private final ItemStack stack;
+		public ItemStack getStack() {
+			return stack.copy();
+		}
+		private StackMaterial(ItemStack stack) {
+			if (stack.stackSize < 0)
+				throw new IllegalArgumentException(stack.toString());
+			this.stack = stack.copy();
+		}
+		@Override public boolean matches(ItemStack item) {
+			if (item == null || item.stackSize < stack.stackSize)
+				return false;
+			return FusionRecipes.matches(stack, item);
+		}
+		
+		@Override public void reduceStackSize(ItemStack item) {
+			item.stackSize -= stack.stackSize;
+		}
+		
+		@Override public List<ItemStack> items() {
+			return Lists.newArrayList(stack.copy());
+		}
+	}
+	
+	public static boolean matches(ItemStack target, ItemStack item) {
+		return target.itemID == item.itemID
+				&& (target.getItemDamage() == WILDCARD_VALUE || target.getItemDamage() == item.getItemDamage())
+				&& (target.stackTagCompound == null || target.stackTagCompound.equals(item.stackTagCompound));
+	}
+	
+	
+	
+	/**
+	 * Implement this interface to customize recipes. @author zot
+	 */
+	public static interface Entry {
+		public boolean matches(ItemStack input1, ItemStack input2, ItemStack catalyst);
+		public ItemStack getOutput(ItemStack input1, ItemStack input2, ItemStack catalyst);
+		
+		/**
+		 * Being called after matching. No need to check items. @author zot
+		 */
+		public ItemStack applyFusion(ItemStack input1, ItemStack input2, ItemStack catalyst);
+		
+		public boolean isItemIput(ItemStack item);
+		public boolean isItemCatalyst(ItemStack item);
+		
+		/**
+		 * Give a BasicEntry that best represents this entry for display purpose. @author zot
+		 */
+		public BasicEntry basicEntry();
+	}
+	
+	public static class BasicEntry implements Entry {
+		public final Material input1;
+		public final Material input2;
+		public final Material catalyst;
+		private final ItemStack output;
+		public ItemStack getOutput() {
+			return output.copy();
+		}
+		public BasicEntry(Material input1, Material input2, Material catalyst, ItemStack output) {
+			this.input1 = checkNotNull(input1);
+			this.input2 = checkNotNull(input2);
+			this.catalyst = checkNotNull(catalyst);
+			this.output = output.copy();
+		}
+		public BasicEntry(ItemStack input1, ItemStack input2, ItemStack catalyst, ItemStack output) {
+			this.input1 = Material.of(input1);
+			this.input2 = Material.of(input2);
+			this.catalyst = Material.of(catalyst);
+			this.output = output.copy();
+		}
+		
+		@Override public boolean matches(ItemStack input1, ItemStack input2, ItemStack catalyst) {
+			return this.catalyst.matches(catalyst)
+					&& (this.input1.matches(input1) && this.input2.matches(input2)
+							|| this.input1.matches(input2) && this.input2.matches(input1));
+		}
+		@Override public ItemStack getOutput(ItemStack input1, ItemStack input2, ItemStack catalyst) {
+			return output.copy();
+		}
 
-    /** The list of smelting and experience results. */
-    private Map recipeList = new HashMap();
-    private Map recipeListMeta = new HashMap();
-    private HashMap<List<Integer>, Float> experienceList = new HashMap<List<Integer>, Float>();
-    
-    int input1ID;
-    int input2ID;
-    int catalystID;
-
-    /**
-     * Used to call methods addSmelting and getSmeltingResult.
-     */
-    public static final FusionRecipes smelting()
-    {
-        return smeltingBase;
-    }
-
-    /**
-     * Where recipes would normally be added to. Instead, recipes can be added from outside the class using FusionRecipes.smelting().addSmelting.
-     * Recipes will be in format: this.addSmelting(input1.itemID, input2.itemID, catalyst.itemID, new ItemStack(output));
-     * 
-     * Only one recipe is needed for the two inputs, as input1 + input2 + catalyst = input2 + input1 + catalyst. 
-     */
-    private FusionRecipes()
-    {
-
-    }
-
-    public void addSmelting(ItemStack input1, ItemStack input2, ItemStack catalyst, ItemStack output, float experience)
-    {
-    	getOreDictID(input1, input2, catalyst);
-    	
-    	boolean is1damaged = input1.getItemDamage() > 0 ? true : false;
-    	boolean is2damaged = input2.getItemDamage() > 0 ? true : false;
-    	boolean iscatdamaged = catalyst.getItemDamage() > 0 ? true : false;
-    	
-    	StringBuffer noMetaList = new StringBuffer(32);
-    	StringBuffer noMetaListAlt = new StringBuffer(32);
-    	
-    	noMetaList
-    	.append(input1ID).append("_")
-    	.append(input2ID).append("_")
-    	.append(catalystID);
-    	
-    	noMetaListAlt
-    	.append(input2ID).append("_")
-    	.append(input1ID).append("_")
-    	.append(catalystID);
-    	
-    	recipeList.put(noMetaList.toString(), output);
-    	recipeList.put(noMetaListAlt.toString(), output);      	
-    	experienceList.put(Arrays.asList(output.itemID, output.getItemDamage()), experience);
-    	   	
-    	if(is1damaged || is2damaged || iscatdamaged)
-    	{	
-        	StringBuffer metaList = new StringBuffer(32);
-        	StringBuffer metaListAlt = new StringBuffer(32);
-        	StringBuffer catOnlyList = new StringBuffer(32);
-        	StringBuffer catOnlyListAlt = new StringBuffer(32);
-        	
-        	metaList
-        	.append(input1ID).append(is1damaged ? (":") : ("_")).append(is1damaged ? input1.getItemDamage() : null)
-        	.append(input2ID).append(is2damaged ? (":") : ("_")).append(is2damaged ? input2.getItemDamage() : null)
-        	.append(catalystID).append(iscatdamaged ? (":") : ("_")).append(iscatdamaged ? catalyst.getItemDamage() : null);
-        	
-        	metaListAlt
-        	.append(input2ID).append(is2damaged ? (":") : ("_")).append(is2damaged ? input2.getItemDamage() : null)
-        	.append(input1ID).append(is1damaged ? (":") : ("_")).append(is1damaged ? input1.getItemDamage() : null)
-        	.append(catalystID).append(iscatdamaged ? (":") : ("_")).append(iscatdamaged ? catalyst.getItemDamage() : null);
-        	
-        	catOnlyList
-        	.append(input1ID).append("_")
-        	.append(input2ID).append("_")
-        	.append(catalystID).append(":").append(catalyst.getItemDamage());
-        	
-        	catOnlyListAlt
-        	.append(input2ID).append("_")
-        	.append(input1ID).append("_")
-        	.append(catalystID).append(":").append(catalyst.getItemDamage());
-        	
-        	recipeListMeta.put(metaList.toString(), output);
-        	recipeListMeta.put(metaListAlt.toString(), output);
-        	if(!is1damaged && !is2damaged)
-        	{
-            	recipeListMeta.put(catOnlyList.toString(), output);
-            	recipeListMeta.put(catOnlyListAlt.toString(), output);
-        	}
-        	experienceList.put(Arrays.asList(output.itemID, output.getItemDamage()), experience);  
-    	}
-    	
-    	size = recipeList.size();
-    }
-    
-    public ItemStack getSmeltingResult(ItemStack input1, ItemStack input2, ItemStack catalyst)
-    {
-    	getOreDictID(input1, input2, catalyst);
-    	
-    	boolean is1damaged = input1.getItemDamage() > 0 ? true : false;
-    	boolean is2damaged = input2.getItemDamage() > 0 ? true : false;
-    	boolean iscatdamaged = catalyst.getItemDamage() > 0 ? true : false;
-    	
-    	StringBuffer noMetaReturnList = new StringBuffer(32);
-    	
-    	noMetaReturnList
-    	.append(input1ID).append("_")
-    	.append(input2ID).append("_")
-    	.append(catalystID); 
-        	
-    	if(is1damaged || is2damaged || iscatdamaged)
-        {
-            StringBuffer metaReturnList = new StringBuffer(32);
-            StringBuffer catOnlyReturnList = new StringBuffer(32);
-            	
-            metaReturnList
-            .append(input1ID).append(is1damaged ? (":") : ("_")).append(is1damaged ? input1.getItemDamage() : null)
-            .append(input2ID).append(is2damaged ? (":") : ("_")).append(is2damaged ? input2.getItemDamage() : null)
-            .append(catalystID).append(iscatdamaged ? (":") : ("_")).append(iscatdamaged ? catalyst.getItemDamage() : null);
-                 
-            catOnlyReturnList
-            .append(input1ID).append("_")
-            .append(input2ID).append("_")
-            .append(catalystID).append(":").append(catalyst.getItemDamage());
-            
-            ItemStack catOnlyResult = (ItemStack)recipeListMeta.get(catOnlyReturnList.toString());
-            
-            if(catOnlyResult != null)
-            {
-            	return (ItemStack) recipeListMeta.get(catOnlyReturnList.toString());
-            }
-            
-            else return (ItemStack) recipeListMeta.get(metaReturnList.toString());
-        }
-    	
-    	else return (ItemStack) recipeList.get(noMetaReturnList.toString());
-    }
-    
-    private void getOreDictID(ItemStack input1, ItemStack input2, ItemStack catalyst)
-    {
-    	int input1Dict;
-    	int input2Dict;
-    	int catalystDict;
-    	
-    	if(input1 != null && input1.getItem() != null)
-    	{
-    		int oreID1 = OreDictionary.getOreID(input1);
-			if(oreID1 > 0)
-			{
-				input1Dict = oreID1;
+		/**
+		 * Being called after matching. No need to check items. @author zot
+		 */
+		@Override public ItemStack applyFusion(ItemStack input1, ItemStack input2, ItemStack catalyst) {
+			if (this.input1.matches(input1) && this.input2.matches(input2)) {
+				this.input1.reduceStackSize(input1);
+				this.input2.reduceStackSize(input2);
 			}
-			else input1Dict = input1.getItem().itemID;
-    	}
-    	else input1Dict = 0;
-    	
-    	if(input2 != null && input2.getItem() != null)
-    	{
-    		int oreID2 = OreDictionary.getOreID(input2);
-    		if(oreID2 > 0)
-    		{
-    			input2Dict = oreID2;
-    		}
-    		else input2Dict = input2.getItem().itemID;
-    	}
-    	else input2Dict = 0;
-    	
-    	if(catalyst != null && catalyst.getItem() != null)
-    	{
-    		int oreID3 = OreDictionary.getOreID(catalyst);
-    		if(oreID3 > 0)
-    		{
-    			catalystDict = oreID3;
-    		}
-    		else catalystDict = catalyst.getItem().itemID;
-    	}
-    	else catalystDict = 0;
-    	
-    	input1ID = input1Dict;
-    	input2ID = input2Dict;
-    	catalystID = catalystDict;
-    }
-    
-    /**
-     * Grabs the amount of base experience for this item to give when pulled from the furnace slot.
-     */
-    public float getExperience(ItemStack item)
-    {
-        if (item == null || item.getItem() == null)
-        {
-            return 0;
-        }
-        
-        float ret = item.getItem().getSmeltingExperience(item);
-        
-        if (ret < 0 && experienceList.containsKey(Arrays.asList(item.itemID, item.getItemDamage())))
-        {
-            ret = experienceList.get(Arrays.asList(item.itemID, item.getItemDamage()));
-        }
-        
-        if (ret < 0 && experienceList.containsKey(item.itemID))
-        {
-            ret = ((Float)experienceList.get(item.itemID)).floatValue();
-        }
-        return (ret < 0 ? 0 : ret);
-    }
-    
-    public Map getRecipeList()
-    {
-        return recipeList;
-    }
-    
-    public Map getMetaRecipeList()
-    {
-    	return recipeListMeta;
-    }
-       
+			else {
+				this.input1.reduceStackSize(input2);
+				this.input2.reduceStackSize(input1);
+			}
+			this.catalyst.reduceStackSize(catalyst);
+			return output.copy();
+		}
+		
+		@Override public boolean isItemIput(ItemStack item) {
+			return input1.matches(item) || input2.matches(item);
+		}
+		@Override public boolean isItemCatalyst(ItemStack item) {
+			return catalyst.matches(item);
+		}
+		
+		@Override public BasicEntry basicEntry() {
+			return this;
+		}
+	}
+	
+	
+	
+	/**
+	 * A hack to identify between ItemStack's. TagCompound aware and stack size unaware. @author zot
+	 */
+	public static final Ordering<ItemStack> stackOrder =
+			Ordering.natural().onResultOf(new Function<ItemStack, Integer>() {
+				@Override public Integer apply(ItemStack input) { return input.itemID; }
+			}).compound(
+					Ordering.natural().onResultOf(new Function<ItemStack, Integer>() {
+						@Override public Integer apply(ItemStack input) { return input.getItemDamage(); }
+					})).compound(
+							Ordering.natural().onResultOf(new Function<ItemStack, Integer>() {
+								@Override public Integer apply(ItemStack input) {
+									return input.stackTagCompound == null ? 0 : input.stackTagCompound.hashCode();
+								}
+							})).compound(
+									new Ordering<ItemStack>() {
+										@Override public int compare(ItemStack left, ItemStack right) {
+											if (left.stackTagCompound == right.stackTagCompound
+													|| left.stackTagCompound.equals(right.stackTagCompound))
+												return 0;
+											return 1;
+										}
+									});
+	
+	/** 
+	 * Lists of fusion recipes and experience results. @author zot
+	 */
+	private static final ArrayList<Entry> recipeList = Lists.newArrayList();
+	private static final TreeMap<ItemStack, Float> experienceList = Maps.newTreeMap(stackOrder);
+	
+	/**
+	 * Total number of the fusion recipes. @author zot
+	 */
+	public static int size() {
+		return recipeList.size();
+	}
+	
+	/**
+	 * A method remained for code compatibility. 'addSmelting' can be called without this. @author zot
+	 */
+	@Deprecated public static FusionRecipes smelting() {
+		return new FusionRecipes();
+	}
+	
+	/**
+	 * The standard method to add a fusion recipe. Use 'Material.of' to obtain required materials. @author zot
+	 */
+	public static void addSmelting(Material input1, Material input2, Material catalyst, ItemStack output, float experience) {
+		recipeList.add(new BasicEntry(input1, input2, catalyst, output));
+		setExperience(output.copy(), experience);
+	}
+	
+	/**
+	 * The ItemStack-only method to add a fusion recipe. @author zot 
+	 */
+	public static void addSmelting(ItemStack input1, ItemStack input2, ItemStack catalyst, ItemStack output, float experience) {
+		recipeList.add(new BasicEntry(input1, input2, catalyst, output));
+		setExperience(output.copy(), experience);
+	}
+	
+	public static void setExperience(ItemStack output, float experience) {
+		if (!experienceList.containsKey(output))
+			experienceList.put(output.copy(), experience);
+	}
+	
+	public static ItemStack getSmeltingResult(ItemStack input1, ItemStack input2, ItemStack catalyst) {
+		for (Entry e : recipeList)
+			if (e.matches(input1, input2, catalyst))
+				return e.getOutput(input1, input2, catalyst);
+		return null;
+	}
+	
+	/**
+	 * Reduce stack size of the stacks in the arguments and return the result. @author zot
+	 */
+	public static ItemStack applyFusion(ItemStack input1, ItemStack input2, ItemStack catalyst) {
+		for (Entry e : recipeList)
+			if (e.matches(input1, input2, catalyst))
+				return e.applyFusion(input1, input2, catalyst);
+		return null;
+	}
+	
+	/**
+	 * Grabs the amount of base experience for this item to give when pulled from the furnace slot.
+	 */
+	public static float getExperience(ItemStack item) {
+		Float exp = experienceList.get(item);
+		return exp == null ? 0 : exp;
+	}
+	
+	/**
+	 * A method to determine which slot should be put in on shift-clicks. @author zot
+	 */
+	public static boolean isItemCatalyst(ItemStack item) {
+		for (Entry e : recipeList)
+			if (e.isItemCatalyst(item))
+				return true;
+		return false;
+	}
+	
+	/**
+	 * A method to determine which slot should be put in on shift-clicks. @author zot
+	 */
+	public static boolean isItemInput(ItemStack item) {
+		for (Entry e : recipeList)
+			if (e.isItemIput(item))
+				return true;
+		return false;
+	}
+	
+	public static List<Entry> getRecipeList() {
+		return recipeList;
+	}
+	
+	public static Map<ItemStack, Float> getExperienceList() {
+		return experienceList;
+	}
+	
 }

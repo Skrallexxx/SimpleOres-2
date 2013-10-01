@@ -1,17 +1,14 @@
 package SimpleOres.core;
 
-import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.CraftingManager;
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapedOreRecipe;
-import net.minecraftforge.oredict.ShapelessOreRecipe;
 import SimpleOres.core.conf.IDs;
 import SimpleOres.core.conf.Localisation;
 import SimpleOres.core.conf.Settings;
-import SimpleOres.plugins.fusion.FusionRecipes;
+import cpw.mods.fml.common.registry.GameRegistry;
 
 public class Recipes
 {
@@ -29,12 +26,21 @@ public class Recipes
 	public static Settings toggles;
 	public static Tools tools;
 	
+
 	/**
 	 * The constructor for the recipes. This is called by the main mod class.
 	 * This is where all the recipes are created, from tools and armor to block and smelting recipes.
 	 * 
 	 * Forge OreDictionary results are set here.
 	 */
+	public static final String STICK = "stickWood";
+	
+	public static final String COPPER = "ingotCopper";
+	public static final String TIN = "ingotTin";
+	public static final String MYTHRIL = "ingotMythril";
+	public static final String ADAMANTIUM = "ingotAdamantium";
+	public static final String ONYX = "gemOnyx";
+	
 	public static void doRecipes()
 	{
 		//Forge OreDictionary
@@ -43,197 +49,198 @@ public class Recipes
 		OreDictionary.registerOre("oreMythril", new ItemStack(blocks.mythrilOre));
 		OreDictionary.registerOre("oreAdamantium", new ItemStack(blocks.adamantiumOre));
 		OreDictionary.registerOre("oreOnyx", new ItemStack(blocks.onyxOre));
-		OreDictionary.registerOre("ingotCopper", new ItemStack(items.copperIngot));
-		OreDictionary.registerOre("ingotTin", new ItemStack(items.tinIngot));
-		OreDictionary.registerOre("ingotMythril", new ItemStack(items.mythrilIngot));
-		OreDictionary.registerOre("ingotAdamantium", new ItemStack(items.adamantiumIngot));
-		OreDictionary.registerOre("gemOnyx", new ItemStack(items.onyxGem));
+		
+		OreDictionary.registerOre(COPPER, new ItemStack(items.copperIngot));
+		OreDictionary.registerOre(TIN, new ItemStack(items.tinIngot));
+		OreDictionary.registerOre(MYTHRIL, new ItemStack(items.mythrilIngot));
+		OreDictionary.registerOre(ADAMANTIUM, new ItemStack(items.adamantiumIngot));
+		OreDictionary.registerOre(ONYX, new ItemStack(items.onyxGem));
 		
 		//Block Recipes
 			//Storage Blocks
-			CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(blocks.copperBlock, true, new Object[]{
-					"XXX", "XXX", "XXX", Character.valueOf('X'), "ingotCopper"}));
-			CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(blocks.tinBlock, true, new Object[]{
-					"XXX", "XXX", "XXX", Character.valueOf('X'), "ingotTin"}));
-			CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(blocks.mythrilBlock, true, new Object[]{
-					"XXX", "XXX", "XXX", Character.valueOf('X'), "ingotMythril"}));
-			CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(blocks.adamantiumBlock, true, new Object[]{
-					"XXX", "XXX", "XXX", Character.valueOf('X'), "ingotAdamantium"}));
-			CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(blocks.onyxBlock, true, new Object[]{
-					"XXX", "XXX", "XXX", Character.valueOf('X'), "gemOnyx"}));
+			GameRegistry.addRecipe(new ShapedOreRecipe(blocks.copperBlock,
+					"XXX", "XXX", "XXX", 'X', COPPER));
+			GameRegistry.addRecipe(new ShapedOreRecipe(blocks.tinBlock,
+					"XXX", "XXX", "XXX", 'X', TIN));
+			GameRegistry.addRecipe(new ShapedOreRecipe(blocks.mythrilBlock,
+					"XXX", "XXX", "XXX", 'X', MYTHRIL));
+			GameRegistry.addRecipe(new ShapedOreRecipe(blocks.adamantiumBlock,
+					"XXX", "XXX", "XXX", 'X', ADAMANTIUM));
+			GameRegistry.addRecipe(new ShapedOreRecipe(blocks.onyxBlock,
+					"XXX", "XXX", "XXX", 'X', ONYX));
 			
 			//Special Furnace Recipes
-				CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(blocks.mythrilFurnace, true, new Object[]{
-						"XXX", "XYX", "XXX", Character.valueOf('X'), "ingotMythril", Character.valueOf('Y'), Block.furnaceIdle}));
-				CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(blocks.onyxFurnace, true, new Object[]{
-						"XXX", "XYX", "XXX", Character.valueOf('X'), "gemOnyx", Character.valueOf('Y'), Block.furnaceIdle}));
+				GameRegistry.addRecipe(new ShapedOreRecipe(blocks.mythrilFurnace,
+						"XXX", "XYX", "XXX", 'X', MYTHRIL, 'Y', Block.furnaceIdle));
+				GameRegistry.addRecipe(new ShapedOreRecipe(blocks.onyxFurnace,
+						"XXX", "XYX", "XXX", 'X', ONYX, 'Y', Block.furnaceIdle));
 				
 			//Bar Recipes
-				CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(new ItemStack(blocks.copperBars, 16), true, new Object[]{
-						"XXX", "XXX", Character.valueOf('X'), "ingotCopper"}));
-				CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(new ItemStack(blocks.tinBars, 16), true, new Object[]{
-						"XXX", "XXX", Character.valueOf('X'), "ingotTin"}));
-				CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(new ItemStack(blocks.mythrilBars, 16), true, new Object[]{
-						"XXX", "XXX", Character.valueOf('X'), "ingotMythril"}));
-				CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(new ItemStack(blocks.adamantiumBars, 16), true, new Object[]{
-						"XXX", "XXX", Character.valueOf('X'), "ingotAdamantium"}));
-				CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(new ItemStack(blocks.onyxBars, 16), true, new Object[]{
-						"XXX", "XXX", Character.valueOf('X'), "gemOnyx"}));
+				GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(blocks.copperBars, 16),
+						"XXX", "XXX", 'X', COPPER));
+				GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(blocks.tinBars, 16),
+						"XXX", "XXX", 'X', TIN));
+				GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(blocks.mythrilBars, 16),
+						"XXX", "XXX", 'X', MYTHRIL));
+				GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(blocks.adamantiumBars, 16),
+						"XXX", "XXX", 'X', ADAMANTIUM));
+				GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(blocks.onyxBars, 16),
+						"XXX", "XXX", 'X', ONYX));
 	
 		//Item Recipes
 			//Ingot Recipes
-				GameRegistry.addShapelessRecipe(new ItemStack(items.copperIngot, 9), new Object[] { 
-						blocks.copperBlock });
-				GameRegistry.addShapelessRecipe(new ItemStack(items.tinIngot, 9), new Object[] { 
-					blocks.tinBlock });
-				GameRegistry.addShapelessRecipe(new ItemStack(items.mythrilIngot, 9), new Object[] { 
-					blocks.mythrilBlock });
-				GameRegistry.addShapelessRecipe(new ItemStack(items.adamantiumIngot, 9), new Object[] { 
-					blocks.adamantiumBlock });
-				GameRegistry.addShapelessRecipe(new ItemStack(items.onyxGem, 9), new Object[] { 
-					blocks.onyxBlock });
+				GameRegistry.addShapelessRecipe(new ItemStack(items.copperIngot, 9), 
+						blocks.copperBlock);
+				GameRegistry.addShapelessRecipe(new ItemStack(items.tinIngot, 9), 
+					blocks.tinBlock);
+				GameRegistry.addShapelessRecipe(new ItemStack(items.mythrilIngot, 9),
+					blocks.mythrilBlock);
+				GameRegistry.addShapelessRecipe(new ItemStack(items.adamantiumIngot, 9),
+					blocks.adamantiumBlock);
+				GameRegistry.addShapelessRecipe(new ItemStack(items.onyxGem, 9),
+					blocks.onyxBlock);
 			
 			//Bucket
-				CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(items.copperBucket, true, new Object[]{
-						"X X", " X ", Character.valueOf('X'), "ingotCopper"}));
+				GameRegistry.addRecipe(new ShapedOreRecipe(items.copperBucket,
+						"X X", " X ", 'X', COPPER));
 			
 			//Rods
-				CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(items.mythrilRod, true, new Object[]{
-						"X", "X", Character.valueOf('X'), "ingotMythril"}));
-				CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(items.onyxRod, true, new Object[]{
-						"X", "X", Character.valueOf('X'), "gemOnyx"}));
+				GameRegistry.addRecipe(new ShapedOreRecipe(items.mythrilRod,
+						"X", "X", 'X', MYTHRIL));
+				GameRegistry.addRecipe(new ShapedOreRecipe(items.onyxRod,
+						"X", "X", 'X', ONYX));
 				
 			//Doors
-				CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(items.copperDoorItem, true, new Object[]{
-						"XX", "XX", "XX", Character.valueOf('X'), "ingotCopper"}));
-				CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(items.onyxDoorItem, true, new Object[]{
-						"XX", "XX", "XX", Character.valueOf('X'), "gemOnyx"}));
+				GameRegistry.addRecipe(new ShapedOreRecipe(items.copperDoorItem,
+						"XX", "XX", "XX", 'X', COPPER));
+				GameRegistry.addRecipe(new ShapedOreRecipe(items.onyxDoorItem,
+						"XX", "XX", "XX", 'X', ONYX));
 			
 		//Tool Recipes
 			//Copper Tool Recipes
-				CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(tools.copperPick, true, new Object[]{
-						"XXX", " Y ", " Y ", Character.valueOf('X'), "ingotCopper", Character.valueOf('Y'), "stickWood"}));
-				CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(tools.copperAxe, true, new Object[]{
-						"XX ", "XY ", " Y ", Character.valueOf('X'), "ingotCopper", Character.valueOf('Y'), "stickWood"}));
-				CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(tools.copperShovel, true, new Object[]{
-						"X", "Y", "Y", Character.valueOf('X'), "ingotCopper", Character.valueOf('Y'), "stickWood"}));
-				CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(tools.copperSword, true, new Object[]{
-						"X", "X", "Y", Character.valueOf('X'), "ingotCopper", Character.valueOf('Y'), "stickWood"}));
-				CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(tools.copperHoe, true, new Object[]{
-						"XX ", " Y ", " Y ", Character.valueOf('X'), "ingotCopper", Character.valueOf('Y'), "stickWood"}));
+				GameRegistry.addRecipe(new ShapedOreRecipe(tools.copperPick,
+						"XXX", " Y ", " Y ", 'X', COPPER, 'Y', STICK));
+				GameRegistry.addRecipe(new ShapedOreRecipe(tools.copperAxe,
+						"XX ", "XY ", " Y ", 'X', COPPER, 'Y', STICK));
+				GameRegistry.addRecipe(new ShapedOreRecipe(tools.copperShovel,
+						"X", "Y", "Y", 'X', COPPER, 'Y', STICK));
+				GameRegistry.addRecipe(new ShapedOreRecipe(tools.copperSword,
+						"X", "X", "Y", 'X', COPPER, 'Y', STICK));
+				GameRegistry.addRecipe(new ShapedOreRecipe(tools.copperHoe,
+						"XX ", " Y ", " Y ", 'X', COPPER, 'Y', STICK));
 				
 			//Tin Tool Recipes
-				CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(tools.tinPick, true, new Object[]{
-						"XXX", " Y ", " Y ", Character.valueOf('X'), "ingotTin", Character.valueOf('Y'), "stickWood"}));
-				CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(tools.tinAxe, true, new Object[]{
-						"XX ", "XY ", " Y ", Character.valueOf('X'), "ingotTin", Character.valueOf('Y'), "stickWood"}));
-				CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(tools.tinShovel, true, new Object[]{
-						"X", "Y", "Y", Character.valueOf('X'), "ingotTin", Character.valueOf('Y'), "stickWood"}));
-				CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(tools.tinSword, true, new Object[]{
-						"X", "X", "Y", Character.valueOf('X'), "ingotTin", Character.valueOf('Y'), "stickWood"}));
-				CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(tools.tinHoe, true, new Object[]{
-						"XX ", " Y ", " Y ", Character.valueOf('X'), "ingotTin", Character.valueOf('Y'), "stickWood"}));
+				GameRegistry.addRecipe(new ShapedOreRecipe(tools.tinPick,
+						"XXX", " Y ", " Y ", 'X', TIN, 'Y', STICK));
+				GameRegistry.addRecipe(new ShapedOreRecipe(tools.tinAxe,
+						"XX ", "XY ", " Y ", 'X', TIN, 'Y', STICK));
+				GameRegistry.addRecipe(new ShapedOreRecipe(tools.tinShovel,
+						"X", "Y", "Y", 'X', TIN, 'Y', STICK));
+				GameRegistry.addRecipe(new ShapedOreRecipe(tools.tinSword,
+						"X", "X", "Y", 'X', TIN, 'Y', STICK));
+				GameRegistry.addRecipe(new ShapedOreRecipe(tools.tinHoe,
+						"XX ", " Y ", " Y ", 'X', TIN, 'Y', STICK));
 				
 			//Mythril Tool Recipes
-				CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(tools.mythrilPick, true, new Object[]{
-						"XXX", " Y ", " Y ", Character.valueOf('X'), "ingotMythril", Character.valueOf('Y'), "stickWood"}));
-				CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(tools.mythrilAxe, true, new Object[]{
-						"XX ", "XY ", " Y ", Character.valueOf('X'), "ingotMythril", Character.valueOf('Y'), "stickWood"}));
-				CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(tools.mythrilShovel, true, new Object[]{
-						"X", "Y", "Y", Character.valueOf('X'), "ingotMythril", Character.valueOf('Y'), "stickWood"}));
-				CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(tools.mythrilSword, true, new Object[]{
-						"X", "X", "Y", Character.valueOf('X'), "ingotMythril", Character.valueOf('Y'), "stickWood"}));
-				CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(tools.mythrilHoe, true, new Object[]{
-						"XX ", " Y ", " Y ", Character.valueOf('X'), "ingotMythril", Character.valueOf('Y'), "stickWood"}));
+				GameRegistry.addRecipe(new ShapedOreRecipe(tools.mythrilPick,
+						"XXX", " Y ", " Y ", 'X', MYTHRIL, 'Y', STICK));
+				GameRegistry.addRecipe(new ShapedOreRecipe(tools.mythrilAxe,
+						"XX ", "XY ", " Y ", 'X', MYTHRIL, 'Y', STICK));
+				GameRegistry.addRecipe(new ShapedOreRecipe(tools.mythrilShovel,
+						"X", "Y", "Y", 'X', MYTHRIL, 'Y', STICK));
+				GameRegistry.addRecipe(new ShapedOreRecipe(tools.mythrilSword,
+						"X", "X", "Y", 'X', MYTHRIL, 'Y', STICK));
+				GameRegistry.addRecipe(new ShapedOreRecipe(tools.mythrilHoe,
+						"XX ", " Y ", " Y ", 'X', MYTHRIL, 'Y', STICK));
 				
 			//Adamantium Tool Recipes
-				CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(tools.adamantiumPick, true, new Object[]{
-						"XXX", " Y ", " Y ", Character.valueOf('X'), "ingotAdamantium", Character.valueOf('Y'), "stickWood"}));
-				CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(tools.adamantiumAxe, true, new Object[]{
-						"XX ", "XY ", " Y ", Character.valueOf('X'), "ingotAdamantium", Character.valueOf('Y'), "stickWood"}));
-				CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(tools.adamantiumShovel, true, new Object[]{
-						"X", "Y", "Y", Character.valueOf('X'), "ingotAdamantium", Character.valueOf('Y'), "stickWood"}));
-				CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(tools.adamantiumSword, true, new Object[]{
-						"X", "X", "Y", Character.valueOf('X'), "ingotAdamantium", Character.valueOf('Y'), "stickWood"}));
-				CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(tools.adamantiumHoe, true, new Object[]{
-						"XX ", " Y ", " Y ", Character.valueOf('X'), "ingotAdamantium", Character.valueOf('Y'), "stickWood"}));
+				GameRegistry.addRecipe(new ShapedOreRecipe(tools.adamantiumPick,
+						"XXX", " Y ", " Y ", 'X', ADAMANTIUM, 'Y', STICK));
+				GameRegistry.addRecipe(new ShapedOreRecipe(tools.adamantiumAxe,
+						"XX ", "XY ", " Y ", 'X', ADAMANTIUM, 'Y', STICK));
+				GameRegistry.addRecipe(new ShapedOreRecipe(tools.adamantiumShovel,
+						"X", "Y", "Y", 'X', ADAMANTIUM, 'Y', STICK));
+				GameRegistry.addRecipe(new ShapedOreRecipe(tools.adamantiumSword,
+						"X", "X", "Y", 'X', ADAMANTIUM, 'Y', STICK));
+				GameRegistry.addRecipe(new ShapedOreRecipe(tools.adamantiumHoe,
+						"XX ", " Y ", " Y ", 'X', ADAMANTIUM, 'Y', STICK));
 				
 			//Onyx Tool Recipes
-				CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(tools.onyxPick, true, new Object[]{
-						"XXX", " Y ", " Y ", Character.valueOf('X'), "gemOnyx", Character.valueOf('Y'), "stickWood"}));
-				CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(tools.onyxAxe, true, new Object[]{
-						"XX ", "XY ", " Y ", Character.valueOf('X'), "gemOnyx", Character.valueOf('Y'), "stickWood"}));
-				CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(tools.onyxShovel, true, new Object[]{
-						"X", "Y", "Y", Character.valueOf('X'), "gemOnyx", Character.valueOf('Y'), "stickWood"}));
-				CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(tools.onyxSword, true, new Object[]{
-						"X", "X", "Y", Character.valueOf('X'), "gemOnyx", Character.valueOf('Y'), "stickWood"}));
-				CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(tools.onyxHoe, true, new Object[]{
-						"XX ", " Y ", " Y ", Character.valueOf('X'), "gemOnyx", Character.valueOf('Y'), "stickWood"}));
+				GameRegistry.addRecipe(new ShapedOreRecipe(tools.onyxPick,
+						"XXX", " Y ", " Y ", 'X', ONYX, 'Y', STICK));
+				GameRegistry.addRecipe(new ShapedOreRecipe(tools.onyxAxe,
+						"XX ", "XY ", " Y ", 'X', ONYX, 'Y', STICK));
+				GameRegistry.addRecipe(new ShapedOreRecipe(tools.onyxShovel,
+						"X", "Y", "Y", 'X', ONYX, 'Y', STICK));
+				GameRegistry.addRecipe(new ShapedOreRecipe(tools.onyxSword,
+						"X", "X", "Y", 'X', ONYX, 'Y', STICK));
+				GameRegistry.addRecipe(new ShapedOreRecipe(tools.onyxHoe,
+						"XX ", " Y ", " Y ", 'X', ONYX, 'Y', STICK));
 				
 			//Bow Recipes
-				CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(tools.mythrilBow, true, new Object[]{
-						" XY", "Z Y", " XY", Character.valueOf('X'), items.mythrilRod, Character.valueOf('Y'), Item.silk, Character.valueOf('Z'), Item.ingotIron}));
-				CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(tools.onyxBow, true, new Object[]{
-						" XY", "ZWY", " XY", Character.valueOf('X'), items.onyxRod, Character.valueOf('Y'), Item.silk, Character.valueOf('Z'), Item.diamond, Character.valueOf('W'), Item.flintAndSteel}));
+				GameRegistry.addRecipe(new ShapedOreRecipe(tools.mythrilBow,
+						" XY", "Z Y", " XY", 'X', items.mythrilRod, 'Y', Item.silk, 'Z', Item.ingotIron));
+				GameRegistry.addRecipe(new ShapedOreRecipe(tools.onyxBow,
+						" XY", "ZWY", " XY", 'X', items.onyxRod, 'Y', Item.silk, 'Z', Item.diamond, 'W', Item.flintAndSteel));
 				
 			//Shears Recipes
-				CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(tools.tinShears, true, new Object[]{
-						"X ", " X", Character.valueOf('X'), "ingotTin"}));
-				CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(tools.adamantiumShears, true, new Object[]{
-						"X ", " X", Character.valueOf('X'), "ingotAdamantium"}));
-				CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(tools.onyxShears, true, new Object[]{
-						"X ", " X", Character.valueOf('X'), "gemOnyx"}));
+				GameRegistry.addRecipe(new ShapedOreRecipe(tools.tinShears,
+						"X ", " X", 'X', TIN));
+				GameRegistry.addRecipe(new ShapedOreRecipe(tools.adamantiumShears,
+						"X ", " X", 'X', ADAMANTIUM));
+				GameRegistry.addRecipe(new ShapedOreRecipe(tools.onyxShears,
+						"X ", " X", 'X', ONYX));
 				
 		//Armour Recipes
 			//Copper Armour Recipes
-				CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(armor.copperHelm, true, new Object[]{
-						"XXX", "X X", Character.valueOf('X'), "ingotCopper"}));
-				CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(armor.copperChest, true, new Object[]{
-						"X X", "XXX", "XXX", Character.valueOf('X'), "ingotCopper"}));
-				CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(armor.copperLegs, true, new Object[]{
-						"XXX", "X X", "X X", Character.valueOf('X'), "ingotCopper"}));
-				CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(armor.copperBoots, true, new Object[]{
-						"X X", "X X", Character.valueOf('X'), "ingotCopper"}));
+				GameRegistry.addRecipe(new ShapedOreRecipe(armor.copperHelm,
+						"XXX", "X X", 'X', COPPER));
+				GameRegistry.addRecipe(new ShapedOreRecipe(armor.copperChest,
+						"X X", "XXX", "XXX", 'X', COPPER));
+				GameRegistry.addRecipe(new ShapedOreRecipe(armor.copperLegs,
+						"XXX", "X X", "X X", 'X', COPPER));
+				GameRegistry.addRecipe(new ShapedOreRecipe(armor.copperBoots,
+						"X X", "X X", 'X', COPPER));
 				
 			//Tin Armour Recipes
-				CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(armor.tinHelm, true, new Object[]{
-						"XXX", "X X", Character.valueOf('X'), "ingotTin"}));
-				CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(armor.tinChest, true, new Object[]{
-						"X X", "XXX", "XXX", Character.valueOf('X'), "ingotTin"}));
-				CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(armor.tinLegs, true, new Object[]{
-						"XXX", "X X", "X X", Character.valueOf('X'), "ingotTin"}));
-				CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(armor.tinBoots, true, new Object[]{
-						"X X", "X X", Character.valueOf('X'), "ingotTin"}));
+				GameRegistry.addRecipe(new ShapedOreRecipe(armor.tinHelm,
+						"XXX", "X X", 'X', TIN));
+				GameRegistry.addRecipe(new ShapedOreRecipe(armor.tinChest,
+						"X X", "XXX", "XXX", 'X', TIN));
+				GameRegistry.addRecipe(new ShapedOreRecipe(armor.tinLegs,
+						"XXX", "X X", "X X", 'X', TIN));
+				GameRegistry.addRecipe(new ShapedOreRecipe(armor.tinBoots,
+						"X X", "X X", 'X', TIN));
 				
 			//Mythril Armour Recipes
-				CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(armor.mythrilHelm, true, new Object[]{
-						"XXX", "X X", Character.valueOf('X'), "ingotMythril"}));
-				CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(armor.mythrilChest, true, new Object[]{
-						"X X", "XXX", "XXX", Character.valueOf('X'), "ingotMythril"}));
-				CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(armor.mythrilLegs, true, new Object[]{
-						"XXX", "X X", "X X", Character.valueOf('X'), "ingotMythril"}));
-				CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(armor.mythrilBoots, true, new Object[]{
-						"X X", "X X", Character.valueOf('X'), "ingotMythril"}));
+				GameRegistry.addRecipe(new ShapedOreRecipe(armor.mythrilHelm,
+						"XXX", "X X", 'X', MYTHRIL));
+				GameRegistry.addRecipe(new ShapedOreRecipe(armor.mythrilChest,
+						"X X", "XXX", "XXX", 'X', MYTHRIL));
+				GameRegistry.addRecipe(new ShapedOreRecipe(armor.mythrilLegs,
+						"XXX", "X X", "X X", 'X', MYTHRIL));
+				GameRegistry.addRecipe(new ShapedOreRecipe(armor.mythrilBoots,
+						"X X", "X X", 'X', MYTHRIL));
 				
 			//Adamantium Armour Recipes
-				CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(armor.adamantiumHelm, true, new Object[]{
-						"XXX", "X X", Character.valueOf('X'), "ingotAdamantium"}));
-				CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(armor.adamantiumChest, true, new Object[]{
-						"X X", "XXX", "XXX", Character.valueOf('X'), "ingotAdamantium"}));
-				CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(armor.adamantiumLegs, true, new Object[]{
-						"XXX", "X X", "X X", Character.valueOf('X'), "ingotAdamantium"}));
-				CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(armor.adamantiumBoots, true, new Object[]{
-						"X X", "X X", Character.valueOf('X'), "ingotAdamantium"}));
+				GameRegistry.addRecipe(new ShapedOreRecipe(armor.adamantiumHelm,
+						"XXX", "X X", 'X', ADAMANTIUM));
+				GameRegistry.addRecipe(new ShapedOreRecipe(armor.adamantiumChest,
+						"X X", "XXX", "XXX", 'X', ADAMANTIUM));
+				GameRegistry.addRecipe(new ShapedOreRecipe(armor.adamantiumLegs,
+						"XXX", "X X", "X X", 'X', ADAMANTIUM));
+				GameRegistry.addRecipe(new ShapedOreRecipe(armor.adamantiumBoots,
+						"X X", "X X", 'X', ADAMANTIUM));
 				
 			//Onyx Armour Recipes
-				CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(armor.onyxHelm, true, new Object[]{
-						"XXX", "X X", Character.valueOf('X'), "gemOnyx"}));
-				CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(armor.onyxChest, true, new Object[]{
-						"X X", "XXX", "XXX", Character.valueOf('X'), "gemOnyx"}));
-				CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(armor.onyxLegs, true, new Object[]{
-						"XXX", "X X", "X X", Character.valueOf('X'), "gemOnyx"}));
-				CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(armor.onyxBoots, true, new Object[]{
-						"X X", "X X", Character.valueOf('X'), "gemOnyx"}));
+				GameRegistry.addRecipe(new ShapedOreRecipe(armor.onyxHelm,
+						"XXX", "X X", 'X', ONYX));
+				GameRegistry.addRecipe(new ShapedOreRecipe(armor.onyxChest,
+						"X X", "XXX", "XXX", 'X', ONYX));
+				GameRegistry.addRecipe(new ShapedOreRecipe(armor.onyxLegs,
+						"XXX", "X X", "X X", 'X', ONYX));
+				GameRegistry.addRecipe(new ShapedOreRecipe(armor.onyxBoots,
+						"X X", "X X", 'X', ONYX));
 				
 		//Smelting Recipes
 			//Regular Furnace				

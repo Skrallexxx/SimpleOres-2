@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties version="1.0">
+		<!--Blocks-->
+	<entry key="tile.copperOre.name">銅鉱石</entry>
+	<entry key="tile.copperBlock.name">銅ブロック</entry>
+	<entry key="tile.tinOre.name">錫鉱石</entry>
+	<entry key="tile.tinBlock.name">錫ブロック</entry>
+	<entry key="tile.mythrilOre.name">ミスリル鉱石</entry>
+	<entry key="tile.mythrilBlock.name">ミスリルブロック</entry>
+	<entry key="tile.adamantiumOre.name">アダマン鉱石</entry>
+	<entry key="tile.adamantiumBlock.name">アダマンブロック</entry>
+	<entry key="tile.onyxOre.name">オニキス鉱石</entry>
+	<entry key="tile.onyxBlock.name">オニキスブロック</entry>
+	<entry key="tile.mythrilFurnace.name">ミスリルのかまど</entry>
+	<entry key="tile.mythrilFurnaceOn.name">ミスリルのかまど</entry>
+	<entry key="tile.onyxFurnace.name">オニキスのかまど</entry>
+	<entry key="tile.onyxFurnaceOn.name">オニキスのかまど</entry>
+	<entry key="tile.copperDoor.name">銅のドア</entry>
+	<entry key="tile.onyxDoor.name">オニキスのドア</entry>
+	<entry key="tile.copperBars.name">銅柵</entry>
+	<entry key="tile.tinBars.name">錫柵</entry>
+	<entry key="tile.mythrilBars.name">ミスリル柵</entry>
+	<entry key="tile.adamantiumBars.name">アダマン柵</entry>
+	<entry key="tile.onyxBars.name">オニキス柵</entry>
+		<!--Items-->
+	<entry key="item.copperIngot.name">銅インゴット</entry>
+	<entry key="item.tinIngot.name">錫インゴット</entry>
+	<entry key="item.mythrilIngot.name">ミスリルインゴット</entry>
+	<entry key="item.adamantiumIngot.name">アダマンインゴット</entry>
+	<entry key="item.onyxGem.name">オニキス</entry>
+	<entry key="item.copperBucket.name">銅のバケツ</entry>
+	<entry key="item.copperBucketWater.name">銅の水入りバケツ</entry>
+	<entry key="item.mythrilRod.name">ミスリルロッド</entry>
+	<entry key="item.onyxRod.name">オニキスロッド</entry>
+	<entry key="item.copperDoor.name">銅のドア</entry>
+	<entry key="item.onyxDoor.name">オニキスのドア</entry>
+		<!--Tools-->
+	<entry key="item.copperPick.name">銅のツルハシ</entry>
+	<entry key="item.copperAxe.name">銅の斧</entry>
+	<entry key="item.copperShovel.name">銅のシャベル</entry>
+	<entry key="item.copperSword.name">銅の剣</entry>
+	<entry key="item.copperHoe.name">銅のクワ</entry>
+	<entry key="item.tinPick.name">錫のツルハシ</entry>
+	<entry key="item.tinAxe.name">錫の斧</entry>
+	<entry key="item.tinShovel.name">錫のシャベル</entry>
+	<entry key="item.tinSword.name">錫の剣</entry>
+	<entry key="item.tinHoe.name">錫のクワ</entry>
+	<entry key="item.mythrilPick.name">ミスリルのツルハシ</entry>
+	<entry key="item.mythrilAxe.name">ミスリルの斧</entry>
+	<entry key="item.mythrilShovel.name">ミスリルのシャベル</entry>
+	<entry key="item.mythrilSword.name">ミスリルの剣</entry>
+	<entry key="item.mythrilHoe.name">ミスリルのクワ</entry>
+	<entry key="item.adamantiumPick.name">アダマンのツルハシ</entry>
+	<entry key="item.adamantiumAxe.name">アダマンの斧</entry>
+	<entry key="item.adamantiumShovel.name">アダマンのシャベル</entry>
+	<entry key="item.adamantiumSword.name">アダマンの剣</entry>
+	<entry key="item.adamantiumHoe.name">アダマンのクワ</entry>
+	<entry key="item.onyxPick.name">オニキスのツルハシ</entry>
+	<entry key="item.onyxAxe.name">オニキスの斧</entry>
+	<entry key="item.onyxShovel.name">オニキスのシャベル</entry>
+	<entry key="item.onyxSword.name">オニキスの剣</entry>
+	<entry key="item.onyxHoe.name">オニキスのクワ</entry>
+	<entry key="item.mythrilBow.name">ミスリルボウ</entry>
+	<entry key="item.onyxBow.name">オニキスボウ</entry>
+	<entry key="item.tinShears.name">錫のハサミ</entry>
+	<entry key="item.adamantiumShears.name">アダマンのハサミ</entry>
+	<entry key="item.onyxShears.name">オニキスのハサミ</entry>
+		<!--Armor-->
+	<entry key="item.copperHelm.name">銅のヘルメット</entry>
+	<entry key="item.copperChest.name">銅のチェストプレート</entry>
+	<entry key="item.copperLegs.name">銅のレギンス</entry>
+	<entry key="item.copperBoots.name">銅のブーツ</entry>
+	<entry key="item.tinHelm.name">錫のヘルメット</entry>
+	<entry key="item.tinChest.name">錫のチェストプレート</entry>
+	<entry key="item.tinLegs.name">錫のレギンス</entry>
+	<entry key="item.tinBoots.name">錫のブーツ</entry>
+	<entry key="item.mythrilHelm.name">ミスリルのヘルメット</entry>
+	<entry key="item.mythrilChest.name">ミスリルのチェストプレート</entry>
+	<entry key="item.mythrilLegs.name">ミスリルのレギンス</entry>
+	<entry key="item.mythrilBoots.name">ミスリルのブーツ</entry>
+	<entry key="item.adamantiumHelm.name">アダマンのヘルメット</entry>
+	<entry key="item.adamantiumChest.name">アダマンのチェストプレート</entry>
+	<entry key="item.adamantiumLegs.name">アダマンのレギンス</entry>
+	<entry key="item.adamantiumBoots.name">アダマンのブーツ</entry>
+	<entry key="item.onyxHelm.name">オニキスのヘルメット</entry>
+	<entry key="item.onyxChest.name">オニキスのチェストプレート</entry>
+	<entry key="item.onyxLegs.name">オニキスのレギンス</entry>
+	<entry key="item.onyxBoots.name">オニキスのブーツ</entry>
+		<!--Achievements-->
+	<entry key="achievement.simpleOresAch">シンプル鉱石へようこそ！</entry>
+	<entry key="achievement.simpleOresAch.desc">銅を集めてシンプル鉱石の冒険へ</entry>
+	<entry key="achievement.adamantiumAch">緑なるもの</entry>
+	<entry key="achievement.adamantiumAch.desc">アダマンを求めて地中の深くまで</entry>
+	<entry key="achievement.onyxAch">ザ・カモフラージュ鉱石</entry>
+	<entry key="achievement.onyxAch.desc">頑張って探してね^^</entry>
+	<entry key="achievement.ironPickAch">アップグレードMK II</entry>
+	<entry key="achievement.ironPickAch.desc">鉄のツルハシを作る</entry>
+	<entry key="achievement.adamantiumPickAch">稲妻のごとく</entry>
+	<entry key="achievement.adamantiumPickAch.desc">アダマンのツルハシを作って早く掘ろう！</entry>
+	<entry key="achievement.onyxPickAch">アンブレイカブル</entry>
+	<entry key="achievement.onyxPickAch.desc">一生使えるかも</entry>
+	<entry key="achievement.mythrilBowAch">神秘的な弓</entry>
+	<entry key="achievement.mythrilBowAch.desc">魔力の秘めた新たな弓を鍛えあげる</entry>
+	<entry key="achievement.onyxBowAch">放火魔</entry>
+	<entry key="achievement.onyxBowAch.desc">この地獄の弓で敵を燃やし尽くす</entry>
+		<!--Tab Names-->
+	<entry key="itemGroup.tabSimpleBlocks">シンプル鉱石 - 建築ブロック -</entry>
+	<entry key="itemGroup.tabSimpleDecoration">シンプル鉱石 - 装飾ブロック -</entry>
+	<entry key="itemGroup.tabSimpleTools">シンプル鉱石 - 道具 -</entry>
+	<entry key="itemGroup.tabSimpleCombat">シンプル鉱石 - 戦闘 -</entry>
+	<entry key="itemGroup.tabSimpleMaterials">シンプル鉱石 - 材料 -</entry>
+		<!--Bow Tooltips-->
+	<entry key="tips.damageTooltip">+ダメージ</entry>
+	<entry key="tips.flameTooltip">+火属性</entry>
+	<entry key="tips.knockbackTooltip">+ノックバック</entry>
+	<entry key="tips.zoomTooltip">+ズーム</entry>
+	<entry key="tips.efficiencyTooltip">+効率強化</entry>
+		<!--Updater-->
+	<entry key="simpleores.updateMessage1">§3シンプル鉱石§rのバージョンが古いです。最新バージョンの§c</entry>
+	<entry key="simpleores.updateMessage2">§rを§9http://bit.ly/SimpleOres§rからダウンロードしてください。</entry>
+</properties>

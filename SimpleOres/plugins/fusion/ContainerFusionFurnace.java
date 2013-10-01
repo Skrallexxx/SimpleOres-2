@@ -118,75 +118,56 @@ public class ContainerFusionFurnace extends Container
     /**
      * Called when a player shift-clicks on a slot. You must override this or you will crash when someone does that.
      */
-    public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int par2)
-    {
-        ItemStack itemstack = null;
-        Slot slot = (Slot)this.inventorySlots.get(par2);
+	@Override public ItemStack transferStackInSlot(EntityPlayer player, int index) {
+		Slot slot = (Slot) inventorySlots.get(index);
+		if (slot == null || !slot.getHasStack())
+			return null;
 
-        if (slot != null && slot.getHasStack())
-        {
-            ItemStack itemstack1 = slot.getStack();
-            itemstack = itemstack1.copy();
+		ItemStack remained = slot.getStack();
+		ItemStack initial = remained.copy();
 
-            if (par2 == 2)
-            {
-                if (!this.mergeItemStack(itemstack1, 3, 39, true))
-                {
-                    return null;
-                }
+		if (index == 2 /* input */) {
+			if (!this.mergeItemStack(remained, 3, 39, true))
+				return null;
 
-                slot.onSlotChange(itemstack1, itemstack);
-            }
-            else if (par2 != 1 && par2 != 0)
-            {
-                if (FurnaceRecipes.smelting().getSmeltingResult(itemstack1) != null)
-                {
-                    if (!this.mergeItemStack(itemstack1, 0, 1, false))
-                    {
-                        return null;
-                    }
-                }
-                else if (TileEntityFusionFurnace.isItemFuel(itemstack1))
-                {
-                    if (!this.mergeItemStack(itemstack1, 1, 2, false))
-                    {
-                        return null;
-                    }
-                }
-                else if (par2 >= 3 && par2 < 30)
-                {
-                    if (!this.mergeItemStack(itemstack1, 30, 39, false))
-                    {
-                        return null;
-                    }
-                }
-                else if (par2 >= 30 && par2 < 39 && !this.mergeItemStack(itemstack1, 3, 30, false))
-                {
-                    return null;
-                }
-            }
-            else if (!this.mergeItemStack(itemstack1, 3, 39, false))
-            {
-                return null;
-            }
+			slot.onSlotChange(remained, initial);
+		}
+		else if (index >= 5 /* every slots that belong to the player's inventory */) {
+			if (TileEntityFusionFurnace.isItemFuel(remained)) {
+				if (!this.mergeItemStack(remained, 1, 2, false))
+					return null;
+			}
+			else if (FusionRecipes.isItemCatalyst(remained)) {
+				if (!this.mergeItemStack(remained, 4, 5, false))
+					return null;
+			}
+			else if (FusionRecipes.isItemInput(remained)) {
+				if (!this.mergeItemStack(remained, 0, 1, false) && !this.mergeItemStack(remained, 3, 4, false))
+					return null;
+			}
+			else if (index < 32) {
+				if (!this.mergeItemStack(remained, 32, 41, false))
+					return null;
+			}
+			else if (index < 41) {
+				if (!this.mergeItemStack(remained, 5, 32, false))
+					return null;
+			}
+		}
+		else
+			if (!this.mergeItemStack(remained, 5, 41, false))
+				return null;
 
-            if (itemstack1.stackSize == 0)
-            {
-                slot.putStack((ItemStack)null);
-            }
-            else
-            {
-                slot.onSlotChanged();
-            }
+		if (remained.stackSize == 0)
+			slot.putStack(null);
+		else
+			slot.onSlotChanged();
 
-            if (itemstack1.stackSize == itemstack.stackSize)
-            {
-                return null;
-            }
-
-            slot.onPickupFromSlot(par1EntityPlayer, itemstack1);
-        }
-
-        return itemstack;
-    }
+		if (remained.stackSize == initial.stackSize)
+			return null;
+		
+		slot.onPickupFromSlot(player, remained);
+		
+		return initial;
+	}
 }
