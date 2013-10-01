@@ -87,6 +87,9 @@ public class SimpleOresFusion
 		 * Adding localisation files.
 		 */
 		LanguageRegistry.instance().loadLocalization(new ResourceLocation("/assets/simpleoresfusion/langs/en_US.xml").getResourcePath(), "en_US", true);
+		LanguageRegistry.instance().loadLocalization(new ResourceLocation("/assets/simpleoresfusion/langs/ru_RU.xml").getResourcePath(), "ru_RU", true);
+		LanguageRegistry.instance().loadLocalization(new ResourceLocation("/assets/simpleoresfusion/langs/de_DE.xml").getResourcePath(), "de_DE", true);
+		LanguageRegistry.instance().loadLocalization(new ResourceLocation("/assets/simpleoresfusion/langs/ja_JP.xml").getResourcePath(), "ja_JP", true);
 		
 		/**
 		 * Registering things such as the world generator, tile entities and GUI's.

@@ -10,6 +10,7 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.inventory.SlotFurnace;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
+import net.minecraft.tileentity.TileEntityFurnace;
 
 public class ContainerFusionFurnace extends Container
 {
@@ -117,7 +118,10 @@ public class ContainerFusionFurnace extends Container
 
     /**
      * Called when a player shift-clicks on a slot. You must override this or you will crash when someone does that.
+     * 
+     * Much thanks to @zot who gave me the inspiration and the nudge to get this done :)
      */
+    @Override
     public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int par2)
     {
         ItemStack itemstack = null;
@@ -137,35 +141,42 @@ public class ContainerFusionFurnace extends Container
 
                 slot.onSlotChange(itemstack1, itemstack);
             }
-            else if (par2 != 1 && par2 != 0)
+            else if (par2 >= 5)
             {
-                if (FurnaceRecipes.smelting().getSmeltingResult(itemstack1) != null)
-                {
-                    if (!this.mergeItemStack(itemstack1, 0, 1, false))
-                    {
-                        return null;
-                    }
-                }
-                else if (TileEntityFusionFurnace.isItemFuel(itemstack1))
+            	if (TileEntityFurnace.isItemFuel(itemstack1))
                 {
                     if (!this.mergeItemStack(itemstack1, 1, 2, false))
                     {
                         return null;
                     }
                 }
-                else if (par2 >= 3 && par2 < 30)
+            	else if (FusionRecipes.smelting().isItemCatalyst(itemstack1))
                 {
-                    if (!this.mergeItemStack(itemstack1, 30, 39, false))
+                    if (!this.mergeItemStack(itemstack1, 4, 5, false))
                     {
                         return null;
                     }
                 }
-                else if (par2 >= 30 && par2 < 39 && !this.mergeItemStack(itemstack1, 3, 30, false))
+                else if (FusionRecipes.isItemInput(itemstack1))
+                {
+                    if (!this.mergeItemStack(itemstack1, 0, 1, false) && !this.mergeItemStack(itemstack1, 3, 4, false))
+                    {
+                        return null;
+                    }
+                }
+                else if (par2 < 32)
+                {
+                    if (!this.mergeItemStack(itemstack1, 32, 41, false))
+                    {
+                        return null;
+                    }
+                }
+                else if (par2 < 41 && !this.mergeItemStack(itemstack1, 5, 32, false))
                 {
                     return null;
                 }
             }
-            else if (!this.mergeItemStack(itemstack1, 3, 39, false))
+            else if (!this.mergeItemStack(itemstack1, 5, 41, false))
             {
                 return null;
             }

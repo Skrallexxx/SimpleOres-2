@@ -1,41 +1,28 @@
 package SimpleOres.plugins.fusion;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import SimpleOres.core.Achievements;
-import SimpleOres.core.Armor;
-import SimpleOres.core.Blocks;
 import SimpleOres.core.Items;
-import SimpleOres.core.Recipes;
-import SimpleOres.core.SimpleOres;
-import SimpleOres.core.Tools;
-import SimpleOres.core.conf.IDs;
-import SimpleOres.core.conf.Localisation;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraftforge.oredict.OreDictionary;
 
+/**
+ * The main file for Fusion Furnace recipes. This is where all the work is done.
+ * 
+ * Thanks to @zot and @sadris for all their help with Shift Clicking and Ore Dictionary support.
+ * 
+ * @author Alex
+ *
+ */
 public class FusionRecipes
 {
-	/**
-	 * Linking to the classes for easier reference.
-	 */
-	public static SimpleOres mod;
-	public static Achievements achievements;
-	public static Armor armor;
-	public static Blocks blocks;
-	public static IDs config;
-	public static Items items;
-	public static Localisation local;
-	public static Recipes recipes;
-	public static Tools tools;
-	
-	public static FurnaceRecipes furnaceRecipes;
+	public static final int WILDCARD_VALUE = OreDictionary.WILDCARD_VALUE;
 	public static int size;
 	
     private static final FusionRecipes smeltingBase = new FusionRecipes();
@@ -43,12 +30,12 @@ public class FusionRecipes
     /** The list of smelting and experience results. */
     private Map recipeList = new HashMap();
     private Map recipeListMeta = new HashMap();
+    private static List<Item> inputList = new ArrayList<Item>();
+    private static List<Item> catalystList = new ArrayList<Item>();
     private HashMap<List<Integer>, Float> experienceList = new HashMap<List<Integer>, Float>();
     
-    int input1ID;
-    int input2ID;
-    int catalystID;
-
+    int input1ID, input2ID, catalystID;
+    
     /**
      * Used to call methods addSmelting and getSmeltingResult.
      */
@@ -91,6 +78,9 @@ public class FusionRecipes
     	
     	recipeList.put(noMetaList.toString(), output);
     	recipeList.put(noMetaListAlt.toString(), output);      	
+    	inputList.add(input1.getItem());
+    	inputList.add(input2.getItem());
+    	catalystList.add(catalyst.getItem());
     	experienceList.put(Arrays.asList(output.itemID, output.getItemDamage()), experience);
     	   	
     	if(is1damaged || is2damaged || iscatdamaged)
@@ -178,9 +168,7 @@ public class FusionRecipes
     
     private void getOreDictID(ItemStack input1, ItemStack input2, ItemStack catalyst)
     {
-    	int input1Dict;
-    	int input2Dict;
-    	int catalystDict;
+    	int input1Dict, input2Dict, catalystDict;
     	
     	if(input1 != null && input1.getItem() != null)
     	{
@@ -189,7 +177,11 @@ public class FusionRecipes
 			{
 				input1Dict = oreID1;
 			}
-			else input1Dict = input1.getItem().itemID;
+			else
+			{
+				input1Dict = input1.getItem().itemID;
+				
+			}
     	}
     	else input1Dict = 0;
     	
@@ -242,6 +234,24 @@ public class FusionRecipes
             ret = ((Float)experienceList.get(item.itemID)).floatValue();
         }
         return (ret < 0 ? 0 : ret);
+    }
+    
+    public static boolean isItemInput(ItemStack item)
+    {
+    	if(inputList.contains(item.getItem()))
+    	{
+    		return true;
+    	}
+    	else return false;
+    }
+    
+    public static boolean isItemCatalyst(ItemStack item)
+    {
+    	if(catalystList.contains(item.getItem()))
+    	{
+    		return true;
+    	}
+    	else return false;
     }
     
     public Map getRecipeList()

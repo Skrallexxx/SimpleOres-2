@@ -154,6 +154,7 @@ public class SimpleOres
 		LanguageRegistry.instance().loadLocalization(new ResourceLocation("/assets/simpleores/langs/en_PT.xml").getResourcePath(), "en_PT", true);
 		LanguageRegistry.instance().loadLocalization(new ResourceLocation("/assets/simpleores/langs/ru_RU.xml").getResourcePath(), "ru_RU", true);
 		LanguageRegistry.instance().loadLocalization(new ResourceLocation("/assets/simpleores/langs/de_DE.xml").getResourcePath(), "de_DE", true);
+		LanguageRegistry.instance().loadLocalization(new ResourceLocation("/assets/simpleores/langs/ja_JP.xml").getResourcePath(), "ja_JP", true);
 		
 		/**
 		 * Registering things such as the world generator, tile entities and GUI's.
