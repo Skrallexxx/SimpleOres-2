@@ -84,7 +84,7 @@ public class FusionRecipes {
 		
 		public abstract boolean matches(ItemStack item);
 		
-		protected abstract void reduceStackSize(ItemStack item);
+		public abstract void reduceStackSize(ItemStack item);
 		
 		/**
 		 * Giving a list of the representing items to display. @author zot
@@ -101,7 +101,7 @@ public class FusionRecipes {
 			return item == null;
 		}
 		
-		@Override protected void reduceStackSize(ItemStack item) {}
+		@Override public void reduceStackSize(ItemStack item) {}
 		
 		@Override public List<ItemStack> items() {
 			return Lists.newArrayList();
@@ -129,7 +129,7 @@ public class FusionRecipes {
 			return false;
 		}
 		
-		@Override protected void reduceStackSize(ItemStack item) {
+		@Override public void reduceStackSize(ItemStack item) {
 			item.stackSize -= amount;
 		}
 		
@@ -157,7 +157,7 @@ public class FusionRecipes {
 			return FusionRecipes.matches(stack, item);
 		}
 		
-		@Override protected void reduceStackSize(ItemStack item) {
+		@Override public void reduceStackSize(ItemStack item) {
 			item.stackSize -= stack.stackSize;
 		}
 		
