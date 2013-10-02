@@ -126,36 +126,36 @@ public class ContainerFusionFurnace extends Container
 		ItemStack remained = slot.getStack();
 		ItemStack initial = remained.copy();
 
-		if (index == 2 /* input */) {
-			if (!this.mergeItemStack(remained, 3, 39, true))
+		if (index == 2 /* output */) {
+			if (!mergeItemStack(remained, 3, 39, true))
 				return null;
 
 			slot.onSlotChange(remained, initial);
 		}
 		else if (index >= 5 /* every slots that belong to the player's inventory */) {
 			if (TileEntityFusionFurnace.isItemFuel(remained)) {
-				if (!this.mergeItemStack(remained, 1, 2, false))
+				if (!mergeItemStack(remained, 1, 2, false))
 					return null;
 			}
 			else if (FusionRecipes.isItemCatalyst(remained)) {
-				if (!this.mergeItemStack(remained, 4, 5, false))
+				if (!mergeItemStack(remained, 4, 5, false))
 					return null;
 			}
 			else if (FusionRecipes.isItemInput(remained)) {
-				if (!this.mergeItemStack(remained, 0, 1, false) && !this.mergeItemStack(remained, 3, 4, false))
+				if (!mergeItemStack(remained, 0, 1, false) && !mergeItemStack(remained, 3, 4, false))
 					return null;
 			}
 			else if (index < 32) {
-				if (!this.mergeItemStack(remained, 32, 41, false))
+				if (!mergeItemStack(remained, 32, 41, false))
 					return null;
 			}
 			else if (index < 41) {
-				if (!this.mergeItemStack(remained, 5, 32, false))
+				if (!mergeItemStack(remained, 5, 32, false))
 					return null;
 			}
 		}
 		else
-			if (!this.mergeItemStack(remained, 5, 41, false))
+			if (!mergeItemStack(remained, 5, 41, false))
 				return null;
 
 		if (remained.stackSize == 0)
