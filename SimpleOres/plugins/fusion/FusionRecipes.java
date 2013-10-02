@@ -372,5 +372,15 @@ public class FusionRecipes {
 	public static Map<ItemStack, Float> getExperienceList() {
 		return experienceList;
 	}
+    
+	/**
+	 * A utility method to register ore while preventing duplicated entries. @author zot
+	 */
+    public static void registerOre(String ore, ItemStack item) {
+    	for (ItemStack i : OreDictionary.getOres(ore))
+    		if (matches(i, item))
+    			return;
+    	OreDictionary.registerOre(ore, item);
+    }
 	
 }
