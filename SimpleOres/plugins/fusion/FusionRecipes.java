@@ -84,7 +84,7 @@ public class FusionRecipes {
 		
 		public abstract boolean matches(ItemStack item);
 		
-		public abstract void reduceStackSize(ItemStack item);
+		public abstract void decrStackSize(ItemStack item);
 		
 		/**
 		 * Giving a list of the representing items to display. @author zot
@@ -101,7 +101,7 @@ public class FusionRecipes {
 			return item == null;
 		}
 		
-		@Override public void reduceStackSize(ItemStack item) {}
+		@Override public void decrStackSize(ItemStack item) {}
 		
 		@Override public List<ItemStack> items() {
 			return Lists.newArrayList();
@@ -129,7 +129,7 @@ public class FusionRecipes {
 			return false;
 		}
 		
-		@Override public void reduceStackSize(ItemStack item) {
+		@Override public void decrStackSize(ItemStack item) {
 			item.stackSize -= amount;
 		}
 		
@@ -157,7 +157,7 @@ public class FusionRecipes {
 			return FusionRecipes.matches(stack, item);
 		}
 		
-		@Override public void reduceStackSize(ItemStack item) {
+		@Override public void decrStackSize(ItemStack item) {
 			item.stackSize -= stack.stackSize;
 		}
 		
@@ -230,14 +230,14 @@ public class FusionRecipes {
 		 */
 		@Override public ItemStack applyFusion(ItemStack input1, ItemStack input2, ItemStack catalyst) {
 			if (this.input1.matches(input1) && this.input2.matches(input2)) {
-				this.input1.reduceStackSize(input1);
-				this.input2.reduceStackSize(input2);
+				this.input1.decrStackSize(input1);
+				this.input2.decrStackSize(input2);
 			}
 			else {
-				this.input1.reduceStackSize(input2);
-				this.input2.reduceStackSize(input1);
+				this.input1.decrStackSize(input2);
+				this.input2.decrStackSize(input1);
 			}
-			this.catalyst.reduceStackSize(catalyst);
+			this.catalyst.decrStackSize(catalyst);
 			return output.copy();
 		}
 		
