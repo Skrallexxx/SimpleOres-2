@@ -338,6 +338,7 @@ public class TileEntityFusionFurnace extends TileEntity implements ISidedInvento
         }
     }
 
+
 	/**
 	 * Returns true if the furnace can smelt an item, i.e. has a source item, destination stack isn't full, etc.
 	 */	
@@ -352,7 +353,7 @@ public class TileEntityFusionFurnace extends TileEntity implements ISidedInvento
    		if (result == null)
    			return false;
 		if (furnaceItemStacks[2] == null)
-			return true;
+			return result.stackSize <= getInventoryStackLimit() && result.stackSize <= result.getMaxStackSize();
 		if (!(furnaceItemStacks[2].isStackable() && FusionRecipes.stackOrder.compare(furnaceItemStacks[2], result) == 0))
 			return false;
 		int size = furnaceItemStacks[2].stackSize + result.stackSize;
@@ -373,11 +374,11 @@ public class TileEntityFusionFurnace extends TileEntity implements ISidedInvento
 		else
 			furnaceItemStacks[2].stackSize += result.stackSize;
 
-		if (furnaceItemStacks[0].stackSize <= 0)
+		if (furnaceItemStacks[0] != null && furnaceItemStacks[0].stackSize <= 0)
 			furnaceItemStacks[0] = null;
-		if (furnaceItemStacks[3].stackSize <= 0)
+		if (furnaceItemStacks[3] != null && furnaceItemStacks[3].stackSize <= 0)
 			furnaceItemStacks[3] = null;
-		if (furnaceItemStacks[4].stackSize <= 0)
+		if (furnaceItemStacks[4] != null && furnaceItemStacks[4].stackSize <= 0)
 			furnaceItemStacks[4] = null;
 	}
 
