@@ -133,18 +133,39 @@ public class ContainerFusionFurnace extends Container
 			slot.onSlotChange(remained, initial);
 		}
 		else if (index >= 5 /* every slots that belong to the player's inventory */) {
+			boolean flag = false;
 			if (TileEntityFusionFurnace.isItemFuel(remained)) {
-				if (!mergeItemStack(remained, 1, 2, false))
-					return null;
+				flag = true;
+				if (mergeItemStack(remained, 1, 2, false)) {
+					assignNullIfZero(slot);
+					if (remained.stackSize == initial.stackSize)
+						return null;
+					slot.onPickupFromSlot(player, remained);
+					return initial;
+				}
 			}
-			else if (FusionRecipes.isItemCatalyst(remained)) {
-				if (!mergeItemStack(remained, 4, 5, false))
-					return null;
+			if (FusionRecipes.isItemCatalyst(remained)) {
+				flag = true;
+				if (mergeItemStack(remained, 4, 5, false)) {
+					assignNullIfZero(slot);
+					if (remained.stackSize == initial.stackSize)
+						return null;
+					slot.onPickupFromSlot(player, remained);
+					return initial;
+				}
 			}
-			else if (FusionRecipes.isItemInput(remained)) {
-				if (!mergeItemStack(remained, 0, 1, false) && !mergeItemStack(remained, 3, 4, false))
-					return null;
+			if (FusionRecipes.isItemInput(remained)) {
+				flag = true;
+				if (mergeItemStack(remained, 0, 1, false) || mergeItemStack(remained, 3, 4, false)) {
+					assignNullIfZero(slot);
+					if (remained.stackSize == initial.stackSize)
+						return null;
+					slot.onPickupFromSlot(player, remained);
+					return initial;
+				}
 			}
+			if (flag)
+				return null;
 			else if (index < 32) {
 				if (!mergeItemStack(remained, 32, 41, false))
 					return null;
@@ -158,16 +179,17 @@ public class ContainerFusionFurnace extends Container
 			if (!mergeItemStack(remained, 5, 41, false))
 				return null;
 
-		if (remained.stackSize == 0)
+		assignNullIfZero(slot);
+		if (remained.stackSize == initial.stackSize)
+			return null;
+		slot.onPickupFromSlot(player, remained);
+		return initial;
+	}
+    public static void assignNullIfZero(Slot slot) {
+		if (slot.getStack().stackSize == 0)
 			slot.putStack(null);
 		else
 			slot.onSlotChanged();
-
-		if (remained.stackSize == initial.stackSize)
-			return null;
-		
-		slot.onPickupFromSlot(player, remained);
-		
-		return initial;
-	}
+    }
+    
 }
