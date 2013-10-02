@@ -17,12 +17,12 @@ import SimpleOres.plugins.fusion.FusionRecipes.BasicEntry;
 import SimpleOres.plugins.fusion.FusionRecipes.Entry;
 import SimpleOres.plugins.fusion.GuiFusionFurnace;
 import codechicken.nei.PositionedStack;
+import codechicken.nei.api.API;
 import codechicken.nei.recipe.TemplateRecipeHandler;
 
 import com.google.common.collect.ImmutableList;
 
 public class FusionRecipeHandler extends TemplateRecipeHandler {
-
 	private static final int X0 = 0;
 	private static final int Y0 = 15;
 	
@@ -33,6 +33,9 @@ public class FusionRecipeHandler extends TemplateRecipeHandler {
 		GL11.glColor4f(1, 1, 1, 1);
 		changeTexture(getGuiTexture());
 		drawTexturedModalRect(X0, Y0, X1, Y1, 166, 78);
+	}
+	static {
+		API.setGuiOffset(GuiFusionFurnace.class, -x(0), -y(0));
 	}
 	
 	protected static int x(int x) {
