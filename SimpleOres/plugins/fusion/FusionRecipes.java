@@ -378,7 +378,7 @@ public class FusionRecipes {
 	 */
 	public static void registerOre(String ore, ItemStack item) {
 		for (ItemStack i : OreDictionary.getOres(ore))
-			if (!matches(i, item))
+			if (matches(i, item))
 				return;
 		OreDictionary.registerOre(ore, item);
 	}
