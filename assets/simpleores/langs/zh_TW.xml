@@ -113,7 +113,7 @@
 		<!--Bow Tooltips-->
 	<entry key="tips.damageTooltip">+傷害</entry>
 	<entry key="tips.flameTooltip">+火焰</entry>
-	<entry key="tips.knockbackTooltip">+擊退	</entry>
+	<entry key="tips.knockbackTooltip">+擊退</entry>
 	<entry key="tips.zoomTooltip">+焦距</entry>
 	<entry key="tips.efficiencyTooltip">+效率</entry>
 		<!--Updater-->
