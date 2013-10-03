@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties version="1.0">
+		<!--Blocks-->
+	<entry key="tile.copperOre.name">銅礦</entry>
+	<entry key="tile.copperBlock.name">銅磚</entry>
+	<entry key="tile.tinOre.name">錫礦</entry>
+	<entry key="tile.tinBlock.name">錫磚</entry>
+	<entry key="tile.mythrilOre.name">秘銀礦</entry>
+	<entry key="tile.mythrilBlock.name">秘銀磚</entry>
+	<entry key="tile.adamantiumOre.name">堅鋼礦</entry>
+	<entry key="tile.adamantiumBlock.name">堅鋼磚</entry>
+	<entry key="tile.onyxOre.name">縞瑪瑙礦</entry>
+	<entry key="tile.onyxBlock.name">縞瑪瑙磚</entry>
+	<entry key="tile.mythrilFurnace.name">秘銀熔爐</entry>
+	<entry key="tile.mythrilFurnaceOn.name">秘銀熔爐</entry>
+	<entry key="tile.onyxFurnace.name">縞瑪瑙熔爐</entry>
+	<entry key="tile.onyxFurnaceOn.name">縞瑪瑙熔爐</entry>
+	<entry key="tile.copperDoor.name">銅門</entry>
+	<entry key="tile.onyxDoor.name">縞瑪瑙門</entry>
+	<entry key="tile.copperBars.name">銅柵</entry>
+	<entry key="tile.tinBars.name">錫柵</entry>
+	<entry key="tile.mythrilBars.name">秘銀柵</entry>
+	<entry key="tile.adamantiumBars.name">堅鋼柵</entry>
+	<entry key="tile.onyxBars.name">縞瑪瑙柵</entry>
+		<!--Items-->
+	<entry key="item.copperIngot.name">銅錠</entry>
+	<entry key="item.tinIngot.name">錫錠</entry>
+	<entry key="item.mythrilIngot.name">秘銀錠</entry>
+	<entry key="item.adamantiumIngot.name">堅鋼錠</entry>
+	<entry key="item.onyxGem.name">縞瑪瑙</entry>
+	<entry key="item.copperBucket.name">銅桶</entry>
+	<entry key="item.copperBucketWater.name">銅水桶</entry>
+	<entry key="item.mythrilRod.name">秘銀桿</entry>
+	<entry key="item.onyxRod.name">縞瑪瑙桿</entry>
+	<entry key="item.copperDoor.name">銅門</entry>
+	<entry key="item.onyxDoor.name">縞瑪瑙門</entry>
+		<!--Tools-->
+	<entry key="item.copperPick.name">銅鎬</entry>
+	<entry key="item.copperAxe.name">銅斧</entry>
+	<entry key="item.copperShovel.name">銅鏟</entry>
+	<entry key="item.copperSword.name">銅劍</entry>
+	<entry key="item.copperHoe.name">銅鋤</entry>
+	<entry key="item.tinPick.name">錫鎬</entry>
+	<entry key="item.tinAxe.name">錫斧</entry>
+	<entry key="item.tinShovel.name">錫鏟</entry>
+	<entry key="item.tinSword.name">錫劍</entry>
+	<entry key="item.tinHoe.name">錫鋤</entry>
+	<entry key="item.mythrilPick.name">秘銀鎬</entry>
+	<entry key="item.mythrilAxe.name">秘銀斧</entry>
+	<entry key="item.mythrilShovel.name">秘銀鏟</entry>
+	<entry key="item.mythrilSword.name">秘銀劍</entry>
+	<entry key="item.mythrilHoe.name">秘銀鋤</entry>
+	<entry key="item.adamantiumPick.name">堅鋼鎬</entry>
+	<entry key="item.adamantiumAxe.name">堅鋼斧</entry>
+	<entry key="item.adamantiumShovel.name">堅鋼鏟</entry>
+	<entry key="item.adamantiumSword.name">堅鋼劍</entry>
+	<entry key="item.adamantiumHoe.name">堅鋼鋤</entry>
+	<entry key="item.onyxPick.name">縞瑪瑙鎬</entry>
+	<entry key="item.onyxAxe.name">縞瑪瑙斧</entry>
+	<entry key="item.onyxShovel.name">縞瑪瑙鏟</entry>
+	<entry key="item.onyxSword.name">縞瑪瑙劍</entry>
+	<entry key="item.onyxHoe.name">縞瑪瑙鋤</entry>
+	<entry key="item.mythrilBow.name">秘銀弓</entry>
+	<entry key="item.onyxBow.name">縞瑪瑙弓</entry>
+	<entry key="item.tinShears.name">錫剪刀</entry>
+	<entry key="item.adamantiumShears.name">堅鋼剪刀</entry>
+	<entry key="item.onyxShears.name">縞瑪瑙剪刀</entry>
+		<!--Armor-->
+	<entry key="item.copperHelm.name">銅頭盔</entry>
+	<entry key="item.copperChest.name">銅胸甲</entry>
+	<entry key="item.copperLegs.name">銅護腿</entry>
+	<entry key="item.copperBoots.name">銅靴子</entry>
+	<entry key="item.tinHelm.name">錫頭盔</entry>
+	<entry key="item.tinChest.name">錫胸甲</entry>
+	<entry key="item.tinLegs.name">錫護腿</entry>
+	<entry key="item.tinBoots.name">錫靴子</entry>
+	<entry key="item.mythrilHelm.name">秘銀頭盔</entry>
+	<entry key="item.mythrilChest.name">秘銀胸甲</entry>
+	<entry key="item.mythrilLegs.name">秘銀護腿</entry>
+	<entry key="item.mythrilBoots.name">秘銀靴子</entry>
+	<entry key="item.adamantiumHelm.name">堅鋼頭盔</entry>
+	<entry key="item.adamantiumChest.name">堅鋼胸甲</entry>
+	<entry key="item.adamantiumLegs.name">堅鋼護腿</entry>
+	<entry key="item.adamantiumBoots.name">堅鋼靴子</entry>
+	<entry key="item.onyxHelm.name">縞瑪瑙頭盔</entry>
+	<entry key="item.onyxChest.name">縞瑪瑙胸甲</entry>
+	<entry key="item.onyxLegs.name">縞瑪瑙護腿</entry>
+	<entry key="item.onyxBoots.name">縞瑪瑙靴子</entry>
+		<!--Achievements-->
+	<entry key="achievement.simpleOresAch">歡迎來到簡單礦物的世界！</entry>
+	<entry key="achievement.simpleOresAch.desc">採集銅以開始簡單礦物的歷險旅程</entry>
+	<entry key="achievement.adamantiumAch">就是那綠色的</entry>
+	<entry key="achievement.adamantiumAch.desc">往地底下的深處發掘堅鋼</entry>
+	<entry key="achievement.onyxAch">迷彩礦物</entry>
+	<entry key="achievement.onyxAch.desc">能找得到嗎？</entry>
+	<entry key="achievement.ironPickAch">升級MK-II</entry>
+	<entry key="achievement.ironPickAch.desc">合成一把鐵鎬</entry>
+	<entry key="achievement.adamantiumPickAch">快如閃電</entry>
+	<entry key="achievement.adamantiumPickAch.desc">製造堅鋼鎬以體驗無如倫比的採掘速度</entry>
+	<entry key="achievement.onyxPickAch">不滅</entry>
+	<entry key="achievement.onyxPickAch.desc">或許它比你活得更久</entry>
+	<entry key="achievement.mythrilBowAch">神秘的弓</entry>
+	<entry key="achievement.mythrilBowAch.desc">鍛造出一把全新而富有魔力的弓</entry>
+	<entry key="achievement.onyxBowAch">縱火狂</entry>
+	<entry key="achievement.onyxBowAch.desc">以這把地獄的弓焦灼你的敵人</entry>
+		<!--Tab Names-->
+	<entry key="itemGroup.tabSimpleBlocks">簡單礦物 - 建築材料 -</entry>
+	<entry key="itemGroup.tabSimpleDecoration">簡單礦物 - 装飾材料 -</entry>
+	<entry key="itemGroup.tabSimpleTools">簡單礦物 - 工具 -</entry>
+	<entry key="itemGroup.tabSimpleCombat">簡單礦物 - 戰鬥 -</entry>
+	<entry key="itemGroup.tabSimpleMaterials">簡單礦物 - 材料 -</entry>
+		<!--Bow Tooltips-->
+	<entry key="tips.damageTooltip">+傷害</entry>
+	<entry key="tips.flameTooltip">+火焰</entry>
+	<entry key="tips.knockbackTooltip">+擊退	</entry>
+	<entry key="tips.zoomTooltip">+焦距</entry>
+	<entry key="tips.efficiencyTooltip">+效率</entry>
+		<!--Updater-->
+	<entry key="simpleores.updateMessage1">你的§3簡單礦物§r並非最新版本。最新的版本§c</entry>
+	<entry key="simpleores.updateMessage2">§r可從§9http://bit.ly/SimpleOres§r處下載。</entry>
+</properties>
