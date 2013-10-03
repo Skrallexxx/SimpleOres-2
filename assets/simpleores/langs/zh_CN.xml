@@ -98,18 +98,18 @@
 	<entry key="achievement.ironPickAch.desc">合成一把铁镐</entry>
 	<entry key="achievement.adamantiumPickAch">快如闪电</entry>
 	<entry key="achievement.adamantiumPickAch.desc">制造坚钢镐体验无如伦比的采掘速度</entry>
-	<entry key="achievement.onyxPickAch">不灭</entry>
+	<entry key="achievement.onyxPickAch">不朽</entry>
 	<entry key="achievement.onyxPickAch.desc">也许它比你活得更久</entry>
 	<entry key="achievement.mythrilBowAch">神秘的弓</entry>
 	<entry key="achievement.mythrilBowAch.desc">锻造出一把全新而富有魔力的弓</entry>
 	<entry key="achievement.onyxBowAch">纵火狂</entry>
 	<entry key="achievement.onyxBowAch.desc">以这把地狱的弓把你的敌人焦灼</entry>
 		<!--Tab Names-->
-	<entry key="itemGroup.tabSimpleBlocks">简单矿石 - 建筑方块 -</entry>
-	<entry key="itemGroup.tabSimpleDecoration">简单矿石 - 装饰性方块 -</entry>
-	<entry key="itemGroup.tabSimpleTools">简单矿石 - 工具 -</entry>
-	<entry key="itemGroup.tabSimpleCombat">简单矿石 - 战斗用品 -</entry>
-	<entry key="itemGroup.tabSimpleMaterials">简单矿石 - 材料 -</entry>
+	<entry key="itemGroup.tabSimpleBlocks">简单矿石―建筑方块</entry>
+	<entry key="itemGroup.tabSimpleDecoration">简单矿石―装饰性方块</entry>
+	<entry key="itemGroup.tabSimpleTools">简单矿石―工具</entry>
+	<entry key="itemGroup.tabSimpleCombat">简单矿石―战斗用品</entry>
+	<entry key="itemGroup.tabSimpleMaterials">简单矿石―材料</entry>
 		<!--Bow Tooltips-->
 	<entry key="tips.damageTooltip">+伤害</entry>
 	<entry key="tips.flameTooltip">+火矢</entry>
