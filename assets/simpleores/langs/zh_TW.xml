@@ -18,11 +18,11 @@
 	<entry key="tile.onyxFurnaceOn.name">縞瑪瑙熔爐</entry>
 	<entry key="tile.copperDoor.name">銅門</entry>
 	<entry key="tile.onyxDoor.name">縞瑪瑙門</entry>
-	<entry key="tile.copperBars.name">銅柵</entry>
-	<entry key="tile.tinBars.name">錫柵</entry>
-	<entry key="tile.mythrilBars.name">秘銀柵</entry>
-	<entry key="tile.adamantiumBars.name">堅鋼柵</entry>
-	<entry key="tile.onyxBars.name">縞瑪瑙柵</entry>
+	<entry key="tile.copperBars.name">銅欄杆</entry>
+	<entry key="tile.tinBars.name">錫欄杆</entry>
+	<entry key="tile.mythrilBars.name">秘銀欄杆</entry>
+	<entry key="tile.adamantiumBars.name">堅鋼欄杆</entry>
+	<entry key="tile.onyxBars.name">縞瑪瑙欄杆</entry>
 		<!--Items-->
 	<entry key="item.copperIngot.name">銅錠</entry>
 	<entry key="item.tinIngot.name">錫錠</entry>
