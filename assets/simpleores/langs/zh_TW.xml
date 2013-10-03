@@ -91,25 +91,25 @@
 	<entry key="achievement.simpleOresAch">歡迎來到簡單礦物的世界！</entry>
 	<entry key="achievement.simpleOresAch.desc">採集銅以開始簡單礦物的歷險旅程</entry>
 	<entry key="achievement.adamantiumAch">就是那綠色的</entry>
-	<entry key="achievement.adamantiumAch.desc">往地底下的深處發掘堅鋼</entry>
+	<entry key="achievement.adamantiumAch.desc">往地底的深處發掘堅鋼</entry>
 	<entry key="achievement.onyxAch">迷彩礦物</entry>
 	<entry key="achievement.onyxAch.desc">能找得到嗎？</entry>
 	<entry key="achievement.ironPickAch">升級MK-II</entry>
 	<entry key="achievement.ironPickAch.desc">合成一把鐵鎬</entry>
 	<entry key="achievement.adamantiumPickAch">快如閃電</entry>
 	<entry key="achievement.adamantiumPickAch.desc">製造堅鋼鎬以體驗無如倫比的採掘速度</entry>
-	<entry key="achievement.onyxPickAch">不滅</entry>
+	<entry key="achievement.onyxPickAch">不朽</entry>
 	<entry key="achievement.onyxPickAch.desc">或許它比你活得更久</entry>
 	<entry key="achievement.mythrilBowAch">神秘的弓</entry>
 	<entry key="achievement.mythrilBowAch.desc">鍛造出一把全新而富有魔力的弓</entry>
 	<entry key="achievement.onyxBowAch">縱火狂</entry>
 	<entry key="achievement.onyxBowAch.desc">以這把地獄的弓焦灼你的敵人</entry>
 		<!--Tab Names-->
-	<entry key="itemGroup.tabSimpleBlocks">簡單礦物 - 建築材料 -</entry>
-	<entry key="itemGroup.tabSimpleDecoration">簡單礦物 - 装飾材料 -</entry>
-	<entry key="itemGroup.tabSimpleTools">簡單礦物 - 工具 -</entry>
-	<entry key="itemGroup.tabSimpleCombat">簡單礦物 - 戰鬥 -</entry>
-	<entry key="itemGroup.tabSimpleMaterials">簡單礦物 - 材料 -</entry>
+	<entry key="itemGroup.tabSimpleBlocks">簡單礦物：建築材料</entry>
+	<entry key="itemGroup.tabSimpleDecoration">簡單礦物：装飾材料</entry>
+	<entry key="itemGroup.tabSimpleTools">簡單礦物：工具</entry>
+	<entry key="itemGroup.tabSimpleCombat">簡單礦物：戰鬥</entry>
+	<entry key="itemGroup.tabSimpleMaterials">簡單礦物：材料</entry>
 		<!--Bow Tooltips-->
 	<entry key="tips.damageTooltip">+傷害</entry>
 	<entry key="tips.flameTooltip">+火焰</entry>
