@@ -55,7 +55,7 @@
 	<entry key="item.sinisiteBoots.name">黑秘銀靴子</entry>
 		<!--Achievements-->
 	<entry key="achievement.fusionAch">合二為一</entry>
-	<entry key="achievement.fusionAch.desc">製造融合熔爐以開拓新的可能性</entry>
-	<entry key="achievement.bronzeAch">本人的首次融合</entry>
+	<entry key="achievement.fusionAch.desc">製造融合熔爐，開拓新的可能性</entry>
+	<entry key="achievement.bronzeAch">我的首次融合</entry>
 	<entry key="achievement.bronzeAch.desc">合成出你的第一塊合金――青銅錠</entry>
 </properties>
