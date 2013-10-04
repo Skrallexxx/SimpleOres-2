@@ -1,15 +1,14 @@
 package SimpleOres.core;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.logging.Level;
+import java.io.IOException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.EnumArmorMaterial;
 import net.minecraft.item.EnumToolMaterial;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.StatCollector;
+import net.minecraftforge.common.EnumHelper;
+import net.minecraftforge.common.MinecraftForge;
 import SimpleOres.core.api.HandlerLoot;
 import SimpleOres.core.conf.IDs;
 import SimpleOres.core.conf.Localisation;
@@ -17,7 +16,6 @@ import SimpleOres.core.conf.Settings;
 import SimpleOres.core.gui.TabBlocks;
 import SimpleOres.core.gui.TabCombat;
 import SimpleOres.core.gui.TabDecoration;
-import SimpleOres.core.gui.TabGeneral;
 import SimpleOres.core.gui.TabMaterials;
 import SimpleOres.core.gui.TabTools;
 import SimpleOres.core.gui.TileEntityMythrilFurnace;
@@ -26,13 +24,12 @@ import SimpleOres.core.handlers.HandlerJoinWorld;
 import SimpleOres.core.handlers.HandlerUpdateChecker;
 import SimpleOres.core.handlers.ProxyCommon;
 import SimpleOres.core.handlers.SimpleOresGenerator;
-import SimpleOres.plugins.fusion.FusionRecipes;
-import SimpleOres.plugins.fusion.TileEntityFusionFurnace;
-import cpw.mods.fml.common.FMLLog;
+
+import com.google.common.reflect.ClassPath;
+import com.google.common.reflect.ClassPath.ResourceInfo;
+
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
-import cpw.mods.fml.common.Mod.Init;
-import cpw.mods.fml.common.Mod.PreInit;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
@@ -40,8 +37,6 @@ import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
-import net.minecraftforge.common.EnumHelper;
-import net.minecraftforge.common.MinecraftForge;
 
 //======================================= FORGE STUFF ====================================================
 @NetworkMod(clientSideRequired = true, serverSideRequired = false)
@@ -147,16 +142,18 @@ public class SimpleOres
 		mod = this;
 			
 		/**
-		 * Adding localisation files.
+		 * Load all the localisation files automatically. 
 		 */
-		LanguageRegistry.instance().loadLocalization(new ResourceLocation("/assets/simpleores/langs/en_US.xml").getResourcePath(), "en_US", true);
-		LanguageRegistry.instance().loadLocalization(new ResourceLocation("/assets/simpleores/langs/en_AU.xml").getResourcePath(), "en_AU", true);
-		LanguageRegistry.instance().loadLocalization(new ResourceLocation("/assets/simpleores/langs/en_PT.xml").getResourcePath(), "en_PT", true);
-		LanguageRegistry.instance().loadLocalization(new ResourceLocation("/assets/simpleores/langs/ru_RU.xml").getResourcePath(), "ru_RU", true);
-		LanguageRegistry.instance().loadLocalization(new ResourceLocation("/assets/simpleores/langs/de_DE.xml").getResourcePath(), "de_DE", true);
-		LanguageRegistry.instance().loadLocalization(new ResourceLocation("/assets/simpleores/langs/ja_JP.xml").getResourcePath(), "ja_JP", true);
-		LanguageRegistry.instance().loadLocalization(new ResourceLocation("/assets/simpleores/langs/zh_TW.xml").getResourcePath(), "zh_TW", true);
-		LanguageRegistry.instance().loadLocalization(new ResourceLocation("/assets/simpleores/langs/zh_CN.xml").getResourcePath(), "zh_CN", true);
+		try {
+			Pattern p = Pattern.compile("assets/simpleores/langs/(.*)\\.xml");
+			for (ResourceInfo i : ClassPath.from(getClass().getClassLoader()).getResources()) {
+				Matcher m = p.matcher(i.getResourceName());
+				if (m.matches())
+					LanguageRegistry.instance().loadLocalization(i.url(), m.group(1), true);
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		
 		/**
 		 * Registering things such as the world generator, tile entities and GUI's.
