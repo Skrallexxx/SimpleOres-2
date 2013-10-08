@@ -50,7 +50,7 @@ public class Settings
 		
     	catch (Exception e) 
     	{
-    		FMLLog.log(Level.SEVERE, e, "[SimpleOres] Error while trying to access the SimpleOres Fusion Plugin settings file!");
+    		FMLLog.log(Level.SEVERE, e, "[SimpleOres] Error while trying to access the Fusion Plugin settings file!");
     	}
 		
     	finally 

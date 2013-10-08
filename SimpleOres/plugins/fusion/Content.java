@@ -92,18 +92,18 @@ public class Content
 	public static void doArmor()
 	{
         //Armour Details
-        bronzeHelm = new SimpleArmor(IDs.bronzeHelmID, mod.armorBronze, mod.rendererBronze, 0, "bronze", "simpleoresfusion").setUnlocalizedName("bronzeHelm");
-		bronzeChest = new SimpleArmor(IDs.bronzeChestID, mod.armorBronze, mod.rendererBronze, 1, "bronze", "simpleoresfusion").setUnlocalizedName("bronzeChest");
-		bronzeLegs = new SimpleArmor(IDs.bronzeLegsID, mod.armorBronze, mod.rendererBronze, 2, "bronze", "simpleoresfusion").setUnlocalizedName("bronzeLegs");
-		bronzeBoots = new SimpleArmor(IDs.bronzeBootsID, mod.armorBronze, mod.rendererBronze, 3, "bronze", "simpleoresfusion").setUnlocalizedName("bronzeBoots");
-        thyriumHelm = new SimpleArmor(IDs.thyriumHelmID, mod.armorThyrium, mod.rendererThyrium, 0, "thyrium", "simpleoresfusion").setUnlocalizedName("thyriumHelm");
-		thyriumChest = new SimpleArmor(IDs.thyriumChestID, mod.armorThyrium, mod.rendererThyrium, 1, "thyrium", "simpleoresfusion").setUnlocalizedName("thyriumChest");
-		thyriumLegs = new SimpleArmor(IDs.thyriumLegsID, mod.armorThyrium, mod.rendererThyrium, 2, "thyrium", "simpleoresfusion").setUnlocalizedName("thyriumLegs");
-		thyriumBoots = new SimpleArmor(IDs.thyriumBootsID, mod.armorThyrium, mod.rendererThyrium, 3, "thyrium", "simpleoresfusion").setUnlocalizedName("thyriumBoots");
-        sinisiteHelm = new SimpleArmor(IDs.sinisiteHelmID, mod.armorSinisite, mod.rendererSinisite, 0, "sinisite", "simpleoresfusion").setUnlocalizedName("sinisiteHelm");
-		sinisiteChest = new SimpleArmor(IDs.sinisiteChestID, mod.armorSinisite, mod.rendererSinisite, 1, "sinisite", "simpleoresfusion").setUnlocalizedName("sinisiteChest");
-		sinisiteLegs = new SimpleArmor(IDs.sinisiteLegsID, mod.armorSinisite, mod.rendererSinisite, 2, "sinisite", "simpleoresfusion").setUnlocalizedName("sinisiteLegs");
-		sinisiteBoots = new SimpleArmor(IDs.sinisiteBootsID, mod.armorSinisite, mod.rendererSinisite, 3, "sinisite", "simpleoresfusion").setUnlocalizedName("sinisiteBoots");
+        bronzeHelm = new SimpleArmor(IDs.bronzeHelmID, mod.armorBronze, mod.rendererBronze, 0, "bronze", "simpleoresfusion", SimpleOres.tabSimpleCombat).setUnlocalizedName("bronzeHelm");
+		bronzeChest = new SimpleArmor(IDs.bronzeChestID, mod.armorBronze, mod.rendererBronze, 1, "bronze", "simpleoresfusion", SimpleOres.tabSimpleCombat).setUnlocalizedName("bronzeChest");
+		bronzeLegs = new SimpleArmor(IDs.bronzeLegsID, mod.armorBronze, mod.rendererBronze, 2, "bronze", "simpleoresfusion", SimpleOres.tabSimpleCombat).setUnlocalizedName("bronzeLegs");
+		bronzeBoots = new SimpleArmor(IDs.bronzeBootsID, mod.armorBronze, mod.rendererBronze, 3, "bronze", "simpleoresfusion", SimpleOres.tabSimpleCombat).setUnlocalizedName("bronzeBoots");
+        thyriumHelm = new SimpleArmor(IDs.thyriumHelmID, mod.armorThyrium, mod.rendererThyrium, 0, "thyrium", "simpleoresfusion", SimpleOres.tabSimpleCombat).setUnlocalizedName("thyriumHelm");
+		thyriumChest = new SimpleArmor(IDs.thyriumChestID, mod.armorThyrium, mod.rendererThyrium, 1, "thyrium", "simpleoresfusion", SimpleOres.tabSimpleCombat).setUnlocalizedName("thyriumChest");
+		thyriumLegs = new SimpleArmor(IDs.thyriumLegsID, mod.armorThyrium, mod.rendererThyrium, 2, "thyrium", "simpleoresfusion", SimpleOres.tabSimpleCombat).setUnlocalizedName("thyriumLegs");
+		thyriumBoots = new SimpleArmor(IDs.thyriumBootsID, mod.armorThyrium, mod.rendererThyrium, 3, "thyrium", "simpleoresfusion", SimpleOres.tabSimpleCombat).setUnlocalizedName("thyriumBoots");
+        sinisiteHelm = new SimpleArmor(IDs.sinisiteHelmID, mod.armorSinisite, mod.rendererSinisite, 0, "sinisite", "simpleoresfusion", SimpleOres.tabSimpleCombat).setUnlocalizedName("sinisiteHelm");
+		sinisiteChest = new SimpleArmor(IDs.sinisiteChestID, mod.armorSinisite, mod.rendererSinisite, 1, "sinisite", "simpleoresfusion", SimpleOres.tabSimpleCombat).setUnlocalizedName("sinisiteChest");
+		sinisiteLegs = new SimpleArmor(IDs.sinisiteLegsID, mod.armorSinisite, mod.rendererSinisite, 2, "sinisite", "simpleoresfusion", SimpleOres.tabSimpleCombat).setUnlocalizedName("sinisiteLegs");
+		sinisiteBoots = new SimpleArmor(IDs.sinisiteBootsID, mod.armorSinisite, mod.rendererSinisite, 3, "sinisite", "simpleoresfusion", SimpleOres.tabSimpleCombat).setUnlocalizedName("sinisiteBoots");
 		
 		//Armor Names
 		if(Settings.enableOldLocalisation)
@@ -129,9 +129,9 @@ public class Content
 	public static void doBlocks()
 	{
 		//Block Properties
-		bronzeBlock = new SimpleOre(IDs.bronzeBlockID, Material.iron, "simpleoresfusion").setHardness(7.0F).setResistance(12.0F).setCreativeTab(SimpleOres.tabSimpleBlocks).setUnlocalizedName("bronzeBlock");
-		thyriumBlock = new SimpleOre(IDs.thyriumBlockID, Material.iron, "simpleoresfusion").setHardness(7.0F).setResistance(12.0F).setCreativeTab(SimpleOres.tabSimpleBlocks).setUnlocalizedName("thyriumBlock");
-		sinisiteBlock = new SimpleOre(IDs.sinisiteBlockID, Material.iron, "simpleoresfusion").setHardness(7.0F).setResistance(12.0F).setCreativeTab(SimpleOres.tabSimpleBlocks).setUnlocalizedName("sinisiteBlock");
+		bronzeBlock = new SimpleOre(IDs.bronzeBlockID, Material.iron, "simpleoresfusion", SimpleOres.tabSimpleBlocks).setHardness(7.0F).setResistance(12.0F).setCreativeTab(SimpleOres.tabSimpleBlocks).setUnlocalizedName("bronzeBlock");
+		thyriumBlock = new SimpleOre(IDs.thyriumBlockID, Material.iron, "simpleoresfusion", SimpleOres.tabSimpleBlocks).setHardness(7.0F).setResistance(12.0F).setCreativeTab(SimpleOres.tabSimpleBlocks).setUnlocalizedName("thyriumBlock");
+		sinisiteBlock = new SimpleOre(IDs.sinisiteBlockID, Material.iron, "simpleoresfusion", SimpleOres.tabSimpleBlocks).setHardness(7.0F).setResistance(12.0F).setCreativeTab(SimpleOres.tabSimpleBlocks).setUnlocalizedName("sinisiteBlock");
 		fusionFurnace = new FusionFurnace(IDs.fusionFurnaceID, false).setHardness(3.5F).setResistance(10.0F).setUnlocalizedName("fusionFurnace");
 		fusionFurnaceOn = new FusionFurnace(IDs.fusionFurnaceOnID, true).setHardness(3.5F).setLightValue(1.0F).setUnlocalizedName("fusionFurnaceOn");
 		
@@ -159,20 +159,20 @@ public class Content
 	public static void doItems()
 	{
 		//Item Details
-		bronzeIngot = new SimpleIngot(IDs.bronzeIngotID, "simpleoresfusion").setUnlocalizedName("bronzeIngot");
-		sinisiteIngot = new SimpleIngot(IDs.sinisiteIngotID, "simpleoresfusion").setUnlocalizedName("sinisiteIngot");
-		thyriumIngot = new SimpleIngot(IDs.thyriumIngotID, "simpleoresfusion").setUnlocalizedName("thyriumIngot");
-		thyriumRod = new SimpleIngot(IDs.thyriumRodID, "simpleoresfusion").setUnlocalizedName("thyriumRod");
-		sinisiteRod = new SimpleIngot(IDs.sinisiteRodID, "simpleoresfusion").setUnlocalizedName("sinisiteRod");	
-		smallBronzeChunk = new SimpleIngot(IDs.smallBronzeChunkID, "simpleoresfusion").setUnlocalizedName("smallBronzeChunk");
-		mediumBronzeChunk = new SimpleIngot(IDs.mediumBronzeChunkID, "simpleoresfusion").setUnlocalizedName("mediumBronzeChunk");
-		largeBronzeChunk = new SimpleIngot(IDs.largeBronzeChunkID, "simpleoresfusion").setUnlocalizedName("largeBronzeChunk");
-		smallThyriumChunk = new SimpleIngot(IDs.smallThyriumChunkID, "simpleoresfusion").setUnlocalizedName("smallThyriumChunk");
-		mediumThyriumChunk = new SimpleIngot(IDs.mediumThyriumChunkID, "simpleoresfusion").setUnlocalizedName("mediumThyriumChunk");
-		largeThyriumChunk = new SimpleIngot(IDs.largeThyriumChunkID, "simpleoresfusion").setUnlocalizedName("largeThyriumChunk");
-		smallSinisiteChunk = new SimpleIngot(IDs.smallSinisiteChunkID, "simpleoresfusion").setUnlocalizedName("smallSinisiteChunk");
-		mediumSinisiteChunk = new SimpleIngot(IDs.mediumSinisiteChunkID, "simpleoresfusion").setUnlocalizedName("mediumSinisiteChunk");
-		largeSinisiteChunk = new SimpleIngot(IDs.largeSinisiteChunkID, "simpleoresfusion").setUnlocalizedName("largeSinisiteChunk");
+		bronzeIngot = new SimpleIngot(IDs.bronzeIngotID, "simpleoresfusion", SimpleOres.tabSimpleMaterials).setUnlocalizedName("bronzeIngot");
+		sinisiteIngot = new SimpleIngot(IDs.sinisiteIngotID, "simpleoresfusion", SimpleOres.tabSimpleMaterials).setUnlocalizedName("sinisiteIngot");
+		thyriumIngot = new SimpleIngot(IDs.thyriumIngotID, "simpleoresfusion", SimpleOres.tabSimpleMaterials).setUnlocalizedName("thyriumIngot");
+		thyriumRod = new SimpleIngot(IDs.thyriumRodID, "simpleoresfusion", SimpleOres.tabSimpleMaterials).setUnlocalizedName("thyriumRod");
+		sinisiteRod = new SimpleIngot(IDs.sinisiteRodID, "simpleoresfusion", SimpleOres.tabSimpleMaterials).setUnlocalizedName("sinisiteRod");	
+		smallBronzeChunk = new SimpleIngot(IDs.smallBronzeChunkID, "simpleoresfusion", SimpleOres.tabSimpleMaterials).setUnlocalizedName("smallBronzeChunk");
+		mediumBronzeChunk = new SimpleIngot(IDs.mediumBronzeChunkID, "simpleoresfusion", SimpleOres.tabSimpleMaterials).setUnlocalizedName("mediumBronzeChunk");
+		largeBronzeChunk = new SimpleIngot(IDs.largeBronzeChunkID, "simpleoresfusion", SimpleOres.tabSimpleMaterials).setUnlocalizedName("largeBronzeChunk");
+		smallThyriumChunk = new SimpleIngot(IDs.smallThyriumChunkID, "simpleoresfusion", SimpleOres.tabSimpleMaterials).setUnlocalizedName("smallThyriumChunk");
+		mediumThyriumChunk = new SimpleIngot(IDs.mediumThyriumChunkID, "simpleoresfusion", SimpleOres.tabSimpleMaterials).setUnlocalizedName("mediumThyriumChunk");
+		largeThyriumChunk = new SimpleIngot(IDs.largeThyriumChunkID, "simpleoresfusion", SimpleOres.tabSimpleMaterials).setUnlocalizedName("largeThyriumChunk");
+		smallSinisiteChunk = new SimpleIngot(IDs.smallSinisiteChunkID, "simpleoresfusion", SimpleOres.tabSimpleMaterials).setUnlocalizedName("smallSinisiteChunk");
+		mediumSinisiteChunk = new SimpleIngot(IDs.mediumSinisiteChunkID, "simpleoresfusion", SimpleOres.tabSimpleMaterials).setUnlocalizedName("mediumSinisiteChunk");
+		largeSinisiteChunk = new SimpleIngot(IDs.largeSinisiteChunkID, "simpleoresfusion", SimpleOres.tabSimpleMaterials).setUnlocalizedName("largeSinisiteChunk");
 		
 		//Item Naming
 		if(Settings.enableOldLocalisation)
@@ -200,21 +200,21 @@ public class Content
 	public static void doTools()
 	{
 		//Tool Details
-		bronzePick = new SimplePickaxe(IDs.bronzePickID, mod.toolBronze, "simpleoresfusion").setUnlocalizedName("bronzePick");
-		bronzeAxe = new SimpleAxe(IDs.bronzeAxeID, mod.toolBronze, "simpleoresfusion").setUnlocalizedName("bronzeAxe");
-		bronzeShovel = new SimpleShovel(IDs.bronzeShovelID, mod.toolBronze, "simpleoresfusion").setUnlocalizedName("bronzeShovel");
-		bronzeSword = new SimpleSword(IDs.bronzeSwordID, mod.toolBronze, "simpleoresfusion").setUnlocalizedName("bronzeSword");
-		bronzeHoe = new SimpleHoe(IDs.bronzeHoeID, mod.toolBronze, "simpleoresfusion").setUnlocalizedName("bronzeHoe");
-		thyriumPick = new SimplePickaxe(IDs.thyriumPickID, mod.toolThyrium, "simpleoresfusion").setUnlocalizedName("thyriumPick");
-		thyriumAxe = new SimpleAxe(IDs.thyriumAxeID, mod.toolThyrium, "simpleoresfusion").setUnlocalizedName("thyriumAxe");
-		thyriumShovel = new SimpleShovel(IDs.thyriumShovelID, mod.toolThyrium, "simpleoresfusion").setUnlocalizedName("thyriumShovel");
-		thyriumSword = new SimpleSword(IDs.thyriumSwordID, mod.toolThyrium, "simpleoresfusion").setUnlocalizedName("thyriumSword");
-		thyriumHoe = new SimpleHoe(IDs.thyriumHoeID, mod.toolThyrium, "simpleoresfusion").setUnlocalizedName("thyriumHoe");
-		sinisitePick = new SimplePickaxe(IDs.sinisitePickID, mod.toolSinisite, "simpleoresfusion").setUnlocalizedName("sinisitePick");
-		sinisiteAxe = new SimpleAxe(IDs.sinisiteAxeID, mod.toolSinisite, "simpleoresfusion").setUnlocalizedName("sinisiteAxe");
-		sinisiteShovel = new SimpleShovel(IDs.sinisiteShovelID, mod.toolSinisite, "simpleoresfusion").setUnlocalizedName("sinisiteShovel");
-		sinisiteSword = new SimpleSword(IDs.sinisiteSwordID, mod.toolSinisite, "simpleoresfusion").setUnlocalizedName("sinisiteSword");
-		sinisiteHoe = new SimpleHoe(IDs.sinisiteHoeID, mod.toolSinisite, "simpleoresfusion").setUnlocalizedName("sinisiteHoe");
+		bronzePick = new SimplePickaxe(IDs.bronzePickID, mod.toolBronze, "simpleoresfusion", SimpleOres.tabSimpleTools).setUnlocalizedName("bronzePick");
+		bronzeAxe = new SimpleAxe(IDs.bronzeAxeID, mod.toolBronze, "simpleoresfusion", SimpleOres.tabSimpleTools).setUnlocalizedName("bronzeAxe");
+		bronzeShovel = new SimpleShovel(IDs.bronzeShovelID, mod.toolBronze, "simpleoresfusion", SimpleOres.tabSimpleTools).setUnlocalizedName("bronzeShovel");
+		bronzeSword = new SimpleSword(IDs.bronzeSwordID, mod.toolBronze, "simpleoresfusion", SimpleOres.tabSimpleCombat).setUnlocalizedName("bronzeSword");
+		bronzeHoe = new SimpleHoe(IDs.bronzeHoeID, mod.toolBronze, "simpleoresfusion", SimpleOres.tabSimpleTools).setUnlocalizedName("bronzeHoe");
+		thyriumPick = new SimplePickaxe(IDs.thyriumPickID, mod.toolThyrium, "simpleoresfusion", SimpleOres.tabSimpleTools).setUnlocalizedName("thyriumPick");
+		thyriumAxe = new SimpleAxe(IDs.thyriumAxeID, mod.toolThyrium, "simpleoresfusion", SimpleOres.tabSimpleTools).setUnlocalizedName("thyriumAxe");
+		thyriumShovel = new SimpleShovel(IDs.thyriumShovelID, mod.toolThyrium, "simpleoresfusion", SimpleOres.tabSimpleTools).setUnlocalizedName("thyriumShovel");
+		thyriumSword = new SimpleSword(IDs.thyriumSwordID, mod.toolThyrium, "simpleoresfusion", SimpleOres.tabSimpleCombat).setUnlocalizedName("thyriumSword");
+		thyriumHoe = new SimpleHoe(IDs.thyriumHoeID, mod.toolThyrium, "simpleoresfusion", SimpleOres.tabSimpleTools).setUnlocalizedName("thyriumHoe");
+		sinisitePick = new SimplePickaxe(IDs.sinisitePickID, mod.toolSinisite, "simpleoresfusion", SimpleOres.tabSimpleTools).setUnlocalizedName("sinisitePick");
+		sinisiteAxe = new SimpleAxe(IDs.sinisiteAxeID, mod.toolSinisite, "simpleoresfusion", SimpleOres.tabSimpleTools).setUnlocalizedName("sinisiteAxe");
+		sinisiteShovel = new SimpleShovel(IDs.sinisiteShovelID, mod.toolSinisite, "simpleoresfusion", SimpleOres.tabSimpleTools).setUnlocalizedName("sinisiteShovel");
+		sinisiteSword = new SimpleSword(IDs.sinisiteSwordID, mod.toolSinisite, "simpleoresfusion", SimpleOres.tabSimpleCombat).setUnlocalizedName("sinisiteSword");
+		sinisiteHoe = new SimpleHoe(IDs.sinisiteHoeID, mod.toolSinisite, "simpleoresfusion", SimpleOres.tabSimpleTools).setUnlocalizedName("sinisiteHoe");
 		thyriumBow = (ItemBow) new SimpleBow(IDs.thyriumBowID, 900, mod.toolThyrium).setFull3D().setUnlocalizedName("thyriumBow");
 		sinisiteBow = (ItemBow) new SimpleBow(IDs.sinisiteBowID, 1200, mod.toolSinisite).setFull3D().setUnlocalizedName("sinisiteBow");
 		

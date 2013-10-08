@@ -4,11 +4,8 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.item.Item;
-import SimpleOres.core.conf.IDs;
-import SimpleOres.core.conf.Localisation;
-import SimpleOres.core.conf.Settings;
-import SimpleOres.core.item.SimpleBucket;
-import SimpleOres.core.item.SimpleDoorItem;
+import SimpleOres.core.content.SimpleBucket;
+import SimpleOres.core.content.SimpleDoorItem;
 import SimpleOres.core.api.SimpleIngot;
 
 public class Items 
@@ -20,7 +17,7 @@ public class Items
 	public static Achievements achievements;
 	public static Armor armor;
 	public static Blocks blocks;
-	public static IDs config;
+	public static Config config;
 	public static Items items;
 	public static Localisation local;
 	public static Recipes recipes;
@@ -49,15 +46,15 @@ public class Items
 	public static void doItems()
 	{
 		//Item Details
-        copperIngot = new SimpleIngot(config.copperIngotID, "simpleores").setUnlocalizedName("copperIngot");
-		tinIngot = new SimpleIngot(config.tinIngotID, "simpleores").setUnlocalizedName("tinIngot");
-		mythrilIngot = new SimpleIngot(config.mythrilIngotID, "simpleores").setUnlocalizedName("mythrilIngot");
-		adamantiumIngot = new SimpleIngot(config.adamantiumIngotID, "simpleores").setUnlocalizedName("adamantiumIngot");
-		onyxGem = new SimpleIngot(config.onyxGemID, "simpleores").setUnlocalizedName("onyxGem");
+        copperIngot = new SimpleIngot(config.copperIngotID, "simpleores", SimpleOres.tabSimpleMaterials).setUnlocalizedName("copperIngot");
+		tinIngot = new SimpleIngot(config.tinIngotID, "simpleores", SimpleOres.tabSimpleMaterials).setUnlocalizedName("tinIngot");
+		mythrilIngot = new SimpleIngot(config.mythrilIngotID, "simpleores", SimpleOres.tabSimpleMaterials).setUnlocalizedName("mythrilIngot");
+		adamantiumIngot = new SimpleIngot(config.adamantiumIngotID, "simpleores", SimpleOres.tabSimpleMaterials).setUnlocalizedName("adamantiumIngot");
+		onyxGem = new SimpleIngot(config.onyxGemID, "simpleores", SimpleOres.tabSimpleMaterials).setUnlocalizedName("onyxGem");
 		copperBucket = new SimpleBucket(config.copperBucketID, 0).setUnlocalizedName("copperBucket").setMaxStackSize(16);
 		copperBucketWater = new SimpleBucket(config.copperBucketWaterID, Block.waterMoving.blockID).setUnlocalizedName("copperBucketWater");
-		mythrilRod = new SimpleIngot(config.mythrilRodID, "simpleores").setUnlocalizedName("mythrilRod");
-		onyxRod = new SimpleIngot(config.onyxRodID, "simpleores").setUnlocalizedName("onyxRod");
+		mythrilRod = new SimpleIngot(config.mythrilRodID, "simpleores", SimpleOres.tabSimpleMaterials).setUnlocalizedName("mythrilRod");
+		onyxRod = new SimpleIngot(config.onyxRodID, "simpleores", SimpleOres.tabSimpleMaterials).setUnlocalizedName("onyxRod");
 		copperDoorItem = new SimpleDoorItem(config.copperDoorItemID, "copper").setUnlocalizedName("copperDoor");
 		onyxDoorItem = new SimpleDoorItem(config.onyxDoorItemID, "onyx").setUnlocalizedName("onyxDoor");
 		

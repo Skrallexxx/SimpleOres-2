@@ -1,5 +1,12 @@
 package SimpleOres.plugins.fusion;
 
+import java.io.IOException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import com.google.common.reflect.ClassPath;
+import com.google.common.reflect.ClassPath.ResourceInfo;
+
 import net.minecraft.item.EnumArmorMaterial;
 import net.minecraft.item.EnumToolMaterial;
 import net.minecraft.util.ResourceLocation;
@@ -55,7 +62,7 @@ public class SimpleOresFusion
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) 
     {
-    	System.out.println("[SimpleOres] Loading SimpleOres 2 Fusion Plugin...");
+    	System.out.println("[SimpleOres] Loading Fusion Plugin...");
     	proxy.registerClientTickHandler();
     	/**
     	 * Calling the various parts of the mod. Moved to different files for neatness. Pretty self explanatory what they all are :P
@@ -85,24 +92,21 @@ public class SimpleOresFusion
 		
 		/**
 		 * Adding localisation files.
+		 * 
+		 * Thanks to @zot for the code for loading localisations automatically.
 		 */
-		LanguageRegistry.instance().loadLocalization(new ResourceLocation("/assets/simpleoresfusion/langs/en_US.xml").getResourcePath(), "en_US", true);
-		LanguageRegistry.instance().loadLocalization(new ResourceLocation("/assets/simpleoresfusion/langs/ru_RU.xml").getResourcePath(), "ru_RU", true);
-		LanguageRegistry.instance().loadLocalization(new ResourceLocation("/assets/simpleoresfusion/langs/de_DE.xml").getResourcePath(), "de_DE", true);
-		LanguageRegistry.instance().loadLocalization(new ResourceLocation("/assets/simpleoresfusion/langs/ja_JP.xml").getResourcePath(), "ja_JP", true);
+		addLocalisations();
 		
 		/**
 		 * Registering things such as the world generator, tile entities and GUI's.
 		 */
-		//Registering
 		NetworkRegistry.instance().registerGuiHandler(INSTANCE, proxy);
 		GameRegistry.registerTileEntity(TileEntityFusionFurnace.class, "fusionFurnace");
 		
         /**
          * Adds the armor textures when you wear it. Calls a method in the CommonProxy (which is overridden by ClientProxy) called addArmor, and inputs the name of the material.
-         * This allows the game to recognise that texture files called copper_1, mythril_2, etc. are corresponding to that armor set.
+         * This allows the game to recognise that texture files called bronze_1, sinisite_2, etc. are corresponding to that armor set.
          */
-		//Armor Renderers
         rendererBronze = simpleores.proxy.addArmor("bronze");
         rendererThyrium = simpleores.proxy.addArmor("thyrium");
         rendererSinisite = simpleores.proxy.addArmor("sinisite");
@@ -110,7 +114,6 @@ public class SimpleOresFusion
         /**
          * This sets what item can be used to repair tools/armor of that type. ie. Copper Ingot to repair copper tools and items.
          */     
-        //Repair Materials
         toolBronze.customCraftingMaterial = Content.bronzeIngot;
         toolThyrium.customCraftingMaterial = Content.thyriumIngot;
         toolSinisite.customCraftingMaterial = Content.sinisiteIngot;
@@ -123,6 +126,25 @@ public class SimpleOresFusion
          * Simply prints to console the number of Fusion Furnace recipes that were loaded, then prints that all content was loaded successfully.
          */
 		System.out.println("[SimpleOres] " + FusionRecipes.size / 2 + " Fusion Furnace recipes were loaded.");
-    	System.out.println("[SimpleOres] SimpleOres 2 Fusion Plugin loaded all content successfully.");
+    	System.out.println("[SimpleOres] Fusion Plugin loaded all content successfully.");
+    }
+    
+    public void addLocalisations()
+    {
+		try 
+		{
+			Pattern p = Pattern.compile("assets/simpleoresfusion/langs/(.*)\\.xml");
+			for (ResourceInfo i : ClassPath.from(getClass().getClassLoader())
+					.getResources()) {
+				Matcher m = p.matcher(i.getResourceName());
+				if (m.matches())
+					LanguageRegistry.instance().loadLocalization(i.url(),
+							m.group(1), true);
+			}
+		}
+		catch (IOException e) 
+		{
+			e.printStackTrace();
+		}
     }
 }

@@ -4,264 +4,333 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-import SimpleOres.core.Items;
-import net.minecraft.block.Block;
+import com.google.common.collect.Lists;
+
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
-/**
- * The main file for Fusion Furnace recipes. This is where all the work is done.
- * 
- * Thanks to @zot and @sadris for all their help with Shift Clicking and Ore Dictionary support.
- * 
- * @author Alex
- *
- */
 public class FusionRecipes
 {
-	public static final int WILDCARD_VALUE = OreDictionary.WILDCARD_VALUE;
+	private static final int WILDCARD_VALUE = OreDictionary.WILDCARD_VALUE;
+	private static final FusionRecipes smeltingBase = new FusionRecipes();
 	public static int size;
 	
-    private static final FusionRecipes smeltingBase = new FusionRecipes();
-
-    /** The list of smelting and experience results. */
-    private Map recipeList = new HashMap();
-    private Map recipeListMeta = new HashMap();
-    private static List<Item> inputList = new ArrayList<Item>();
-    private static List<Item> catalystList = new ArrayList<Item>();
-    private HashMap<List<Integer>, Float> experienceList = new HashMap<List<Integer>, Float>();
+	private HashMap<HashMap<ArrayList<String>, ArrayList<Integer>>, ItemStack> recipeMap = new HashMap<HashMap<ArrayList<String>, ArrayList<Integer>>, ItemStack>();
+	private HashMap<ArrayList<String>, ItemStack> dictionaryRecipeMap = new HashMap<ArrayList<String>, ItemStack>();
+	private HashMap<ArrayList<String>, ArrayList<Integer>> damageMap = new HashMap<ArrayList<String>, ArrayList<Integer>>();
+	private HashMap<HashMap<ArrayList<String>, ArrayList<Integer>>, ArrayList<Integer>> stackSizeMap = new HashMap<HashMap<ArrayList<String>, ArrayList<Integer>>, ArrayList<Integer>>();
+	private HashMap<List<Integer>, Float> experienceMap = new HashMap<List<Integer>, Float>();
+	
+	private static ArrayList<Item> inputList = Lists.newArrayList();
+    private static ArrayList<Item> catalystList = Lists.newArrayList();
     
-    int input1ID, input2ID, catalystID;
-    
-    /**
-     * Used to call methods addSmelting and getSmeltingResult.
-     */
-    public static final FusionRecipes smelting()
-    {
-        return smeltingBase;
-    }
-
-    /**
-     * Where recipes would normally be added to. Instead, recipes can be added from outside the class using FusionRecipes.smelting().addSmelting.
-     * Recipes will be in format: this.addSmelting(input1.itemID, input2.itemID, catalyst.itemID, new ItemStack(output));
-     * 
-     * Only one recipe is needed for the two inputs, as input1 + input2 + catalyst = input2 + input1 + catalyst. 
-     */
-    private FusionRecipes()
-    {
-
-    }
-
-    public void addSmelting(ItemStack input1, ItemStack input2, ItemStack catalyst, ItemStack output, float experience)
-    {
-    	getOreDictID(input1, input2, catalyst);
-    	
-    	boolean is1damaged = input1.getItemDamage() > 0 ? true : false;
-    	boolean is2damaged = input2.getItemDamage() > 0 ? true : false;
-    	boolean iscatdamaged = catalyst.getItemDamage() > 0 ? true : false;
-    	
-    	StringBuffer noMetaList = new StringBuffer(32);
-    	StringBuffer noMetaListAlt = new StringBuffer(32);
-    	
-    	noMetaList
-    	.append(input1ID).append("_")
-    	.append(input2ID).append("_")
-    	.append(catalystID);
-    	
-    	noMetaListAlt
-    	.append(input2ID).append("_")
-    	.append(input1ID).append("_")
-    	.append(catalystID);
-    	
-    	recipeList.put(noMetaList.toString(), output);
-    	recipeList.put(noMetaListAlt.toString(), output);      	
-    	inputList.add(input1.getItem());
-    	inputList.add(input2.getItem());
-    	catalystList.add(catalyst.getItem());
-    	experienceList.put(Arrays.asList(output.itemID, output.getItemDamage()), experience);
-    	   	
-    	if(is1damaged || is2damaged || iscatdamaged)
-    	{	
-        	StringBuffer metaList = new StringBuffer(32);
-        	StringBuffer metaListAlt = new StringBuffer(32);
-        	StringBuffer catOnlyList = new StringBuffer(32);
-        	StringBuffer catOnlyListAlt = new StringBuffer(32);
-        	
-        	metaList
-        	.append(input1ID).append(is1damaged ? (":") : ("_")).append(is1damaged ? input1.getItemDamage() : null)
-        	.append(input2ID).append(is2damaged ? (":") : ("_")).append(is2damaged ? input2.getItemDamage() : null)
-        	.append(catalystID).append(iscatdamaged ? (":") : ("_")).append(iscatdamaged ? catalyst.getItemDamage() : null);
-        	
-        	metaListAlt
-        	.append(input2ID).append(is2damaged ? (":") : ("_")).append(is2damaged ? input2.getItemDamage() : null)
-        	.append(input1ID).append(is1damaged ? (":") : ("_")).append(is1damaged ? input1.getItemDamage() : null)
-        	.append(catalystID).append(iscatdamaged ? (":") : ("_")).append(iscatdamaged ? catalyst.getItemDamage() : null);
-        	
-        	catOnlyList
-        	.append(input1ID).append("_")
-        	.append(input2ID).append("_")
-        	.append(catalystID).append(":").append(catalyst.getItemDamage());
-        	
-        	catOnlyListAlt
-        	.append(input2ID).append("_")
-        	.append(input1ID).append("_")
-        	.append(catalystID).append(":").append(catalyst.getItemDamage());
-        	
-        	recipeListMeta.put(metaList.toString(), output);
-        	recipeListMeta.put(metaListAlt.toString(), output);
-        	if(!is1damaged && !is2damaged)
-        	{
-            	recipeListMeta.put(catOnlyList.toString(), output);
-            	recipeListMeta.put(catOnlyListAlt.toString(), output);
-        	}
-        	experienceList.put(Arrays.asList(output.itemID, output.getItemDamage()), experience);  
-    	}
-    	
-    	size = recipeList.size();
-    }
-    
-    public ItemStack getSmeltingResult(ItemStack input1, ItemStack input2, ItemStack catalyst)
-    {
-    	getOreDictID(input1, input2, catalyst);
-    	
-    	boolean is1damaged = input1.getItemDamage() > 0 ? true : false;
-    	boolean is2damaged = input2.getItemDamage() > 0 ? true : false;
-    	boolean iscatdamaged = catalyst.getItemDamage() > 0 ? true : false;
-    	
-    	StringBuffer noMetaReturnList = new StringBuffer(32);
-    	
-    	noMetaReturnList
-    	.append(input1ID).append("_")
-    	.append(input2ID).append("_")
-    	.append(catalystID); 
-        	
-    	if(is1damaged || is2damaged || iscatdamaged)
-        {
-            StringBuffer metaReturnList = new StringBuffer(32);
-            StringBuffer catOnlyReturnList = new StringBuffer(32);
-            	
-            metaReturnList
-            .append(input1ID).append(is1damaged ? (":") : ("_")).append(is1damaged ? input1.getItemDamage() : null)
-            .append(input2ID).append(is2damaged ? (":") : ("_")).append(is2damaged ? input2.getItemDamage() : null)
-            .append(catalystID).append(iscatdamaged ? (":") : ("_")).append(iscatdamaged ? catalyst.getItemDamage() : null);
-                 
-            catOnlyReturnList
-            .append(input1ID).append("_")
-            .append(input2ID).append("_")
-            .append(catalystID).append(":").append(catalyst.getItemDamage());
-            
-            ItemStack catOnlyResult = (ItemStack)recipeListMeta.get(catOnlyReturnList.toString());
-            
-            if(catOnlyResult != null)
-            {
-            	return (ItemStack) recipeListMeta.get(catOnlyReturnList.toString());
-            }
-            
-            else return (ItemStack) recipeListMeta.get(metaReturnList.toString());
-        }
-    	
-    	else return (ItemStack) recipeList.get(noMetaReturnList.toString());
-    }
-    
-    private void getOreDictID(ItemStack input1, ItemStack input2, ItemStack catalyst)
-    {
-    	int input1Dict, input2Dict, catalystDict;
-    	
-    	if(input1 != null && input1.getItem() != null)
-    	{
-    		int oreID1 = OreDictionary.getOreID(input1);
-			if(oreID1 > 0)
+    private ArrayList<Item> input1Variants, input2Variants, catalystVariants = Lists.newArrayList();
+    private boolean isStackBigEnough = false;
+    private int input1NumToDecreaseBy, input2NumToDecreaseBy, catalystNumToDecreaseBy = 1;
+	
+	public static final FusionRecipes smelting()
+	{
+		return smeltingBase;
+	}
+	
+	public void addSmelting(ItemStack input1, ItemStack input2, ItemStack catalyst, ItemStack output, float experience)
+	{
+		ArrayList<String> itemList = getItemList(input1, input2, catalyst);
+		ArrayList<String> itemListAlt = getItemList(input2, input1, catalyst);
+		ArrayList<String> dictionaryList = getDictionaryList(input1, input2, catalyst);
+		ArrayList<String> dictionaryListAlt = getDictionaryList(input2, input1, catalyst);
+		ArrayList<Integer> damageList = getDamageList(input1, input2, catalyst);
+		ArrayList<Integer> damageListAlt = getDamageList(input2, input1, catalyst);
+		ArrayList<Integer> stackSizeList = getStackSizeList(input1, input2, catalyst);
+		ArrayList<Integer> stackSizeListAlt = getStackSizeList(input2, input1, catalyst);
+		
+		HashMap<ArrayList<String>, ArrayList<Integer>> itemMap = new HashMap<ArrayList<String>, ArrayList<Integer>>();
+		HashMap<ArrayList<String>, ArrayList<Integer>> itemMapAlt = new HashMap<ArrayList<String>, ArrayList<Integer>>();
+		HashMap<ArrayList<String>, ArrayList<Integer>> dictMap = new HashMap<ArrayList<String>, ArrayList<Integer>>();
+		HashMap<ArrayList<String>, ArrayList<Integer>> dictMapAlt = new HashMap<ArrayList<String>, ArrayList<Integer>>();
+	
+		itemMap.put(itemList, damageList);
+		itemMapAlt.put(itemListAlt, damageListAlt);
+		dictMap.put(dictionaryList, damageList);
+		dictMapAlt.put(dictionaryListAlt, damageListAlt);
+		
+		recipeMap.put(itemMap, output);
+		recipeMap.put(itemMapAlt, output);
+		dictionaryRecipeMap.put(dictionaryList, output);
+		dictionaryRecipeMap.put(dictionaryListAlt, output);
+		
+		stackSizeMap.put(itemMap, stackSizeList);
+		stackSizeMap.put(itemMapAlt, stackSizeListAlt);
+		stackSizeMap.put(dictMap, stackSizeList);
+		stackSizeMap.put(dictMapAlt, stackSizeListAlt);
+		
+		damageMap.put(itemList, damageList);
+		damageMap.put(itemListAlt, damageListAlt);
+		damageMap.put(dictionaryList, damageList);
+		damageMap.put(dictionaryListAlt, damageListAlt);
+		
+		inputList.add(input1.getItem());
+	    inputList.add(input2.getItem());
+	    catalystList.add(catalyst.getItem());
+	    
+	    experienceMap.put(Arrays.asList(output.itemID, output.getItemDamage()), experience);
+	    size = recipeMap.size();
+	}
+	
+	public ItemStack getSmeltingResult(ItemStack input1, ItemStack input2, ItemStack catalyst)
+	{
+		ArrayList<String> itemList = getItemList(input1, input2, catalyst);
+		ArrayList<String> dictionaryList = getDictionaryList(input1, input2, catalyst);
+		ArrayList<Integer> stackSizeList = getStackSizeList(input1, input2, catalyst);
+		ArrayList<Integer> recipeDamages = damageMap.get(itemList);
+		
+		HashMap<ArrayList<String>, ArrayList<Integer>> itemMap = new HashMap<ArrayList<String>, ArrayList<Integer>>();
+		HashMap<ArrayList<String>, ArrayList<Integer>> itemMap1 = new HashMap<ArrayList<String>, ArrayList<Integer>>();
+		itemMap1.put(itemList, recipeDamages);
+		
+		if(recipeMap.containsKey(itemMap1))
+		{
+			ArrayList<Integer> damageList = new ArrayList<Integer>();
+			if(recipeDamages.get(0) == WILDCARD_VALUE)
 			{
-				input1Dict = oreID1;
+				damageList.add(WILDCARD_VALUE);
 			}
 			else
+				damageList.add(input1.getItemDamage());
+			if(recipeDamages.get(1) == WILDCARD_VALUE)
 			{
-				input1Dict = input1.getItem().itemID;
-				
+				damageList.add(WILDCARD_VALUE);
 			}
-    	}
-    	else input1Dict = 0;
-    	
-    	if(input2 != null && input2.getItem() != null)
-    	{
-    		int oreID2 = OreDictionary.getOreID(input2);
-    		if(oreID2 > 0)
-    		{
-    			input2Dict = oreID2;
-    		}
-    		else input2Dict = input2.getItem().itemID;
-    	}
-    	else input2Dict = 0;
-    	
-    	if(catalyst != null && catalyst.getItem() != null)
-    	{
-    		int oreID3 = OreDictionary.getOreID(catalyst);
-    		if(oreID3 > 0)
-    		{
-    			catalystDict = oreID3;
-    		}
-    		else catalystDict = catalyst.getItem().itemID;
-    	}
-    	else catalystDict = 0;
-    	
-    	input1ID = input1Dict;
-    	input2ID = input2Dict;
-    	catalystID = catalystDict;
-    }
-    
-    /**
-     * Grabs the amount of base experience for this item to give when pulled from the furnace slot.
-     */
-    public float getExperience(ItemStack item)
-    {
-        if (item == null || item.getItem() == null)
+			else
+				damageList.add(input2.getItemDamage());
+			if(recipeDamages.get(2) == WILDCARD_VALUE)
+			{
+				damageList.add(WILDCARD_VALUE);
+			}
+			else 
+				damageList.add(catalyst.getItemDamage());
+			
+			itemMap.put(itemList, damageList);
+			ArrayList<Integer> stackSizeNeeded = stackSizeMap.get(itemMap);
+			
+			if(stackSizeList.get(0) >= stackSizeNeeded.get(0))
+			{
+				if(stackSizeList.get(1) >= stackSizeNeeded.get(1))
+				{
+					if(stackSizeList.get(2) >= stackSizeNeeded.get(2))
+					{
+						isStackBigEnough = true;
+						input1NumToDecreaseBy = stackSizeNeeded.get(0);
+						input2NumToDecreaseBy = stackSizeNeeded.get(1);
+						catalystNumToDecreaseBy = stackSizeNeeded.get(2);
+						
+						return (ItemStack) recipeMap.get(itemMap);
+					}
+				}
+			}
+		}
+		
+		else if(!recipeMap.containsKey(itemMap1))
+		{
+			HashMap<ArrayList<String>, ArrayList<Integer>> dictMap = new HashMap<ArrayList<String>, ArrayList<Integer>>();
+			ArrayList<Integer> damageList = new ArrayList<Integer>();
+			ArrayList<Integer> damages = damageMap.get(dictionaryList);
+			int i1 = damages.get(0);
+			int i2 = damages.get(1);
+			int i3 = damages.get(2);
+			
+			damageList.add(i1);
+			damageList.add(i2);
+			damageList.add(i3);
+			
+			dictMap.put(dictionaryList, damageList);
+			ArrayList<Integer> stackSizeNeeded = stackSizeMap.get(dictMap);	
+			
+			if(stackSizeList.get(0) >= stackSizeNeeded.get(0))
+			{
+				if(stackSizeList.get(1) >= stackSizeNeeded.get(1))
+				{
+					if(stackSizeList.get(2) >= stackSizeNeeded.get(2))
+					{
+						isStackBigEnough = true;
+						input1NumToDecreaseBy = stackSizeNeeded.get(0);
+						input2NumToDecreaseBy = stackSizeNeeded.get(1);
+						catalystNumToDecreaseBy = stackSizeNeeded.get(2);
+						
+						return (ItemStack) dictionaryRecipeMap.get(dictionaryList);
+					}
+				}
+			}
+		}
+		return null;
+	}
+	
+	public ArrayList<String> getItemList(ItemStack input1, ItemStack input2, ItemStack catalyst)
+	{
+		ArrayList<String> itemList = Lists.newArrayList();
+		itemList.add(input1.getItem().itemID + "");
+		itemList.add(input2.getItem().itemID + "");
+		itemList.add(catalyst.getItem().itemID + "");
+		return itemList;
+	}
+	
+	public ArrayList<String> getDictionaryList(ItemStack input1, ItemStack input2, ItemStack catalyst)
+	{
+		ArrayList<String> dictionaryList = Lists.newArrayList();
+		getOreDictVariants(input1, input2, catalyst);
+		dictionaryList.add(input1Variants.toString());
+		dictionaryList.add(input2Variants.toString());
+		dictionaryList.add(catalystVariants.toString());
+		return dictionaryList;
+	}
+	
+	public ArrayList<Integer> getDamageList(ItemStack input1, ItemStack input2, ItemStack catalyst)
+	{
+		ArrayList<Integer> damageList = Lists.newArrayList();
+		damageList.add(input1.getItemDamage());
+		damageList.add(input2.getItemDamage());
+		damageList.add(catalyst.getItemDamage());
+		return damageList;
+	}
+	
+	public ArrayList<Integer> getStackSizeList(ItemStack input1, ItemStack input2, ItemStack catalyst)
+	{
+		ArrayList<Integer> stackSizeList = Lists.newArrayList();
+		stackSizeList.add(input1.stackSize);
+		stackSizeList.add(input2.stackSize);
+		stackSizeList.add(catalyst.stackSize);
+		return stackSizeList;
+	}
+	
+	public void getOreDictVariants(ItemStack input1, ItemStack input2, ItemStack catalyst)
+	{
+		input1Variants = Lists.newArrayList();
+		input2Variants = Lists.newArrayList();
+		catalystVariants = Lists.newArrayList();
+		
+		if(input1 != null && input1.getItem() != null)
+		{
+			int oreId1 = OreDictionary.getOreID(input1);
+			if(oreId1 > 0)
+			{
+				ArrayList<ItemStack> ores = OreDictionary.getOres(oreId1);
+				if(ores != null && ores.size() != 0)
+				{
+					for(int i = 0; i < ores.size(); i++)
+					{
+						input1Variants.add(ores.get(i).getItem());
+					}
+				}
+				else
+					input1Variants.add(input1.getItem());
+			}
+			else
+				input1Variants.add(input1.getItem());
+		}
+		
+		if(input2 != null && input2.getItem() != null)
+		{
+			int oreId2 = OreDictionary.getOreID(input2);
+			if(oreId2 > 0)
+			{
+				ArrayList<ItemStack> ores = OreDictionary.getOres(oreId2);
+				if(ores != null && ores.size() != 0)
+				{
+					for(int i = 0; i < ores.size(); i++)
+					{
+						input2Variants.add(ores.get(i).getItem());
+					}
+				}
+				else
+					input2Variants.add(input2.getItem());
+			}
+			else
+				input2Variants.add(input2.getItem());
+		}
+		
+		if(catalyst != null && catalyst.getItem() != null)
+		{
+			int oreId3 = OreDictionary.getOreID(catalyst);
+			if(oreId3 > 0)
+			{
+				ArrayList<ItemStack> ores = OreDictionary.getOres(oreId3);
+				if(ores != null && ores.size() != 0)
+				{
+					for(int i = 0; i < ores.size(); i++)
+					{
+						catalystVariants.add(ores.get(i).getItem());
+					}
+				}
+				else
+					catalystVariants.add(catalyst.getItem());
+			}
+			else
+				catalystVariants.add(catalyst.getItem());
+		}
+	}
+	
+	public float getExperience(ItemStack item)
+	{
+		if (item == null || item.getItem() == null)
         {
             return 0;
         }
         
         float ret = item.getItem().getSmeltingExperience(item);
         
-        if (ret < 0 && experienceList.containsKey(Arrays.asList(item.itemID, item.getItemDamage())))
+        if (ret < 0 && experienceMap.containsKey(Arrays.asList(item.itemID, item.getItemDamage())))
         {
-            ret = experienceList.get(Arrays.asList(item.itemID, item.getItemDamage()));
+            ret = experienceMap.get(Arrays.asList(item.itemID, item.getItemDamage()));
         }
         
-        if (ret < 0 && experienceList.containsKey(item.itemID))
+        if (ret < 0 && experienceMap.containsKey(item.itemID))
         {
-            ret = ((Float)experienceList.get(item.itemID)).floatValue();
+            ret = ((Float)experienceMap.get(item.itemID)).floatValue();
         }
         return (ret < 0 ? 0 : ret);
-    }
-    
-    public static boolean isItemInput(ItemStack item)
-    {
-    	if(inputList.contains(item.getItem()))
-    	{
-    		return true;
-    	}
-    	else return false;
-    }
-    
-    public static boolean isItemCatalyst(ItemStack item)
-    {
-    	if(catalystList.contains(item.getItem()))
-    	{
-    		return true;
-    	}
-    	else return false;
-    }
-    
-    public Map getRecipeList()
-    {
-        return recipeList;
-    }
-    
-    public Map getMetaRecipeList()
-    {
-    	return recipeListMeta;
-    }
-       
+	}
+	
+	public boolean isStackBigEnough()
+	{
+		boolean bool = false;
+		bool = isStackBigEnough;
+		return bool;
+	}
+	
+	public Integer decreaseStackBy(int index)
+	{
+		if(index == 0)
+		{
+			return input1NumToDecreaseBy;
+		}
+		else if(index == 1)
+		{
+			return input2NumToDecreaseBy;
+		}
+		else if(index == 2)
+		{
+			return catalystNumToDecreaseBy;
+		}
+		return null;
+	}
+	
+	public static boolean isItemInput(ItemStack item)
+	{
+		if (inputList.contains(item.getItem())) 
+		{
+			return true;
+		} 
+		else return false;
+	}
+	
+	public static boolean isItemCatalyst(ItemStack item)
+	{
+		if (catalystList.contains(item.getItem())) 
+		{
+			return true;
+		} 
+		else return false;
+	}
 }

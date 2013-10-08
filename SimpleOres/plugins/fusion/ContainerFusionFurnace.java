@@ -147,13 +147,21 @@ public class ContainerFusionFurnace extends Container
                 {
                     if (!this.mergeItemStack(itemstack1, 1, 2, false))
                     {
+                        if (!this.mergeItemStack(itemstack1, 4, 5, false))
+                        {   
+                            if (!this.mergeItemStack(itemstack1, 0, 1, false) && !this.mergeItemStack(itemstack1, 3, 4, false))
+                            {
+                                return null;
+                            }
+                            return null;
+                        }
                         return null;
                     }
                 }
-            	else if (FusionRecipes.smelting().isItemCatalyst(itemstack1))
+            	else if (FusionRecipes.isItemCatalyst(itemstack1))
                 {
                     if (!this.mergeItemStack(itemstack1, 4, 5, false))
-                    {
+                    {   	
                         return null;
                     }
                 }

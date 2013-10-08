@@ -17,6 +17,7 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.StatCollector;
 
 import SimpleOres.core.ModInfo;
+import SimpleOres.core.Settings;
 
 import cpw.mods.fml.common.network.IConnectionHandler;
 import cpw.mods.fml.common.network.Player;
@@ -42,32 +43,7 @@ public class HandlerUpdateChecker implements IConnectionHandler
 	 */
 	public static void checkUpdates()
 	{
-		try 
-		{
-			URL url = new URL(link);
-			reader = new BufferedReader(new InputStreamReader(url.openStream()));
-						
-			while((line = reader.readLine()) != null)
-			{
-				newVersion.append(line);
-			}
-			
-			String versionNum = ModInfo.VERSION.replace(".", "");
-			String newVersionNum = newVersion.toString().replace(".", "");
-			
-			versionInt = Integer.parseInt(versionNum);
-			newVersionInt = Integer.parseInt(newVersionNum);
-			
-			if(newVersionInt > versionInt)
-			{
-				isOutOfDate = true;
-			}
-		} 
-		
-		catch (Exception e) 
-		{
-			e.printStackTrace();
-		}
+
 	}
 	
 	public void playerLoggedIn(Player player, NetHandler netHandler, INetworkManager manager) {}
@@ -79,9 +55,40 @@ public class HandlerUpdateChecker implements IConnectionHandler
 	@Override
 	public void clientLoggedIn(NetHandler clientHandler, INetworkManager manager, Packet1Login login) 
 	{
-		if(isOutOfDate)
+		if(Settings.enableUpdateChecker)
 		{
-			Minecraft.getMinecraft().thePlayer.addChatMessage(StatCollector.translateToLocal("simpleores.updateMessage1") + newVersion + StatCollector.translateToLocal("simpleores.updateMessage2"));
+			try 
+			{
+				wait(20000);
+				URL url = new URL(link);
+				reader = new BufferedReader(new InputStreamReader(url.openStream()));
+							
+				while((line = reader.readLine()) != null)
+				{
+					newVersion.append(line);
+				}
+				
+				String versionNum = ModInfo.VERSION.replace(".", "");
+				String newVersionNum = newVersion.toString().replace(".", "");
+				
+				versionInt = Integer.parseInt(versionNum);
+				newVersionInt = Integer.parseInt(newVersionNum);
+				
+				if(newVersionInt > versionInt)
+				{
+					isOutOfDate = true;
+				}
+			} 
+			
+			catch (Exception e) 
+			{
+				System.out.println("[SimpleOres 2] Update checker could not reach server (Connection Timed Out). If you're offline or behind a proxy, this is fine. If not, let me know, there may be something wrong on my end.");
+			}
+			
+			if(isOutOfDate)
+			{
+				Minecraft.getMinecraft().thePlayer.addChatMessage(StatCollector.translateToLocal("simpleores.updateMessage1") + newVersion + StatCollector.translateToLocal("simpleores.updateMessage2"));
+			}
 		}
 	}
 }

@@ -3,12 +3,12 @@ package SimpleOres.plugins.fusion;
 import SimpleOres.core.Achievements;
 import SimpleOres.core.Armor;
 import SimpleOres.core.Blocks;
+import SimpleOres.core.Config;
 import SimpleOres.core.Items;
+import SimpleOres.core.Localisation;
 import SimpleOres.core.Recipes;
 import SimpleOres.core.SimpleOres;
 import SimpleOres.core.Tools;
-import SimpleOres.core.conf.IDs;
-import SimpleOres.core.conf.Localisation;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -38,7 +38,7 @@ public class TileEntityFusionFurnace extends TileEntity implements ISidedInvento
 	public static Achievements achievements;
 	public static Armor armor;
 	public static Blocks blocks;
-	public static IDs config;
+	public static Config config;
 	public static Items items;
 	public static Localisation local;
 	public static Recipes recipes;
@@ -347,6 +347,7 @@ public class TileEntityFusionFurnace extends TileEntity implements ISidedInvento
         {
         	ItemStack itemstack = FusionRecipes.smelting().getSmeltingResult(this.furnaceItemStacks[0], this.furnaceItemStacks[3], this.furnaceItemStacks[4]);
        		if (itemstack == null) return false;
+       		if(FusionRecipes.smelting().isStackBigEnough() == false) return false;
     		if (this.furnaceItemStacks[2] == null) return true;
     		if (!this.furnaceItemStacks[2].isItemEqual(itemstack)) return false;
     		int result = furnaceItemStacks[2].stackSize + itemstack.stackSize;
@@ -365,7 +366,6 @@ public class TileEntityFusionFurnace extends TileEntity implements ISidedInvento
         {
         	ItemStack itemstack = FusionRecipes.smelting().getSmeltingResult(this.furnaceItemStacks[0], this.furnaceItemStacks[3], this.furnaceItemStacks[4]);
 
-
             if (this.furnaceItemStacks[2] == null)
             {
                 this.furnaceItemStacks[2] = itemstack.copy();
@@ -376,9 +376,9 @@ public class TileEntityFusionFurnace extends TileEntity implements ISidedInvento
                 furnaceItemStacks[2].stackSize += itemstack.stackSize;
             }
 
-            --this.furnaceItemStacks[0].stackSize;
-            --this.furnaceItemStacks[3].stackSize;
-            --this.furnaceItemStacks[4].stackSize;
+            this.furnaceItemStacks[0].stackSize = this.furnaceItemStacks[0].stackSize - FusionRecipes.smelting().decreaseStackBy(0); //FusionRecipes.smelting().decreaseStackBy(0);
+            this.furnaceItemStacks[3].stackSize = this.furnaceItemStacks[3].stackSize - FusionRecipes.smelting().decreaseStackBy(1); //FusionRecipes.smelting().decreaseStackBy(1);
+            this.furnaceItemStacks[4].stackSize = this.furnaceItemStacks[3].stackSize - FusionRecipes.smelting().decreaseStackBy(2); //FusionRecipes.smelting().decreaseStackBy(2);
 
             if (this.furnaceItemStacks[0].stackSize <= 0)
             {

@@ -5,9 +5,6 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 import net.minecraft.item.Item;
 import net.minecraft.stats.Achievement;
 import net.minecraft.stats.AchievementList;
-import SimpleOres.core.conf.IDs;
-import SimpleOres.core.conf.Localisation;
-import SimpleOres.core.conf.Settings;
 import SimpleOres.core.handlers.HandlerCrafting;
 import SimpleOres.core.handlers.HandlerPickup;
 
@@ -17,7 +14,7 @@ public class Achievements
 	 * Linking to the classes for easier reference.
 	 */
 	public static Blocks blocks;
-	public static IDs config;
+	public static Config config;
 	public static Items items;
 	public static Localisation local;
 	public static Tools tools;

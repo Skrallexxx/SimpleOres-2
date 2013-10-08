@@ -161,7 +161,7 @@ public class Localisation
 		
 		catch (Exception e) 
     	{
-    		FMLLog.log(Level.SEVERE, e, "[SimpleOres] Error while trying to access the SimpleOres Fusion Plugin localisation file!");
+    		FMLLog.log(Level.SEVERE, e, "[SimpleOres] Error while trying to access the Fusion Plugin localisation file!");
     	}
 		
     	finally 

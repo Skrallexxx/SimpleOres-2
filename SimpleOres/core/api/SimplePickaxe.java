@@ -4,11 +4,11 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import SimpleOres.core.Achievements;
 import SimpleOres.core.Blocks;
+import SimpleOres.core.Config;
+import SimpleOres.core.Localisation;
 import SimpleOres.core.Recipes;
+import SimpleOres.core.Settings;
 import SimpleOres.core.SimpleOres;
-import SimpleOres.core.conf.IDs;
-import SimpleOres.core.conf.Localisation;
-import SimpleOres.core.conf.Settings;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.EnumArmorMaterial;
@@ -26,7 +26,7 @@ public class SimplePickaxe extends ItemPickaxe
     private String modName;
     
 
-	public SimplePickaxe(int i, EnumToolMaterial enumtoolmaterial, String mod) 
+	public SimplePickaxe(int i, EnumToolMaterial enumtoolmaterial, String mod, CreativeTabs tab) 
 	{
 		super(i, enumtoolmaterial);
 		material = enumtoolmaterial;
@@ -34,7 +34,7 @@ public class SimplePickaxe extends ItemPickaxe
 		
     	if(Settings.enableSeparateTabs == true)
     	{
-            this.setCreativeTab(SimpleOres.tabSimpleTools);
+            this.setCreativeTab(tab);
     	}
     	else this.setCreativeTab(SimpleOres.tabSimpleBlocks);
 	}

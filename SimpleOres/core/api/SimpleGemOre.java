@@ -3,11 +3,14 @@ package SimpleOres.core.api;
 import java.util.Random;
 
 import SimpleOres.core.Items;
+import SimpleOres.core.Settings;
+import SimpleOres.core.SimpleOres;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.MathHelper;
@@ -24,11 +27,17 @@ public class SimpleGemOre extends Block
 	 * @param id = ID of the block.
 	 * @param material = The material of the block. This sets what tools are effective against it, the sounds it makes, etc.
 	 */
-	public SimpleGemOre(int id, Material material, String mod, int itemDropID)
+	public SimpleGemOre(int id, Material material, String mod, int itemDropID, CreativeTabs tab)
 	{
 		super(id, material);
 		this.modName = mod;
 		this.itemIDToDrop = itemDropID + 256;
+		
+    	if(Settings.enableSeparateTabs == true)
+    	{
+            this.setCreativeTab(tab);
+    	}
+    	else this.setCreativeTab(SimpleOres.tabSimpleBlocks);
 	}
 	
 	/**

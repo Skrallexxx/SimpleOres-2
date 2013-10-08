@@ -2,10 +2,6 @@ package SimpleOres.core;
 
 import cpw.mods.fml.common.registry.LanguageRegistry;
 import net.minecraft.item.Item;
-import SimpleOres.core.conf.IDs;
-import SimpleOres.core.conf.Localisation;
-import SimpleOres.core.conf.Settings;
-import SimpleOres.core.handlers.ProxyCommon;
 import SimpleOres.core.api.SimpleArmor;
 
 public class Armor
@@ -19,7 +15,7 @@ public class Armor
 	public static Achievements achievements;
 	public static Armor armor;
 	public static Blocks blocks;
-	public static IDs config;
+	public static Config config;
 	public static Items items;
 	public static Localisation local;
 	public static Recipes recipes;
@@ -55,26 +51,26 @@ public class Armor
 	public static void doArmor()
 	{
         //Armour Details
-        copperHelm = new SimpleArmor(config.copperHelmID, mod.armorCopper, mod.rendererCopper, 0, "copper", "simpleores").setUnlocalizedName("copperHelm");
-		copperChest = new SimpleArmor(config.copperChestID, mod.armorCopper, mod.rendererCopper, 1, "copper", "simpleores").setUnlocalizedName("copperChest");
-		copperLegs = new SimpleArmor(config.copperLegsID, mod.armorCopper, mod.rendererCopper, 2, "copper", "simpleores").setUnlocalizedName("copperLegs");
-		copperBoots = new SimpleArmor(config.copperBootsID, mod.armorCopper, mod.rendererCopper, 3, "copper", "simpleores").setUnlocalizedName("copperBoots");
-        tinHelm = new SimpleArmor(config.tinHelmID, mod.armorTin, mod.rendererTin, 0, "tin", "simpleores").setUnlocalizedName("tinHelm");
-		tinChest = new SimpleArmor(config.tinChestID, mod.armorTin, mod.rendererTin, 1, "tin", "simpleores").setUnlocalizedName("tinChest");
-		tinLegs = new SimpleArmor(config.tinLegsID, mod.armorTin, mod.rendererTin, 2, "tin", "simpleores").setUnlocalizedName("tinLegs");
-		tinBoots = new SimpleArmor(config.tinBootsID, mod.armorTin, mod.rendererTin, 3, "tin", "simpleores").setUnlocalizedName("tinBoots");
-		mythrilHelm = new SimpleArmor(config.mythrilHelmID, mod.armorMythril, mod.rendererMythril, 0, "mythril", "simpleores").setUnlocalizedName("mythrilHelm");
-		mythrilChest = new SimpleArmor(config.mythrilChestID, mod.armorMythril, mod.rendererMythril, 1, "mythril", "simpleores").setUnlocalizedName("mythrilChest");
-		mythrilLegs = new SimpleArmor(config.mythrilLegsID, mod.armorMythril, mod.rendererMythril, 2, "mythril", "simpleores").setUnlocalizedName("mythrilLegs");
-		mythrilBoots = new SimpleArmor(config.mythrilBootsID, mod.armorMythril, mod.rendererMythril, 3, "mythril", "simpleores").setUnlocalizedName("mythrilBoots");
-		adamantiumHelm = new SimpleArmor(config.adamantiumHelmID, mod.armorAdamantium, mod.rendererAdamantium, 0, "adamantium", "simpleores").setUnlocalizedName("adamantiumHelm");
-		adamantiumChest = new SimpleArmor(config.adamantiumChestID, mod.armorAdamantium, mod.rendererAdamantium, 1, "adamantium", "simpleores").setUnlocalizedName("adamantiumChest");
-		adamantiumLegs = new SimpleArmor(config.adamantiumLegsID, mod.armorAdamantium, mod.rendererAdamantium, 2, "adamantium", "simpleores").setUnlocalizedName("adamantiumLegs");
-		adamantiumBoots = new SimpleArmor(config.adamantiumBootsID, mod.armorAdamantium, mod.rendererAdamantium, 3, "adamantium", "simpleores").setUnlocalizedName("adamantiumBoots");
-		onyxHelm = new SimpleArmor(config.onyxHelmID, mod.armorOnyx, mod.rendererOnyx, 0, "onyx", "simpleores").setUnlocalizedName("onyxHelm");
-		onyxChest = new SimpleArmor(config.onyxChestID, mod.armorOnyx, mod.rendererOnyx, 1, "onyx", "simpleores").setUnlocalizedName("onyxChest");
-		onyxLegs = new SimpleArmor(config.onyxLegsID, mod.armorOnyx, mod.rendererOnyx, 2, "onyx", "simpleores").setUnlocalizedName("onyxLegs");
-		onyxBoots = new SimpleArmor(config.onyxBootsID, mod.armorOnyx, mod.rendererOnyx, 3, "onyx", "simpleores").setUnlocalizedName("onyxBoots");
+        copperHelm = new SimpleArmor(config.copperHelmID, mod.armorCopper, mod.rendererCopper, 0, "copper", "simpleores", SimpleOres.tabSimpleCombat).setUnlocalizedName("copperHelm");
+		copperChest = new SimpleArmor(config.copperChestID, mod.armorCopper, mod.rendererCopper, 1, "copper", "simpleores", SimpleOres.tabSimpleCombat).setUnlocalizedName("copperChest");
+		copperLegs = new SimpleArmor(config.copperLegsID, mod.armorCopper, mod.rendererCopper, 2, "copper", "simpleores", SimpleOres.tabSimpleCombat).setUnlocalizedName("copperLegs");
+		copperBoots = new SimpleArmor(config.copperBootsID, mod.armorCopper, mod.rendererCopper, 3, "copper", "simpleores", SimpleOres.tabSimpleCombat).setUnlocalizedName("copperBoots");
+        tinHelm = new SimpleArmor(config.tinHelmID, mod.armorTin, mod.rendererTin, 0, "tin", "simpleores", SimpleOres.tabSimpleCombat).setUnlocalizedName("tinHelm");
+		tinChest = new SimpleArmor(config.tinChestID, mod.armorTin, mod.rendererTin, 1, "tin", "simpleores", SimpleOres.tabSimpleCombat).setUnlocalizedName("tinChest");
+		tinLegs = new SimpleArmor(config.tinLegsID, mod.armorTin, mod.rendererTin, 2, "tin", "simpleores", SimpleOres.tabSimpleCombat).setUnlocalizedName("tinLegs");
+		tinBoots = new SimpleArmor(config.tinBootsID, mod.armorTin, mod.rendererTin, 3, "tin", "simpleores", SimpleOres.tabSimpleCombat).setUnlocalizedName("tinBoots");
+		mythrilHelm = new SimpleArmor(config.mythrilHelmID, mod.armorMythril, mod.rendererMythril, 0, "mythril", "simpleores", SimpleOres.tabSimpleCombat).setUnlocalizedName("mythrilHelm");
+		mythrilChest = new SimpleArmor(config.mythrilChestID, mod.armorMythril, mod.rendererMythril, 1, "mythril", "simpleores", SimpleOres.tabSimpleCombat).setUnlocalizedName("mythrilChest");
+		mythrilLegs = new SimpleArmor(config.mythrilLegsID, mod.armorMythril, mod.rendererMythril, 2, "mythril", "simpleores", SimpleOres.tabSimpleCombat).setUnlocalizedName("mythrilLegs");
+		mythrilBoots = new SimpleArmor(config.mythrilBootsID, mod.armorMythril, mod.rendererMythril, 3, "mythril", "simpleores", SimpleOres.tabSimpleCombat).setUnlocalizedName("mythrilBoots");
+		adamantiumHelm = new SimpleArmor(config.adamantiumHelmID, mod.armorAdamantium, mod.rendererAdamantium, 0, "adamantium", "simpleores", SimpleOres.tabSimpleCombat).setUnlocalizedName("adamantiumHelm");
+		adamantiumChest = new SimpleArmor(config.adamantiumChestID, mod.armorAdamantium, mod.rendererAdamantium, 1, "adamantium", "simpleores", SimpleOres.tabSimpleCombat).setUnlocalizedName("adamantiumChest");
+		adamantiumLegs = new SimpleArmor(config.adamantiumLegsID, mod.armorAdamantium, mod.rendererAdamantium, 2, "adamantium", "simpleores", SimpleOres.tabSimpleCombat).setUnlocalizedName("adamantiumLegs");
+		adamantiumBoots = new SimpleArmor(config.adamantiumBootsID, mod.armorAdamantium, mod.rendererAdamantium, 3, "adamantium", "simpleores", SimpleOres.tabSimpleCombat).setUnlocalizedName("adamantiumBoots");
+		onyxHelm = new SimpleArmor(config.onyxHelmID, mod.armorOnyx, mod.rendererOnyx, 0, "onyx", "simpleores", SimpleOres.tabSimpleCombat).setUnlocalizedName("onyxHelm");
+		onyxChest = new SimpleArmor(config.onyxChestID, mod.armorOnyx, mod.rendererOnyx, 1, "onyx", "simpleores", SimpleOres.tabSimpleCombat).setUnlocalizedName("onyxChest");
+		onyxLegs = new SimpleArmor(config.onyxLegsID, mod.armorOnyx, mod.rendererOnyx, 2, "onyx", "simpleores", SimpleOres.tabSimpleCombat).setUnlocalizedName("onyxLegs");
+		onyxBoots = new SimpleArmor(config.onyxBootsID, mod.armorOnyx, mod.rendererOnyx, 3, "onyx", "simpleores", SimpleOres.tabSimpleCombat).setUnlocalizedName("onyxBoots");
 		
 		//Armor Names
 		if(Settings.enableOldLocalisation)

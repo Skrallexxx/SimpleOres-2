@@ -2,8 +2,8 @@ package SimpleOres.core.api;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import SimpleOres.core.Settings;
 import SimpleOres.core.SimpleOres;
-import SimpleOres.core.conf.Settings;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.EnumToolMaterial;
@@ -25,7 +25,7 @@ public class SimpleHoe extends ItemHoe
      * @param i = the items ID
      * @param enumtoolmaterial = the material of the tool. Determines speed, number of uses, etc.
      */
-	public SimpleHoe(int i, EnumToolMaterial enumtoolmaterial, String mod) 
+	public SimpleHoe(int i, EnumToolMaterial enumtoolmaterial, String mod, CreativeTabs tab) 
 	{
 		super(i, enumtoolmaterial);
 		material = enumtoolmaterial;
@@ -33,7 +33,7 @@ public class SimpleHoe extends ItemHoe
 		
     	if(Settings.enableSeparateTabs == true)
     	{
-            this.setCreativeTab(SimpleOres.tabSimpleTools);
+            this.setCreativeTab(tab);
     	}
     	else this.setCreativeTab(SimpleOres.tabSimpleBlocks);
 	}

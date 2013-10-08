@@ -1,9 +1,10 @@
 package SimpleOres.plugins.fusion;
 
+import SimpleOres.core.Settings;
 import SimpleOres.core.SimpleOres;
-import SimpleOres.core.conf.Settings;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+
 import java.util.Random;
 
 import net.minecraft.block.Block;

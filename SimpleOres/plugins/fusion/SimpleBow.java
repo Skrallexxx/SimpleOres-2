@@ -5,8 +5,7 @@ import java.util.Random;
 
 import org.lwjgl.opengl.GL11;
 
-import SimpleOres.core.conf.Localisation;
-
+import SimpleOres.core.Localisation;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.Minecraft;
@@ -34,7 +33,7 @@ public class SimpleBow extends ItemBow
 	 * The EnumToolMaterial for the tool. This is used to set what item can be used to repair it.
 	 */
     private final EnumToolMaterial material;
-    private static SimpleOres.core.conf.Settings coreSettings;
+    private static SimpleOres.core.Settings coreSettings;
     private static SimpleOres.core.SimpleOres simpleores;
 	
     /**

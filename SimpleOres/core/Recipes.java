@@ -8,9 +8,6 @@ import net.minecraft.item.crafting.CraftingManager;
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
-import SimpleOres.core.conf.IDs;
-import SimpleOres.core.conf.Localisation;
-import SimpleOres.core.conf.Settings;
 import SimpleOres.plugins.fusion.FusionRecipes;
 
 public class Recipes
@@ -22,7 +19,7 @@ public class Recipes
 	public static Achievements achievements;
 	public static Armor armor;
 	public static Blocks blocks;
-	public static IDs config;
+	public static Config config;
 	public static Items items;
 	public static Localisation local;
 	public static Recipes recipes;

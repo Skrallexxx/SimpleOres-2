@@ -2,7 +2,13 @@ package SimpleOres.core;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.logging.Level;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import com.google.common.reflect.ClassPath;
+import com.google.common.reflect.ClassPath.ResourceInfo;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.EnumArmorMaterial;
@@ -11,21 +17,12 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
 import SimpleOres.core.api.HandlerLoot;
-import SimpleOres.core.conf.IDs;
-import SimpleOres.core.conf.Localisation;
-import SimpleOres.core.conf.Settings;
-import SimpleOres.core.gui.TabBlocks;
-import SimpleOres.core.gui.TabCombat;
-import SimpleOres.core.gui.TabDecoration;
-import SimpleOres.core.gui.TabGeneral;
-import SimpleOres.core.gui.TabMaterials;
-import SimpleOres.core.gui.TabTools;
-import SimpleOres.core.gui.TileEntityMythrilFurnace;
-import SimpleOres.core.gui.TileEntityOnyxFurnace;
+import SimpleOres.core.api.SimpleTab;
+import SimpleOres.core.content.MythrilFurnaceTileEntity;
+import SimpleOres.core.content.OnyxFurnaceTileEntity;
 import SimpleOres.core.handlers.HandlerJoinWorld;
 import SimpleOres.core.handlers.HandlerUpdateChecker;
-import SimpleOres.core.handlers.ProxyCommon;
-import SimpleOres.core.handlers.SimpleOresGenerator;
+import SimpleOres.core.handlers.Generator;
 import SimpleOres.plugins.fusion.FusionRecipes;
 import SimpleOres.plugins.fusion.TileEntityFusionFurnace;
 import cpw.mods.fml.common.FMLLog;
@@ -49,13 +46,13 @@ import net.minecraftforge.common.MinecraftForge;
 
 public class SimpleOres 
 {
-	@SidedProxy(clientSide = "SimpleOres.core.handlers.ProxyClient", serverSide = "SimpleOres.core.handlers.ProxyCommon")	
+	@SidedProxy(clientSide = "SimpleOres.core.ProxyClient", serverSide = "SimpleOres.core.ProxyCommon")	
 	public static ProxyCommon proxy;
 	
 	/**
 	 * Linking to the classes for easier reference.
 	 */
-	public static SimpleOres mod;
+	public static SimpleOres INSTANCE = new SimpleOres();
 	
 //======================================= CREATION =======================================================	
 	/**
@@ -79,11 +76,11 @@ public class SimpleOres
     /**
      * Creating the tabs for Creative Inventory.
      */
-    public static CreativeTabs tabSimpleBlocks;
-    public static CreativeTabs tabSimpleDecoration;
-    public static CreativeTabs tabSimpleTools;
-    public static CreativeTabs tabSimpleCombat;
-    public static CreativeTabs tabSimpleMaterials;
+    public static SimpleTab tabSimpleBlocks = new SimpleTab("tabSimpleBlocks");
+    public static SimpleTab tabSimpleDecoration = new SimpleTab("tabSimpleDecorations");
+    public static SimpleTab tabSimpleTools = new SimpleTab("tabSimpleTools");
+    public static SimpleTab tabSimpleCombat = new SimpleTab("tabSimpleCombat");
+    public static SimpleTab tabSimpleMaterials = new SimpleTab("tabSimpleMaterials");
 
     /**
      * Creating the Armor Renderers. This is simply so you can see the armor texture when you wear it.
@@ -105,37 +102,32 @@ public class SimpleOres
     	 * Calling the various parts of the mod. Moved to different files for neatness. Pretty self explanatory what they all are :P
     	 */
     	//Configuration
-    	IDs.doConfig(event);
+    	Config.doConfig(event);
     	Localisation.doLocalisation(event);
     	Settings.doSettings(event);
     	
     	//Content
-    	doTabs();
     	Blocks.doBlocks();
     	Items.doItems();
     	Tools.doTools();
     	Armor.doArmor();
     	Recipes.doRecipes();	
     	Achievements.doAchievements();
-    	
+    	setTabIcons();
     }
     
-    public void doTabs()
+    public void setTabIcons()
     {
-		/**
-		 * This is so that the custom tabs can be toggled. If the boolean returns true, blocks, items, tools etc are seperated into separate tabs.
-		 * If the boolean returns false, they will all be placed into a single custom tab.
-		 */
-    	if(Settings.enableSeparateTabs == true)
-    	{
-    		tabSimpleBlocks = new TabBlocks("tabSimpleBlocks");
-    	    tabSimpleDecoration = new TabDecoration("tabSimpleDecoration");
-    	    tabSimpleTools = new TabTools("tabSimpleTools");
-    	    tabSimpleCombat = new TabCombat("tabSimpleCombat");
-    	    tabSimpleMaterials = new TabMaterials("tabSimpleMaterials");
-    	}
-    	else tabSimpleBlocks = new TabBlocks("tabSimpleBlocks");
+    	/**
+    	 * Creating the custom tabs using the API class "SimpleTab" and setting their icon.
+    	 */
+		tabSimpleBlocks.setIcon(new ItemStack(Blocks.copperOre));
+	    tabSimpleDecoration.setIcon(new ItemStack(Blocks.mythrilFurnaceOn));
+	    tabSimpleTools.setIcon(new ItemStack(Tools.onyxPick));
+	    tabSimpleCombat.setIcon(new ItemStack(Armor.adamantiumHelm));
+	    tabSimpleMaterials.setIcon(new ItemStack(Items.tinIngot));
     }
+    
     
     @EventHandler
     public void Init(FMLInitializationEvent event)
@@ -144,26 +136,23 @@ public class SimpleOres
     	
     	if(Settings.enableUpdateChecker){HandlerUpdateChecker.checkUpdates();}	
     	
-		mod = this;
+		INSTANCE = this;
 			
 		/**
 		 * Adding localisation files.
+		 * 
+		 * Thanks to @zot for the code for loading localisations automatically.
 		 */
-		LanguageRegistry.instance().loadLocalization(new ResourceLocation("/assets/simpleores/langs/en_US.xml").getResourcePath(), "en_US", true);
-		LanguageRegistry.instance().loadLocalization(new ResourceLocation("/assets/simpleores/langs/en_AU.xml").getResourcePath(), "en_AU", true);
-		LanguageRegistry.instance().loadLocalization(new ResourceLocation("/assets/simpleores/langs/en_PT.xml").getResourcePath(), "en_PT", true);
-		LanguageRegistry.instance().loadLocalization(new ResourceLocation("/assets/simpleores/langs/ru_RU.xml").getResourcePath(), "ru_RU", true);
-		LanguageRegistry.instance().loadLocalization(new ResourceLocation("/assets/simpleores/langs/de_DE.xml").getResourcePath(), "de_DE", true);
-		LanguageRegistry.instance().loadLocalization(new ResourceLocation("/assets/simpleores/langs/ja_JP.xml").getResourcePath(), "ja_JP", true);
+		addLocalisations();
 		
 		/**
 		 * Registering things such as the world generator, tile entities and GUI's.
 		 */
 		//Registering
-		NetworkRegistry.instance().registerGuiHandler(mod, proxy);
-		GameRegistry.registerWorldGenerator(new SimpleOresGenerator());
-		GameRegistry.registerTileEntity(TileEntityMythrilFurnace.class, "mythrilFurnace");
-		GameRegistry.registerTileEntity(TileEntityOnyxFurnace.class, "onyxFurnace");
+		NetworkRegistry.instance().registerGuiHandler(INSTANCE, proxy);
+		GameRegistry.registerWorldGenerator(new Generator());
+		GameRegistry.registerTileEntity(MythrilFurnaceTileEntity.class, "mythrilFurnace");
+		GameRegistry.registerTileEntity(OnyxFurnaceTileEntity.class, "onyxFurnace");
 		MinecraftForge.EVENT_BUS.register(new HandlerJoinWorld());
 	
         /**
@@ -198,5 +187,24 @@ public class SimpleOres
          */
         //Loot
         HandlerLoot.addLoot();
+    }
+    
+    public void addLocalisations()
+    {
+		try 
+		{
+			Pattern p = Pattern.compile("assets/simpleores/langs/(.*)\\.xml");
+			for (ResourceInfo i : ClassPath.from(getClass().getClassLoader())
+					.getResources()) {
+				Matcher m = p.matcher(i.getResourceName());
+				if (m.matches())
+					LanguageRegistry.instance().loadLocalization(i.url(),
+							m.group(1), true);
+			}
+		}
+		catch (IOException e) 
+		{
+			e.printStackTrace();
+		}
     }
 }

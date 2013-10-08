@@ -8,15 +8,12 @@ import net.minecraft.block.BlockPane;
 import net.minecraft.block.material.Material;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
-import SimpleOres.core.block.MythrilFurnace;
-import SimpleOres.core.block.OnyxFurnace;
-import SimpleOres.core.block.SimpleBars;
-import SimpleOres.core.block.SimpleDoor;
 import SimpleOres.core.api.SimpleGemOre;
 import SimpleOres.core.api.SimpleOre;
-import SimpleOres.core.conf.IDs;
-import SimpleOres.core.conf.Localisation;
-import SimpleOres.core.conf.Settings;
+import SimpleOres.core.content.MythrilFurnace;
+import SimpleOres.core.content.OnyxFurnace;
+import SimpleOres.core.content.SimpleBars;
+import SimpleOres.core.content.SimpleDoor;
 import SimpleOres.plugins.fusion.FusionFurnace;
 
 public class Blocks
@@ -28,7 +25,7 @@ public class Blocks
 	public static Achievements achievements;
 	public static Armor armor;
 	public static Blocks blocks;
-	public static IDs config;
+	public static Config config;
 	public static Items items;
 	public static Localisation local;
 	public static Recipes recipes;
@@ -72,16 +69,16 @@ public class Blocks
 	public static void doBlocks()
 	{
 		//Block Properties
-		copperOre = new SimpleOre(config.copperOreID, Material.rock, "simpleores").setHardness(1.7F).setResistance(5.0F).setCreativeTab(mod.tabSimpleBlocks).setUnlocalizedName("copperOre");
-		copperBlock = new SimpleOre(config.copperBlockID, Material.iron, "simpleores").setHardness(7.0F).setResistance(12.0F).setCreativeTab(mod.tabSimpleBlocks).setUnlocalizedName("copperBlock"); 
-		tinOre = new SimpleOre(config.tinOreID, Material.rock, "simpleores").setHardness(3.0F).setResistance(5.0F).setCreativeTab(mod.tabSimpleBlocks).setUnlocalizedName("tinOre");
-		tinBlock = new SimpleOre(config.tinBlockID, Material.iron, "simpleores").setHardness(7.0F).setResistance(12.0F).setCreativeTab(mod.tabSimpleBlocks).setUnlocalizedName("tinBlock"); 
-		mythrilOre = new SimpleOre(config.mythrilOreID, Material.rock, "simpleores").setHardness(4.0F).setResistance(5.0F).setCreativeTab(mod.tabSimpleBlocks).setUnlocalizedName("mythrilOre");
-		mythrilBlock = new SimpleOre(config.mythrilBlockID, Material.iron, "simpleores").setHardness(7.0F).setResistance(12.0F).setCreativeTab(mod.tabSimpleBlocks).setUnlocalizedName("mythrilBlock");
-		adamantiumOre = new SimpleOre(config.adamantiumOreID, Material.rock, "simpleores").setHardness(5.0F).setResistance(5.0F).setCreativeTab(mod.tabSimpleBlocks).setUnlocalizedName("adamantiumOre");
-		adamantiumBlock = new SimpleOre(config.adamantiumBlockID, Material.iron, "simpleores").setHardness(7.0F).setResistance(12.0F).setCreativeTab(mod.tabSimpleBlocks).setUnlocalizedName("adamantiumBlock");
-		onyxOre = new SimpleGemOre(config.onyxOreID, Material.rock, "simpleores", config.onyxGemID).setHardness(7.0F).setResistance(5.0F).setCreativeTab(mod.tabSimpleBlocks).setUnlocalizedName("onyxOre");
-		onyxBlock = new SimpleOre(config.onyxBlockID, Material.iron, "simpleores").setHardness(25.0F).setResistance(40.0F).setCreativeTab(mod.tabSimpleBlocks).setUnlocalizedName("onyxBlock");
+		copperOre = new SimpleOre(config.copperOreID, Material.rock, "simpleores", SimpleOres.tabSimpleBlocks).setHardness(1.7F).setResistance(5.0F).setCreativeTab(mod.tabSimpleBlocks).setUnlocalizedName("copperOre");
+		copperBlock = new SimpleOre(config.copperBlockID, Material.iron, "simpleores", SimpleOres.tabSimpleBlocks).setHardness(7.0F).setResistance(12.0F).setCreativeTab(mod.tabSimpleBlocks).setUnlocalizedName("copperBlock"); 
+		tinOre = new SimpleOre(config.tinOreID, Material.rock, "simpleores", SimpleOres.tabSimpleBlocks).setHardness(3.0F).setResistance(5.0F).setCreativeTab(mod.tabSimpleBlocks).setUnlocalizedName("tinOre");
+		tinBlock = new SimpleOre(config.tinBlockID, Material.iron, "simpleores", SimpleOres.tabSimpleBlocks).setHardness(7.0F).setResistance(12.0F).setCreativeTab(mod.tabSimpleBlocks).setUnlocalizedName("tinBlock"); 
+		mythrilOre = new SimpleOre(config.mythrilOreID, Material.rock, "simpleores", SimpleOres.tabSimpleBlocks).setHardness(4.0F).setResistance(5.0F).setCreativeTab(mod.tabSimpleBlocks).setUnlocalizedName("mythrilOre");
+		mythrilBlock = new SimpleOre(config.mythrilBlockID, Material.iron, "simpleores", SimpleOres.tabSimpleBlocks).setHardness(7.0F).setResistance(12.0F).setCreativeTab(mod.tabSimpleBlocks).setUnlocalizedName("mythrilBlock");
+		adamantiumOre = new SimpleOre(config.adamantiumOreID, Material.rock, "simpleores", SimpleOres.tabSimpleBlocks).setHardness(5.0F).setResistance(5.0F).setCreativeTab(mod.tabSimpleBlocks).setUnlocalizedName("adamantiumOre");
+		adamantiumBlock = new SimpleOre(config.adamantiumBlockID, Material.iron, "simpleores", SimpleOres.tabSimpleBlocks).setHardness(7.0F).setResistance(12.0F).setCreativeTab(mod.tabSimpleBlocks).setUnlocalizedName("adamantiumBlock");
+		onyxOre = new SimpleGemOre(config.onyxOreID, Material.rock, "simpleores", config.onyxGemID, SimpleOres.tabSimpleBlocks).setHardness(7.0F).setResistance(5.0F).setCreativeTab(mod.tabSimpleBlocks).setUnlocalizedName("onyxOre");
+		onyxBlock = new SimpleOre(config.onyxBlockID, Material.iron, "simpleores", SimpleOres.tabSimpleBlocks).setHardness(25.0F).setResistance(40.0F).setCreativeTab(mod.tabSimpleBlocks).setUnlocalizedName("onyxBlock");
 		mythrilFurnace = new MythrilFurnace(config.mythrilFurnaceID, false).setHardness(3.5F).setResistance(10.0F).setUnlocalizedName("mythrilFurnace");
 		mythrilFurnaceOn = new MythrilFurnace(config.mythrilFurnaceOnID, true).setHardness(3.5F).setLightValue(1.0F).setResistance(10F).setUnlocalizedName("mythrilFurnaceOn");
 		onyxFurnace = new OnyxFurnace(config.onyxFurnaceID, false).setHardness(20F).setResistance(40.0F).setUnlocalizedName("onyxFurnace");

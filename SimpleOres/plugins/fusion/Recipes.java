@@ -10,6 +10,7 @@ import net.minecraftforge.oredict.ShapedOreRecipe;
 
 public class Recipes 
 {
+	private static final int WILDCARD_VALUE = OreDictionary.WILDCARD_VALUE;
 	public static SimpleOres.core.Items coreItems;
 	/**
 	 * The constructor for the recipes. This is called by the main mod class.
@@ -24,6 +25,9 @@ public class Recipes
 		OreDictionary.registerOre("ingotThyrium", new ItemStack(Content.thyriumIngot));
 		OreDictionary.registerOre("ingotSinisite", new ItemStack(Content.sinisiteIngot));
 		
+		/**
+		 * Just for testing the OreDictionary capabilities of the FusionFurnace. Hopefully I won't forget to remove it :3
+		 */
 		OreDictionary.registerOre("ingotCopper", new ItemStack(Content.smallThyriumChunk));
 		
 		//Block Recipes
@@ -162,6 +166,11 @@ public class Recipes
 		    	FusionRecipes.smelting().addSmelting(new ItemStack(coreItems.onyxGem), new ItemStack(coreItems.mythrilIngot), new ItemStack(Item.glowstone), new ItemStack(Content.smallSinisiteChunk), 12.0F);
 		    	FusionRecipes.smelting().addSmelting(new ItemStack(coreItems.onyxGem), new ItemStack(coreItems.mythrilIngot), new ItemStack(Item.blazePowder), new ItemStack(Content.mediumSinisiteChunk), 20.0F);
 		    	FusionRecipes.smelting().addSmelting(new ItemStack(coreItems.onyxGem), new ItemStack(coreItems.mythrilIngot), new ItemStack(Item.ghastTear), new ItemStack(Content.largeSinisiteChunk), 60.0F);
+		    	
+		    	//Test
+		    	FusionRecipes.smelting().addSmelting(new ItemStack(Block.wood, 1, 0), new ItemStack(Block.leaves, 1, 0), new ItemStack(Item.dyePowder, 2, WILDCARD_VALUE), new ItemStack(Block.sapling, 1, 0), 1.0F);
+		    	FusionRecipes.smelting().addSmelting(new ItemStack(Block.wood, 1, 1), new ItemStack(Block.leaves, 1, 1), new ItemStack(Item.dyePowder, 2, WILDCARD_VALUE), new ItemStack(Block.sapling, 1, 1), 1.0F);
+		    	FusionRecipes.smelting().addSmelting(new ItemStack(Block.wood, 1, 2), new ItemStack(Block.leaves, 1, 2), new ItemStack(Item.dyePowder, 2, WILDCARD_VALUE), new ItemStack(Block.sapling, 1, 2), 1.0F);
 		    	
 		    //Regular Furnace
 				GameRegistry.addSmelting(Content.largeBronzeChunk.itemID, new ItemStack(Content.bronzeIngot, 1, 0), 0.3F);

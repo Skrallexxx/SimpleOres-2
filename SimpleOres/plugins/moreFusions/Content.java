@@ -37,21 +37,21 @@ public class Content
 	public static void doContent()
 	{
 		//Descriptions
-		steelBlock = new SimpleOre(Config.steelBlockID, Material.iron, "morefusions").setHardness(7.0F).setResistance(12.0F).setCreativeTab(SimpleOres.tabSimpleBlocks).setUnlocalizedName("steelBlock");
+		steelBlock = new SimpleOre(Config.steelBlockID, Material.iron, "morefusions", SimpleOres.tabSimpleBlocks).setHardness(7.0F).setResistance(12.0F).setCreativeTab(SimpleOres.tabSimpleBlocks).setUnlocalizedName("steelBlock");
 		
-		steelChunkSmall = new SimpleIngot(Config.steelChunkSmallID, "morefusions").setUnlocalizedName("steelChunkSmall");
-		steelChunkMedium = new SimpleIngot(Config.steelChunkMediumID, "morefusions").setUnlocalizedName("steelChunkMedium");
-		steelChunkLarge = new SimpleIngot(Config.steelChunkLargeID, "morefusions").setUnlocalizedName("steelChunkLarge");
-		steelIngot = new SimpleIngot(Config.steelIngotID, "morefusions").setUnlocalizedName("steelIngot");
-		steelPick = new SimplePickaxe(Config.steelPickID, MoreFusions.toolSteel, "morefusions").setUnlocalizedName("steelPick");
-		steelAxe = new SimpleAxe(Config.steelAxeID, MoreFusions.toolSteel, "morefusions").setUnlocalizedName("steelAxe");
-		steelShovel = new SimpleShovel(Config.steelShovelID, MoreFusions.toolSteel, "morefusions").setUnlocalizedName("steelShovel");
-		steelSword = new SimpleSword(Config.steelSwordID, MoreFusions.toolSteel, "morefusions").setUnlocalizedName("steelSword");
-		steelHoe = new SimpleHoe(Config.steelHoeID, MoreFusions.toolSteel, "morefusions").setUnlocalizedName("steelHoe");
-		steelHelm = new SimpleArmor(Config.steelHelmID, MoreFusions.armorSteel, MoreFusions.rendererSteel, 0, "steel", "morefusions").setUnlocalizedName("steelHelm");
-		steelChest = new SimpleArmor(Config.steelChestID, MoreFusions.armorSteel, MoreFusions.rendererSteel, 1, "steel", "morefusions").setUnlocalizedName("steelChest");
-		steelLegs = new SimpleArmor(Config.steelLegsID, MoreFusions.armorSteel, MoreFusions.rendererSteel, 2, "steel", "morefusions").setUnlocalizedName("steelLegs");
-		steelBoots = new SimpleArmor(Config.steelBootsID, MoreFusions.armorSteel, MoreFusions.rendererSteel, 3, "steel", "morefusions").setUnlocalizedName("steelBoots");
+		steelChunkSmall = new SimpleIngot(Config.steelChunkSmallID, "morefusions", SimpleOres.tabSimpleMaterials).setUnlocalizedName("steelChunkSmall");
+		steelChunkMedium = new SimpleIngot(Config.steelChunkMediumID, "morefusions", SimpleOres.tabSimpleMaterials).setUnlocalizedName("steelChunkMedium");
+		steelChunkLarge = new SimpleIngot(Config.steelChunkLargeID, "morefusions", SimpleOres.tabSimpleMaterials).setUnlocalizedName("steelChunkLarge");
+		steelIngot = new SimpleIngot(Config.steelIngotID, "morefusions", SimpleOres.tabSimpleMaterials).setUnlocalizedName("steelIngot");
+		steelPick = new SimplePickaxe(Config.steelPickID, MoreFusions.toolSteel, "morefusions", SimpleOres.tabSimpleTools).setUnlocalizedName("steelPick");
+		steelAxe = new SimpleAxe(Config.steelAxeID, MoreFusions.toolSteel, "morefusions", SimpleOres.tabSimpleTools).setUnlocalizedName("steelAxe");
+		steelShovel = new SimpleShovel(Config.steelShovelID, MoreFusions.toolSteel, "morefusions", SimpleOres.tabSimpleTools).setUnlocalizedName("steelShovel");
+		steelSword = new SimpleSword(Config.steelSwordID, MoreFusions.toolSteel, "morefusions", SimpleOres.tabSimpleCombat).setUnlocalizedName("steelSword");
+		steelHoe = new SimpleHoe(Config.steelHoeID, MoreFusions.toolSteel, "morefusions", SimpleOres.tabSimpleTools).setUnlocalizedName("steelHoe");
+		steelHelm = new SimpleArmor(Config.steelHelmID, MoreFusions.armorSteel, MoreFusions.rendererSteel, 0, "steel", "morefusions", SimpleOres.tabSimpleCombat).setUnlocalizedName("steelHelm");
+		steelChest = new SimpleArmor(Config.steelChestID, MoreFusions.armorSteel, MoreFusions.rendererSteel, 1, "steel", "morefusions", SimpleOres.tabSimpleCombat).setUnlocalizedName("steelChest");
+		steelLegs = new SimpleArmor(Config.steelLegsID, MoreFusions.armorSteel, MoreFusions.rendererSteel, 2, "steel", "morefusions", SimpleOres.tabSimpleCombat).setUnlocalizedName("steelLegs");
+		steelBoots = new SimpleArmor(Config.steelBootsID, MoreFusions.armorSteel, MoreFusions.rendererSteel, 3, "steel", "morefusions", SimpleOres.tabSimpleCombat).setUnlocalizedName("steelBoots");
 		
 		//Naming
 		LanguageRegistry.addName(steelBlock, "Steel Block");

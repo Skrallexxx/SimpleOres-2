@@ -2,8 +2,8 @@ package SimpleOres.core.api;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import SimpleOres.core.Settings;
 import SimpleOres.core.SimpleOres;
-import SimpleOres.core.conf.Settings;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.EnumToolMaterial;
@@ -19,7 +19,7 @@ public class SimpleSword extends ItemSword
     private final EnumToolMaterial material;
     private String modName;
 	  
-	public SimpleSword(int i, EnumToolMaterial enumtoolmaterial, String mod)
+	public SimpleSword(int i, EnumToolMaterial enumtoolmaterial, String mod, CreativeTabs tab)
 	{
 		super(i, enumtoolmaterial);
 		material = enumtoolmaterial;
@@ -27,7 +27,7 @@ public class SimpleSword extends ItemSword
 		
     	if(Settings.enableSeparateTabs == true)
     	{
-            this.setCreativeTab(SimpleOres.tabSimpleCombat);
+            this.setCreativeTab(tab);
     	}
     	else this.setCreativeTab(SimpleOres.tabSimpleBlocks);
 	}

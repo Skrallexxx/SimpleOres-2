@@ -152,7 +152,7 @@ public class IDs
     	
     	catch (Exception e) 
     	{
-    		FMLLog.log(Level.SEVERE, e, "[SimpleOres] Error while trying to access the SimpleOres Fusion Plugin config file!");
+    		FMLLog.log(Level.SEVERE, e, "[SimpleOres] Error while trying to access the Fusion Plugin config file!");
     	}
     	
     	finally 

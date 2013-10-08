@@ -2,8 +2,8 @@ package SimpleOres.core.api;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import SimpleOres.core.Settings;
 import SimpleOres.core.SimpleOres;
-import SimpleOres.core.conf.Settings;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.EnumToolMaterial;
@@ -19,7 +19,7 @@ public class SimpleShovel extends ItemSpade
     private final EnumToolMaterial material;
     private String modName;
 	
-	public SimpleShovel(int i, EnumToolMaterial enumtoolmaterial, String mod) 
+	public SimpleShovel(int i, EnumToolMaterial enumtoolmaterial, String mod, CreativeTabs tab) 
 	{
 		super(i, enumtoolmaterial);
 		material = enumtoolmaterial;
@@ -27,7 +27,7 @@ public class SimpleShovel extends ItemSpade
 		
     	if(Settings.enableSeparateTabs == true)
     	{
-            this.setCreativeTab(SimpleOres.tabSimpleTools);
+            this.setCreativeTab(tab);
     	}
     	else this.setCreativeTab(SimpleOres.tabSimpleBlocks);
 	}

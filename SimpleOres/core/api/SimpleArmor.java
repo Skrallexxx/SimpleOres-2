@@ -5,13 +5,13 @@ import cpw.mods.fml.relauncher.SideOnly;
 import SimpleOres.core.Achievements;
 import SimpleOres.core.Armor;
 import SimpleOres.core.Blocks;
+import SimpleOres.core.Config;
 import SimpleOres.core.Items;
+import SimpleOres.core.Localisation;
 import SimpleOres.core.Recipes;
+import SimpleOres.core.Settings;
 import SimpleOres.core.SimpleOres;
 import SimpleOres.core.Tools;
-import SimpleOres.core.conf.IDs;
-import SimpleOres.core.conf.Localisation;
-import SimpleOres.core.conf.Settings;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
@@ -28,7 +28,7 @@ public class SimpleArmor extends ItemArmor
 	public static Achievements achievements;
 	public static Armor armor;
 	public static Blocks blocks;
-	public static IDs config;
+	public static Config config;
 	public static Items items;
 	public static Localisation local;
 	public static Recipes recipes;
@@ -44,7 +44,7 @@ public class SimpleArmor extends ItemArmor
 	/**
 	 * Constructor for the armor items. Most things should be fairly straight forward.
 	 */
-	public SimpleArmor(int ID, EnumArmorMaterial armormaterial, int renderer, int slotNumber, String type, String mod) 
+	public SimpleArmor(int ID, EnumArmorMaterial armormaterial, int renderer, int slotNumber, String type, String mod, CreativeTabs tab) 
 	{
 		super(ID, armormaterial, renderer, slotNumber);
         this.material = armormaterial;
@@ -52,7 +52,7 @@ public class SimpleArmor extends ItemArmor
         
     	if(Settings.enableSeparateTabs == true)
     	{
-            this.setCreativeTab(SimpleOres.tabSimpleCombat);
+            this.setCreativeTab(tab);
     	}
     	else this.setCreativeTab(SimpleOres.tabSimpleBlocks);
     	
