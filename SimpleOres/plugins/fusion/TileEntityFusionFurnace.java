@@ -375,11 +375,11 @@ public class TileEntityFusionFurnace extends TileEntity implements ISidedInvento
 			furnaceItemStacks[2].stackSize += result.stackSize;
 
 		if (furnaceItemStacks[0] != null && furnaceItemStacks[0].stackSize <= 0)
-			furnaceItemStacks[0] = null;
+			furnaceItemStacks[0] = furnaceItemStacks[0].getItem().getContainerItemStack(furnaceItemStacks[0]);
 		if (furnaceItemStacks[3] != null && furnaceItemStacks[3].stackSize <= 0)
-			furnaceItemStacks[3] = null;
+			furnaceItemStacks[3] = furnaceItemStacks[3].getItem().getContainerItemStack(furnaceItemStacks[3]);
 		if (furnaceItemStacks[4] != null && furnaceItemStacks[4].stackSize <= 0)
-			furnaceItemStacks[4] = null;
+			furnaceItemStacks[4] = furnaceItemStacks[4].getItem().getContainerItemStack(furnaceItemStacks[4]);
 	}
 
     /**
