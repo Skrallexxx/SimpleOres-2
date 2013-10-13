@@ -42,9 +42,9 @@ public class ProxyCommon implements IGuiHandler
         	return null;
         }
         
-        else if(machine instanceof TileEntityFusionFurnace)
+        else if(machine instanceof FusionFurnaceTileEntity)
         {
-        	return new ContainerFusionFurnace(player.inventory, (TileEntityFusionFurnace)machine);
+        	return new FusionFurnaceContainer(player.inventory, (FusionFurnaceTileEntity)machine);
         }
         
         return null;
@@ -64,9 +64,9 @@ public class ProxyCommon implements IGuiHandler
         	return null;
         }
         
-        else if(machine instanceof TileEntityFusionFurnace)
+        else if(machine instanceof FusionFurnaceTileEntity)
         {
-        	return new GuiFusionFurnace(player.inventory, (TileEntityFusionFurnace)machine);
+        	return new FusionFurnaceGUI(player.inventory, (FusionFurnaceTileEntity)machine);
         }
         
         return null;

@@ -156,7 +156,7 @@ public class FusionFurnace extends BlockContainer
         }
         else
         {
-            par5EntityPlayer.openGui(SimpleOresFusion.INSTANCE, 0, par1World, par2, par3, par4);
+            par5EntityPlayer.openGui(FusionPlugin.INSTANCE, 0, par1World, par2, par3, par4);
 
             return true;
         }
@@ -234,7 +234,7 @@ public class FusionFurnace extends BlockContainer
      */
     public TileEntity createNewTileEntity(World par1World)
     {
-        return new TileEntityFusionFurnace();
+        return new FusionFurnaceTileEntity();
     }
 
     /**
@@ -277,7 +277,7 @@ public class FusionFurnace extends BlockContainer
     {
         if (!keepFurnaceInventory)
         {
-            TileEntityFusionFurnace tileentityfurnace = (TileEntityFusionFurnace)par1World.getBlockTileEntity(par2, par3, par4);
+            FusionFurnaceTileEntity tileentityfurnace = (FusionFurnaceTileEntity)par1World.getBlockTileEntity(par2, par3, par4);
 
             if (tileentityfurnace != null)
             {

@@ -52,7 +52,7 @@ public class Items
 		adamantiumIngot = new SimpleIngot(config.adamantiumIngotID, "simpleores", SimpleOres.tabSimpleMaterials).setUnlocalizedName("adamantiumIngot");
 		onyxGem = new SimpleIngot(config.onyxGemID, "simpleores", SimpleOres.tabSimpleMaterials).setUnlocalizedName("onyxGem");
 		copperBucket = new SimpleBucket(config.copperBucketID, 0).setUnlocalizedName("copperBucket").setMaxStackSize(16);
-		copperBucketWater = new SimpleBucket(config.copperBucketWaterID, Block.waterMoving.blockID).setUnlocalizedName("copperBucketWater");
+		copperBucketWater = new SimpleBucket(config.copperBucketWaterID, Block.waterMoving.blockID).setContainerItem(copperBucket).setUnlocalizedName("copperBucketWater");
 		mythrilRod = new SimpleIngot(config.mythrilRodID, "simpleores", SimpleOres.tabSimpleMaterials).setUnlocalizedName("mythrilRod");
 		onyxRod = new SimpleIngot(config.onyxRodID, "simpleores", SimpleOres.tabSimpleMaterials).setUnlocalizedName("onyxRod");
 		copperDoorItem = new SimpleDoorItem(config.copperDoorItemID, "copper").setUnlocalizedName("copperDoor");

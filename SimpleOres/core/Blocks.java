@@ -69,21 +69,21 @@ public class Blocks
 	public static void doBlocks()
 	{
 		//Block Properties
-		copperOre = new SimpleOre(config.copperOreID, Material.rock, "simpleores", SimpleOres.tabSimpleBlocks).setHardness(1.7F).setResistance(5.0F).setCreativeTab(mod.tabSimpleBlocks).setUnlocalizedName("copperOre");
-		copperBlock = new SimpleOre(config.copperBlockID, Material.iron, "simpleores", SimpleOres.tabSimpleBlocks).setHardness(7.0F).setResistance(12.0F).setCreativeTab(mod.tabSimpleBlocks).setUnlocalizedName("copperBlock"); 
-		tinOre = new SimpleOre(config.tinOreID, Material.rock, "simpleores", SimpleOres.tabSimpleBlocks).setHardness(3.0F).setResistance(5.0F).setCreativeTab(mod.tabSimpleBlocks).setUnlocalizedName("tinOre");
-		tinBlock = new SimpleOre(config.tinBlockID, Material.iron, "simpleores", SimpleOres.tabSimpleBlocks).setHardness(7.0F).setResistance(12.0F).setCreativeTab(mod.tabSimpleBlocks).setUnlocalizedName("tinBlock"); 
-		mythrilOre = new SimpleOre(config.mythrilOreID, Material.rock, "simpleores", SimpleOres.tabSimpleBlocks).setHardness(4.0F).setResistance(5.0F).setCreativeTab(mod.tabSimpleBlocks).setUnlocalizedName("mythrilOre");
-		mythrilBlock = new SimpleOre(config.mythrilBlockID, Material.iron, "simpleores", SimpleOres.tabSimpleBlocks).setHardness(7.0F).setResistance(12.0F).setCreativeTab(mod.tabSimpleBlocks).setUnlocalizedName("mythrilBlock");
-		adamantiumOre = new SimpleOre(config.adamantiumOreID, Material.rock, "simpleores", SimpleOres.tabSimpleBlocks).setHardness(5.0F).setResistance(5.0F).setCreativeTab(mod.tabSimpleBlocks).setUnlocalizedName("adamantiumOre");
-		adamantiumBlock = new SimpleOre(config.adamantiumBlockID, Material.iron, "simpleores", SimpleOres.tabSimpleBlocks).setHardness(7.0F).setResistance(12.0F).setCreativeTab(mod.tabSimpleBlocks).setUnlocalizedName("adamantiumBlock");
-		onyxOre = new SimpleGemOre(config.onyxOreID, Material.rock, "simpleores", config.onyxGemID, SimpleOres.tabSimpleBlocks).setHardness(7.0F).setResistance(5.0F).setCreativeTab(mod.tabSimpleBlocks).setUnlocalizedName("onyxOre");
-		onyxBlock = new SimpleOre(config.onyxBlockID, Material.iron, "simpleores", SimpleOres.tabSimpleBlocks).setHardness(25.0F).setResistance(40.0F).setCreativeTab(mod.tabSimpleBlocks).setUnlocalizedName("onyxBlock");
+		copperOre = new SimpleOre(config.copperOreID, Material.rock, "simpleores", SimpleOres.tabSimpleBlocks).setHardness(1.7F).setResistance(5.0F).setUnlocalizedName("copperOre");
+		copperBlock = new SimpleOre(config.copperBlockID, Material.iron, "simpleores", SimpleOres.tabSimpleBlocks).setHardness(7.0F).setResistance(12.0F).setUnlocalizedName("copperBlock"); 
+		tinOre = new SimpleOre(config.tinOreID, Material.rock, "simpleores", SimpleOres.tabSimpleBlocks).setHardness(3.0F).setResistance(5.0F).setUnlocalizedName("tinOre");
+		tinBlock = new SimpleOre(config.tinBlockID, Material.iron, "simpleores", SimpleOres.tabSimpleBlocks).setHardness(7.0F).setResistance(12.0F).setUnlocalizedName("tinBlock"); 
+		mythrilOre = new SimpleOre(config.mythrilOreID, Material.rock, "simpleores", SimpleOres.tabSimpleBlocks).setHardness(4.0F).setResistance(5.0F).setUnlocalizedName("mythrilOre");
+		mythrilBlock = new SimpleOre(config.mythrilBlockID, Material.iron, "simpleores", SimpleOres.tabSimpleBlocks).setHardness(7.0F).setResistance(12.0F).setUnlocalizedName("mythrilBlock");
+		adamantiumOre = new SimpleOre(config.adamantiumOreID, Material.rock, "simpleores", SimpleOres.tabSimpleBlocks).setHardness(5.0F).setResistance(5.0F).setUnlocalizedName("adamantiumOre");
+		adamantiumBlock = new SimpleOre(config.adamantiumBlockID, Material.iron, "simpleores", SimpleOres.tabSimpleBlocks).setHardness(7.0F).setResistance(12.0F).setUnlocalizedName("adamantiumBlock");
+		onyxOre = new SimpleGemOre(config.onyxOreID, Material.rock, "simpleores", config.onyxGemID, SimpleOres.tabSimpleBlocks).setHardness(7.0F).setResistance(5.0F).setUnlocalizedName("onyxOre");
+		onyxBlock = new SimpleOre(config.onyxBlockID, Material.iron, "simpleores", SimpleOres.tabSimpleBlocks).setHardness(25.0F).setResistance(40.0F).setUnlocalizedName("onyxBlock");
 		mythrilFurnace = new MythrilFurnace(config.mythrilFurnaceID, false).setHardness(3.5F).setResistance(10.0F).setUnlocalizedName("mythrilFurnace");
 		mythrilFurnaceOn = new MythrilFurnace(config.mythrilFurnaceOnID, true).setHardness(3.5F).setLightValue(1.0F).setResistance(10F).setUnlocalizedName("mythrilFurnaceOn");
 		onyxFurnace = new OnyxFurnace(config.onyxFurnaceID, false).setHardness(20F).setResistance(40.0F).setUnlocalizedName("onyxFurnace");
 		onyxFurnaceOn = new OnyxFurnace(config.onyxFurnaceOnID, true).setHardness(20F).setResistance(40.0F).setLightValue(1.0F).setUnlocalizedName("onyxFurnaceOn");
-		copperDoor = new SimpleDoor(config.copperDoorID, "copper").setHardness(7.0F).setStepSound(Block.soundMetalFootstep).setUnlocalizedName("copperDoor");
+		copperDoor = new SimpleDoor(config.copperDoorID, "copper").setHardness(7.0F).setResistance(12.0F).setStepSound(Block.soundMetalFootstep).setUnlocalizedName("copperDoor");
 		onyxDoor = new SimpleDoor(config.onyxDoorID, "onyx").setHardness(25.0F).setResistance(40.0F).setStepSound(Block.soundMetalFootstep).setUnlocalizedName("onyxDoor");
 		copperBars = new SimpleBars(config.copperBarsID, "simpleores:" + "copperBars", "simpleores:" + "copperBars", Material.iron, true).setHardness(3.0F).setResistance(10.0F).setStepSound(Block.soundMetalFootstep).setUnlocalizedName("copperBars");
 		tinBars = new SimpleBars(config.tinBarsID, "simpleores:" + "tinBars", "simpleores:" + "tinBars", Material.iron, true).setHardness(3.0F).setResistance(10.0F).setStepSound(Block.soundMetalFootstep).setUnlocalizedName("tinBars");

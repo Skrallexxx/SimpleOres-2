@@ -24,7 +24,7 @@ import SimpleOres.core.handlers.HandlerJoinWorld;
 import SimpleOres.core.handlers.HandlerUpdateChecker;
 import SimpleOres.core.handlers.Generator;
 import SimpleOres.plugins.fusion.FusionRecipes;
-import SimpleOres.plugins.fusion.TileEntityFusionFurnace;
+import SimpleOres.plugins.fusion.FusionFurnaceTileEntity;
 import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -58,20 +58,20 @@ public class SimpleOres
 	/**
 	 * EnumToolMaterial. In form ("NAME", mining level, max uses, speed, damage to entity, enchantability)
 	 */
-    public static EnumToolMaterial toolCopper = EnumHelper.addToolMaterial("COPPER", 1, 185, 4.0F, 1, 8);
-    public static EnumToolMaterial toolTin = EnumHelper.addToolMaterial("TIN", 1, 220, 3.5F, 1, 8);
-    public static EnumToolMaterial toolMythril = EnumHelper.addToolMaterial("MYTHRIL", 2, 800, 8.0F, 3, 12);
-    public static EnumToolMaterial toolAdamantium = EnumHelper.addToolMaterial("ADAMANTIUM", 2, 1150, 14.0F, 3, 3);
-    public static EnumToolMaterial toolOnyx = EnumHelper.addToolMaterial("ONYX", 4, 3280, 10.0F, 5, 15);
+    public static EnumToolMaterial toolCopper;
+    public static EnumToolMaterial toolTin;
+    public static EnumToolMaterial toolMythril;
+    public static EnumToolMaterial toolAdamantium;
+    public static EnumToolMaterial toolOnyx;
        
     /**
      * EnumArmorMaterial. In form ("NAME", max damage (like uses, multiply by pieces for their max damage), new int[] {helmet defense, chestplate defense, leggings defense, boots defense}, enchantability)
      */
-    public static EnumArmorMaterial armorCopper = EnumHelper.addArmorMaterial("COPPER", 8, new int[] {2, 3, 2, 1}, 8);
-    public static EnumArmorMaterial armorTin = EnumHelper.addArmorMaterial("TIN", 8, new int[] {2, 3, 2, 1}, 8);
-    public static EnumArmorMaterial armorMythril = EnumHelper.addArmorMaterial("MYTHRIL", 22, new int[] {3, 5, 4, 3}, 12);
-    public static EnumArmorMaterial armorAdamantium = EnumHelper.addArmorMaterial("ADAMANTIUM", 28, new int[] {3, 8, 6, 2}, 3);
-    public static EnumArmorMaterial armorOnyx = EnumHelper.addArmorMaterial("ONYX", 45, new int[] {5, 8, 6, 5}, 15);
+    public static EnumArmorMaterial armorCopper;
+    public static EnumArmorMaterial armorTin;
+    public static EnumArmorMaterial armorMythril;
+    public static EnumArmorMaterial armorAdamantium;
+    public static EnumArmorMaterial armorOnyx;
     
     /**
      * Creating the tabs for Creative Inventory.
@@ -107,6 +107,7 @@ public class SimpleOres
     	Settings.doSettings(event);
     	
     	//Content
+    	setToolAndArmorStats();
     	Blocks.doBlocks();
     	Items.doItems();
     	Tools.doTools();
@@ -128,6 +129,20 @@ public class SimpleOres
 	    tabSimpleMaterials.setIcon(new ItemStack(Items.tinIngot));
     }
     
+    public void setToolAndArmorStats()
+    {
+    	toolCopper = EnumHelper.addToolMaterial("COPPER", Settings.copperMiningLevel, Settings.copperUsesNum, Settings.copperMiningSpeed, Settings.copperDamageVsEntity, Settings.copperEnchantability);
+    	toolTin = EnumHelper.addToolMaterial("TIN", Settings.tinMiningLevel, Settings.tinUsesNum, Settings.tinMiningSpeed, Settings.tinDamageVsEntity, Settings.tinEnchantability);
+    	toolMythril = EnumHelper.addToolMaterial("MYTHRIL", Settings.mythrilMiningLevel, Settings.mythrilUsesNum, Settings.mythrilMiningSpeed, Settings.mythrilDamageVsEntity, Settings.mythrilEnchantability);
+    	toolAdamantium = EnumHelper.addToolMaterial("ADAMANTIUM", Settings.adamantiumMiningLevel, Settings.adamantiumUsesNum, Settings.adamantiumMiningSpeed, Settings.adamantiumDamageVsEntity, Settings.adamantiumEnchantability);
+    	toolOnyx = EnumHelper.addToolMaterial("ONYX", Settings.onyxMiningLevel, Settings.onyxUsesNum, Settings.onyxMiningSpeed, Settings.onyxDamageVsEntity, Settings.onyxEnchantability);
+    	
+    	armorCopper = EnumHelper.addArmorMaterial("COPPER", Settings.copperArmorDurability, Settings.copperArmorDamageReduction, Settings.copperArmorEnchantability);
+    	armorTin = EnumHelper.addArmorMaterial("TIN", Settings.tinArmorDurability, Settings.tinArmorDamageReduction, Settings.tinArmorEnchantability);
+    	armorMythril = EnumHelper.addArmorMaterial("MYTHRIL", Settings.mythrilArmorDurability, Settings.mythrilArmorDamageReduction, Settings.mythrilArmorEnchantability);
+    	armorAdamantium = EnumHelper.addArmorMaterial("ADAMANTIUM", Settings.adamantiumArmorDurability, Settings.adamantiumArmorDamageReduction, Settings.adamantiumArmorEnchantability);
+    	armorOnyx = EnumHelper.addArmorMaterial("ONYX", Settings.onyxArmorDurability, Settings.onyxArmorDamageReduction, Settings.onyxArmorEnchantability);
+    }
     
     @EventHandler
     public void Init(FMLInitializationEvent event)

@@ -4,9 +4,9 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBow;
 import net.minecraftforge.common.MinecraftForge;
-import SimpleOres.core.content.SimpleBow;
 import SimpleOres.core.content.SimpleShears;
 import SimpleOres.core.api.SimpleAxe;
+import SimpleOres.core.api.SimpleBow;
 import SimpleOres.core.api.SimpleHoe;
 import SimpleOres.core.api.SimplePickaxe;
 import SimpleOres.core.api.SimpleShovel;
@@ -14,19 +14,6 @@ import SimpleOres.core.api.SimpleSword;
 
 public class Tools 
 {
-	/**
-	 * Linking to the classes for easier reference.
-	 */
-	public static SimpleOres mod;
-	public static Achievements achievements;
-	public static Armor armor;
-	public static Blocks blocks;
-	public static Config config;
-	public static Items items;
-	public static Localisation local;
-	public static Recipes recipes;
-	public static Tools tools;
-	
 	/**
 	 * Creating the tool items.
 	 */
@@ -67,88 +54,88 @@ public class Tools
 	public static void doTools()
 	{
 		//Tool Details
-		copperPick = new SimplePickaxe(config.copperPickID, mod.toolCopper, "simpleores", SimpleOres.tabSimpleTools).setUnlocalizedName("copperPick");
-		copperAxe = new SimpleAxe(config.copperAxeID, mod.toolCopper, "simpleores", SimpleOres.tabSimpleTools).setUnlocalizedName("copperAxe");
-		copperShovel = new SimpleShovel(config.copperShovelID, mod.toolCopper, "simpleores", SimpleOres.tabSimpleTools).setUnlocalizedName("copperShovel");
-		copperSword = new SimpleSword(config.copperSwordID, mod.toolCopper, "simpleores", SimpleOres.tabSimpleCombat).setUnlocalizedName("copperSword");
-		copperHoe = new SimpleHoe(config.copperHoeID, mod.toolCopper, "simpleores", SimpleOres.tabSimpleTools).setUnlocalizedName("copperHoe");
-		tinPick = new SimplePickaxe(config.tinPickID, mod.toolTin, "simpleores", SimpleOres.tabSimpleTools).setUnlocalizedName("tinPick");
-		tinAxe = new SimpleAxe(config.tinAxeID, mod.toolTin, "simpleores", SimpleOres.tabSimpleTools).setUnlocalizedName("tinAxe");
-		tinShovel = new SimpleShovel(config.tinShovelID, mod.toolTin, "simpleores", SimpleOres.tabSimpleTools).setUnlocalizedName("tinShovel");
-		tinSword = new SimpleSword(config.tinSwordID, mod.toolTin, "simpleores", SimpleOres.tabSimpleCombat).setUnlocalizedName("tinSword");
-		tinHoe = new SimpleHoe(config.tinHoeID, mod.toolTin, "simpleores", SimpleOres.tabSimpleTools).setUnlocalizedName("tinHoe");
-		mythrilPick = new SimplePickaxe(config.mythrilPickID, mod.toolMythril, "simpleores", SimpleOres.tabSimpleTools).setUnlocalizedName("mythrilPick");
-		mythrilAxe = new SimpleAxe(config.mythrilAxeID, mod.toolMythril, "simpleores", SimpleOres.tabSimpleTools).setUnlocalizedName("mythrilAxe");
-		mythrilShovel = new SimpleShovel(config.mythrilShovelID, mod.toolMythril, "simpleores", SimpleOres.tabSimpleTools).setUnlocalizedName("mythrilShovel");
-		mythrilSword = new SimpleSword(config.mythrilSwordID, mod.toolMythril, "simpleores", SimpleOres.tabSimpleCombat).setUnlocalizedName("mythrilSword");
-		mythrilHoe = new SimpleHoe(config.mythrilHoeID, mod.toolMythril, "simpleores", SimpleOres.tabSimpleTools).setUnlocalizedName("mythrilHoe");
-		adamantiumPick = new SimplePickaxe(config.adamantiumPickID, mod.toolAdamantium, "simpleores", SimpleOres.tabSimpleTools).setUnlocalizedName("adamantiumPick");
-		adamantiumAxe = new SimpleAxe(config.adamantiumAxeID, mod.toolAdamantium, "simpleores", SimpleOres.tabSimpleTools).setUnlocalizedName("adamantiumAxe");
-		adamantiumShovel = new SimpleShovel(config.adamantiumShovelID, mod.toolAdamantium, "simpleores", SimpleOres.tabSimpleTools).setUnlocalizedName("adamantiumShovel");
-		adamantiumSword = new SimpleSword(config.adamantiumSwordID, mod.toolAdamantium, "simpleores", SimpleOres.tabSimpleCombat).setUnlocalizedName("adamantiumSword");
-		adamantiumHoe = new SimpleHoe(config.adamantiumHoeID, mod.toolAdamantium, "simpleores", SimpleOres.tabSimpleTools).setUnlocalizedName("adamantiumHoe");
-		onyxPick = new SimplePickaxe(config.onyxPickID, mod.toolOnyx, "simpleores", SimpleOres.tabSimpleTools).setUnlocalizedName("onyxPick");
-		onyxAxe = new SimpleAxe(config.onyxAxeID, mod.toolOnyx, "simpleores", SimpleOres.tabSimpleTools).setUnlocalizedName("onyxAxe");
-		onyxShovel = new SimpleShovel(config.onyxShovelID, mod.toolOnyx, "simpleores", SimpleOres.tabSimpleTools).setUnlocalizedName("onyxShovel");
-		onyxSword = new SimpleSword(config.onyxSwordID, mod.toolOnyx, "simpleores", SimpleOres.tabSimpleCombat).setUnlocalizedName("onyxSword");
-		onyxHoe = new SimpleHoe(config.onyxHoeID, mod.toolOnyx, "simpleores", SimpleOres.tabSimpleTools).setUnlocalizedName("onyxHoe");		
-		mythrilBow = (ItemBow) new SimpleBow(config.mythrilBowID, 750, mod.toolMythril).setFull3D().setUnlocalizedName("mythrilBow");
-		onyxBow = (ItemBow) new SimpleBow(config.onyxBowID, 1000, mod.toolOnyx).setFull3D().setUnlocalizedName("onyxBow");
-		tinShears = new SimpleShears(config.tinShearsID, 176).setUnlocalizedName("tinShears");
-		adamantiumShears = new SimpleShears(config.adamantiumShearsID, 1092).setUnlocalizedName("adamantiumShears");
-		onyxShears = new SimpleShears(config.onyxShearsID, 3116).setUnlocalizedName("onyxShears");
+		copperPick = new SimplePickaxe(Config.copperPickID, SimpleOres.toolCopper, "simpleores", SimpleOres.tabSimpleTools).setUnlocalizedName("copperPick");
+		copperAxe = new SimpleAxe(Config.copperAxeID, SimpleOres.toolCopper, "simpleores", SimpleOres.tabSimpleTools).setUnlocalizedName("copperAxe");
+		copperShovel = new SimpleShovel(Config.copperShovelID, SimpleOres.toolCopper, "simpleores", SimpleOres.tabSimpleTools).setUnlocalizedName("copperShovel");
+		copperSword = new SimpleSword(Config.copperSwordID, SimpleOres.toolCopper, "simpleores", SimpleOres.tabSimpleCombat).setUnlocalizedName("copperSword");
+		copperHoe = new SimpleHoe(Config.copperHoeID, SimpleOres.toolCopper, "simpleores", SimpleOres.tabSimpleTools).setUnlocalizedName("copperHoe");
+		tinPick = new SimplePickaxe(Config.tinPickID, SimpleOres.toolTin, "simpleores", SimpleOres.tabSimpleTools).setUnlocalizedName("tinPick");
+		tinAxe = new SimpleAxe(Config.tinAxeID, SimpleOres.toolTin, "simpleores", SimpleOres.tabSimpleTools).setUnlocalizedName("tinAxe");
+		tinShovel = new SimpleShovel(Config.tinShovelID, SimpleOres.toolTin, "simpleores", SimpleOres.tabSimpleTools).setUnlocalizedName("tinShovel");
+		tinSword = new SimpleSword(Config.tinSwordID, SimpleOres.toolTin, "simpleores", SimpleOres.tabSimpleCombat).setUnlocalizedName("tinSword");
+		tinHoe = new SimpleHoe(Config.tinHoeID, SimpleOres.toolTin, "simpleores", SimpleOres.tabSimpleTools).setUnlocalizedName("tinHoe");
+		mythrilPick = new SimplePickaxe(Config.mythrilPickID, SimpleOres.toolMythril, "simpleores", SimpleOres.tabSimpleTools).setUnlocalizedName("mythrilPick");
+		mythrilAxe = new SimpleAxe(Config.mythrilAxeID, SimpleOres.toolMythril, "simpleores", SimpleOres.tabSimpleTools).setUnlocalizedName("mythrilAxe");
+		mythrilShovel = new SimpleShovel(Config.mythrilShovelID, SimpleOres.toolMythril, "simpleores", SimpleOres.tabSimpleTools).setUnlocalizedName("mythrilShovel");
+		mythrilSword = new SimpleSword(Config.mythrilSwordID, SimpleOres.toolMythril, "simpleores", SimpleOres.tabSimpleCombat).setUnlocalizedName("mythrilSword");
+		mythrilHoe = new SimpleHoe(Config.mythrilHoeID, SimpleOres.toolMythril, "simpleores", SimpleOres.tabSimpleTools).setUnlocalizedName("mythrilHoe");
+		adamantiumPick = new SimplePickaxe(Config.adamantiumPickID, SimpleOres.toolAdamantium, "simpleores", SimpleOres.tabSimpleTools).setUnlocalizedName("adamantiumPick");
+		adamantiumAxe = new SimpleAxe(Config.adamantiumAxeID, SimpleOres.toolAdamantium, "simpleores", SimpleOres.tabSimpleTools).setUnlocalizedName("adamantiumAxe");
+		adamantiumShovel = new SimpleShovel(Config.adamantiumShovelID, SimpleOres.toolAdamantium, "simpleores", SimpleOres.tabSimpleTools).setUnlocalizedName("adamantiumShovel");
+		adamantiumSword = new SimpleSword(Config.adamantiumSwordID, SimpleOres.toolAdamantium, "simpleores", SimpleOres.tabSimpleCombat).setUnlocalizedName("adamantiumSword");
+		adamantiumHoe = new SimpleHoe(Config.adamantiumHoeID, SimpleOres.toolAdamantium, "simpleores", SimpleOres.tabSimpleTools).setUnlocalizedName("adamantiumHoe");
+		onyxPick = new SimplePickaxe(Config.onyxPickID, SimpleOres.toolOnyx, "simpleores", SimpleOres.tabSimpleTools).setUnlocalizedName("onyxPick");
+		onyxAxe = new SimpleAxe(Config.onyxAxeID, SimpleOres.toolOnyx, "simpleores", SimpleOres.tabSimpleTools).setUnlocalizedName("onyxAxe");
+		onyxShovel = new SimpleShovel(Config.onyxShovelID, SimpleOres.toolOnyx, "simpleores", SimpleOres.tabSimpleTools).setUnlocalizedName("onyxShovel");
+		onyxSword = new SimpleSword(Config.onyxSwordID, SimpleOres.toolOnyx, "simpleores", SimpleOres.tabSimpleCombat).setUnlocalizedName("onyxSword");
+		onyxHoe = new SimpleHoe(Config.onyxHoeID, SimpleOres.toolOnyx, "simpleores", SimpleOres.tabSimpleTools).setUnlocalizedName("onyxHoe");		
+		mythrilBow = (ItemBow) new SimpleBow(Config.mythrilBowID, 750, SimpleOres.toolMythril).setFull3D().setUnlocalizedName("mythrilBow");
+		onyxBow = (ItemBow) new SimpleBow(Config.onyxBowID, 1000, SimpleOres.toolOnyx).setFull3D().setUnlocalizedName("onyxBow");
+		tinShears = new SimpleShears(Config.tinShearsID, 176).setUnlocalizedName("tinShears");
+		adamantiumShears = new SimpleShears(Config.adamantiumShearsID, 1092).setUnlocalizedName("adamantiumShears");
+		onyxShears = new SimpleShears(Config.onyxShearsID, 3116).setUnlocalizedName("onyxShears");
 		
 		//Tool Names
 		if(Settings.enableOldLocalisation)
 		{
-			LanguageRegistry.addName(copperPick, local.copperPickName);
-			LanguageRegistry.addName(copperAxe, local.copperAxeName);
-			LanguageRegistry.addName(copperShovel, local.copperShovelName);
-			LanguageRegistry.addName(copperSword, local.copperSwordName);
-			LanguageRegistry.addName(copperHoe, local.copperHoeName);
-			LanguageRegistry.addName(tinPick, local.tinPickName);
-			LanguageRegistry.addName(tinAxe, local.tinAxeName);
-			LanguageRegistry.addName(tinShovel, local.tinShovelName);
-			LanguageRegistry.addName(tinSword, local.tinSwordName);
-			LanguageRegistry.addName(tinHoe, local.tinHoeName);
-			LanguageRegistry.addName(mythrilPick, local.mythrilPickName);
-			LanguageRegistry.addName(mythrilAxe, local.mythrilAxeName);
-			LanguageRegistry.addName(mythrilShovel, local.mythrilShovelName);
-			LanguageRegistry.addName(mythrilSword, local.mythrilSwordName);
-			LanguageRegistry.addName(mythrilHoe, local.mythrilHoeName);
-			LanguageRegistry.addName(adamantiumPick, local.adamantiumPickName);
-			LanguageRegistry.addName(adamantiumAxe, local.adamantiumAxeName);
-			LanguageRegistry.addName(adamantiumShovel, local.adamantiumShovelName);
-			LanguageRegistry.addName(adamantiumSword, local.adamantiumSwordName);
-			LanguageRegistry.addName(adamantiumHoe, local.adamantiumHoeName);	
-			LanguageRegistry.addName(onyxPick, local.onyxPickName);
-			LanguageRegistry.addName(onyxAxe, local.onyxAxeName);
-			LanguageRegistry.addName(onyxShovel, local.onyxShovelName);
-			LanguageRegistry.addName(onyxSword, local.onyxSwordName);
-			LanguageRegistry.addName(onyxHoe, local.onyxHoeName);
-			LanguageRegistry.addName(mythrilBow, local.mythrilBowName);
-			LanguageRegistry.addName(onyxBow, local.onyxBowName);
-			LanguageRegistry.addName(tinShears, local.tinShearsName);
-			LanguageRegistry.addName(adamantiumShears, local.adamantiumShearsName);
-			LanguageRegistry.addName(onyxShears, local.onyxShearsName);
+			LanguageRegistry.addName(copperPick, Localisation.copperPickName);
+			LanguageRegistry.addName(copperAxe, Localisation.copperAxeName);
+			LanguageRegistry.addName(copperShovel, Localisation.copperShovelName);
+			LanguageRegistry.addName(copperSword, Localisation.copperSwordName);
+			LanguageRegistry.addName(copperHoe, Localisation.copperHoeName);
+			LanguageRegistry.addName(tinPick, Localisation.tinPickName);
+			LanguageRegistry.addName(tinAxe, Localisation.tinAxeName);
+			LanguageRegistry.addName(tinShovel, Localisation.tinShovelName);
+			LanguageRegistry.addName(tinSword, Localisation.tinSwordName);
+			LanguageRegistry.addName(tinHoe, Localisation.tinHoeName);
+			LanguageRegistry.addName(mythrilPick, Localisation.mythrilPickName);
+			LanguageRegistry.addName(mythrilAxe, Localisation.mythrilAxeName);
+			LanguageRegistry.addName(mythrilShovel, Localisation.mythrilShovelName);
+			LanguageRegistry.addName(mythrilSword, Localisation.mythrilSwordName);
+			LanguageRegistry.addName(mythrilHoe, Localisation.mythrilHoeName);
+			LanguageRegistry.addName(adamantiumPick, Localisation.adamantiumPickName);
+			LanguageRegistry.addName(adamantiumAxe, Localisation.adamantiumAxeName);
+			LanguageRegistry.addName(adamantiumShovel, Localisation.adamantiumShovelName);
+			LanguageRegistry.addName(adamantiumSword, Localisation.adamantiumSwordName);
+			LanguageRegistry.addName(adamantiumHoe, Localisation.adamantiumHoeName);	
+			LanguageRegistry.addName(onyxPick, Localisation.onyxPickName);
+			LanguageRegistry.addName(onyxAxe, Localisation.onyxAxeName);
+			LanguageRegistry.addName(onyxShovel, Localisation.onyxShovelName);
+			LanguageRegistry.addName(onyxSword, Localisation.onyxSwordName);
+			LanguageRegistry.addName(onyxHoe, Localisation.onyxHoeName);
+			LanguageRegistry.addName(mythrilBow, Localisation.mythrilBowName);
+			LanguageRegistry.addName(onyxBow, Localisation.onyxBowName);
+			LanguageRegistry.addName(tinShears, Localisation.tinShearsName);
+			LanguageRegistry.addName(adamantiumShears, Localisation.adamantiumShearsName);
+			LanguageRegistry.addName(onyxShears, Localisation.onyxShearsName);
 		}
 		
 		//Tool Registering
-        MinecraftForge.setToolClass(copperPick, "pickaxe", 1);
-        MinecraftForge.setToolClass(copperShovel, "shovel", 1);
-        MinecraftForge.setToolClass(copperAxe, "axe", 1);
-        MinecraftForge.setToolClass(tinPick, "pickaxe", 1);
-        MinecraftForge.setToolClass(tinShovel, "shovel", 1);
-        MinecraftForge.setToolClass(tinAxe, "axe", 1);
-        MinecraftForge.setToolClass(mythrilPick, "pickaxe", 2);
-        MinecraftForge.setToolClass(mythrilShovel, "shovel", 2);
-        MinecraftForge.setToolClass(mythrilAxe, "axe", 2);
-        MinecraftForge.setToolClass(adamantiumPick, "pickaxe", 2);
-        MinecraftForge.setToolClass(adamantiumShovel, "shovel", 2);
-        MinecraftForge.setToolClass(adamantiumAxe, "axe", 2);
-        MinecraftForge.setToolClass(onyxPick, "pickaxe", 4);
-        MinecraftForge.setToolClass(onyxShovel, "shovel", 4);
-        MinecraftForge.setToolClass(onyxAxe, "axe", 4);
+        MinecraftForge.setToolClass(copperPick, "pickaxe", Settings.copperMiningLevel);
+        MinecraftForge.setToolClass(copperShovel, "shovel", Settings.copperMiningLevel);
+        MinecraftForge.setToolClass(copperAxe, "axe", Settings.copperMiningLevel);
+        MinecraftForge.setToolClass(tinPick, "pickaxe", Settings.tinMiningLevel);
+        MinecraftForge.setToolClass(tinShovel, "shovel", Settings.tinMiningLevel);
+        MinecraftForge.setToolClass(tinAxe, "axe", Settings.tinMiningLevel);
+        MinecraftForge.setToolClass(mythrilPick, "pickaxe", Settings.mythrilMiningLevel);
+        MinecraftForge.setToolClass(mythrilShovel, "shovel", Settings.mythrilMiningLevel);
+        MinecraftForge.setToolClass(mythrilAxe, "axe", Settings.mythrilMiningLevel);
+        MinecraftForge.setToolClass(adamantiumPick, "pickaxe", Settings.adamantiumMiningLevel);
+        MinecraftForge.setToolClass(adamantiumShovel, "shovel", Settings.adamantiumMiningLevel);
+        MinecraftForge.setToolClass(adamantiumAxe, "axe", Settings.adamantiumMiningLevel);
+        MinecraftForge.setToolClass(onyxPick, "pickaxe", Settings.onyxMiningLevel);
+        MinecraftForge.setToolClass(onyxShovel, "shovel", Settings.onyxMiningLevel);
+        MinecraftForge.setToolClass(onyxAxe, "axe", Settings.onyxMiningLevel);
 	}
 	
 }

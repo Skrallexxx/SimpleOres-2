@@ -35,6 +35,19 @@ public class FusionRecipes
 		return smeltingBase;
 	}
 	
+	/**
+	 * Adds a recipe to the Fusion Furnace. All inputs are in itemstack form, to allow for stack sizes and damages. 
+	 * 
+	 * You don't need to add separate recipes for reversed input1 and input2 items, the code will do that automatically for you.
+	 * 
+	 * For example, this:
+	 * addSmelting(new ItemStack(Items.copperIngot), new ItemStack(Items.tinIngot), new ItemStack(Item.redstone), new ItemStack(Items.bronzeIngot), 10.0F);
+	 * 
+	 * is the same as:
+	 * addSmelting(new ItemStack(Items.tinIngot), new ItemStack(Items.copperIngot), new ItemStack(Item.redstone), new ItemStack(Items.bronzeIngot), 10.0F);
+	 * 
+	 * Fairly logically set out (in my opinion), so it shouldn't be too hard to follow.
+	 */
 	public void addSmelting(ItemStack input1, ItemStack input2, ItemStack catalyst, ItemStack output, float experience)
 	{
 		ArrayList<String> itemList = getItemList(input1, input2, catalyst);
@@ -79,6 +92,12 @@ public class FusionRecipes
 	    size = recipeMap.size();
 	}
 	
+	/**
+	 * Gets the smelting result for the Fusion Furnace tile entity. Checks stack sizes, damages and item ID's. Also allows for the WILDCARD_VALUE to be used to specify ANY damage.
+	 * 
+	 * If there is no normal recipe available, it looks for an OreDictionary recipe, which automatically checks if there are any OreDictionary alternatives available for
+	 * the items used.
+	 */
 	public ItemStack getSmeltingResult(ItemStack input1, ItemStack input2, ItemStack catalyst)
 	{
 		ArrayList<String> itemList = getItemList(input1, input2, catalyst);
@@ -167,6 +186,11 @@ public class FusionRecipes
 		return null;
 	}
 	
+	/**
+	 * Returns an ArrayList of Strings of the ID's of the items put into the method.
+	 * 
+	 * This is called by both addSmelting and getSmeltingResult.
+	 */
 	public ArrayList<String> getItemList(ItemStack input1, ItemStack input2, ItemStack catalyst)
 	{
 		ArrayList<String> itemList = Lists.newArrayList();
@@ -176,6 +200,13 @@ public class FusionRecipes
 		return itemList;
 	}
 	
+	/**
+	 * Returns an ArrayList of Strings, however these Strings are themselves ArrayLists converted to Strings.
+	 * 
+	 * input1Variants, input2Variants and catalystVariants are all ArrayLists of Items, and are basically lists of
+	 * all the possible OreDictionary variants for the items put into the method. These ArrayLists are obtained by
+	 * calling the getOreDictVariants method below.
+	 */
 	public ArrayList<String> getDictionaryList(ItemStack input1, ItemStack input2, ItemStack catalyst)
 	{
 		ArrayList<String> dictionaryList = Lists.newArrayList();
@@ -186,6 +217,10 @@ public class FusionRecipes
 		return dictionaryList;
 	}
 	
+	/**
+	 * Returns an ArrayList of Integers, which is just a list of the item damages for the itemstacks put
+	 * into the method. 
+	 */
 	public ArrayList<Integer> getDamageList(ItemStack input1, ItemStack input2, ItemStack catalyst)
 	{
 		ArrayList<Integer> damageList = Lists.newArrayList();
@@ -195,6 +230,9 @@ public class FusionRecipes
 		return damageList;
 	}
 	
+	/**
+	 * Returns an ArrayList of Integers, which is a list of the stack sizes of the itemstacks put into the method.
+	 */
 	public ArrayList<Integer> getStackSizeList(ItemStack input1, ItemStack input2, ItemStack catalyst)
 	{
 		ArrayList<Integer> stackSizeList = Lists.newArrayList();
@@ -204,6 +242,11 @@ public class FusionRecipes
 		return stackSizeList;
 	}
 	
+	/**
+	 * Gets any possible variants for each of the input items and puts these items in ArrayLists.
+	 * These ArrayLists are called input1Variants, input2Variants and catalystVariants. They are
+	 * used again by getDictionaryList.
+	 */
 	public void getOreDictVariants(ItemStack input1, ItemStack input2, ItemStack catalyst)
 	{
 		input1Variants = Lists.newArrayList();
@@ -271,6 +314,11 @@ public class FusionRecipes
 		}
 	}
 	
+	/**
+	 * Returns the amount of experience given (as a float) when a certain item is taken from the output slot.
+	 * This is called by either the Fusion Furnace tile entity, or the Fusion Furnace slot, or even both
+	 * (I forget which :P).
+	 */
 	public float getExperience(ItemStack item)
 	{
 		if (item == null || item.getItem() == null)
@@ -292,13 +340,21 @@ public class FusionRecipes
         return (ret < 0 ? 0 : ret);
 	}
 	
+	/**
+	 * Just returns whether or not the available stack size in each slot is greater than the required stack size, as 
+	 * specified by the recipe. This is used by the Fusion Furnace tile entity to determine whether or not
+	 * smelting can actually go ahead (canSmelt method).
+	 */
 	public boolean isStackBigEnough()
 	{
-		boolean bool = false;
-		bool = isStackBigEnough;
-		return bool;
+		return isStackBigEnough;
 	}
 	
+	/**
+	 * Another method called by the Fusion Furnace tile entity class, is given a certain int as an index number,
+	 * and depending on that index number, returns another int which is the amount to reduce a stack by after 
+	 * the Fusion process is finished. This stack number is set by the recipe as well.
+	 */
 	public Integer decreaseStackBy(int index)
 	{
 		if(index == 0)
@@ -316,6 +372,11 @@ public class FusionRecipes
 		return null;
 	}
 	
+	/**
+	 * Gets an ArrayList of input items and checks if the parameter item is in that list.
+	 * If yes, returns true, if not returns false. This is used by the Fusion Furnace container
+	 * to allow shift clicking to work properly.
+	 */
 	public static boolean isItemInput(ItemStack item)
 	{
 		if (inputList.contains(item.getItem())) 
@@ -325,6 +386,11 @@ public class FusionRecipes
 		else return false;
 	}
 	
+	/**
+	 * Gets an ArrayList of catalyst items and checks if the parameter item is in that list.
+	 * If yes, returns true, if not returns false. This is used by the Fusion Furnace container
+	 * to allow shift clicking to work properly.
+	 */
 	public static boolean isItemCatalyst(ItemStack item)
 	{
 		if (catalystList.contains(item.getItem())) 

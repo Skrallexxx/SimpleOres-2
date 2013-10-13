@@ -31,7 +31,7 @@ public class HandlerTick implements ITickHandler
 				int itemID = player.getItemInUse().itemID;
 				if(itemID == Content.sinisiteBow.itemID || itemID == Content.thyriumBow.itemID)
 				{
-					SimpleOresFusion.proxy.onBowUse(player.getItemInUse(), player);
+					FusionPlugin.proxy.onBowUse(player.getItemInUse(), player);
 					if(itemID== Content.thyriumBow.itemID)
 					{
 						this.zoomAmount = (float) zoomAmount;
@@ -46,7 +46,7 @@ public class HandlerTick implements ITickHandler
 			
 			else 
 			{
-				SimpleOresFusion.proxy.resetSavedFOV();
+				FusionPlugin.proxy.resetSavedFOV();
 			}
 		}  
 	}

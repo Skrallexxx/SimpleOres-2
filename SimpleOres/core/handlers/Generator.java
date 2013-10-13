@@ -18,21 +18,7 @@ import net.minecraft.world.gen.feature.WorldGenMinable;
 import cpw.mods.fml.common.IWorldGenerator;
 
 public class Generator implements IWorldGenerator 
-{
-	/**
-	 * Linking to the classes for easier reference.
-	 */
-	public static SimpleOres mod;
-	public static Achievements achievements;
-	public static Armor armor;
-	public static Blocks blocks;
-	public static Config config;
-	public static Items items;
-	public static Localisation local;
-	public static Recipes recipes;
-	public static Settings settings;
-	public static Tools tools;
-	
+{	
 	/**
 	 * Generates the ores in the world. Depending on which 'world' the player is in (ie. Nether or Surface), different methods are called.
 	 * These two methods are generateSurface and generateNether, which are below.
@@ -62,36 +48,36 @@ public class Generator implements IWorldGenerator
 	 */
 	private void generateSurface(World world, Random random, int blockX, int blockZ) 
 	{
-		for(int x =0; x < settings.copperSpawnRate; x++)
+		for(int x = 0; x < Settings.copperSpawnRate; x++)
 		{
 		    int Xcoord = blockX + random.nextInt(16);
-		    int Ycoord = random.nextInt(settings.copperSpawnHeight);
+		    int Ycoord = random.nextInt(Settings.copperMaxHeight - Settings.copperMinHeight);
 		    int Zcoord = blockZ + random.nextInt(16);
-		    new WorldGenMinable(blocks.copperOre.blockID, settings.copperVeinSize).generate(world, random, Xcoord, Ycoord, Zcoord);
+		    new WorldGenMinable(Blocks.copperOre.blockID, Settings.copperVeinSize).generate(world, random, Xcoord, Ycoord + Settings.copperMinHeight, Zcoord);
 		}
 		
-		for(int x =0; x < settings.tinSpawnRate; x++)
+		for(int x = 0; x < Settings.tinSpawnRate; x++)
 		{
 			int Xcoord = blockX + random.nextInt(16);
-		    int Ycoord = random.nextInt(settings.tinSpawnHeight);
+		    int Ycoord = random.nextInt(Settings.tinMaxHeight - Settings.tinMinHeight);
 		    int Zcoord = blockZ + random.nextInt(16);
-		    new WorldGenMinable(blocks.tinOre.blockID, settings.tinVeinSize).generate(world, random, Xcoord, Ycoord, Zcoord);
+		    new WorldGenMinable(Blocks.tinOre.blockID, Settings.tinVeinSize).generate(world, random, Xcoord, Ycoord + Settings.tinMinHeight, Zcoord);
 		}
 
-		for(int x =0; x < settings.mythrilSpawnRate; x++)
+		for(int x = 0; x < Settings.mythrilSpawnRate; x++)
 		{
 		    int Xcoord = blockX + random.nextInt(16);
-		    int Ycoord = random.nextInt(settings.mythrilSpawnHeight);
+		    int Ycoord = random.nextInt(Settings.mythrilMaxHeight - Settings.mythrilMinHeight);
 		    int Zcoord = blockZ + random.nextInt(16);
-		    new WorldGenMinable(blocks.mythrilOre.blockID, settings.mythrilVeinSize).generate(world, random, Xcoord, Ycoord, Zcoord);
+		    new WorldGenMinable(Blocks.mythrilOre.blockID, Settings.mythrilVeinSize).generate(world, random, Xcoord, Ycoord + Settings.mythrilMinHeight, Zcoord);
 		}
 
-		for(int x =0; x < settings.adamantiumSpawnRate; x++)
+		for(int x = 0; x < Settings.adamantiumSpawnRate; x++)
 		{
 		    int Xcoord = blockX + random.nextInt(16);
-		    int Ycoord = random.nextInt(settings.adamantiumSpawnHeight);
+		    int Ycoord = random.nextInt(Settings.adamantiumMaxHeight - Settings.adamantiumMinHeight);
 		    int Zcoord = blockZ + random.nextInt(16);
-		    new WorldGenMinable(blocks.adamantiumOre.blockID, settings.adamantiumVeinSize).generate(world, random, Xcoord, Ycoord, Zcoord);
+		    new WorldGenMinable(Blocks.adamantiumOre.blockID, Settings.adamantiumVeinSize).generate(world, random, Xcoord, Ycoord + Settings.adamantiumMinHeight, Zcoord);
 		}
 	}
 	
@@ -109,12 +95,12 @@ public class Generator implements IWorldGenerator
 	 */
 	private void generateNether(World world, Random rand, int baseX, int baseZ) 
 	{
-	    for(int i = 0; i < settings.onyxSpawnRate; i++)
+	    for(int i = 0; i < Settings.onyxSpawnRate; i++)
 	    {
 	    	int randPosX = baseX + rand.nextInt(16);
-	        int randPosY = rand.nextInt(settings.onyxSpawnHeight);
+	        int randPosY = rand.nextInt(Settings.onyxMaxHeight - Settings.onyxMinHeight);
 	        int randPosZ = baseZ + rand.nextInt(16);
-	        new GenNetherrack(blocks.onyxOre.blockID, settings.onyxVeinSize).generate(world, rand, randPosX, randPosY, randPosZ);       
+	        new GenNetherrack(Blocks.onyxOre.blockID, Settings.onyxVeinSize).generate(world, rand, randPosX, randPosY + Settings.onyxMinHeight, randPosZ);       
 	    }
 	}
 }

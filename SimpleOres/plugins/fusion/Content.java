@@ -19,7 +19,7 @@ import net.minecraftforge.common.MinecraftForge;
 
 public class Content 
 {
-	public static SimpleOresFusion mod;
+	public static FusionPlugin mod;
 	
 	/**
 	 * Creating the blocks.

@@ -168,9 +168,8 @@ public class Recipes
 		    	FusionRecipes.smelting().addSmelting(new ItemStack(coreItems.onyxGem), new ItemStack(coreItems.mythrilIngot), new ItemStack(Item.ghastTear), new ItemStack(Content.largeSinisiteChunk), 60.0F);
 		    	
 		    	//Test
-		    	FusionRecipes.smelting().addSmelting(new ItemStack(Block.wood, 1, 0), new ItemStack(Block.leaves, 1, 0), new ItemStack(Item.dyePowder, 2, WILDCARD_VALUE), new ItemStack(Block.sapling, 1, 0), 1.0F);
-		    	FusionRecipes.smelting().addSmelting(new ItemStack(Block.wood, 1, 1), new ItemStack(Block.leaves, 1, 1), new ItemStack(Item.dyePowder, 2, WILDCARD_VALUE), new ItemStack(Block.sapling, 1, 1), 1.0F);
-		    	FusionRecipes.smelting().addSmelting(new ItemStack(Block.wood, 1, 2), new ItemStack(Block.leaves, 1, 2), new ItemStack(Item.dyePowder, 2, WILDCARD_VALUE), new ItemStack(Block.sapling, 1, 2), 1.0F);
+		    	FusionRecipes.smelting().addSmelting(new ItemStack(Block.wood, 1, 0), new ItemStack(Block.leaves, 1, 0), new ItemStack(Item.coal), new ItemStack(Block.sapling, 1, 0), 1.0F);
+		    	FusionRecipes.smelting().addSmelting(new ItemStack(Item.axeDiamond, 1, WILDCARD_VALUE), new ItemStack(Item.diamond), new ItemStack(Item.bucketLava), new ItemStack(Item.diamond, 4, 1), 1.0F);
 		    	
 		    //Regular Furnace
 				GameRegistry.addSmelting(Content.largeBronzeChunk.itemID, new ItemStack(Content.bronzeIngot, 1, 0), 0.3F);
