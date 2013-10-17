@@ -4,24 +4,24 @@
 		<!--Blocks-->
 	<entry key="tile.bronzeBlock.name">青銅磚</entry>
 	<entry key="tile.thyriumBlock.name">鍪銀磚</entry>
-	<entry key="tile.sinisiteBlock.name">黑秘銀磚</entry>
+	<entry key="tile.sinisiteBlock.name">逆銀磚</entry>
 	<entry key="tile.fusionFurnace.name">融合熔爐</entry>
 	<entry key="tile.fusionFurnaceOn.name">融合熔爐</entry>
 		<!--Items-->
 	<entry key="item.bronzeIngot.name">青銅錠</entry>
 	<entry key="item.thyriumIngot.name">鍪銀錠</entry>
-	<entry key="item.sinisiteIngot.name">黑秘銀錠</entry>
+	<entry key="item.sinisiteIngot.name">逆銀錠</entry>
 	<entry key="item.thyriumRod.name">鍪銀桿</entry>
-	<entry key="item.sinisiteRod.name">黑秘銀桿</entry>
+	<entry key="item.sinisiteRod.name">逆銀桿</entry>
 	<entry key="item.smallBronzeChunk.name">小青銅塊</entry>
 	<entry key="item.mediumBronzeChunk.name">中青銅塊</entry>
 	<entry key="item.largeBronzeChunk.name">大青銅塊</entry>
 	<entry key="item.smallThyriumChunk.name">小鍪銀塊</entry>
 	<entry key="item.mediumThyriumChunk.name">中鍪銀塊</entry>
 	<entry key="item.largeThyriumChunk.name">大鍪銀塊</entry>
-	<entry key="item.smallSinisiteChunk.name">小黑秘銀塊</entry>
-	<entry key="item.mediumSinisiteChunk.name">中黑秘銀塊</entry>
-	<entry key="item.largeSinisiteChunk.name">大黑秘銀塊</entry>
+	<entry key="item.smallSinisiteChunk.name">小逆銀塊</entry>
+	<entry key="item.mediumSinisiteChunk.name">中逆銀塊</entry>
+	<entry key="item.largeSinisiteChunk.name">大逆銀塊</entry>
 		<!--Tools-->
 	<entry key="item.bronzePick.name">青銅鎬</entry>
 	<entry key="item.bronzeAxe.name">青銅斧</entry>
@@ -33,13 +33,13 @@
 	<entry key="item.thyriumShovel.name">鍪銀鏟</entry>
 	<entry key="item.thyriumSword.name">鍪銀劍</entry>
 	<entry key="item.thyriumHoe.name">鍪銀鋤</entry>
-	<entry key="item.sinisitePick.name">黑秘銀鎬</entry>
-	<entry key="item.sinisiteAxe.name">黑秘銀斧</entry>
-	<entry key="item.sinisiteShovel.name">黑秘銀鏟</entry>
-	<entry key="item.sinisiteSword.name">黑秘銀劍</entry>
-	<entry key="item.sinisiteHoe.name">黑秘銀鋤</entry>
+	<entry key="item.sinisitePick.name">逆銀鎬</entry>
+	<entry key="item.sinisiteAxe.name">逆銀斧</entry>
+	<entry key="item.sinisiteShovel.name">逆銀鏟</entry>
+	<entry key="item.sinisiteSword.name">逆銀劍</entry>
+	<entry key="item.sinisiteHoe.name">逆銀鋤</entry>
 	<entry key="item.thyriumBow.name">鍪銀弓</entry>
-	<entry key="item.sinisiteBow.name">黑秘銀弓</entry>
+	<entry key="item.sinisiteBow.name">逆銀弓</entry>
 		<!--Armor-->
 	<entry key="item.bronzeHelm.name">青銅頭盔</entry>
 	<entry key="item.bronzeChest.name">青銅胸甲</entry>
@@ -49,10 +49,10 @@
 	<entry key="item.thyriumChest.name">鍪銀胸甲</entry>
 	<entry key="item.thyriumLegs.name">鍪銀護腿</entry>
 	<entry key="item.thyriumBoots.name">鍪銀靴子</entry>
-	<entry key="item.sinisiteHelm.name">黑秘銀頭盔</entry>
-	<entry key="item.sinisiteChest.name">黑秘銀胸甲</entry>
-	<entry key="item.sinisiteLegs.name">黑秘銀護腿</entry>
-	<entry key="item.sinisiteBoots.name">黑秘銀靴子</entry>
+	<entry key="item.sinisiteHelm.name">逆銀頭盔</entry>
+	<entry key="item.sinisiteChest.name">逆銀胸甲</entry>
+	<entry key="item.sinisiteLegs.name">逆銀護腿</entry>
+	<entry key="item.sinisiteBoots.name">逆銀靴子</entry>
 		<!--Achievements-->
 	<entry key="achievement.fusionAch">合二為一</entry>
 	<entry key="achievement.fusionAch.desc">製造融合熔爐，開拓新的可能性</entry>
