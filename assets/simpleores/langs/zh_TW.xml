@@ -8,8 +8,8 @@
 	<entry key="tile.tinBlock.name">錫磚</entry>
 	<entry key="tile.mythrilOre.name">秘銀礦</entry>
 	<entry key="tile.mythrilBlock.name">秘銀磚</entry>
-	<entry key="tile.adamantiumOre.name">堅鋼礦</entry>
-	<entry key="tile.adamantiumBlock.name">堅鋼磚</entry>
+	<entry key="tile.adamantiumOre.name">精金礦</entry>
+	<entry key="tile.adamantiumBlock.name">精金磚</entry>
 	<entry key="tile.onyxOre.name">縞瑪瑙礦</entry>
 	<entry key="tile.onyxBlock.name">縞瑪瑙磚</entry>
 	<entry key="tile.mythrilFurnace.name">秘銀熔爐</entry>
@@ -21,13 +21,13 @@
 	<entry key="tile.copperBars.name">銅欄杆</entry>
 	<entry key="tile.tinBars.name">錫欄杆</entry>
 	<entry key="tile.mythrilBars.name">秘銀欄杆</entry>
-	<entry key="tile.adamantiumBars.name">堅鋼欄杆</entry>
+	<entry key="tile.adamantiumBars.name">精金欄杆</entry>
 	<entry key="tile.onyxBars.name">縞瑪瑙欄杆</entry>
 		<!--Items-->
 	<entry key="item.copperIngot.name">銅錠</entry>
 	<entry key="item.tinIngot.name">錫錠</entry>
 	<entry key="item.mythrilIngot.name">秘銀錠</entry>
-	<entry key="item.adamantiumIngot.name">堅鋼錠</entry>
+	<entry key="item.adamantiumIngot.name">精金錠</entry>
 	<entry key="item.onyxGem.name">縞瑪瑙</entry>
 	<entry key="item.copperBucket.name">銅桶</entry>
 	<entry key="item.copperBucketWater.name">銅水桶</entry>
@@ -51,11 +51,11 @@
 	<entry key="item.mythrilShovel.name">秘銀鏟</entry>
 	<entry key="item.mythrilSword.name">秘銀劍</entry>
 	<entry key="item.mythrilHoe.name">秘銀鋤</entry>
-	<entry key="item.adamantiumPick.name">堅鋼鎬</entry>
-	<entry key="item.adamantiumAxe.name">堅鋼斧</entry>
-	<entry key="item.adamantiumShovel.name">堅鋼鏟</entry>
-	<entry key="item.adamantiumSword.name">堅鋼劍</entry>
-	<entry key="item.adamantiumHoe.name">堅鋼鋤</entry>
+	<entry key="item.adamantiumPick.name">精金鎬</entry>
+	<entry key="item.adamantiumAxe.name">精金斧</entry>
+	<entry key="item.adamantiumShovel.name">精金鏟</entry>
+	<entry key="item.adamantiumSword.name">精金劍</entry>
+	<entry key="item.adamantiumHoe.name">精金鋤</entry>
 	<entry key="item.onyxPick.name">縞瑪瑙鎬</entry>
 	<entry key="item.onyxAxe.name">縞瑪瑙斧</entry>
 	<entry key="item.onyxShovel.name">縞瑪瑙鏟</entry>
@@ -64,7 +64,7 @@
 	<entry key="item.mythrilBow.name">秘銀弓</entry>
 	<entry key="item.onyxBow.name">縞瑪瑙弓</entry>
 	<entry key="item.tinShears.name">錫剪刀</entry>
-	<entry key="item.adamantiumShears.name">堅鋼剪刀</entry>
+	<entry key="item.adamantiumShears.name">精金剪刀</entry>
 	<entry key="item.onyxShears.name">縞瑪瑙剪刀</entry>
 		<!--Armor-->
 	<entry key="item.copperHelm.name">銅頭盔</entry>
@@ -79,10 +79,10 @@
 	<entry key="item.mythrilChest.name">秘銀胸甲</entry>
 	<entry key="item.mythrilLegs.name">秘銀護腿</entry>
 	<entry key="item.mythrilBoots.name">秘銀靴子</entry>
-	<entry key="item.adamantiumHelm.name">堅鋼頭盔</entry>
-	<entry key="item.adamantiumChest.name">堅鋼胸甲</entry>
-	<entry key="item.adamantiumLegs.name">堅鋼護腿</entry>
-	<entry key="item.adamantiumBoots.name">堅鋼靴子</entry>
+	<entry key="item.adamantiumHelm.name">精金頭盔</entry>
+	<entry key="item.adamantiumChest.name">精金胸甲</entry>
+	<entry key="item.adamantiumLegs.name">精金護腿</entry>
+	<entry key="item.adamantiumBoots.name">精金靴子</entry>
 	<entry key="item.onyxHelm.name">縞瑪瑙頭盔</entry>
 	<entry key="item.onyxChest.name">縞瑪瑙胸甲</entry>
 	<entry key="item.onyxLegs.name">縞瑪瑙護腿</entry>
@@ -91,13 +91,13 @@
 	<entry key="achievement.simpleOresAch">歡迎來到簡單礦物的世界！</entry>
 	<entry key="achievement.simpleOresAch.desc">採集銅以開始簡單礦物的歷險旅程</entry>
 	<entry key="achievement.adamantiumAch">就是那綠色的</entry>
-	<entry key="achievement.adamantiumAch.desc">往地底的深處發掘堅鋼</entry>
+	<entry key="achievement.adamantiumAch.desc">往地底的深處發掘精金</entry>
 	<entry key="achievement.onyxAch">迷彩礦物</entry>
 	<entry key="achievement.onyxAch.desc">能找得到嗎？</entry>
 	<entry key="achievement.ironPickAch">升級MK-II</entry>
 	<entry key="achievement.ironPickAch.desc">合成一把鐵鎬</entry>
 	<entry key="achievement.adamantiumPickAch">快如閃電</entry>
-	<entry key="achievement.adamantiumPickAch.desc">製造堅鋼鎬以體驗無如倫比的採掘速度</entry>
+	<entry key="achievement.adamantiumPickAch.desc">製造精金鎬以體驗無如倫比的採掘速度</entry>
 	<entry key="achievement.onyxPickAch">不朽</entry>
 	<entry key="achievement.onyxPickAch.desc">或許它比你活得更久</entry>
 	<entry key="achievement.mythrilBowAch">神秘的弓</entry>
