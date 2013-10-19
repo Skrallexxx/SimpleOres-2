@@ -55,7 +55,7 @@
 	<entry key="item.sinisiteBoots.name">シニサイトのブーツ</entry>
 		<!--Achievements-->
 	<entry key="achievement.fusionAch">合体</entry>
-	<entry key="achievement.fusionAch.desc">融合かまどを作って新たな可能性をひらく</entry>
-	<entry key="achievement.bronzeAch">はじめての融合</entry>
-	<entry key="achievement.bronzeAch.desc">最初の合金、青銅インゴットを作ってみる</entry>
+	<entry key="achievement.fusionAch.desc">融合かまどを作り新たな可能性を開く</entry>
+	<entry key="achievement.bronzeAch">初めての融合</entry>
+	<entry key="achievement.bronzeAch.desc">最初の合金、青銅インゴット作りを試みる</entry>
 </properties>
