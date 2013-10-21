@@ -1,6 +1,7 @@
 package SimpleOres.core;
 
 import java.io.File;
+import java.util.Arrays;
 import java.util.logging.Level;
 
 import net.minecraft.block.StepSound;
@@ -9,8 +10,9 @@ import net.minecraftforge.common.Configuration;
 import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 
-public class Settings 
+public class Settings
 {
+	public static Configuration settings;
 	/**
 	 * Creating toggles. For example, whether or not separate custom tabs are enabled. Basically another config.
 	 */	
@@ -22,6 +24,7 @@ public class Settings
 	public static boolean enableToolStatModification;
 	public static boolean enableArmorStatModification;
 	public static boolean enableBlockStatModification;
+	public static boolean enableHigherDimensionGen;
 	
 	//Ore Spawn Rates
 	public static int copperSpawnRate;
@@ -57,6 +60,9 @@ public class Settings
 	//Bow Modifiers
 	public static int mythrilBowDamageModifier;
 	public static int onyxBowDamageModifier;
+	
+	//Higher Dimensions
+	public static int[] dimensionIDsArray;
 	
 	//Tool Stats
 	public static int copperMiningLevel;
@@ -104,6 +110,7 @@ public class Settings
 	
 	//Block Stats
 		//Copper
+		public static int copperOreHarvestLevel;
 		public static float copperOreHardness;
 		public static float copperOreResistance;
 		public static float copperBlockHardness;
@@ -114,6 +121,7 @@ public class Settings
 		public static float copperBarsResistance;
 		
 		//Tin
+		public static int tinOreHarvestLevel;
 		public static float tinOreHardness;
 		public static float tinOreResistance;
 		public static float tinBlockHardness;
@@ -122,6 +130,7 @@ public class Settings
 		public static float tinBarsResistance;
 		
 		//Mythril
+		public static int mythrilOreHarvestLevel;
 		public static float mythrilOreHardness;
 		public static float mythrilOreResistance;
 		public static float mythrilBlockHardness;
@@ -133,6 +142,7 @@ public class Settings
 		public static float mythrilBarsResistance;
 		
 		//Adamantium
+		public static int adamantiumOreHarvestLevel;
 		public static float adamantiumOreHardness;
 		public static float adamantiumOreResistance;
 		public static float adamantiumBlockHardness;
@@ -141,6 +151,7 @@ public class Settings
 		public static float adamantiumBarsResistance;
 		
 		//Onyx
+		public static int onyxOreHarvestLevel;
 		public static float onyxOreHardness;
 		public static float onyxOreResistance;
 		public static float onyxBlockHardness;
@@ -160,7 +171,7 @@ public class Settings
     {
 		File installDir = event.getModConfigurationDirectory();
 		File configDir = new File(installDir, "SimpleOres Configuration");
-		Configuration settings = new Configuration(new File(configDir, "SimpleOresSettings.cfg"));
+		settings = new Configuration(new File(configDir, "SimpleOresSettings.cfg"));
 		
 		try 
 	    {
@@ -173,6 +184,7 @@ public class Settings
 	    	enableToolStatModification = settings.get("Toggles", "Enable Tool Stat Modification? (Advanced)", false).getBoolean(enableToolStatModification);
 	    	enableArmorStatModification = settings.get("Toggles", "Enable Armor Stat Modification? (Advanced)", false).getBoolean(enableArmorStatModification);
 	    	enableBlockStatModification = settings.get("Toggles", "Enable Block Stat Modification? (Advanced)", false).getBoolean(enableBlockStatModification);
+	    	enableHigherDimensionGen = settings.get("Toggles", "Enable Higher Dimension Generation? (Advanced)", false).getBoolean(enableHigherDimensionGen);
 	    	
         	//Adjustable Ore Spawn Rates 
         	copperSpawnRate = settings.get("Spawn Rates", "Copper Spawn Rate", 35).getInt();
@@ -209,39 +221,73 @@ public class Settings
         	mythrilBowDamageModifier = settings.get("Bow Modifiers", "Mythril Bow Damage Modifier", 2).getInt();
         	onyxBowDamageModifier = settings.get("Bow Modifiers", "Onyx Bow Damage Modifier", 5).getInt();
         	
+        	//Higher Dimensions
+        	if(enableHigherDimensionGen)
+        	{
+        		dimensionIDsArray = settings.get("Higher Dimensions", "Higher Dimensions ID List", new int[]{}).getIntList();
+        		System.out.println("Number of dimension ID's in the array = " + dimensionIDsArray.length);
+    			try
+    			{
+            		for(int i = 0; i < dimensionIDsArray.length; i++)
+            		{
+            			settings.get("Higher Dimension ID: " + dimensionIDsArray[i], "Copper Spawn Rate", 35).getInt();
+            			settings.get("Higher Dimension ID: " + dimensionIDsArray[i], "Tin Spawn Rate", 30).getInt();
+            			settings.get("Higher Dimension ID: " + dimensionIDsArray[i], "Mythril Spawn Rate", 8).getInt();
+            			settings.get("Higher Dimension ID: " + dimensionIDsArray[i], "Adamantium Spawn Rate", 4).getInt();
+            			settings.get("Higher Dimension ID: " + dimensionIDsArray[i], "Copper Max Spawn Height", 90).getInt();
+            			settings.get("Higher Dimension ID: " + dimensionIDsArray[i], "Copper Min Spawn Height", 0).getInt();
+            			settings.get("Higher Dimension ID: " + dimensionIDsArray[i], "Tin Max Spawn Height", 90).getInt();
+            			settings.get("Higher Dimension ID: " + dimensionIDsArray[i], "Tin Min Spawn Height", 0).getInt();
+            			settings.get("Higher Dimension ID: " + dimensionIDsArray[i], "Mythril Max Spawn Height", 35).getInt();
+            			settings.get("Higher Dimension ID: " + dimensionIDsArray[i], "Mythril Min Spawn Height", 0).getInt();
+            			settings.get("Higher Dimension ID: " + dimensionIDsArray[i], "Adamantium Max Spawn Height", 20).getInt();
+            			settings.get("Higher Dimension ID: " + dimensionIDsArray[i], "Adamantium Min Spawn Height", 0).getInt();
+            			settings.get("Higher Dimension ID: " + dimensionIDsArray[i], "Copper Vein Size", 7).getInt();
+            			settings.get("Higher Dimension ID: " + dimensionIDsArray[i], "Tin Vein Size", 7).getInt();
+            			settings.get("Higher Dimension ID: " + dimensionIDsArray[i], "Mythril Vein Size", 4).getInt();
+            			settings.get("Higher Dimension ID: " + dimensionIDsArray[i], "Adamantium Vein Size", 4).getInt();
+        				System.out.println("Dimension ID in position " + i + " is " + dimensionIDsArray[i]);
+            		}
+    			}
+    			catch(Exception e)
+    			{
+    				
+    			}
+        	}
+        	else
+        		dimensionIDsArray = new int[]{};
+        	
         	//Tool Stat Modifiers
 	    	if(enableToolStatModification)
 	    	{
 	    		copperMiningLevel = settings.get("Tool Stats", "Copper Mining Level", 1).getInt();
 	    		copperUsesNum = settings.get("Tool Stats", "Copper Uses Number", 185).getInt();
-	    		copperMiningSpeed = (float) settings.get("Tool Stats", "Copper Mining Speed (Use divide to get fractions)", 4).getInt();
+	    		copperMiningSpeed = (float) settings.get("Tool Stats", "Copper Mining Speed", 4.0).getDouble(copperMiningSpeed);
 	    		copperDamageVsEntity = settings.get("Tool Stats", "Copper Damage Vs Entity", 1).getInt();
 	    		copperEnchantability = settings.get("Tool Stats", "Copper Enchantability", 8).getInt();
 	    		tinMiningLevel = settings.get("Tool Stats", "Tin Mining Level", 1).getInt();
 	    		tinUsesNum = settings.get("Tool Stats", "Tin Uses Number", 220).getInt();
-	    		tinMiningSpeed = (float) settings.get("Tool Stats", "Tin Mining Speed (Use divide to get fractions)", 35 / 10).getInt();
+	    		tinMiningSpeed = (float) settings.get("Tool Stats", "Tin Mining Speed", 3.5).getDouble(tinMiningSpeed);
 	    		tinDamageVsEntity = settings.get("Tool Stats", "Tin Damage Vs Entity", 1).getInt();
 	    		tinEnchantability = settings.get("Tool Stats", "Tin Enchantability", 8).getInt();
 	    		mythrilMiningLevel = settings.get("Tool Stats", "Mythril Mining Level", 2).getInt();
 	    		mythrilUsesNum = settings.get("Tool Stats", "Mythril Uses Number", 800).getInt();
-	    		mythrilMiningSpeed = (float) settings.get("Tool Stats", "Mythril Mining Speed (Use divide to get fractions)", 8).getInt();
+	    		mythrilMiningSpeed = (float) settings.get("Tool Stats", "Mythril Mining Speed", 8.0).getDouble(mythrilMiningSpeed);
 	    		mythrilDamageVsEntity = settings.get("Tool Stats", "Mythril Damage Vs Entity", 3).getInt();
 	    		mythrilEnchantability = settings.get("Tool Stats", "Mythril Enchantability", 12).getInt();
 	    		adamantiumMiningLevel = settings.get("Tool Stats", "Adamantium Mining Level", 2).getInt();
 	    		adamantiumUsesNum = settings.get("Tool Stats", "Adamantium Uses Number", 1150).getInt();
-	    		adamantiumMiningSpeed = (float) settings.get("Tool Stats", "Adamantium Mining Speed (Use divide to get fractions)", 14).getInt();
+	    		adamantiumMiningSpeed = (float) settings.get("Tool Stats", "Adamantium Mining Speed", 14.0).getDouble(adamantiumMiningSpeed);
 	    		adamantiumDamageVsEntity = settings.get("Tool Stats", "Adamantium Damage Vs Entity", 3).getInt();
 	    		adamantiumEnchantability = settings.get("Tool Stats", "Adamantium Enchantability", 3).getInt();
 	    		onyxMiningLevel = settings.get("Tool Stats", "Onyx Mining Level", 4).getInt();
 	    		onyxUsesNum = settings.get("Tool Stats", "Onyx Uses Number", 3280).getInt();
-	    		onyxMiningSpeed = (float) settings.get("Tool Stats", "Onyx Mining Speed", 10).getInt();
+	    		onyxMiningSpeed = (float) settings.get("Tool Stats", "Onyx Mining Speed", 10.0).getDouble(onyxMiningSpeed);
 	    		onyxDamageVsEntity = settings.get("Tool Stats", "Onyx Damage Vs Entity", 5).getInt();
 	    		onyxEnchantability = settings.get("Tool Stats", "Onyx Enchantability", 15).getInt();
 	    	}    	
 	    	else
-	    	{
 	    		toolStatDefaults();
-	    	}
 	    	
 	    	//Armor Stat Modifiers
 	    	if(enableArmorStatModification)
@@ -249,32 +295,81 @@ public class Settings
 	    		copperArmorDurability = settings.get("Armor Stats", "Copper Armor Durability", 8).getInt();
 	    		copperArmorDamageReduction = settings.get("Armor Stats", "Copper Armor Damage Reduction Array", new int[] {2, 3, 2, 1}).getIntList();
 	    		copperArmorEnchantability = settings.get("Armor Stats", "Copper Armor Enchantability", 8).getInt();
+	    		
 	    		tinArmorDurability = settings.get("Armor Stats", "Tin Armor Durability", 8).getInt();
 	    		tinArmorDamageReduction = settings.get("Armor Stats", "Tin Armor Damage Reduction Array", new int[] {2, 3, 2, 1}).getIntList();
 	    		tinArmorEnchantability = settings.get("Armor Stats", "Tin Armor Enchantability", 8).getInt();
+	    		
 	    		mythrilArmorDurability = settings.get("Armor Stats", "Mythril Armor Durability", 22).getInt();
 	    		mythrilArmorDamageReduction = settings.get("Armor Stats", "Mythril Armor Damage Reduction Array", new int[] {3, 5, 4, 3}).getIntList();
 	    		mythrilArmorEnchantability = settings.get("Armor Stats", "Mythril Armor Enchantability", 12).getInt();
+	    		
 	    		adamantiumArmorDurability = settings.get("Armor Stats", "Adamantium Armor Durability", 28).getInt();
 	    		adamantiumArmorDamageReduction = settings.get("Armor Stats", "Adamantium Armor Damage Reduction Array", new int[] {3, 8, 6, 2}).getIntList();
 	    		adamantiumArmorEnchantability = settings.get("Armor Stats", "Adamantium Armor Enchantability", 3).getInt();
+	    		
 	    		onyxArmorDurability = settings.get("Armor Stats", "Onyx Armor Durability", 45).getInt();
 	    		onyxArmorDamageReduction = settings.get("Armor Stats", "Onyx Armor Damage Reduction Array", new int[] {5, 8, 6, 5}).getIntList();
 	    		onyxArmorEnchantability = settings.get("Armor Stats", "Onyx Armor Enchantability", 15).getInt();   		
 	    	}
 	    	else
-	    	{
 	    		armorStatDefaults();
-	    	}
 	    	
+	    	//Block Stat Modifiers
 	    	if(enableBlockStatModification)
 	    	{
+	    		copperOreHarvestLevel = settings.get("Block Stats", "Copper Ore Harvest Level", 1).getInt();
+	    		copperOreHardness = (float) settings.get("Block Stats", "Copper Ore Hardness", 1.7).getDouble(copperOreHardness);
+	    		copperOreResistance = (float) settings.get("Block Stats", "Copper Ore Resistance", 5.0).getDouble(copperOreResistance);
+	    		copperBlockHardness = (float) settings.get("Block Stats", "Copper Block Hardness", 7.0).getDouble(copperBlockHardness);
+	    		copperBlockResistance = (float) settings.get("Block Stats", "Copper Block Resistance", 12.0).getDouble(copperBlockResistance);
+	    		copperDoorHardness = (float) settings.get("Block Stats", "Copper Door Hardness", 7.0).getDouble(copperDoorHardness);
+	    		copperDoorResistance = (float) settings.get("Block Stats", "Copper Door Resistance", 12.0).getDouble(copperDoorResistance);
+	    		copperBarsHardness = (float) settings.get("Block Stats", "Copper Bars Hardness", 3.0).getDouble(copperBarsHardness);
+	    		copperBarsResistance = (float) settings.get("Block Stats", "Copper Bars Resistance", 10.0).getDouble(copperBarsResistance);
 	    		
+	    		tinOreHarvestLevel = settings.get("Block Stats", "Tin Ore Harvest Level", 1).getInt();
+	    		tinOreHardness = (float) settings.get("Block Stats", "Tin Ore Hardness", 3.0).getDouble(tinOreHardness);
+	    		tinOreResistance = (float) settings.get("Block Stats", "Tin Ore Resistance", 5.0).getDouble(tinOreResistance);
+	    		tinBlockHardness = (float) settings.get("Block Stats", "Tin Block Hardness", 7.0).getDouble(tinBlockHardness);
+	    		tinBlockResistance = (float) settings.get("Block Stats", "Tin Block Resistance", 12.0).getDouble(tinBlockResistance);
+	    		tinBarsHardness = (float) settings.get("Block Stats", "Tin Bars Hardness", 3.0).getDouble(tinBarsHardness);
+	    		tinBarsResistance = (float) settings.get("Block Stats", "Tin Bars Resistance", 10.0).getDouble(tinBarsResistance);
+	    		
+	    		mythrilOreHarvestLevel = settings.get("Block Stats", "Mythril Ore Harvest Level", 2).getInt();
+	    		mythrilOreHardness = (float) settings.get("Block Stats", "Mythril Ore Hardness", 4.0).getDouble(mythrilOreHardness);
+	    		mythrilOreResistance = (float) settings.get("Block Stats", "Mythril Ore Resistance", 5.0).getDouble(mythrilOreResistance);
+	    		mythrilBlockHardness = (float) settings.get("Block Stats", "Mythril Block Hardness", 7.0).getDouble(mythrilBlockHardness);
+	    		mythrilBlockResistance = (float) settings.get("Block Stats", "Mythril Block Resistance", 12.0).getDouble(mythrilBlockResistance);
+	    		mythrilFurnaceHardness = (float) settings.get("Block Stats", "Mythril Furnace Hardness", 3.5).getDouble(mythrilFurnaceHardness);
+	    		mythrilFurnaceResistance = (float) settings.get("Block Stats", "Mythril Furnace Resistance", 10.0).getDouble(mythrilFurnaceResistance);
+	    		mythrilFurnaceLightValue = (float) settings.get("Block Stats", "Mythril Furnace Light Value", 1.0).getDouble(mythrilFurnaceLightValue);
+	    		mythrilBarsHardness = (float) settings.get("Block Stats", "Mythril Bars Hardness", 6.0).getDouble(mythrilBarsHardness);
+	    		mythrilBarsResistance = (float) settings.get("Block Stats", "Mythril Bars Hardness", 20.0).getDouble(mythrilBarsResistance);
+	    		
+	    		adamantiumOreHarvestLevel = settings.get("Block Stats", "Adamantium Ore Harvest Level", 2).getInt();
+	    		adamantiumOreHardness = (float) settings.get("Block Stats", "Adamantium Ore Hardness", 5.0).getDouble(adamantiumOreHardness);
+	    		adamantiumOreResistance = (float) settings.get("Block Stats", "Adamantium Ore Resistance", 5.0).getDouble(adamantiumOreResistance);
+	    		adamantiumBlockHardness = (float) settings.get("Block Stats", "Adamantium Block Hardness", 7.0).getDouble(adamantiumBlockHardness);
+	    		adamantiumBlockResistance = (float) settings.get("Block Stats", "Adamantium Block Resistance", 12.0).getDouble(adamantiumBlockResistance);
+	    		adamantiumBarsHardness = (float) settings.get("Block Stats", "Adamantium Bars Hardness", 8.0).getDouble(adamantiumBarsHardness);
+	    		adamantiumBarsResistance = (float) settings.get("Block Stats", "Adamantium Bars Resistance", 30.0).getDouble(adamantiumBarsResistance);
+	    		
+	    		onyxOreHarvestLevel = settings.get("Block Stats", "Onyx Ore Harvest Level", 3).getInt();
+	    		onyxOreHardness = (float) settings.get("Block Stats", "Onyx Ore Hardness", 7.0).getDouble(onyxOreHardness);
+	    		onyxOreResistance = (float) settings.get("Block Stats", "Onyx Ore Resistance", 5.0).getDouble(onyxOreResistance);
+	    		onyxBlockHardness = (float) settings.get("Block Stats", "Onyx Block Hardness", 25.0).getDouble(onyxBlockHardness);
+	    		onyxBlockResistance = (float) settings.get("Block Stats", "Onyx Block Resistance", 40.0).getDouble(onyxBlockResistance);
+	    		onyxFurnaceHardness = (float) settings.get("Block Stats", "Onyx Furnace Hardness", 20.0).getDouble(onyxFurnaceHardness);
+	    		onyxFurnaceResistance = (float) settings.get("Block Stats", "Onyx Furnace Resistance", 40.0).getDouble(onyxFurnaceResistance);
+	    		onyxFurnaceLightValue = (float) settings.get("Block Stats", "Onyx Furnace Light Value", 1.0).getDouble(onyxFurnaceLightValue);
+	    		onyxDoorHardness = (float) settings.get("Block Stats", "Onyx Door Hardness", 25.0).getDouble(onyxDoorHardness);
+	    		onyxDoorResistance = (float) settings.get("Block Stats", "Onyx Door Resistance", 40.0).getDouble(onyxDoorResistance);
+	    		onyxBarsHardness = (float) settings.get("Block Stats", "Onyx Bars Hardness", 10.0).getDouble(onyxBarsHardness);
+	    		onyxBarsResistance = (float) settings.get("Block Stats", "Onyx Bars Resistance", 40.0).getDouble(onyxBarsResistance);
 	    	}
 	    	else
-	    	{
 	    		blockStatDefaults();
-	    	}
 	    }
 		
     	catch (Exception e) 
@@ -339,6 +434,7 @@ public class Settings
 	
 	public static void blockStatDefaults()
 	{
+		copperOreHarvestLevel = 1;
 		copperOreHardness = 1.7F;
 		copperOreResistance = 5.0F;
 		copperBlockHardness = 7.0F;
@@ -348,6 +444,7 @@ public class Settings
 		copperBarsHardness = 3.0F;
 		copperBarsResistance = 10.0F;
 		
+		tinOreHarvestLevel = 1;
 		tinOreHardness = 3.0F;
 		tinOreResistance = 5.0F;
 		tinBlockHardness = 7.0F;
@@ -355,6 +452,7 @@ public class Settings
 		tinBarsHardness = 3.0F;
 		tinBarsResistance = 10.0F;
 		
+		mythrilOreHarvestLevel = 2;
 		mythrilOreHardness = 4.0F;
 		mythrilOreResistance = 5.0F;
 		mythrilBlockHardness = 7.0F;
@@ -365,6 +463,7 @@ public class Settings
 		mythrilBarsHardness = 6.0F;
 		mythrilBarsResistance = 20.0F;
 		
+		adamantiumOreHarvestLevel = 2;
 		adamantiumOreHardness = 5.0F;
 		adamantiumOreResistance = 5.0F;
 		adamantiumBlockHardness = 7.0F;
@@ -372,6 +471,7 @@ public class Settings
 		adamantiumBarsHardness = 8.0F;
 		adamantiumBarsResistance = 30.0F;
 		
+		onyxOreHarvestLevel = 3;
 		onyxOreHardness = 7.0F;
 		onyxOreResistance = 5.0F;
 		onyxBlockHardness = 25.0F;

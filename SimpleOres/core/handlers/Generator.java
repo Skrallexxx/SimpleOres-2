@@ -27,10 +27,25 @@ public class Generator implements IWorldGenerator
 	public void generate(Random random, int chunkX, int chunkZ, World world,
 			IChunkProvider chunkGenerator, IChunkProvider chunkProvider) 
 	{
-		switch (world.provider.dimensionId)
+		if(world.provider.dimensionId == -1)
 		{
-		   case -1: generateNether(world, random, chunkX*16, chunkZ*16);
-		   case 0: generateSurface(world, random, chunkX*16, chunkZ*16);
+			generateNether(world, random, chunkX*16, chunkZ*16);
+		}
+		
+		else if(world.provider.dimensionId == 0)
+		{
+			generateSurface(world, random, chunkX*16, chunkZ*16);
+		}
+		
+		else if(Settings.dimensionIDsArray.length >= 1)
+		{
+			for(int i = 0; i < Settings.dimensionIDsArray.length; i++)
+			{
+				if(world.provider.dimensionId == Settings.dimensionIDsArray[i])
+				{
+					generateHigher(world, random, chunkX*16, chunkZ*16, Settings.dimensionIDsArray[i]);
+				}
+			}
 		}
 	}
 	
@@ -102,5 +117,82 @@ public class Generator implements IWorldGenerator
 	        int randPosZ = baseZ + rand.nextInt(16);
 	        new GenNetherrack(Blocks.onyxOre.blockID, Settings.onyxVeinSize).generate(world, rand, randPosX, randPosY + Settings.onyxMinHeight, randPosZ);       
 	    }
+	}
+	
+	/**
+	 * Generates the main surface ores in dimensions other than the vanilla ones.
+	 * This is all configurable through the settings file, and is classified as "Advanced".
+	 * 
+	 * Each different dimension can have different spawn rates, with support for up to ~30000 dimensions (I think).
+	 */
+	private void generateHigher(World world, Random random, int blockX, int blockZ, int dimensionID) 
+	{
+		if(Settings.enableHigherDimensionGen)
+		{
+			for(int i = 0; i < Settings.dimensionIDsArray.length; i++)
+			{
+				int copperRate = Settings.settings.get("Higher Dimension ID: " + dimensionID, "Copper Spawn Rate", 35).getInt();
+				int tinRate = Settings.settings.get("Higher Dimension ID: " + dimensionID, "Tin Spawn Rate", 30).getInt();
+				int mythrilRate = Settings.settings.get("Higher Dimension ID: " + dimensionID, "Mythril Spawn Rate", 8).getInt();
+				int adamantiumRate = Settings.settings.get("Higher Dimension ID: " + dimensionID, "Adamantium Spawn Rate", 4).getInt();
+				
+				for(int x = 0; x < copperRate; x++)
+				{
+					int maxHeight = Settings.settings.get("Higher Dimension ID: " + dimensionID, "Copper Max Spawn Height", 90).getInt();
+					int minHeight = Settings.settings.get("Higher Dimension ID: " + dimensionID, "Copper Min Spawn Height", 0).getInt();
+					int veinSize = Settings.settings.get("Higher Dimension ID: " + dimensionID, "Copper Vein Size", 7).getInt();
+					
+				    int Xcoord = blockX + random.nextInt(16);
+				    int Ycoord = random.nextInt(maxHeight - minHeight);
+				    int Zcoord = blockZ + random.nextInt(16);
+				    new WorldGenMinable(Blocks.copperOre.blockID, veinSize).generate(world, random, Xcoord, Ycoord + minHeight, Zcoord);
+				    //System.out.println("SimpleOres has generated " + copperRate + " Copper in Dimension " + Settings.dimensionIDsArray[i] + " with MinHeight " + minHeight + " and MaxHeight " + maxHeight + " and VeinSize " + veinSize);
+				}
+				
+				for(int x = 0; x < tinRate; x++)
+				{
+					int maxHeight = Settings.settings.get("Higher Dimension ID: " + dimensionID, "Tin Max Spawn Height", 90).getInt();
+					int minHeight = Settings.settings.get("Higher Dimension ID: " + dimensionID, "Tin Min Spawn Height", 0).getInt();
+					int veinSize = Settings.settings.get("Higher Dimension ID: " + dimensionID, "Tin Vein Size", 7).getInt();
+					
+				    int Xcoord = blockX + random.nextInt(16);
+				    int Ycoord = random.nextInt(maxHeight - minHeight);
+				    int Zcoord = blockZ + random.nextInt(16);
+				    new WorldGenMinable(Blocks.tinOre.blockID, veinSize).generate(world, random, Xcoord, Ycoord + minHeight, Zcoord);
+				    //System.out.println("SimpleOres has generated " + copperRate + " Tin in Dimension " + Settings.dimensionIDsArray[i] + " with MinHeight " + minHeight + " and MaxHeight " + maxHeight + " and VeinSize " + veinSize);
+				}
+				
+				for(int x = 0; x < mythrilRate; x++)
+				{
+					int maxHeight = Settings.settings.get("Higher Dimension ID: " + dimensionID, "Mythril Max Spawn Height", 35).getInt();
+					int minHeight = Settings.settings.get("Higher Dimension ID: " + dimensionID, "Mythril Min Spawn Height", 0).getInt();
+					int veinSize = Settings.settings.get("Higher Dimension ID: " + dimensionID, "Mythril Vein Size", 4).getInt();
+					
+				    int Xcoord = blockX + random.nextInt(16);
+				    int Ycoord = random.nextInt(maxHeight - minHeight);
+				    int Zcoord = blockZ + random.nextInt(16);
+				    new WorldGenMinable(Blocks.mythrilOre.blockID, veinSize).generate(world, random, Xcoord, Ycoord + minHeight, Zcoord);
+				    //System.out.println("SimpleOres has generated " + copperRate + " Mythril in Dimension " + Settings.dimensionIDsArray[i] + " with MinHeight " + minHeight + " and MaxHeight " + maxHeight + " and VeinSize " + veinSize);
+				}
+				
+				for(int x = 0; x < adamantiumRate; x++)
+				{
+					int maxHeight = Settings.settings.get("Higher Dimension ID: " + dimensionID, "Adamantium Max Spawn Height", 20).getInt();
+					int minHeight = Settings.settings.get("Higher Dimension ID: " + dimensionID, "Adamantium Min Spawn Height", 0).getInt();
+					int veinSize = Settings.settings.get("Higher Dimension ID: " + dimensionID, "Adamantium Vein Size", 4).getInt();
+					
+				    int Xcoord = blockX + random.nextInt(16);
+				    int Ycoord = random.nextInt(maxHeight - minHeight);
+				    int Zcoord = blockZ + random.nextInt(16);
+				    new WorldGenMinable(Blocks.mythrilOre.blockID, veinSize).generate(world, random, Xcoord, Ycoord + minHeight, Zcoord);
+				    //System.out.println("SimpleOres has generated " + copperRate + " Adamantium in Dimension " + Settings.dimensionIDsArray[i] + " with MinHeight " + minHeight + " and MaxHeight " + maxHeight + " and VeinSize " + veinSize);
+				}
+			}
+		}
+	}
+	
+	private void generateNothing()
+	{
+		
 	}
 }

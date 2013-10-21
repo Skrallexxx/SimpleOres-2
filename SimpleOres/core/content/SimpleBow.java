@@ -1,4 +1,4 @@
- package SimpleOres.core.api;
+ package SimpleOres.core.content;
 
 import java.util.List;
 import java.util.Random;

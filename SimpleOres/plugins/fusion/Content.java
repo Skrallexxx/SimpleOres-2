@@ -129,11 +129,11 @@ public class Content
 	public static void doBlocks()
 	{
 		//Block Properties
-		bronzeBlock = new SimpleOre(IDs.bronzeBlockID, Material.iron, "simpleoresfusion", SimpleOres.tabSimpleBlocks).setHardness(7.0F).setResistance(12.0F).setCreativeTab(SimpleOres.tabSimpleBlocks).setUnlocalizedName("bronzeBlock");
-		thyriumBlock = new SimpleOre(IDs.thyriumBlockID, Material.iron, "simpleoresfusion", SimpleOres.tabSimpleBlocks).setHardness(7.0F).setResistance(12.0F).setCreativeTab(SimpleOres.tabSimpleBlocks).setUnlocalizedName("thyriumBlock");
-		sinisiteBlock = new SimpleOre(IDs.sinisiteBlockID, Material.iron, "simpleoresfusion", SimpleOres.tabSimpleBlocks).setHardness(7.0F).setResistance(12.0F).setCreativeTab(SimpleOres.tabSimpleBlocks).setUnlocalizedName("sinisiteBlock");
-		fusionFurnace = new FusionFurnace(IDs.fusionFurnaceID, false).setHardness(3.5F).setResistance(10.0F).setUnlocalizedName("fusionFurnace");
-		fusionFurnaceOn = new FusionFurnace(IDs.fusionFurnaceOnID, true).setHardness(3.5F).setLightValue(1.0F).setUnlocalizedName("fusionFurnaceOn");
+		bronzeBlock = new SimpleOre(IDs.bronzeBlockID, Material.iron, "simpleoresfusion", SimpleOres.tabSimpleBlocks).setHardness(Settings.bronzeBlockHardness).setResistance(Settings.bronzeBlockResistance).setCreativeTab(SimpleOres.tabSimpleBlocks).setUnlocalizedName("bronzeBlock");
+		thyriumBlock = new SimpleOre(IDs.thyriumBlockID, Material.iron, "simpleoresfusion", SimpleOres.tabSimpleBlocks).setHardness(Settings.thyriumBlockHardness).setResistance(Settings.thyriumBlockResistance).setCreativeTab(SimpleOres.tabSimpleBlocks).setUnlocalizedName("thyriumBlock");
+		sinisiteBlock = new SimpleOre(IDs.sinisiteBlockID, Material.iron, "simpleoresfusion", SimpleOres.tabSimpleBlocks).setHardness(Settings.sinisiteBlockHardness).setResistance(Settings.sinisiteBlockResistance).setCreativeTab(SimpleOres.tabSimpleBlocks).setUnlocalizedName("sinisiteBlock");
+		fusionFurnace = new FusionFurnace(IDs.fusionFurnaceID, false).setHardness(Settings.fusionFurnaceHardness).setResistance(Settings.fusionFurnaceResistance).setUnlocalizedName("fusionFurnace");
+		fusionFurnaceOn = new FusionFurnace(IDs.fusionFurnaceOnID, true).setHardness(Settings.fusionFurnaceHardness).setResistance(Settings.fusionFurnaceResistance).setLightValue(Settings.fusionFurnaceLightValue).setUnlocalizedName("fusionFurnaceOn");
 		
 		//Block Naming
 		if(Settings.enableOldLocalisation)

@@ -14,15 +14,14 @@ public class HandlerCrafting implements ICraftingHandler
 		{
 			player.addStat(Achievements.fusionAch, 1);
 		}
-		if(item.itemID == Content.bronzeIngot.itemID)
-		{
-			player.addStat(Achievements.bronzeAch, 1);
-		}
 	}
 	
 	@Override
 	public void onSmelting(EntityPlayer player, ItemStack item) 
 	{
-		
+		if(item.itemID == Content.bronzeIngot.itemID)
+		{
+			player.addStat(Achievements.bronzeAch, 1);
+		}
 	}
 }

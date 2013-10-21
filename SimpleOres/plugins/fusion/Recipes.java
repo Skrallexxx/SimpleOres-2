@@ -167,13 +167,70 @@ public class Recipes
 		    	FusionRecipes.smelting().addSmelting(new ItemStack(coreItems.onyxGem), new ItemStack(coreItems.mythrilIngot), new ItemStack(Item.blazePowder), new ItemStack(Content.mediumSinisiteChunk), 20.0F);
 		    	FusionRecipes.smelting().addSmelting(new ItemStack(coreItems.onyxGem), new ItemStack(coreItems.mythrilIngot), new ItemStack(Item.ghastTear), new ItemStack(Content.largeSinisiteChunk), 60.0F);
 		    	
-		    	//Test
-		    	FusionRecipes.smelting().addSmelting(new ItemStack(Block.wood, 1, 0), new ItemStack(Block.leaves, 1, 0), new ItemStack(Item.coal), new ItemStack(Block.sapling, 1, 0), 1.0F);
-		    	FusionRecipes.smelting().addSmelting(new ItemStack(Item.axeDiamond, 1, WILDCARD_VALUE), new ItemStack(Item.diamond), new ItemStack(Item.bucketLava), new ItemStack(Item.diamond, 4, 1), 1.0F);
-		    	
 		    //Regular Furnace
 				GameRegistry.addSmelting(Content.largeBronzeChunk.itemID, new ItemStack(Content.bronzeIngot, 1, 0), 0.3F);
 				GameRegistry.addSmelting(Content.largeThyriumChunk.itemID, new ItemStack(Content.thyriumIngot, 1, 0), 0.6F);
 				GameRegistry.addSmelting(Content.largeSinisiteChunk.itemID, new ItemStack(Content.sinisiteIngot, 1, 0), 1.0F);
+	}
+	
+	public static void addCustomFusionRecipes()
+	{
+		int[] id1 = Settings.input1Id;
+		String[] meta1 = Settings.input1Meta;
+		int[] size1 = Settings.input1Size;
+		int[] id2 = Settings.input2Id;
+		String[] meta2 = Settings.input2Meta;
+		int[] size2 = Settings.input2Size;
+		int[] id3 = Settings.catalystId;
+		String[] meta3 = Settings.catalystMeta;
+		int[] size3 = Settings.catalystSize;
+		int[] id4 = Settings.outputId;
+		String[] meta4 = Settings.outputMeta;
+		int[] size4 = Settings.outputSize;
+		double[] exp = Settings.expAmount;
+		
+		if(Settings.enableCustomFusionRecipes)
+		{
+			if(id1.length > 0 && id2.length > 0 && id3.length > 0 && id4.length > 0)
+			{
+				if(id1.length == id2.length && id1.length == id3.length && id1.length == id4.length)
+				{
+					for(int i = 0; i < id1.length; i++)
+					{
+						float experience = (float) exp[i];
+						int dam1, dam2, dam3, dam4;
+						
+						if(meta1[i].contains("WILDCARD_VALUE"))
+							dam1 = WILDCARD_VALUE;
+						else
+							dam1 = Integer.parseInt(meta1[i]);
+						
+						if(meta2[i].contains("WILDCARD_VALUE"))
+							dam2 = WILDCARD_VALUE;
+						else
+							dam2 = Integer.parseInt(meta2[i]);
+						
+						if(meta3[i].contains("WILDCARD_VALUE"))
+							dam3 = WILDCARD_VALUE;
+						else
+							dam3 = Integer.parseInt(meta3[i]);
+						
+						if(meta4[i].contains("WILDCARD_VALUE"))
+							dam4 = WILDCARD_VALUE;
+						else
+							dam4 = Integer.parseInt(meta4[i]);
+						
+						try
+						{
+							FusionRecipes.smelting().addSmelting(new ItemStack(id1[i], size1[i], dam1), new ItemStack(id2[i], size2[i], dam2), new ItemStack(id3[i], size3[i], dam3), new ItemStack(id4[i], size4[i], dam4), experience);						
+						}
+						catch(Exception e)
+						{
+							System.out.println("[SimpleOres 2] Couldn't add a custom Fusion Furnace recipe for some reason. Try checking your values at index #" + i + " and then try again.");
+						}
+					}
+				}
+			}
+		}
 	}
 }

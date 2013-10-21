@@ -44,7 +44,7 @@ public class Netherrocks
 	public static EnumToolMaterial toolAshstone = EnumHelper.addToolMaterial("ASHSTONE", 3, 900, 16F, 2, 7);
 	public static EnumToolMaterial toolDragonstone = EnumHelper.addToolMaterial("DRAGONSTONE", 4, 4000, 10F, 8, 27);
 	public static EnumToolMaterial toolArgonite = EnumHelper.addToolMaterial("ARGONITE", 3, 1300, 8F, 3, 18);
-	public static EnumToolMaterial toolFyrite = EnumHelper.addToolMaterial("FYRITE", 3, 700, 8F, 4, 7);
+	public static EnumToolMaterial toolFyrite = EnumHelper.addToolMaterial("FYRITE", 3, 150, 8F, 4, 7);
 	public static EnumToolMaterial toolIllumenite = EnumHelper.addToolMaterial("ILLUMENITE", 3, 700, 8F, 4, 7);
 	
     /**

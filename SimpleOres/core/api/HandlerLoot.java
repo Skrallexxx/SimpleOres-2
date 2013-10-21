@@ -50,14 +50,14 @@ public class HandlerLoot
 	 * Adds blocks to the loot list.
 	 * 
 	 * @param location = the location of the chest you want to add the loot to. These can all be found in ChestGenHooks.
-	 * @param block = the block you want added to the chest.
-	 * @param minChance = the minimum chance for the block to spawn.
-	 * @param maxChance = the maximum chance for the block spawn.
+	 * @param stack = the itemstack you want added to the chest.
+	 * @param minChance = the minimum chance for the stack to spawn.
+	 * @param maxChance = the maximum chance for the stack spawn.
 	 * @param howOften = how many loot 'slots' it can generate in. ie. How many can generate in the chest.
 	 */
-	public void addLoot(String location, Block block, int minChance, int maxChance, int howOften)
+	public void addLoot(String location, ItemStack stack, int minChance, int maxChance, int howOften)
 	{
-		ChestGenHooks.getInfo(location).addItem(new WeightedRandomChestContent(new ItemStack(block), minChance, maxChance, howOften));
+		ChestGenHooks.getInfo(location).addItem(new WeightedRandomChestContent(stack, minChance, maxChance, howOften));
 	}
 	
 	/**

@@ -1,7 +1,5 @@
 package SimpleOres.plugins.fusion;
 
-import SimpleOres.core.handlers.HandlerCrafting;
-import SimpleOres.core.handlers.HandlerPickup;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 import net.minecraft.stats.Achievement;
@@ -23,7 +21,6 @@ public class Achievements
 		bronzeAch = new Achievement(IDs.bronzeAchID, "bronzeAch", 8, 6, Content.bronzeIngot, fusionAch).registerAchievement();
 		
 		GameRegistry.registerCraftingHandler(new HandlerCrafting());
-		GameRegistry.registerPickupHandler(new HandlerPickup());
 		if(Settings.enableOldLocalisation)
 		{
 			addAchievementLocalizations();

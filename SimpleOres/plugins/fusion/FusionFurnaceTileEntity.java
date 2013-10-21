@@ -47,11 +47,11 @@ public class FusionFurnaceTileEntity extends TileEntity implements ISidedInvento
 	public static Recipes recipes;
 	public static Tools tools;
 	
-    private static final int[] slots_input1 = new int[] {0}; //top
+    private static final int[] slots_input1 = new int[] {0};
     private static final int[] slots_input2 = new int[] {3};
     private static final int[] slots_catalyst = new int[] {4};
-    private static final int[] slots_output = new int[] {2, 1}; //bottom
-    private static final int[] slots_fuel = new int[] {1}; //sides
+    private static final int[] slots_output = new int[] {2, 1}; 
+    private static final int[] slots_fuel = new int[] {1}; 
 
     /**
      * The ItemStacks that hold the items currently being used in the furnace
@@ -481,9 +481,29 @@ public class FusionFurnaceTileEntity extends TileEntity implements ISidedInvento
      * Returns an array containing the indices of the slots that can be accessed by automation on the given side of this
      * block.
      */
-    public int[] getAccessibleSlotsFromSide(int par1)
+    public int[] getAccessibleSlotsFromSide(int side)
     {
-        return par1 == 0 ? slots_output : (par1 == 1 ? slots_input1 : slots_fuel);
+    	if(side == 0) //Bottom
+    	{
+    		return slots_output;
+    	}
+    	
+    	if(side == 1) //Top
+    	{
+    		return slots_catalyst;
+    	}
+    	
+    	ForgeDirection blockOrientation = ForgeDirection.getOrientation(worldObj.getBlockMetadata(xCoord, yCoord, zCoord));
+    	if(blockOrientation.getRotation(ForgeDirection.UP).equals(ForgeDirection.getOrientation(side))) //Left
+    	{
+    		return slots_input1;
+    	}
+    	if(blockOrientation.getRotation(ForgeDirection.DOWN).equals(ForgeDirection.getOrientation(side))) //Right
+    	{
+    		return slots_input2;
+    	}
+    	
+    	return slots_fuel;
     }
 
     /**
@@ -508,8 +528,13 @@ public class FusionFurnaceTileEntity extends TileEntity implements ISidedInvento
      * Returns true if automation is allowed to insert the given stack (ignoring stack size) into the given slot.
      */
 	@Override
-    public boolean isItemValidForSlot(int par1, ItemStack par2ItemStack)
+    public boolean isItemValidForSlot(int slot, ItemStack item)
     {
-        return par1 == 2 ? false : (par1 == 1 ? isItemFuel(par2ItemStack) : true);
+        switch(slot)
+        {
+        	case 1: return isItemFuel(item);
+        	case 2: return false;
+        	default: return true;
+        }
     }
 }

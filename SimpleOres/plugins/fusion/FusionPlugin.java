@@ -38,16 +38,16 @@ public class FusionPlugin
 	/**
 	 * EnumToolMaterial. In form ("NAME", mining level, max uses, speed, damage to entity, enchantability)
 	 */
-    public static EnumToolMaterial toolBronze = EnumHelper.addToolMaterial("BRONZE", 2, 400, 7.5F, 2, 6);
-    public static EnumToolMaterial toolThyrium = EnumHelper.addToolMaterial("THYRIUM", 3, 2000, 22.0F, 6, 28);
-    public static EnumToolMaterial toolSinisite = EnumHelper.addToolMaterial("SINISITE", 5, 4100, 18.0F, 8, 11);
+    public static EnumToolMaterial toolBronze;
+    public static EnumToolMaterial toolThyrium;
+    public static EnumToolMaterial toolSinisite;
     
     /**
      * EnumArmorMaterial. In form ("NAME", max damage (like uses, multiply by pieces for their max damage), new int[] {helmet defense, chestplate defense, leggings defense, boots defense}, enchantability)
      */
-    public static EnumArmorMaterial armorBronze = EnumHelper.addArmorMaterial("BRONZE", 16, new int[] {3, 5, 3, 1}, 6);
-    public static EnumArmorMaterial armorThyrium = EnumHelper.addArmorMaterial("THYRIUM", 39, new int[] {4, 8, 7, 4}, 28);
-    public static EnumArmorMaterial armorSinisite = EnumHelper.addArmorMaterial("SINISITE", 56, new int[] {6, 8, 8, 7}, 11);
+    public static EnumArmorMaterial armorBronze;
+    public static EnumArmorMaterial armorThyrium;
+    public static EnumArmorMaterial armorSinisite;
     
     /**
      * Creating the Armor Renderers. This is simply so you can see the armor texture when you wear it.
@@ -73,16 +73,29 @@ public class FusionPlugin
     	Settings.doSettings(event);
     	
     	//Content
+    	setToolsAndArmorStats();
     	Content.doArmor();
     	Content.doBlocks();
     	Content.doItems();
     	Content.doTools();
     	Achievements.doAchievements();
     	Recipes.doRecipes();
+    	Recipes.addCustomFusionRecipes();
     	
     	//Loot
     	HandlerLoot.lootHandler().addLoot("villageBlacksmith", Content.thyriumSword, 1, 1, 10);
     	HandlerLoot.lootHandler().addLoot("mineshaftCorridor", Content.sinisiteAxe, 1, 1, 4);
+    }
+    
+    public static void setToolsAndArmorStats()
+    {
+    	toolBronze = EnumHelper.addToolMaterial("BRONZE", Settings.bronzeMiningLevel, Settings.bronzeUsesNum, Settings.bronzeMiningSpeed, Settings.bronzeDamageVsEntity, Settings.bronzeEnchantability);
+    	toolThyrium = EnumHelper.addToolMaterial("THYRIUM", Settings.thyriumMiningLevel, Settings.thyriumUsesNum, Settings.thyriumMiningSpeed, Settings.thyriumDamageVsEntity, Settings.thyriumEnchantability);
+    	toolSinisite = EnumHelper.addToolMaterial("SINISITE", Settings.sinisiteMiningLevel, Settings.sinisiteUsesNum, Settings.sinisiteMiningSpeed, Settings.sinisiteDamageVsEntity, Settings.sinisiteEnchantability);
+    	
+    	armorBronze = EnumHelper.addArmorMaterial("BRONZE", Settings.bronzeArmorDurability, Settings.bronzeArmorDamageReduction, Settings.bronzeArmorEnchantability);
+    	armorThyrium = EnumHelper.addArmorMaterial("THYRIUM", Settings.thyriumArmorDurability, Settings.thyriumArmorDamageReduction, Settings.thyriumArmorEnchantability);
+    	armorSinisite = EnumHelper.addArmorMaterial("SINISITE", Settings.sinisiteArmorDurability, Settings.sinisiteArmorDamageReduction, Settings.sinisiteArmorEnchantability);
     }
     
     @EventHandler

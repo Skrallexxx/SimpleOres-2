@@ -46,15 +46,10 @@ public class Blocks
 	public static Block adamantiumBlock;
 	public static Block onyxOre;
 	public static Block onyxBlock;
-	public static Block bronzeBlock;
-	public static Block thyriumBlock;
-	public static Block sinisiteBlock;
 	public static Block mythrilFurnace;
 	public static Block mythrilFurnaceOn;
 	public static Block onyxFurnace;
 	public static Block onyxFurnaceOn;
-	public static Block fusionFurnace;
-	public static Block fusionFurnaceOn;
 	public static Block copperDoor;
 	public static Block onyxDoor;
 	public static Block copperBars;
@@ -69,27 +64,27 @@ public class Blocks
 	public static void doBlocks()
 	{
 		//Block Properties
-		copperOre = new SimpleOre(config.copperOreID, Material.rock, "simpleores", SimpleOres.tabSimpleBlocks).setHardness(1.7F).setResistance(5.0F).setUnlocalizedName("copperOre");
-		copperBlock = new SimpleOre(config.copperBlockID, Material.iron, "simpleores", SimpleOres.tabSimpleBlocks).setHardness(7.0F).setResistance(12.0F).setUnlocalizedName("copperBlock"); 
-		tinOre = new SimpleOre(config.tinOreID, Material.rock, "simpleores", SimpleOres.tabSimpleBlocks).setHardness(3.0F).setResistance(5.0F).setUnlocalizedName("tinOre");
-		tinBlock = new SimpleOre(config.tinBlockID, Material.iron, "simpleores", SimpleOres.tabSimpleBlocks).setHardness(7.0F).setResistance(12.0F).setUnlocalizedName("tinBlock"); 
-		mythrilOre = new SimpleOre(config.mythrilOreID, Material.rock, "simpleores", SimpleOres.tabSimpleBlocks).setHardness(4.0F).setResistance(5.0F).setUnlocalizedName("mythrilOre");
-		mythrilBlock = new SimpleOre(config.mythrilBlockID, Material.iron, "simpleores", SimpleOres.tabSimpleBlocks).setHardness(7.0F).setResistance(12.0F).setUnlocalizedName("mythrilBlock");
-		adamantiumOre = new SimpleOre(config.adamantiumOreID, Material.rock, "simpleores", SimpleOres.tabSimpleBlocks).setHardness(5.0F).setResistance(5.0F).setUnlocalizedName("adamantiumOre");
-		adamantiumBlock = new SimpleOre(config.adamantiumBlockID, Material.iron, "simpleores", SimpleOres.tabSimpleBlocks).setHardness(7.0F).setResistance(12.0F).setUnlocalizedName("adamantiumBlock");
-		onyxOre = new SimpleGemOre(config.onyxOreID, Material.rock, "simpleores", config.onyxGemID, SimpleOres.tabSimpleBlocks).setHardness(7.0F).setResistance(5.0F).setUnlocalizedName("onyxOre");
-		onyxBlock = new SimpleOre(config.onyxBlockID, Material.iron, "simpleores", SimpleOres.tabSimpleBlocks).setHardness(25.0F).setResistance(40.0F).setUnlocalizedName("onyxBlock");
-		mythrilFurnace = new MythrilFurnace(config.mythrilFurnaceID, false).setHardness(3.5F).setResistance(10.0F).setUnlocalizedName("mythrilFurnace");
-		mythrilFurnaceOn = new MythrilFurnace(config.mythrilFurnaceOnID, true).setHardness(3.5F).setLightValue(1.0F).setResistance(10F).setUnlocalizedName("mythrilFurnaceOn");
-		onyxFurnace = new OnyxFurnace(config.onyxFurnaceID, false).setHardness(20F).setResistance(40.0F).setUnlocalizedName("onyxFurnace");
-		onyxFurnaceOn = new OnyxFurnace(config.onyxFurnaceOnID, true).setHardness(20F).setResistance(40.0F).setLightValue(1.0F).setUnlocalizedName("onyxFurnaceOn");
-		copperDoor = new SimpleDoor(config.copperDoorID, "copper").setHardness(7.0F).setResistance(12.0F).setStepSound(Block.soundMetalFootstep).setUnlocalizedName("copperDoor");
-		onyxDoor = new SimpleDoor(config.onyxDoorID, "onyx").setHardness(25.0F).setResistance(40.0F).setStepSound(Block.soundMetalFootstep).setUnlocalizedName("onyxDoor");
-		copperBars = new SimpleBars(config.copperBarsID, "simpleores:" + "copperBars", "simpleores:" + "copperBars", Material.iron, true).setHardness(3.0F).setResistance(10.0F).setStepSound(Block.soundMetalFootstep).setUnlocalizedName("copperBars");
-		tinBars = new SimpleBars(config.tinBarsID, "simpleores:" + "tinBars", "simpleores:" + "tinBars", Material.iron, true).setHardness(3.0F).setResistance(10.0F).setStepSound(Block.soundMetalFootstep).setUnlocalizedName("tinBars");
-		mythrilBars = new SimpleBars(config.mythrilBarsID, "simpleores:" + "mythrilBars", "simpleores:" + "mythrilBars", Material.iron, true).setHardness(6.0F).setResistance(20.0F).setStepSound(Block.soundMetalFootstep).setUnlocalizedName("mythrilBars");
-		adamantiumBars = new SimpleBars(config.adamantiumBarsID, "simpleores:" + "adamantiumBars", "simpleores:" + "adamantiumBars", Material.iron, true).setHardness(8.0F).setResistance(30.0F).setStepSound(Block.soundMetalFootstep).setUnlocalizedName("adamantiumBars");
-	    onyxBars = new SimpleBars(config.onyxBarsID, "simpleores:" + "onyxBars", "simpleores:" + "onyxBars", Material.iron, true).setHardness(10.0F).setResistance(40.0F).setStepSound(Block.soundMetalFootstep).setUnlocalizedName("onyxBars");
+		copperOre = new SimpleOre(config.copperOreID, Material.rock, "simpleores", SimpleOres.tabSimpleBlocks).setHardness(Settings.copperOreHardness).setResistance(Settings.copperOreResistance).setUnlocalizedName("copperOre");
+		copperBlock = new SimpleOre(config.copperBlockID, Material.iron, "simpleores", SimpleOres.tabSimpleBlocks).setHardness(Settings.copperBlockHardness).setResistance(Settings.copperBlockResistance).setUnlocalizedName("copperBlock"); 
+		tinOre = new SimpleOre(config.tinOreID, Material.rock, "simpleores", SimpleOres.tabSimpleBlocks).setHardness(Settings.tinOreHardness).setResistance(Settings.tinOreResistance).setUnlocalizedName("tinOre");
+		tinBlock = new SimpleOre(config.tinBlockID, Material.iron, "simpleores", SimpleOres.tabSimpleBlocks).setHardness(Settings.tinBlockHardness).setResistance(Settings.tinBlockResistance).setUnlocalizedName("tinBlock"); 
+		mythrilOre = new SimpleOre(config.mythrilOreID, Material.rock, "simpleores", SimpleOres.tabSimpleBlocks).setHardness(Settings.mythrilOreHardness).setResistance(Settings.mythrilOreResistance).setUnlocalizedName("mythrilOre");
+		mythrilBlock = new SimpleOre(config.mythrilBlockID, Material.iron, "simpleores", SimpleOres.tabSimpleBlocks).setHardness(Settings.mythrilBlockHardness).setResistance(Settings.mythrilBlockResistance).setUnlocalizedName("mythrilBlock");
+		adamantiumOre = new SimpleOre(config.adamantiumOreID, Material.rock, "simpleores", SimpleOres.tabSimpleBlocks).setHardness(Settings.adamantiumOreHardness).setResistance(Settings.adamantiumOreResistance).setUnlocalizedName("adamantiumOre");
+		adamantiumBlock = new SimpleOre(config.adamantiumBlockID, Material.iron, "simpleores", SimpleOres.tabSimpleBlocks).setHardness(Settings.adamantiumBlockHardness).setResistance(Settings.adamantiumBlockResistance).setUnlocalizedName("adamantiumBlock");
+		onyxOre = new SimpleGemOre(config.onyxOreID, Material.rock, "simpleores", config.onyxGemID, SimpleOres.tabSimpleBlocks).setHardness(Settings.onyxOreHardness).setResistance(Settings.onyxOreResistance).setUnlocalizedName("onyxOre");
+		onyxBlock = new SimpleOre(config.onyxBlockID, Material.iron, "simpleores", SimpleOres.tabSimpleBlocks).setHardness(Settings.onyxBlockHardness).setResistance(Settings.onyxBlockResistance).setUnlocalizedName("onyxBlock");
+		mythrilFurnace = new MythrilFurnace(config.mythrilFurnaceID, false).setHardness(Settings.mythrilFurnaceHardness).setResistance(Settings.mythrilFurnaceResistance).setUnlocalizedName("mythrilFurnace");
+		mythrilFurnaceOn = new MythrilFurnace(config.mythrilFurnaceOnID, true).setHardness(Settings.mythrilFurnaceHardness).setLightValue(Settings.mythrilFurnaceLightValue).setResistance(Settings.mythrilFurnaceResistance).setUnlocalizedName("mythrilFurnaceOn");
+		onyxFurnace = new OnyxFurnace(config.onyxFurnaceID, false).setHardness(Settings.onyxFurnaceHardness).setResistance(Settings.onyxFurnaceResistance).setUnlocalizedName("onyxFurnace");
+		onyxFurnaceOn = new OnyxFurnace(config.onyxFurnaceOnID, true).setHardness(Settings.onyxFurnaceHardness).setResistance(Settings.onyxFurnaceResistance).setLightValue(Settings.onyxFurnaceLightValue).setUnlocalizedName("onyxFurnaceOn");
+		copperDoor = new SimpleDoor(config.copperDoorID, "copper").setHardness(Settings.copperDoorHardness).setResistance(Settings.copperDoorResistance).setStepSound(Block.soundMetalFootstep).setUnlocalizedName("copperDoor");
+		onyxDoor = new SimpleDoor(config.onyxDoorID, "onyx").setHardness(Settings.onyxDoorHardness).setResistance(Settings.onyxDoorResistance).setStepSound(Block.soundMetalFootstep).setUnlocalizedName("onyxDoor");
+		copperBars = new SimpleBars(config.copperBarsID, "simpleores:" + "copperBars", "simpleores:" + "copperBars", Material.iron, true).setHardness(Settings.copperBarsHardness).setResistance(Settings.copperBarsResistance).setStepSound(Block.soundMetalFootstep).setUnlocalizedName("copperBars");
+		tinBars = new SimpleBars(config.tinBarsID, "simpleores:" + "tinBars", "simpleores:" + "tinBars", Material.iron, true).setHardness(Settings.tinBarsHardness).setResistance(Settings.tinBarsResistance).setStepSound(Block.soundMetalFootstep).setUnlocalizedName("tinBars");
+		mythrilBars = new SimpleBars(config.mythrilBarsID, "simpleores:" + "mythrilBars", "simpleores:" + "mythrilBars", Material.iron, true).setHardness(Settings.mythrilBarsHardness).setResistance(Settings.mythrilBarsResistance).setStepSound(Block.soundMetalFootstep).setUnlocalizedName("mythrilBars");
+		adamantiumBars = new SimpleBars(config.adamantiumBarsID, "simpleores:" + "adamantiumBars", "simpleores:" + "adamantiumBars", Material.iron, true).setHardness(Settings.adamantiumBarsHardness).setResistance(Settings.adamantiumBarsResistance).setStepSound(Block.soundMetalFootstep).setUnlocalizedName("adamantiumBars");
+	    onyxBars = new SimpleBars(config.onyxBarsID, "simpleores:" + "onyxBars", "simpleores:" + "onyxBars", Material.iron, true).setHardness(Settings.onyxBarsHardness).setResistance(Settings.onyxBarsResistance).setStepSound(Block.soundMetalFootstep).setUnlocalizedName("onyxBars");
 	    
 		//Block Naming
 	    if(Settings.enableOldLocalisation)
@@ -118,11 +113,11 @@ public class Blocks
 	    }
 		
 		//Block Harvest Levels
-        MinecraftForge.setBlockHarvestLevel(copperOre, "pickaxe", 1);
-        MinecraftForge.setBlockHarvestLevel(tinOre, "pickaxe", 1);
-        MinecraftForge.setBlockHarvestLevel(mythrilOre, "pickaxe", 2);
-        MinecraftForge.setBlockHarvestLevel(adamantiumOre, "pickaxe", 2);
-        MinecraftForge.setBlockHarvestLevel(onyxOre, "pickaxe", 3);
+        MinecraftForge.setBlockHarvestLevel(copperOre, "pickaxe", Settings.copperOreHarvestLevel);
+        MinecraftForge.setBlockHarvestLevel(tinOre, "pickaxe", Settings.tinOreHarvestLevel);
+        MinecraftForge.setBlockHarvestLevel(mythrilOre, "pickaxe", Settings.mythrilOreHarvestLevel);
+        MinecraftForge.setBlockHarvestLevel(adamantiumOre, "pickaxe", Settings.adamantiumOreHarvestLevel);
+        MinecraftForge.setBlockHarvestLevel(onyxOre, "pickaxe", Settings.onyxOreHarvestLevel);
         
 		//Block Registering
 		GameRegistry.registerBlock(copperOre, "copperOre");

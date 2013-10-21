@@ -99,7 +99,7 @@ public class FusionRecipes
 	 * the items used.
 	 */
 	public ItemStack getSmeltingResult(ItemStack input1, ItemStack input2, ItemStack catalyst)
-	{
+	{		
 		ArrayList<String> itemList = getItemList(input1, input2, catalyst);
 		ArrayList<String> dictionaryList = getDictionaryList(input1, input2, catalyst);
 		ArrayList<Integer> stackSizeList = getStackSizeList(input1, input2, catalyst);
@@ -151,14 +151,15 @@ public class FusionRecipes
 			}
 		}
 		
-		else if(!recipeMap.containsKey(itemMap1))
+		else if(!recipeMap.containsKey(itemMap1) && dictionaryRecipeMap.containsKey(dictionaryList))
 		{
 			HashMap<ArrayList<String>, ArrayList<Integer>> dictMap = new HashMap<ArrayList<String>, ArrayList<Integer>>();
 			ArrayList<Integer> damageList = new ArrayList<Integer>();
 			ArrayList<Integer> damages = damageMap.get(dictionaryList);
-			int i1 = damages.get(0);
-			int i2 = damages.get(1);
-			int i3 = damages.get(2);
+			int i1 = 0, i2 = 0, i3 = 0;
+			i1 = damages.get(0);			
+			i2 = damages.get(1);	
+			i3 = damages.get(2);
 			
 			damageList.add(i1);
 			damageList.add(i2);
@@ -183,6 +184,8 @@ public class FusionRecipes
 				}
 			}
 		}
+		else
+			return null;
 		return null;
 	}
 	

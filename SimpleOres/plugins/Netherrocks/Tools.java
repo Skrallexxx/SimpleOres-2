@@ -1,6 +1,7 @@
 package SimpleOres.plugins.Netherrocks;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import SimpleOres.core.SimpleOres;
 import SimpleOres.core.api.SimpleAxe;
@@ -157,7 +158,8 @@ class FyritePickaxe extends ItemPickaxe
 	@Override
 	public boolean onBlockStartBreak(ItemStack itemstack, int i, int j, int k, EntityPlayer player)
 	{
-		if(itemID == Tools.fyritePick.itemID)
+		Random random = new Random();
+		if(itemID == Tools.fyritePick.itemID && !player.capabilities.isCreativeMode)
 		{
 			Boolean flag = false;
 			World world = player.worldObj;
@@ -165,16 +167,16 @@ class FyritePickaxe extends ItemPickaxe
 			int meta = world.getBlockMetadata(i, j, k);
 
 			NBTTagList ench = itemstack.getEnchantmentTagList();
-			int level = 0;
+			short level = 0;
 			if(ench != null)
 			{
 				for (int x = 0; x < ench.tagCount(); x++)
 				{
 					NBTTagCompound nbt = (NBTTagCompound) ench.tagAt(x);
-					int id = nbt.getInteger("id");
+					short id = nbt.getShort("id");
 					if (id == Enchantment.fortune.effectId)
 					{
-						level = nbt.getInteger("lvl");
+						level = nbt.getShort("lvl");
 					}
 				}
 			}
@@ -191,8 +193,17 @@ class FyritePickaxe extends ItemPickaxe
 					{
 						return false;
 					}
-					ItemStack smelted = FurnaceRecipes.smelting().getSmeltingResult(item).copy();
+					
+		            int var3 = random.nextInt(level + 2) - 1;
 
+		            if (var3 < 0)
+		            {
+		                var3 = 0;
+		            }
+		            
+		            int quantity = Block.blocksList[blockID].quantityDropped(random) * (var3 + 1);
+					
+					ItemStack drop = new ItemStack(FurnaceRecipes.smelting().getSmeltingResult(item).copy().itemID, quantity, meta);
 					world.playSoundEffect(i + 0.5F, j + 0.5F, k + 0.5F,
 							Block.blocksList[blockID].stepSound.getBreakSound(),
 							(Block.blocksList[blockID].stepSound.getVolume() + 1.0F) / 2.0F,
@@ -200,12 +211,8 @@ class FyritePickaxe extends ItemPickaxe
 
 					world.setBlock(i, j, k, 0);
 					if(!world.isRemote)
-					{
-						float var6 = 0.7F;
-						double var7 = world.rand.nextFloat() * var6 + 1.0F - var6 * 0.5D;
-						double var9 = world.rand.nextFloat() * var6 + 1.0F - var6 * 0.5D;
-						double var11 = world.rand.nextFloat() * var6 + 1.0F - var6 * 0.5D;
-						EntityItem entityitem = new EntityItem(world, i + 0.5D /*+ var7*/, j + 0.5D /*+ var9*/, k + 0.D /*+ var11*/, smelted);
+					{		
+						EntityItem entityitem = new EntityItem(world, i + 0.5, j + 0.5, k + 0.5, drop);
 						world.spawnEntityInWorld(entityitem);
 					}
 					itemstack.damageItem(1, player);
