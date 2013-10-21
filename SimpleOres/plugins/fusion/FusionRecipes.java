@@ -134,21 +134,28 @@ public class FusionRecipes
 			itemMap.put(itemList, damageList);
 			ArrayList<Integer> stackSizeNeeded = stackSizeMap.get(itemMap);
 			
-			if(stackSizeList.get(0) >= stackSizeNeeded.get(0))
+			try
 			{
-				if(stackSizeList.get(1) >= stackSizeNeeded.get(1))
+				if(stackSizeList.get(0) >= stackSizeNeeded.get(0))
 				{
-					if(stackSizeList.get(2) >= stackSizeNeeded.get(2))
+					if(stackSizeList.get(1) >= stackSizeNeeded.get(1))
 					{
-						isStackBigEnough = true;
-						input1NumToDecreaseBy = stackSizeNeeded.get(0);
-						input2NumToDecreaseBy = stackSizeNeeded.get(1);
-						catalystNumToDecreaseBy = stackSizeNeeded.get(2);
-						
-						return (ItemStack) recipeMap.get(itemMap);
+						if(stackSizeList.get(2) >= stackSizeNeeded.get(2))
+						{
+							isStackBigEnough = true;
+							input1NumToDecreaseBy = stackSizeNeeded.get(0);
+							input2NumToDecreaseBy = stackSizeNeeded.get(1);
+							catalystNumToDecreaseBy = stackSizeNeeded.get(2);
+							
+							return (ItemStack) recipeMap.get(itemMap);
+						}
 					}
 				}
 			}
+			catch(Exception e)
+			{
+				return null;
+			}					
 		}
 		
 		else if(!recipeMap.containsKey(itemMap1) && dictionaryRecipeMap.containsKey(dictionaryList))
