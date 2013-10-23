@@ -2,18 +2,10 @@ package SimpleOres.core.api;
 
 import java.util.Random;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import SimpleOres.core.Achievements;
-import SimpleOres.core.Armor;
-import SimpleOres.core.Blocks;
-import SimpleOres.core.Config;
-import SimpleOres.core.Items;
-import SimpleOres.core.Localisation;
-import SimpleOres.core.Recipes;
 import SimpleOres.core.Settings;
 import SimpleOres.core.SimpleOres;
-import SimpleOres.core.Tools;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;

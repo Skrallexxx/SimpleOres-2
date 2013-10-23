@@ -16,7 +16,6 @@ public class Achievements
 	public static Blocks blocks;
 	public static Config config;
 	public static Items items;
-	public static Localisation local;
 	public static Tools tools;
 	
 	/**
@@ -47,10 +46,6 @@ public class Achievements
 		
 		GameRegistry.registerCraftingHandler(new HandlerCrafting());
 		GameRegistry.registerPickupHandler(new HandlerPickup());
-		if(Settings.enableOldLocalisation)
-		{
-			addAchievementLocalizations();
-		}
 	}
 	
 	private static void addAchievementName(String ach, String name)
@@ -61,35 +56,5 @@ public class Achievements
     private static void addAchievementDesc(String ach, String desc)
     {
             LanguageRegistry.instance().addStringLocalization("achievement." + ach + ".desc", "en_US", desc);
-    }
-    
-    /**
-     * Sets the names and descriptions of the achievements. This is what shows up when you hover over the achievement in the GUI.
-     */
-    static void addAchievementLocalizations()
-    {
-    	addAchievementName("simpleOresAch", local.simpleOresAchName);
-        addAchievementDesc("simpleOresAch", local.simpleOresAchDesc);
-        
-        addAchievementName("adamantiumAch", local.adamantiumAchName);
-        addAchievementDesc("adamantiumAch", local.adamantiumAchDesc);
-        
-        addAchievementName("onyxAch", local.onyxAchName);
-        addAchievementDesc("onyxAch", local.onyxAchDesc);
-        
-        addAchievementName("ironPickAch", local.ironPickAchName);
-        addAchievementDesc("ironPickAch", local.ironPickAchDesc);
-        
-        addAchievementName("adamantiumPickAch", local.adamantiumPickAchName);
-        addAchievementDesc("adamantiumPickAch", local.adamantiumPickAchDesc);
-        
-        addAchievementName("onyxPickAch", local.onyxPickAchName);
-        addAchievementDesc("onyxPickAch", local.onyxPickAchDesc);
-        
-        addAchievementName("mythrilBowAch", local.mythrilBowAchName);
-        addAchievementDesc("mythrilBowAch", local.mythrilBowAchDesc);
-        
-        addAchievementName("onyxBowAch", local.onyxBowAchName);
-        addAchievementDesc("onyxBowAch", local.onyxBowAchDesc);
     }
 }

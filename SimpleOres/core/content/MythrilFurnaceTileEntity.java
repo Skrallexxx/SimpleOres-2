@@ -1,15 +1,7 @@
 package SimpleOres.core.content;
 
-import SimpleOres.core.Achievements;
-import SimpleOres.core.Armor;
-import SimpleOres.core.Blocks;
-import SimpleOres.core.Config;
-import SimpleOres.core.Items;
-import SimpleOres.core.Localisation;
-import SimpleOres.core.Recipes;
 import SimpleOres.core.Settings;
 import SimpleOres.core.SimpleOres;
-import SimpleOres.core.Tools;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -32,20 +24,6 @@ import net.minecraftforge.common.ForgeDummyContainer;
 
 public class MythrilFurnaceTileEntity extends TileEntity implements ISidedInventory
 {
-	/**
-	 * Linking to the classes for easier reference.
-	 */
-	public static SimpleOres mod;
-	public static Achievements achievements;
-	public static Armor armor;
-	public static Blocks blocks;
-	public static Config config;
-	public static Items items;
-	public static Localisation local;
-	public static Recipes recipes;
-	public static Settings settings;
-	public static Tools tools;
-	
     private static final int[] slots_top = new int[] {0};
     private static final int[] slots_bottom = new int[] {2, 1};
     private static final int[] slots_sides = new int[] {1};
@@ -406,12 +384,12 @@ public class MythrilFurnaceTileEntity extends TileEntity implements ISidedInvent
 
                 if (block == Block.woodSingleSlab)
                 {
-                    return 150 * settings.mythrilFurnaceMultiplier;
+                    return 150 * Settings.mythrilFurnaceMultiplier;
                 }
 
                 if (block.blockMaterial == Material.wood)
                 {
-                    return 300 * settings.mythrilFurnaceMultiplier;
+                    return 300 * Settings.mythrilFurnaceMultiplier;
                 }
                 
                 if (block == Block.coalBlock)
@@ -420,15 +398,15 @@ public class MythrilFurnaceTileEntity extends TileEntity implements ISidedInvent
                 }
             }
 
-            if (item instanceof ItemTool && ((ItemTool) item).getToolMaterialName().equals("WOOD")) return 200 * settings.mythrilFurnaceMultiplier;
-            if (item instanceof ItemSword && ((ItemSword) item).getToolMaterialName().equals("WOOD")) return 200 * settings.mythrilFurnaceMultiplier;
-            if (item instanceof ItemHoe && ((ItemHoe) item).getMaterialName().equals("WOOD")) return 200 * settings.mythrilFurnaceMultiplier;
-            if (i == Item.stick.itemID) return 100 * settings.mythrilFurnaceMultiplier;
-            if (i == Item.coal.itemID) return 1600 * settings.mythrilFurnaceMultiplier;
-            if (i == Item.bucketLava.itemID) return 20000 * settings.mythrilFurnaceMultiplier;
-            if (i == Block.sapling.blockID) return 100 * settings.mythrilFurnaceMultiplier;
-            if (i == Item.blazeRod.itemID) return 2400 * settings.mythrilFurnaceMultiplier;
-            return GameRegistry.getFuelValue(par0ItemStack) * settings.mythrilFurnaceMultiplier;
+            if (item instanceof ItemTool && ((ItemTool) item).getToolMaterialName().equals("WOOD")) return 200 * Settings.mythrilFurnaceMultiplier;
+            if (item instanceof ItemSword && ((ItemSword) item).getToolMaterialName().equals("WOOD")) return 200 * Settings.mythrilFurnaceMultiplier;
+            if (item instanceof ItemHoe && ((ItemHoe) item).getMaterialName().equals("WOOD")) return 200 * Settings.mythrilFurnaceMultiplier;
+            if (i == Item.stick.itemID) return 100 * Settings.mythrilFurnaceMultiplier;
+            if (i == Item.coal.itemID) return 1600 * Settings.mythrilFurnaceMultiplier;
+            if (i == Item.bucketLava.itemID) return 20000 * Settings.mythrilFurnaceMultiplier;
+            if (i == Block.sapling.blockID) return 100 * Settings.mythrilFurnaceMultiplier;
+            if (i == Item.blazeRod.itemID) return 2400 * Settings.mythrilFurnaceMultiplier;
+            return GameRegistry.getFuelValue(par0ItemStack) * Settings.mythrilFurnaceMultiplier;
         }
     }
 

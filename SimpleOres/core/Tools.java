@@ -85,41 +85,6 @@ public class Tools
 		adamantiumShears = new SimpleShears(Config.adamantiumShearsID, 1092).setUnlocalizedName("adamantiumShears");
 		onyxShears = new SimpleShears(Config.onyxShearsID, 3116).setUnlocalizedName("onyxShears");
 		
-		//Tool Names
-		if(Settings.enableOldLocalisation)
-		{
-			LanguageRegistry.addName(copperPick, Localisation.copperPickName);
-			LanguageRegistry.addName(copperAxe, Localisation.copperAxeName);
-			LanguageRegistry.addName(copperShovel, Localisation.copperShovelName);
-			LanguageRegistry.addName(copperSword, Localisation.copperSwordName);
-			LanguageRegistry.addName(copperHoe, Localisation.copperHoeName);
-			LanguageRegistry.addName(tinPick, Localisation.tinPickName);
-			LanguageRegistry.addName(tinAxe, Localisation.tinAxeName);
-			LanguageRegistry.addName(tinShovel, Localisation.tinShovelName);
-			LanguageRegistry.addName(tinSword, Localisation.tinSwordName);
-			LanguageRegistry.addName(tinHoe, Localisation.tinHoeName);
-			LanguageRegistry.addName(mythrilPick, Localisation.mythrilPickName);
-			LanguageRegistry.addName(mythrilAxe, Localisation.mythrilAxeName);
-			LanguageRegistry.addName(mythrilShovel, Localisation.mythrilShovelName);
-			LanguageRegistry.addName(mythrilSword, Localisation.mythrilSwordName);
-			LanguageRegistry.addName(mythrilHoe, Localisation.mythrilHoeName);
-			LanguageRegistry.addName(adamantiumPick, Localisation.adamantiumPickName);
-			LanguageRegistry.addName(adamantiumAxe, Localisation.adamantiumAxeName);
-			LanguageRegistry.addName(adamantiumShovel, Localisation.adamantiumShovelName);
-			LanguageRegistry.addName(adamantiumSword, Localisation.adamantiumSwordName);
-			LanguageRegistry.addName(adamantiumHoe, Localisation.adamantiumHoeName);	
-			LanguageRegistry.addName(onyxPick, Localisation.onyxPickName);
-			LanguageRegistry.addName(onyxAxe, Localisation.onyxAxeName);
-			LanguageRegistry.addName(onyxShovel, Localisation.onyxShovelName);
-			LanguageRegistry.addName(onyxSword, Localisation.onyxSwordName);
-			LanguageRegistry.addName(onyxHoe, Localisation.onyxHoeName);
-			LanguageRegistry.addName(mythrilBow, Localisation.mythrilBowName);
-			LanguageRegistry.addName(onyxBow, Localisation.onyxBowName);
-			LanguageRegistry.addName(tinShears, Localisation.tinShearsName);
-			LanguageRegistry.addName(adamantiumShears, Localisation.adamantiumShearsName);
-			LanguageRegistry.addName(onyxShears, Localisation.onyxShearsName);
-		}
-		
 		//Tool Registering
         MinecraftForge.setToolClass(copperPick, "pickaxe", Settings.copperMiningLevel);
         MinecraftForge.setToolClass(copperShovel, "shovel", Settings.copperMiningLevel);

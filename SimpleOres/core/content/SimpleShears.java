@@ -5,16 +5,8 @@ import java.util.Random;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import SimpleOres.core.Achievements;
-import SimpleOres.core.Armor;
-import SimpleOres.core.Blocks;
-import SimpleOres.core.Config;
-import SimpleOres.core.Items;
-import SimpleOres.core.Localisation;
-import SimpleOres.core.Recipes;
 import SimpleOres.core.Settings;
 import SimpleOres.core.SimpleOres;
-import SimpleOres.core.Tools;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.enchantment.Enchantment;
@@ -31,19 +23,6 @@ import net.minecraftforge.common.IShearable;
 
 public class SimpleShears extends Item
 {
-	/**
-	 * Linking to the classes for easier reference.
-	 */
-	public static SimpleOres mod;
-	public static Achievements achievements;
-	public static Armor armor;
-	public static Blocks blocks;
-	public static Config config;
-	public static Items items;
-	public static Localisation local;
-	public static Recipes recipes;
-	public static Tools tools;
-	
     public SimpleShears(int par1, int maxDamage)
     {
         super(par1);

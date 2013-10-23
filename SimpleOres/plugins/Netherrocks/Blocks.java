@@ -6,6 +6,7 @@ import SimpleOres.core.api.SimpleGemOre;
 import SimpleOres.core.api.SimpleOre;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
 
 public class Blocks 

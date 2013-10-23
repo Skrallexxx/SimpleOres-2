@@ -2,14 +2,6 @@ package SimpleOres.core.handlers;
 
 import java.util.EnumSet;
 
-import SimpleOres.core.Achievements;
-import SimpleOres.core.Armor;
-import SimpleOres.core.Blocks;
-import SimpleOres.core.Config;
-import SimpleOres.core.Items;
-import SimpleOres.core.Localisation;
-import SimpleOres.core.Recipes;
-import SimpleOres.core.Settings;
 import SimpleOres.core.SimpleOres;
 import SimpleOres.core.Tools;
 import net.minecraft.client.Minecraft;
@@ -20,21 +12,7 @@ import cpw.mods.fml.common.ITickHandler;
 import cpw.mods.fml.common.TickType;
 
 public class HandlerTick implements ITickHandler 
-{
-	/**
-	 * Linking to the classes for easier reference.
-	 */
-	public static SimpleOres mod;
-	public static Achievements achievements;
-	public static Armor armor;
-	public static Blocks blocks;
-	public static Config config;
-	public static Items items;
-	public static Localisation local;
-	public static Recipes recipes;
-	public static Settings settings;
-	public static Tools tools;
-	
+{	
 	public static float zoomAmount;
 	
 	/**
@@ -54,16 +32,16 @@ public class HandlerTick implements ITickHandler
 			if(player != null && player.isUsingItem())
 			{
 				int itemID = player.getItemInUse().itemID;
-				if(itemID == tools.mythrilBow.itemID || itemID == tools.onyxBow.itemID)
+				if(itemID == Tools.mythrilBow.itemID || itemID == Tools.onyxBow.itemID)
 				{
-					mod.proxy.onBowUse(player.getItemInUse(), player);
+					SimpleOres.proxy.onBowUse(player.getItemInUse(), player);
 					this.zoomAmount = 0.25F;
 				}
 			}
 			
 			else 
 			{
-				mod.proxy.resetSavedFOV();
+				SimpleOres.proxy.resetSavedFOV();
 			}
 		}  
 	}

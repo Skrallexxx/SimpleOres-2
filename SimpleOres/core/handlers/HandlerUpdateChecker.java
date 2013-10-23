@@ -25,7 +25,6 @@ import cpw.mods.fml.common.network.Player;
 public class HandlerUpdateChecker implements IConnectionHandler
 {
 	static String link = "http://dl.dropboxusercontent.com/u/66466201/SimpleOres%202%20Version.txt";
-	static File file = new File("C:/Users/longbottom.alex/Dropbox/Public/SimpleOres 2/SimpleOres 2 Version.txt");
 	static String line = null;
 	
 	static BufferedReader reader;
@@ -43,7 +42,7 @@ public class HandlerUpdateChecker implements IConnectionHandler
 	 */
 	public static void checkUpdates()
 	{
-
+		
 	}
 	
 	public void playerLoggedIn(Player player, NetHandler netHandler, INetworkManager manager) {}
@@ -56,10 +55,9 @@ public class HandlerUpdateChecker implements IConnectionHandler
 	public void clientLoggedIn(NetHandler clientHandler, INetworkManager manager, Packet1Login login) 
 	{
 		if(Settings.enableUpdateChecker)
-		{
+		{		
 			try 
 			{
-				wait(20000);
 				URL url = new URL(link);
 				reader = new BufferedReader(new InputStreamReader(url.openStream()));
 							

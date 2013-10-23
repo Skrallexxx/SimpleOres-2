@@ -10,19 +10,6 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 public class Config 
 {
 	/**
-	 * Linking to the classes for easier reference.
-	 */
-	public static SimpleOres mod;
-	public static Achievements achievements;
-	public static Armor armor;
-	public static Blocks blocks;
-	public static Config config;
-	public static Items items;
-	public static Localisation local;
-	public static Recipes recipes;
-	public static Tools tools;
-	
-	/**
 	 * Creating the config int's. Fairly obvious. 
 	 */
 //======================================= CREATION ======================================================= 	

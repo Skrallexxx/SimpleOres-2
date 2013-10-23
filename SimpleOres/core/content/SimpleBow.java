@@ -5,16 +5,10 @@ import java.util.Random;
 
 import org.lwjgl.opengl.GL11;
 
-import SimpleOres.core.Achievements;
-import SimpleOres.core.Armor;
-import SimpleOres.core.Blocks;
-import SimpleOres.core.Config;
-import SimpleOres.core.Items;
-import SimpleOres.core.Localisation;
-import SimpleOres.core.Recipes;
 import SimpleOres.core.Settings;
 import SimpleOres.core.SimpleOres;
 import SimpleOres.core.Tools;
+import SimpleOres.plugins.fusion.Localisation;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.Minecraft;
@@ -199,30 +193,14 @@ public class SimpleBow extends ItemBow
 	{
 		if(itemID == Tools.mythrilBow.itemID)
 		{
-			if(Settings.enableOldLocalisation)
-			{
-				par3List.add(Localisation.damageTooltip);
-				par3List.add(Localisation.efficiencyTooltip);
-			}
-			else
-			{
-				par3List.add(StatCollector.translateToLocal("tips.damageTooltip"));
-				par3List.add(StatCollector.translateToLocal("tips.efficiencyTooltip"));
-			}
+			par3List.add(StatCollector.translateToLocal("tips.damageTooltip"));
+			par3List.add(StatCollector.translateToLocal("tips.efficiencyTooltip"));
 		}
 		
 		if(itemID == Tools.onyxBow.itemID)
 		{
-			if(Settings.enableOldLocalisation)
-			{
-				par3List.add(Localisation.damageTooltip);
-				par3List.add(Localisation.flameTooltip);
-			}
-			else
-			{
-				par3List.add(StatCollector.translateToLocal("tips.damageTooltip"));
-				par3List.add(StatCollector.translateToLocal("tips.flameTooltip"));
-			}
+			par3List.add(StatCollector.translateToLocal("tips.damageTooltip"));
+			par3List.add(StatCollector.translateToLocal("tips.flameTooltip"));
 		}
 	}
 		

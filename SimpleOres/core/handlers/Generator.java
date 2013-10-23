@@ -2,16 +2,9 @@ package SimpleOres.core.handlers;
 
 import java.util.Random;
 
-import SimpleOres.core.Achievements;
-import SimpleOres.core.Armor;
 import SimpleOres.core.Blocks;
-import SimpleOres.core.Config;
-import SimpleOres.core.Items;
-import SimpleOres.core.Localisation;
-import SimpleOres.core.Recipes;
 import SimpleOres.core.Settings;
 import SimpleOres.core.SimpleOres;
-import SimpleOres.core.Tools;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.feature.WorldGenMinable;

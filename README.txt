@@ -1,3 +1,32 @@
+Version 1.2.0
+Core
+-Updated Localisations.
+-Moved update checker to login section to prevent increased world load time when offline.
+-Advanced config options (tools, armor and block stats).
+-Significant restructuring of the code.
+-Added a min spawn height setting for ores.
+-Added Higher Dimension Generation options.
+-Removed the old localisation because it was redundant.
+
+Fusion Plugin
+-Updated Localisations.
+-Re-done Fusion Furnace code to support Metadata, OreDictionary, Wildcard Value, and made it Stack Size aware.
+-Fixed Shift Clicking in the Fusion Furnace.
+-Advanced config options (tools, armor and block stats).
+-Allowed returning of buckets from the Fusion Furnace.
+-Added Hopper support for the Fusion Furnace.
+-Fixed the Fusion Furnace achievements not working.
+-The Fusion Furnace can now auto-load custom Fusion Recipes from the Settings file, without the need to create a plugin.
+
+Plugin API
+-[API] Added a new class to the API to easily create new custom creative tabs (SimpleTab).
+-[API] Updated content classes (SimpleArmor, SimpleOre, etc) to allow a defined Creative Tab.
+-[API] Fixed HandlerLoot not accepting ItemStacks, therefore no metadata.
+
+Version 1.1.1
+Core:
+-Fixed a bug with the Onyx Ore not dropping the Onyx Gem.
+
 Version 1.1.0
 Core:
 -Updated to Minecraft 1.6.4 and Forge 9.11.0.884.

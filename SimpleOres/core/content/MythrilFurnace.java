@@ -1,15 +1,8 @@
 package SimpleOres.core.content;
 
-import SimpleOres.core.Achievements;
-import SimpleOres.core.Armor;
 import SimpleOres.core.Blocks;
-import SimpleOres.core.Config;
-import SimpleOres.core.Items;
-import SimpleOres.core.Localisation;
-import SimpleOres.core.Recipes;
 import SimpleOres.core.Settings;
 import SimpleOres.core.SimpleOres;
-import SimpleOres.core.Tools;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -34,21 +27,7 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
 public class MythrilFurnace extends BlockContainer
-{
-	/**
-	 * Linking to the classes for easier reference.
-	 */
-	public static SimpleOres mod;
-	public static Achievements achievements;
-	public static Armor armor;
-	public static Blocks blocks;
-	public static Config config;
-	public static Items items;
-	public static Localisation local;
-	public static Recipes recipes;
-	public static Tools tools;
-	public static Settings toggles;
-		
+{	
     /**
      * Is the random generator used by furnace to drop the inventory contents in random directions.
      */
@@ -74,11 +53,11 @@ public class MythrilFurnace extends BlockContainer
         
         if(par2 == false)
 		{
-        	if(toggles.enableSeparateTabs == true)
+        	if(Settings.enableSeparateTabs == true)
         	{
-    			this.setCreativeTab(mod.tabSimpleDecoration);
+    			this.setCreativeTab(SimpleOres.tabSimpleDecoration);
         	}
-        	else this.setCreativeTab(mod.tabSimpleBlocks);   
+        	else this.setCreativeTab(SimpleOres.tabSimpleBlocks);   
 		}
     }
 
@@ -87,7 +66,7 @@ public class MythrilFurnace extends BlockContainer
      */
     public int idDropped(int par1, Random par2Random, int par3)
     {
-        return blocks.mythrilFurnace.blockID;
+        return Blocks.mythrilFurnace.blockID;
     }
 
     /**

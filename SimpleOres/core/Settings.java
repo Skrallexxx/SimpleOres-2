@@ -179,7 +179,6 @@ public class Settings
 	    	
 	    	//Toggles
 	    	enableSeparateTabs = settings.get("Toggles", "Use Separate Creative Tabs?", true).getBoolean(enableSeparateTabs);
-	    	enableOldLocalisation = settings.get("Toggles", "Use Old (Configurable) Localisation?", false).getBoolean(enableOldLocalisation);
 	    	enableUpdateChecker = settings.get("Toggles", "Enable Update Checker?", true).getBoolean(enableUpdateChecker);
 	    	enableToolStatModification = settings.get("Toggles", "Enable Tool Stat Modification? (Advanced)", false).getBoolean(enableToolStatModification);
 	    	enableArmorStatModification = settings.get("Toggles", "Enable Armor Stat Modification? (Advanced)", false).getBoolean(enableArmorStatModification);

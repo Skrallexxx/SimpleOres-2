@@ -5,7 +5,6 @@ import java.util.Random;
 
 import org.lwjgl.opengl.GL11;
 
-import SimpleOres.core.Localisation;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.Minecraft;

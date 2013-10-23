@@ -9,20 +9,7 @@ import SimpleOres.core.content.SimpleDoorItem;
 import SimpleOres.core.api.SimpleIngot;
 
 public class Items 
-{
-	/**
-	 * Linking to the classes for easier reference.
-	 */
-	public static SimpleOres mod;
-	public static Achievements achievements;
-	public static Armor armor;
-	public static Blocks blocks;
-	public static Config config;
-	public static Items items;
-	public static Localisation local;
-	public static Recipes recipes;
-	public static Tools tools;
-		
+{		
 	/**
 	 * Creating the item int's. Fairly obvious.
 	 */
@@ -46,32 +33,16 @@ public class Items
 	public static void doItems()
 	{
 		//Item Details
-        copperIngot = new SimpleIngot(config.copperIngotID, "simpleores", SimpleOres.tabSimpleMaterials).setUnlocalizedName("copperIngot");
-		tinIngot = new SimpleIngot(config.tinIngotID, "simpleores", SimpleOres.tabSimpleMaterials).setUnlocalizedName("tinIngot");
-		mythrilIngot = new SimpleIngot(config.mythrilIngotID, "simpleores", SimpleOres.tabSimpleMaterials).setUnlocalizedName("mythrilIngot");
-		adamantiumIngot = new SimpleIngot(config.adamantiumIngotID, "simpleores", SimpleOres.tabSimpleMaterials).setUnlocalizedName("adamantiumIngot");
-		onyxGem = new SimpleIngot(config.onyxGemID, "simpleores", SimpleOres.tabSimpleMaterials).setUnlocalizedName("onyxGem");
-		copperBucket = new SimpleBucket(config.copperBucketID, 0).setUnlocalizedName("copperBucket").setMaxStackSize(16);
-		copperBucketWater = new SimpleBucket(config.copperBucketWaterID, Block.waterMoving.blockID).setContainerItem(copperBucket).setUnlocalizedName("copperBucketWater");
-		mythrilRod = new SimpleIngot(config.mythrilRodID, "simpleores", SimpleOres.tabSimpleMaterials).setUnlocalizedName("mythrilRod");
-		onyxRod = new SimpleIngot(config.onyxRodID, "simpleores", SimpleOres.tabSimpleMaterials).setUnlocalizedName("onyxRod");
-		copperDoorItem = new SimpleDoorItem(config.copperDoorItemID, "copper").setUnlocalizedName("copperDoor");
-		onyxDoorItem = new SimpleDoorItem(config.onyxDoorItemID, "onyx").setUnlocalizedName("onyxDoor");
-		
-		//Item Naming
-		if(Settings.enableOldLocalisation)
-		{
-			LanguageRegistry.addName(copperIngot, local.copperIngotName);
-			LanguageRegistry.addName(tinIngot, local.tinIngotName);
-			LanguageRegistry.addName(mythrilIngot, local.mythrilIngotName);
-			LanguageRegistry.addName(adamantiumIngot, local.adamantiumIngotName);	
-			LanguageRegistry.addName(onyxGem, local.onyxGemName);
-			LanguageRegistry.addName(copperBucket, local.copperBucketName);
-			LanguageRegistry.addName(copperBucketWater, local.copperBucketWaterName);
-			LanguageRegistry.addName(mythrilRod, local.mythrilRodName);
-			LanguageRegistry.addName(onyxRod, local.onyxRodName);
-			LanguageRegistry.addName(copperDoorItem, local.copperDoorName);
-			LanguageRegistry.addName(onyxDoorItem, local.onyxDoorName);
-		}
+        copperIngot = new SimpleIngot(Config.copperIngotID, "simpleores", SimpleOres.tabSimpleMaterials).setUnlocalizedName("copperIngot");
+		tinIngot = new SimpleIngot(Config.tinIngotID, "simpleores", SimpleOres.tabSimpleMaterials).setUnlocalizedName("tinIngot");
+		mythrilIngot = new SimpleIngot(Config.mythrilIngotID, "simpleores", SimpleOres.tabSimpleMaterials).setUnlocalizedName("mythrilIngot");
+		adamantiumIngot = new SimpleIngot(Config.adamantiumIngotID, "simpleores", SimpleOres.tabSimpleMaterials).setUnlocalizedName("adamantiumIngot");
+		onyxGem = new SimpleIngot(Config.onyxGemID, "simpleores", SimpleOres.tabSimpleMaterials).setUnlocalizedName("onyxGem");
+		copperBucket = new SimpleBucket(Config.copperBucketID, 0).setUnlocalizedName("copperBucket").setMaxStackSize(16);
+		copperBucketWater = new SimpleBucket(Config.copperBucketWaterID, Block.waterMoving.blockID).setContainerItem(copperBucket).setUnlocalizedName("copperBucketWater");
+		mythrilRod = new SimpleIngot(Config.mythrilRodID, "simpleores", SimpleOres.tabSimpleMaterials).setUnlocalizedName("mythrilRod");
+		onyxRod = new SimpleIngot(Config.onyxRodID, "simpleores", SimpleOres.tabSimpleMaterials).setUnlocalizedName("onyxRod");
+		copperDoorItem = new SimpleDoorItem(Config.copperDoorItemID, "copper").setUnlocalizedName("copperDoor");
+		onyxDoorItem = new SimpleDoorItem(Config.onyxDoorItemID, "onyx").setUnlocalizedName("onyxDoor");
 	}
 }

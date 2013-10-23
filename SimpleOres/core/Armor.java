@@ -17,7 +17,6 @@ public class Armor
 	public static Blocks blocks;
 	public static Config config;
 	public static Items items;
-	public static Localisation local;
 	public static Recipes recipes;
 	public static Tools tools;
 	
@@ -71,30 +70,5 @@ public class Armor
 		onyxChest = new SimpleArmor(config.onyxChestID, mod.armorOnyx, mod.rendererOnyx, 1, "onyx", "simpleores", SimpleOres.tabSimpleCombat).setUnlocalizedName("onyxChest");
 		onyxLegs = new SimpleArmor(config.onyxLegsID, mod.armorOnyx, mod.rendererOnyx, 2, "onyx", "simpleores", SimpleOres.tabSimpleCombat).setUnlocalizedName("onyxLegs");
 		onyxBoots = new SimpleArmor(config.onyxBootsID, mod.armorOnyx, mod.rendererOnyx, 3, "onyx", "simpleores", SimpleOres.tabSimpleCombat).setUnlocalizedName("onyxBoots");
-		
-		//Armor Names
-		if(Settings.enableOldLocalisation)
-		{
-			LanguageRegistry.addName(copperHelm, local.copperHelmName);		
-			LanguageRegistry.addName(copperChest, local.copperChestName);
-			LanguageRegistry.addName(copperLegs, local.copperLegsName);
-			LanguageRegistry.addName(copperBoots, local.copperBootsName);
-			LanguageRegistry.addName(tinHelm, local.tinHelmName);		
-			LanguageRegistry.addName(tinChest, local.tinChestName);
-			LanguageRegistry.addName(tinLegs, local.tinLegsName);
-			LanguageRegistry.addName(tinBoots, local.tinBootsName);
-			LanguageRegistry.addName(mythrilHelm, local.mythrilHelmName);
-			LanguageRegistry.addName(mythrilChest, local.mythrilChestName);
-			LanguageRegistry.addName(mythrilLegs, local.mythrilLegsName);
-			LanguageRegistry.addName(mythrilBoots, local.mythrilBootsName);
-			LanguageRegistry.addName(adamantiumHelm, local.adamantiumHelmName);
-			LanguageRegistry.addName(adamantiumChest, local.adamantiumChestName);
-			LanguageRegistry.addName(adamantiumLegs, local.adamantiumLegsName);
-			LanguageRegistry.addName(adamantiumBoots, local.adamantiumBootsName);
-			LanguageRegistry.addName(onyxHelm, local.onyxHelmName);
-			LanguageRegistry.addName(onyxChest, local.onyxChestName);
-			LanguageRegistry.addName(onyxLegs, local.onyxLegsName);
-			LanguageRegistry.addName(onyxBoots, local.onyxBootsName);
-		}
 	}
 }

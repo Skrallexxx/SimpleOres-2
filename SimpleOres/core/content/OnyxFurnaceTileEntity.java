@@ -21,33 +21,11 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.ForgeDirection;
 import net.minecraftforge.common.ForgeDummyContainer;
-import SimpleOres.core.Achievements;
-import SimpleOres.core.Armor;
-import SimpleOres.core.Blocks;
-import SimpleOres.core.Config;
-import SimpleOres.core.Items;
-import SimpleOres.core.Localisation;
-import SimpleOres.core.Recipes;
 import SimpleOres.core.Settings;
 import SimpleOres.core.SimpleOres;
-import SimpleOres.core.Tools;
 
 public class OnyxFurnaceTileEntity extends TileEntity implements ISidedInventory
-{
-	/**
-	 * Linking to the classes for easier reference.
-	 */
-	public static SimpleOres mod;
-	public static Achievements achievements;
-	public static Armor armor;
-	public static Blocks blocks;
-	public static Config config;
-	public static Items items;
-	public static Localisation local;
-	public static Recipes recipes;
-	public static Settings settings;
-	public static Tools tools;
-	
+{	
     private static final int[] slots_top = new int[] {0};
     private static final int[] slots_bottom = new int[] {2, 1};
     private static final int[] slots_sides = new int[] {1};
@@ -370,9 +348,9 @@ public class OnyxFurnaceTileEntity extends TileEntity implements ISidedInventory
     	int k;
     	int r = generator.nextInt(100);
     	
-    	if(r <= settings.onyxFurnaceMultiChance)
+    	if(r <= Settings.onyxFurnaceMultiChance)
     	{
-    		k = settings.onyxFurnaceMultiplier;
+    		k = Settings.onyxFurnaceMultiplier;
     	}
     	
        	else

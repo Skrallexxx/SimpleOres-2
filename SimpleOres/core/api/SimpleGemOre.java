@@ -19,7 +19,7 @@ import net.minecraft.world.World;
 public class SimpleGemOre extends Block
 {
 	private String modName;
-	private int itemIDToDrop;
+	private int itemDrop;
 	
 	/**
 	 * This allows you to easily create a new ore block that drops an item. Only supports one item drop though.
@@ -27,11 +27,11 @@ public class SimpleGemOre extends Block
 	 * @param id = ID of the block.
 	 * @param material = The material of the block. This sets what tools are effective against it, the sounds it makes, etc.
 	 */
-	public SimpleGemOre(int id, Material material, String mod, int itemDropID, CreativeTabs tab)
+	public SimpleGemOre(int id, Material material, String mod, int itemToDrop, CreativeTabs tab)
 	{
 		super(id, material);
 		this.modName = mod;
-		this.itemIDToDrop = itemDropID + 256;
+		this.itemDrop = itemToDrop;
 		
     	if(Settings.enableSeparateTabs == true)
     	{
@@ -56,9 +56,9 @@ public class SimpleGemOre extends Block
 	 */
     public int idDropped(int i, Random random, int j)
     {
-    	if(itemIDToDrop != 0)
+    	if(itemDrop != 0)
     	{
-            return itemIDToDrop; 
+            return itemDrop; 
     	}
     	else return this.blockID;
     }

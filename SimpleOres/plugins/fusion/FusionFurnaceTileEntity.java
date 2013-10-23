@@ -1,14 +1,5 @@
 package SimpleOres.plugins.fusion;
 
-import SimpleOres.core.Achievements;
-import SimpleOres.core.Armor;
-import SimpleOres.core.Blocks;
-import SimpleOres.core.Config;
-import SimpleOres.core.Items;
-import SimpleOres.core.Localisation;
-import SimpleOres.core.Recipes;
-import SimpleOres.core.SimpleOres;
-import SimpleOres.core.Tools;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -34,19 +25,6 @@ import net.minecraftforge.event.entity.player.PlayerDestroyItemEvent;
 
 public class FusionFurnaceTileEntity extends TileEntity implements ISidedInventory
 {
-	/**
-	 * Linking to the classes for easier reference.
-	 */
-	public static SimpleOres mod;
-	public static Achievements achievements;
-	public static Armor armor;
-	public static Blocks blocks;
-	public static Config config;
-	public static Items items;
-	public static Localisation local;
-	public static Recipes recipes;
-	public static Tools tools;
-	
     private static final int[] slots_input1 = new int[] {0};
     private static final int[] slots_input2 = new int[] {3};
     private static final int[] slots_catalyst = new int[] {4};

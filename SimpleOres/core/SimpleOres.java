@@ -103,7 +103,6 @@ public class SimpleOres
     	 */
     	//Configuration
     	Config.doConfig(event);
-    	Localisation.doLocalisation(event);
     	Settings.doSettings(event);
     	
     	//Content

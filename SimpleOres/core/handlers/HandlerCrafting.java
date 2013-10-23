@@ -1,12 +1,6 @@
 package SimpleOres.core.handlers;
 
 import SimpleOres.core.Achievements;
-import SimpleOres.core.Armor;
-import SimpleOres.core.Blocks;
-import SimpleOres.core.Config;
-import SimpleOres.core.Items;
-import SimpleOres.core.Localisation;
-import SimpleOres.core.Recipes;
 import SimpleOres.core.SimpleOres;
 import SimpleOres.core.Tools;
 import net.minecraft.entity.player.EntityPlayer;
@@ -17,36 +11,28 @@ import cpw.mods.fml.common.ICraftingHandler;
 
 public class HandlerCrafting implements ICraftingHandler
 {
-	/**
-	 * Linking to the classes for easier reference.
-	 */
-	public static Achievements achievements;
-	public static Blocks blocks;
-	public static Items items;
-	public static Tools tools;
-	
 	@Override
 	public void onCrafting(EntityPlayer player, ItemStack item, IInventory craftMatrix) 
 	{
 		if(item.itemID == Item.pickaxeIron.itemID)
 		{
-			player.addStat(achievements.ironPickAch, 1);
+			player.addStat(Achievements.ironPickAch, 1);
 		}
-		if(item.itemID == tools.adamantiumPick.itemID)
+		if(item.itemID == Tools.adamantiumPick.itemID)
 		{
-			player.addStat(achievements.adamantiumPickAch, 1);
+			player.addStat(Achievements.adamantiumPickAch, 1);
 		}
-		if(item.itemID == tools.onyxPick.itemID)
+		if(item.itemID == Tools.onyxPick.itemID)
 		{
-			player.addStat(achievements.onyxPickAch, 1);
+			player.addStat(Achievements.onyxPickAch, 1);
 		}
-		if(item.itemID == tools.mythrilBow.itemID)
+		if(item.itemID == Tools.mythrilBow.itemID)
 		{
-			player.addStat(achievements.mythrilBowAch, 1);
+			player.addStat(Achievements.mythrilBowAch, 1);
 		}
-		if(item.itemID == tools.onyxBow.itemID)
+		if(item.itemID == Tools.onyxBow.itemID)
 		{
-			player.addStat(achievements.onyxBowAch, 1);
+			player.addStat(Achievements.onyxBowAch, 1);
 		}
 	}
 
