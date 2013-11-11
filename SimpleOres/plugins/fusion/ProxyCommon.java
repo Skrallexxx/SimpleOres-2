@@ -33,42 +33,42 @@ public class ProxyCommon implements IGuiHandler
 	  * called by the server or client. Server will call the Containers, while Client will call the GUI (so the player can actually see them).
 	  */
 	@Override
-   public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z)
-   {
+    public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z)
+    {
 		TileEntity machine = world.getBlockTileEntity(x, y, z);
 		
         if(machine == null)
         {
         	return null;
         }
-        
-        else if(machine instanceof FusionFurnaceTileEntity)
+            
+        if(machine instanceof FusionFurnaceTileEntity)
         {
         	return new FusionFurnaceContainer(player.inventory, (FusionFurnaceTileEntity)machine);
         }
-        
+            
         return null;
-   }
+    }
 	
 	 /**
 	  * Determines whether to return the Container or GUI for certain 'machines' (ie. furnaces, in this case), depending upon if this is being 
 	  * called by the server or client. Server will call the Containers, while Client will call the GUI (so the player can actually see them).
 	  */
 	@Override
-   public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z)
-   {
+    public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z)
+    {
 		TileEntity machine = world.getBlockTileEntity(x, y, z);
 		
         if(machine == null)
         {
         	return null;
         }
-        
-        else if(machine instanceof FusionFurnaceTileEntity)
+            
+        if(machine instanceof FusionFurnaceTileEntity)
         {
         	return new FusionFurnaceGUI(player.inventory, (FusionFurnaceTileEntity)machine);
         }
-        
+		
         return null;
-   }
+    }
 }

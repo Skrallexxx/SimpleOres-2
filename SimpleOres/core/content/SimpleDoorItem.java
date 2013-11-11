@@ -12,6 +12,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import SimpleOres.core.Blocks;
+import SimpleOres.core.Settings;
 import SimpleOres.core.SimpleOres;
 
 public class SimpleDoorItem extends Item
@@ -23,7 +24,12 @@ public class SimpleDoorItem extends Item
         super(par1);
         this.material = doorMaterial;
         this.maxStackSize = 1;
-        this.setCreativeTab(SimpleOres.tabSimpleDecoration);
+        if(Settings.enableSeparateTabs)
+        {
+            this.setCreativeTab(SimpleOres.tabSimpleDecorations);
+        }
+        else
+        	this.setCreativeTab(SimpleOres.tabSimpleBlocks);
     }
     
     /**

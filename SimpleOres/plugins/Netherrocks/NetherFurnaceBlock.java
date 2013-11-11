@@ -48,11 +48,11 @@ public class NetherFurnaceBlock extends BlockContainer
         
         if(par2 == false)
 		{
-        	if(Settings.enableSeparateTabs == true)
+        	if(SimpleOres.core.Settings.enableSeparateTabs == true)
         	{
     			this.setCreativeTab(Netherrocks.tabNetherDecorations);
         	}
-        	else this.setCreativeTab(Netherrocks.tabNetherBlocks);   
+        	else this.setCreativeTab(SimpleOres.core.SimpleOres.tabSimpleBlocks);   
 		}
     }
 

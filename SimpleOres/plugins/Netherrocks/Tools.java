@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import SimpleOres.core.SimpleOres;
+import SimpleOres.core.Settings;
 import SimpleOres.core.api.SimpleAxe;
 import SimpleOres.core.api.SimpleHoe;
 import SimpleOres.core.api.SimplePickaxe;

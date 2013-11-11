@@ -55,7 +55,7 @@ public class FusionFurnace extends BlockContainer
 		{
         	if(Settings.enableSeparateTabs == true)
         	{
-    			this.setCreativeTab(simpleores.tabSimpleDecoration);
+    			this.setCreativeTab(simpleores.tabSimpleDecorations);
         	}
         	else this.setCreativeTab(simpleores.tabSimpleBlocks);      		
 		}

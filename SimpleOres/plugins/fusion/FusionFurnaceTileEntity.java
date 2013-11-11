@@ -5,7 +5,6 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.Item;
@@ -14,14 +13,10 @@ import net.minecraft.item.ItemHoe;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.item.ItemTool;
-import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.ForgeDirection;
-import net.minecraftforge.common.ForgeDummyContainer;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.entity.player.PlayerDestroyItemEvent;
 
 public class FusionFurnaceTileEntity extends TileEntity implements ISidedInventory
 {
@@ -35,8 +30,6 @@ public class FusionFurnaceTileEntity extends TileEntity implements ISidedInvento
      * The ItemStacks that hold the items currently being used in the furnace
      */
     private ItemStack[] furnaceItemStacks = new ItemStack[5];
-    
-	EntityPlayer thePlayer = Minecraft.getMinecraft().thePlayer;
 
     /** The number of ticks that the furnace will keep burning */
     public int furnaceBurnTime = 0;
@@ -401,29 +394,29 @@ public class FusionFurnaceTileEntity extends TileEntity implements ISidedInvento
 
                 if (block == Block.woodSingleSlab)
                 {
-                    return 150 * 18750 / 10000;
+                    return 1125 / 4;
                 }
 
                 if (block.blockMaterial == Material.wood)
                 {
-                    return 300 * 18750 / 10000;
+                    return 1125 / 2;
                 }
                 
                 if (block == Block.coalBlock)
                 {
-                    return 16000 * 18750 / 10000;
+                    return 30000;
                 }
             }
 
-            if (item instanceof ItemTool && ((ItemTool) item).getToolMaterialName().equals("WOOD")) return 200 * 18750 / 10000;
-            if (item instanceof ItemSword && ((ItemSword) item).getToolMaterialName().equals("WOOD")) return 200 * 18750 / 10000;
-            if (item instanceof ItemHoe && ((ItemHoe) item).getMaterialName().equals("WOOD")) return 200 * 18750 / 10000;
-            if (i == Item.stick.itemID) return 100 * 18750 / 10000;
-            if (i == Item.coal.itemID) return 1600 * 18750 / 10000;
-            if (i == Item.bucketLava.itemID) return 20000 * 18750 / 10000;
-            if (i == Block.sapling.blockID) return 100 * 18750 / 10000;
-            if (i == Item.blazeRod.itemID) return 2400 * 18750 / 10000;
-            return GameRegistry.getFuelValue(par0ItemStack) * 18750 / 10000;
+            if (item instanceof ItemTool && ((ItemTool) item).getToolMaterialName().equals("WOOD")) return 375;
+            if (item instanceof ItemSword && ((ItemSword) item).getToolMaterialName().equals("WOOD")) return 375;
+            if (item instanceof ItemHoe && ((ItemHoe) item).getMaterialName().equals("WOOD")) return 375;
+            if (i == Item.stick.itemID) return 375 / 2;
+            if (i == Item.coal.itemID) return 3000;
+            if (i == Item.bucketLava.itemID) return 37500;
+            if (i == Block.sapling.blockID) return 375 / 2;
+            if (i == Item.blazeRod.itemID) return 4500;
+            return GameRegistry.getFuelValue(par0ItemStack) * 1875 / 1000;
         }
     }
 

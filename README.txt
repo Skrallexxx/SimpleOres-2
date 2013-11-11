@@ -1,3 +1,19 @@
+Version 1.2.1
+Core
+-Fixed Mythril Furnace not doubling the coal block length/fuel value.
+-Fixed the Onyx Gem not dropping from Onyx Ore.
+-Fixed Adamantium not generating in higher dimensions.
+-Fixed Copper Buckets not being destroyed when picking up lava.
+-Lava blocks no longer disappear when you attempt to pick them up with a Copper Bucket.
+-Copper Bucket now plays a burning sound when you attempt to pick up lava.
+-Decorations tab now has correct name.
+-Fixed the "Enable Separate Tabs" toggled not working as intended.
+-Fixed the update checker adding version number on world reload (but not game quit), and then displaying the update message.
+
+Fusion
+-Removed old localisation as it is now redundant.
+-Fusion Furnace no longer crashes SMP.
+
 Version 1.2.0
 Core
 -Updated Localisations.

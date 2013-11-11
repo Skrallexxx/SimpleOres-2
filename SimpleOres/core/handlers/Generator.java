@@ -138,8 +138,7 @@ public class Generator implements IWorldGenerator
 				    int Xcoord = blockX + random.nextInt(16);
 				    int Ycoord = random.nextInt(maxHeight - minHeight);
 				    int Zcoord = blockZ + random.nextInt(16);
-				    new WorldGenMinable(Blocks.copperOre.blockID, veinSize).generate(world, random, Xcoord, Ycoord + minHeight, Zcoord);
-				    //System.out.println("SimpleOres has generated " + copperRate + " Copper in Dimension " + Settings.dimensionIDsArray[i] + " with MinHeight " + minHeight + " and MaxHeight " + maxHeight + " and VeinSize " + veinSize);
+				    new WorldGenMinable(Blocks.copperOre.blockID, veinSize).generate(world, random, Xcoord, Ycoord + minHeight, Zcoord);				    
 				}
 				
 				for(int x = 0; x < tinRate; x++)
@@ -151,8 +150,7 @@ public class Generator implements IWorldGenerator
 				    int Xcoord = blockX + random.nextInt(16);
 				    int Ycoord = random.nextInt(maxHeight - minHeight);
 				    int Zcoord = blockZ + random.nextInt(16);
-				    new WorldGenMinable(Blocks.tinOre.blockID, veinSize).generate(world, random, Xcoord, Ycoord + minHeight, Zcoord);
-				    //System.out.println("SimpleOres has generated " + copperRate + " Tin in Dimension " + Settings.dimensionIDsArray[i] + " with MinHeight " + minHeight + " and MaxHeight " + maxHeight + " and VeinSize " + veinSize);
+				    new WorldGenMinable(Blocks.tinOre.blockID, veinSize).generate(world, random, Xcoord, Ycoord + minHeight, Zcoord);				 
 				}
 				
 				for(int x = 0; x < mythrilRate; x++)
@@ -164,8 +162,7 @@ public class Generator implements IWorldGenerator
 				    int Xcoord = blockX + random.nextInt(16);
 				    int Ycoord = random.nextInt(maxHeight - minHeight);
 				    int Zcoord = blockZ + random.nextInt(16);
-				    new WorldGenMinable(Blocks.mythrilOre.blockID, veinSize).generate(world, random, Xcoord, Ycoord + minHeight, Zcoord);
-				    //System.out.println("SimpleOres has generated " + copperRate + " Mythril in Dimension " + Settings.dimensionIDsArray[i] + " with MinHeight " + minHeight + " and MaxHeight " + maxHeight + " and VeinSize " + veinSize);
+				    new WorldGenMinable(Blocks.mythrilOre.blockID, veinSize).generate(world, random, Xcoord, Ycoord + minHeight, Zcoord);				   
 				}
 				
 				for(int x = 0; x < adamantiumRate; x++)
@@ -177,8 +174,7 @@ public class Generator implements IWorldGenerator
 				    int Xcoord = blockX + random.nextInt(16);
 				    int Ycoord = random.nextInt(maxHeight - minHeight);
 				    int Zcoord = blockZ + random.nextInt(16);
-				    new WorldGenMinable(Blocks.mythrilOre.blockID, veinSize).generate(world, random, Xcoord, Ycoord + minHeight, Zcoord);
-				    //System.out.println("SimpleOres has generated " + copperRate + " Adamantium in Dimension " + Settings.dimensionIDsArray[i] + " with MinHeight " + minHeight + " and MaxHeight " + maxHeight + " and VeinSize " + veinSize);
+				    new WorldGenMinable(Blocks.adamantiumOre.blockID, veinSize).generate(world, random, Xcoord, Ycoord + minHeight, Zcoord);				    
 				}
 			}
 		}

@@ -76,11 +76,11 @@ public class SimpleOres
     /**
      * Creating the tabs for Creative Inventory.
      */
-    public static SimpleTab tabSimpleBlocks = new SimpleTab("tabSimpleBlocks");
-    public static SimpleTab tabSimpleDecoration = new SimpleTab("tabSimpleDecorations");
-    public static SimpleTab tabSimpleTools = new SimpleTab("tabSimpleTools");
-    public static SimpleTab tabSimpleCombat = new SimpleTab("tabSimpleCombat");
-    public static SimpleTab tabSimpleMaterials = new SimpleTab("tabSimpleMaterials");
+    public static SimpleTab tabSimpleBlocks;
+    public static SimpleTab tabSimpleDecorations;
+    public static SimpleTab tabSimpleTools;
+    public static SimpleTab tabSimpleCombat;
+    public static SimpleTab tabSimpleMaterials;
 
     /**
      * Creating the Armor Renderers. This is simply so you can see the armor texture when you wear it.
@@ -104,6 +104,7 @@ public class SimpleOres
     	//Configuration
     	Config.doConfig(event);
     	Settings.doSettings(event);
+    	doTabs();
     	
     	//Content
     	setToolAndArmorStats();
@@ -116,16 +117,36 @@ public class SimpleOres
     	setTabIcons();
     }
     
+    public void doTabs()
+    {
+    	/**
+    	 * Creating the custom tabs using the API class "SimpleTab".
+    	 */  	
+    	tabSimpleBlocks = new SimpleTab("tabSimpleBlocks");   	
+    	 
+    	if(Settings.enableSeparateTabs)
+    	{
+        	tabSimpleDecorations = new SimpleTab("tabSimpleDecorations");
+        	tabSimpleTools = new SimpleTab("tabSimpleTools");
+        	tabSimpleCombat = new SimpleTab("tabSimpleCombat");
+        	tabSimpleMaterials = new SimpleTab("tabSimpleMaterials");
+    	}
+    }
+    
     public void setTabIcons()
     {
     	/**
-    	 * Creating the custom tabs using the API class "SimpleTab" and setting their icon.
-    	 */
+    	 * Setting the Creative Tab icons.
+    	 */  	
 		tabSimpleBlocks.setIcon(new ItemStack(Blocks.copperOre));
-	    tabSimpleDecoration.setIcon(new ItemStack(Blocks.mythrilFurnaceOn));
-	    tabSimpleTools.setIcon(new ItemStack(Tools.onyxPick));
-	    tabSimpleCombat.setIcon(new ItemStack(Armor.adamantiumHelm));
-	    tabSimpleMaterials.setIcon(new ItemStack(Items.tinIngot));
+		
+    	if(Settings.enableSeparateTabs)
+    	{
+    	    tabSimpleDecorations.setIcon(new ItemStack(Blocks.mythrilFurnaceOn));
+    	    tabSimpleTools.setIcon(new ItemStack(Tools.onyxPick));
+    	    tabSimpleCombat.setIcon(new ItemStack(Armor.adamantiumHelm));
+    	    tabSimpleMaterials.setIcon(new ItemStack(Items.tinIngot));
+    	}
     }
     
     public void setToolAndArmorStats()

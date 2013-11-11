@@ -3,13 +3,12 @@ package SimpleOres.core.content;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import SimpleOres.core.Items;
-import SimpleOres.core.Settings;
 import SimpleOres.core.SimpleOres;
+import SimpleOres.core.Settings;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.passive.EntityCow;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -31,12 +30,11 @@ public class SimpleBucket extends Item
         this.maxStackSize = 1;
         this.isFull = par2;
         
-    	if(Settings.enableSeparateTabs == true)
-    	{
-            this.setCreativeTab(SimpleOres.tabSimpleTools);
-    	}
-    	else this.setCreativeTab(SimpleOres.tabSimpleBlocks);  
-
+        if(Settings.enableSeparateTabs == true)
+        {
+        	this.setCreativeTab(SimpleOres.tabSimpleTools);
+        }
+        else this.setCreativeTab(SimpleOres.tabSimpleBlocks);
     }
     
     /**
@@ -46,7 +44,7 @@ public class SimpleBucket extends Item
     @SideOnly(Side.CLIENT)
     public void registerIcons(IconRegister iconRegister) 
     {
-    	 this.itemIcon = iconRegister.registerIcon("simpleores:" + (this.getUnlocalizedName().substring(5)));
+             this.itemIcon = iconRegister.registerIcon("simpleores:" + (this.getUnlocalizedName().substring(5)));
     }
 
     /**
@@ -54,10 +52,6 @@ public class SimpleBucket extends Item
      */
     public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer)
     {
-        float f = 1.0F;
-        double d0 = par3EntityPlayer.prevPosX + (par3EntityPlayer.posX - par3EntityPlayer.prevPosX) * (double)f;
-        double d1 = par3EntityPlayer.prevPosY + (par3EntityPlayer.posY - par3EntityPlayer.prevPosY) * (double)f + 1.62D - (double)par3EntityPlayer.yOffset;
-        double d2 = par3EntityPlayer.prevPosZ + (par3EntityPlayer.posZ - par3EntityPlayer.prevPosZ) * (double)f;
         boolean flag = this.isFull == 0;
         MovingObjectPosition movingobjectposition = this.getMovingObjectPositionFromPlayer(par2World, par3EntityPlayer, flag);
 
@@ -125,7 +119,7 @@ public class SimpleBucket extends Item
                             return new ItemStack(Items.copperBucketWater);
                         }
 
-                        if (!par3EntityPlayer.inventory.addItemStackToInventory(new ItemStack(Items.copperBucketWater)))
+                        if (!par3EntityPlayer.inventory.addItemStackToInventory(new ItemStack(Item.bucketWater)))
                         {
                             par3EntityPlayer.dropPlayerItem(new ItemStack(Items.copperBucketWater.itemID, 1, 0));
                         }
@@ -135,19 +129,22 @@ public class SimpleBucket extends Item
 
                     if (par2World.getBlockMaterial(i, j, k) == Material.lava && par2World.getBlockMetadata(i, j, k) == 0)
                     {
-                        par2World.setBlockToAir(i, j, k);
-
                         if (par3EntityPlayer.capabilities.isCreativeMode)
                         {
                             return par1ItemStack;
                         }
 
-                        if (--par1ItemStack.stackSize <= 0)
+                        if (par1ItemStack.stackSize <= 1)
                         {
-                        	par1ItemStack.stackSize--;
+                            --par1ItemStack.stackSize;
+                            par2World.playSoundEffect((double)((float)i + 0.5F), (double)((float)j + 0.5F), (double)((float)k + 0.5F), "random.fizz", 0.5F, 2.6F + (par2World.rand.nextFloat() - par2World.rand.nextFloat()) * 0.8F);
                         }
 
-                        par1ItemStack.stackSize--;
+                        if (par1ItemStack.stackSize > 1)
+                        {
+                            --par1ItemStack.stackSize;
+                            par2World.playSoundEffect((double)((float)i + 0.5F), (double)((float)j + 0.5F), (double)((float)k + 0.5F), "random.fizz", 0.5F, 2.6F + (par2World.rand.nextFloat() - par2World.rand.nextFloat()) * 0.8F);
+                        }
                     }
                 }
                 else
@@ -192,12 +189,13 @@ public class SimpleBucket extends Item
                         return par1ItemStack;
                     }
 
-                    if (this.tryPlaceContainedLiquid(par2World, d0, d1, d2, i, j, k) && !par3EntityPlayer.capabilities.isCreativeMode)
+                    if (this.tryPlaceContainedLiquid(par2World, i, j, k) && !par3EntityPlayer.capabilities.isCreativeMode)
                     {
                         return new ItemStack(Items.copperBucket);
                     }
                 }
             }
+
             return par1ItemStack;
         }
     }
@@ -205,33 +203,44 @@ public class SimpleBucket extends Item
     /**
      * Attempts to place the liquid contained inside the bucket.
      */
-    public boolean tryPlaceContainedLiquid(World par1World, double par2, double par4, double par6, int par8, int par9, int par10)
+    public boolean tryPlaceContainedLiquid(World par1World, int par2, int par3, int par4)
     {
         if (this.isFull <= 0)
         {
             return false;
         }
-        else if (!par1World.isAirBlock(par8, par9, par10) && par1World.getBlockMaterial(par8, par9, par10).isSolid())
-        {
-            return false;
-        }
         else
         {
-            if (par1World.provider.isHellWorld && this.isFull == Block.waterMoving.blockID)
-            {
-                par1World.playSoundEffect(par2 + 0.5D, par4 + 0.5D, par6 + 0.5D, "random.fizz", 0.5F, 2.6F + (par1World.rand.nextFloat() - par1World.rand.nextFloat()) * 0.8F);
+            Material material = par1World.getBlockMaterial(par2, par3, par4);
+            boolean flag = !material.isSolid();
 
-                for (int l = 0; l < 8; ++l)
-                {
-                    par1World.spawnParticle("largesmoke", (double)par8 + Math.random(), (double)par9 + Math.random(), (double)par10 + Math.random(), 0.0D, 0.0D, 0.0D);
-                }
+            if (!par1World.isAirBlock(par2, par3, par4) && !flag)
+            {
+                return false;
             }
             else
             {
-                par1World.setBlock(par8, par9, par10, this.isFull, 0, 3);
-            }
+                if (par1World.provider.isHellWorld && this.isFull == Block.waterMoving.blockID)
+                {
+                    par1World.playSoundEffect((double)((float)par2 + 0.5F), (double)((float)par3 + 0.5F), (double)((float)par4 + 0.5F), "random.fizz", 0.5F, 2.6F + (par1World.rand.nextFloat() - par1World.rand.nextFloat()) * 0.8F);
 
-            return true;
+                    for (int l = 0; l < 8; ++l)
+                    {
+                        par1World.spawnParticle("largesmoke", (double)par2 + Math.random(), (double)par3 + Math.random(), (double)par4 + Math.random(), 0.0D, 0.0D, 0.0D);
+                    }
+                }
+                else
+                {
+                    if (!par1World.isRemote && flag && !material.isLiquid())
+                    {
+                        par1World.destroyBlock(par2, par3, par4, true);
+                    }
+
+                    par1World.setBlock(par2, par3, par4, this.isFull, 0, 3);
+                }
+
+                return true;
+            }
         }
     }
 }

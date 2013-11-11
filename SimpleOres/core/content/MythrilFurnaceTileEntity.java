@@ -394,7 +394,7 @@ public class MythrilFurnaceTileEntity extends TileEntity implements ISidedInvent
                 
                 if (block == Block.coalBlock)
                 {
-                    return 16000;
+                    return 16000 + Settings.mythrilFurnaceMultiplier;
                 }
             }
 

@@ -20,7 +20,6 @@ public class Settings
 	public static int sinisiteBowKnockbackModifier;
 	
 	//Toggles
-	public static boolean enableOldLocalisation;
 	public static boolean enableToolStatModification;
 	public static boolean enableArmorStatModification;
 	public static boolean enableBlockStatModification;
@@ -97,7 +96,6 @@ public class Settings
 			settings.load();
 			
 			//Toggles
-			enableOldLocalisation = settings.get("Toggles", "Enable Old (Configurable) Localisation?", false).getBoolean(enableOldLocalisation);
 			enableToolStatModification = settings.get("Toggles", "Enable Tool Stat Modification? (Advanced)", false).getBoolean(enableToolStatModification);
 			enableArmorStatModification = settings.get("Toggles", "Enable Armor Stat Modification? (Advanced)", false).getBoolean(enableArmorStatModification);
 			enableBlockStatModification = settings.get("Toggles", "Enable Block Stat Modification? (Advanced)", false).getBoolean(enableBlockStatModification);

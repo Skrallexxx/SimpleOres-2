@@ -104,23 +104,6 @@ public class Content
 		sinisiteChest = new SimpleArmor(IDs.sinisiteChestID, mod.armorSinisite, mod.rendererSinisite, 1, "sinisite", "simpleoresfusion", SimpleOres.tabSimpleCombat).setUnlocalizedName("sinisiteChest");
 		sinisiteLegs = new SimpleArmor(IDs.sinisiteLegsID, mod.armorSinisite, mod.rendererSinisite, 2, "sinisite", "simpleoresfusion", SimpleOres.tabSimpleCombat).setUnlocalizedName("sinisiteLegs");
 		sinisiteBoots = new SimpleArmor(IDs.sinisiteBootsID, mod.armorSinisite, mod.rendererSinisite, 3, "sinisite", "simpleoresfusion", SimpleOres.tabSimpleCombat).setUnlocalizedName("sinisiteBoots");
-		
-		//Armor Names
-		if(Settings.enableOldLocalisation)
-		{
-			LanguageRegistry.addName(bronzeHelm, Localisation.bronzeHelmName);		
-			LanguageRegistry.addName(bronzeChest, Localisation.bronzeChestName);
-			LanguageRegistry.addName(bronzeLegs, Localisation.bronzeLegsName);
-			LanguageRegistry.addName(bronzeBoots, Localisation.bronzeBootsName);
-			LanguageRegistry.addName(thyriumHelm, Localisation.thyriumHelmName);		
-			LanguageRegistry.addName(thyriumChest, Localisation.thyriumChestName);
-			LanguageRegistry.addName(thyriumLegs, Localisation.thyriumLegsName);
-			LanguageRegistry.addName(thyriumBoots, Localisation.thyriumBootsName);
-			LanguageRegistry.addName(sinisiteHelm, Localisation.sinisiteHelmName);		
-			LanguageRegistry.addName(sinisiteChest, Localisation.sinisiteChestName);
-			LanguageRegistry.addName(sinisiteLegs, Localisation.sinisiteLegsName);
-			LanguageRegistry.addName(sinisiteBoots, Localisation.sinisiteBootsName);
-		}
 	}
 	
 	/**
@@ -134,16 +117,6 @@ public class Content
 		sinisiteBlock = new SimpleOre(IDs.sinisiteBlockID, Material.iron, "simpleoresfusion", SimpleOres.tabSimpleBlocks).setHardness(Settings.sinisiteBlockHardness).setResistance(Settings.sinisiteBlockResistance).setCreativeTab(SimpleOres.tabSimpleBlocks).setUnlocalizedName("sinisiteBlock");
 		fusionFurnace = new FusionFurnace(IDs.fusionFurnaceID, false).setHardness(Settings.fusionFurnaceHardness).setResistance(Settings.fusionFurnaceResistance).setUnlocalizedName("fusionFurnace");
 		fusionFurnaceOn = new FusionFurnace(IDs.fusionFurnaceOnID, true).setHardness(Settings.fusionFurnaceHardness).setResistance(Settings.fusionFurnaceResistance).setLightValue(Settings.fusionFurnaceLightValue).setUnlocalizedName("fusionFurnaceOn");
-		
-		//Block Naming
-		if(Settings.enableOldLocalisation)
-		{
-			LanguageRegistry.addName(bronzeBlock, Localisation.bronzeBlockName);
-			LanguageRegistry.addName(thyriumBlock, Localisation.thyriumBlockName);
-			LanguageRegistry.addName(sinisiteBlock, Localisation.sinisiteBlockName);
-			LanguageRegistry.addName(fusionFurnace, Localisation.fusionFurnaceName);
-			LanguageRegistry.addName(fusionFurnaceOn, Localisation.fusionFurnaceOnName);
-		}
 		
 		//Block Registering
 		GameRegistry.registerBlock(bronzeBlock, "bronzeBlock");
@@ -173,25 +146,6 @@ public class Content
 		smallSinisiteChunk = new SimpleIngot(IDs.smallSinisiteChunkID, "simpleoresfusion", SimpleOres.tabSimpleMaterials).setUnlocalizedName("smallSinisiteChunk");
 		mediumSinisiteChunk = new SimpleIngot(IDs.mediumSinisiteChunkID, "simpleoresfusion", SimpleOres.tabSimpleMaterials).setUnlocalizedName("mediumSinisiteChunk");
 		largeSinisiteChunk = new SimpleIngot(IDs.largeSinisiteChunkID, "simpleoresfusion", SimpleOres.tabSimpleMaterials).setUnlocalizedName("largeSinisiteChunk");
-		
-		//Item Naming
-		if(Settings.enableOldLocalisation)
-		{
-			LanguageRegistry.addName(bronzeIngot, Localisation.bronzeIngotName);
-			LanguageRegistry.addName(sinisiteIngot, Localisation.sinisiteIngotName);
-			LanguageRegistry.addName(thyriumIngot, Localisation.thyriumIngotName);
-			LanguageRegistry.addName(thyriumRod, Localisation.thyriumRodName);
-			LanguageRegistry.addName(sinisiteRod, Localisation.sinisiteRodName);
-			LanguageRegistry.addName(smallBronzeChunk, Localisation.smallBronzeChunkName);
-			LanguageRegistry.addName(mediumBronzeChunk, Localisation.mediumBronzeChunkName);
-			LanguageRegistry.addName(largeBronzeChunk, Localisation.largeBronzeChunkName);
-			LanguageRegistry.addName(smallThyriumChunk, Localisation.smallThyriumChunkName);
-			LanguageRegistry.addName(mediumThyriumChunk, Localisation.mediumThyriumChunkName);
-			LanguageRegistry.addName(largeThyriumChunk, Localisation.largeThyriumChunkName);
-			LanguageRegistry.addName(smallSinisiteChunk, Localisation.smallSinisiteChunkName);
-			LanguageRegistry.addName(mediumSinisiteChunk, Localisation.mediumSinisiteChunkName);
-			LanguageRegistry.addName(largeSinisiteChunk, Localisation.largeSinisiteChunkName);	
-		}
 	}
 	
 	/**
@@ -217,28 +171,6 @@ public class Content
 		sinisiteHoe = new SimpleHoe(IDs.sinisiteHoeID, mod.toolSinisite, "simpleoresfusion", SimpleOres.tabSimpleTools).setUnlocalizedName("sinisiteHoe");
 		thyriumBow = (ItemBow) new SimpleBow(IDs.thyriumBowID, 900, mod.toolThyrium).setFull3D().setUnlocalizedName("thyriumBow");
 		sinisiteBow = (ItemBow) new SimpleBow(IDs.sinisiteBowID, 1200, mod.toolSinisite).setFull3D().setUnlocalizedName("sinisiteBow");
-		
-		//Tool Names
-		if(Settings.enableOldLocalisation)
-		{
-			LanguageRegistry.addName(bronzePick, Localisation.bronzePickName);
-			LanguageRegistry.addName(bronzeAxe, Localisation.bronzeAxeName);
-			LanguageRegistry.addName(bronzeShovel, Localisation.bronzeShovelName);
-			LanguageRegistry.addName(bronzeSword, Localisation.bronzeSwordName);
-			LanguageRegistry.addName(bronzeHoe, Localisation.bronzeHoeName);
-			LanguageRegistry.addName(thyriumPick, Localisation.thyriumPickName);
-			LanguageRegistry.addName(thyriumAxe, Localisation.thyriumAxeName);
-			LanguageRegistry.addName(thyriumShovel, Localisation.thyriumShovelName);
-			LanguageRegistry.addName(thyriumSword, Localisation.thyriumSwordName);
-			LanguageRegistry.addName(thyriumHoe, Localisation.thyriumHoeName);
-			LanguageRegistry.addName(sinisitePick, Localisation.sinisitePickName);
-			LanguageRegistry.addName(sinisiteAxe, Localisation.sinisiteAxeName);
-			LanguageRegistry.addName(sinisiteShovel, Localisation.sinisiteShovelName);
-			LanguageRegistry.addName(sinisiteSword, Localisation.sinisiteSwordName);
-			LanguageRegistry.addName(sinisiteHoe, Localisation.sinisiteHoeName);
-			LanguageRegistry.addName(thyriumBow, Localisation.thyriumBowName);
-			LanguageRegistry.addName(sinisiteBow, Localisation.sinisiteBowName);
-		}
 		
 		//Tool Registering
         MinecraftForge.setToolClass(bronzePick, "pickaxe", 2);

@@ -25,7 +25,7 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 
 //======================================= FORGE STUFF ====================================================
 @NetworkMod(clientSideRequired = true, serverSideRequired = false)
-@Mod(modid = "simpleoresfusion", name = "SimpleOres 2 Fusion Plugin", version = "1.2.0", dependencies = "required-after:simpleores")
+@Mod(modid = "simpleoresfusion", name = "SimpleOres 2 Fusion Plugin", version = "1.2.1", dependencies = "required-after:simpleores")
 
 public class FusionPlugin 
 {

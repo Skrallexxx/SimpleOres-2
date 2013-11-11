@@ -55,7 +55,7 @@ public class OnyxFurnace extends BlockContainer
 		{
         	if(Settings.enableSeparateTabs == true)
         	{
-    			this.setCreativeTab(SimpleOres.tabSimpleDecoration);
+    			this.setCreativeTab(SimpleOres.tabSimpleDecorations);
         	}
         	else this.setCreativeTab(SimpleOres.tabSimpleBlocks);     
 		}

@@ -2,6 +2,7 @@ package SimpleOres.core.content;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+
 import java.util.List;
 import java.util.Random;
 
@@ -16,6 +17,7 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import SimpleOres.core.Settings;
 import SimpleOres.core.SimpleOres;
 
 public class SimpleBars extends BlockPane
@@ -40,7 +42,13 @@ public class SimpleBars extends BlockPane
         this.sideTextureIndex = par3Str;
         this.canDropItself = par5;
         this.field_94402_c = par2Str;
-        this.setCreativeTab(SimpleOres.tabSimpleDecoration);
+        if(Settings.enableSeparateTabs)
+        {
+            this.setCreativeTab(SimpleOres.tabSimpleDecorations);
+        }
+        else
+        	this.setCreativeTab(SimpleOres.tabSimpleBlocks);
+
     }
 
     /**
