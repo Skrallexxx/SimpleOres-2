@@ -17,6 +17,8 @@ public class HandlerJoinWorld
 
   public static RandomRange random = new RandomRange();
   
+	public static final String HANDLED_KEY = "simpleores.spawn.handled";
+  
   /**
    * This class allows zombies and skeletons to spawn holding/wearing SimpleOres items.
    */
@@ -28,6 +30,11 @@ public class HandlerJoinWorld
     if ((rand <= 0.03D) && ((event.entity instanceof EntityLiving)) && ((event.entity instanceof EntitySkeleton | event.entity instanceof EntityZombie))) 
     {
       EntityLiving living = (EntityLiving)event.entity;
+      
+      if (entity.getEntityData().getBoolean(HANDLED_KEY))
+        return;
+      entity.getEntityData().setBoolean(HANDLED_KEY, true);
+      
       if (range == 1) {
         living.setCurrentItemOrArmor(4, new ItemStack(Armor.copperHelm));
       }
