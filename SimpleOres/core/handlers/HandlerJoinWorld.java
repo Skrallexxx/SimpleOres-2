@@ -26,7 +26,7 @@ public class HandlerJoinWorld
   public void EntityJoinWorldEvent(EntityJoinWorldEvent event)
   {
     if (!(event.entity instanceof EntitySkeleton || event.entity instanceof EntityZombie)
-        && event.entity.getEntityData().getBoolean(HANDLED_KEY))
+        || event.entity.getEntityData().getBoolean(HANDLED_KEY))
       return;
     event.entity.getEntityData().setBoolean(HANDLED_KEY, true);
       
@@ -35,7 +35,6 @@ public class HandlerJoinWorld
     if (rand <= 0.03D)
     {
       EntityLiving living = (EntityLiving)event.entity;
-      
       if (range == 1) {
         living.setCurrentItemOrArmor(4, new ItemStack(Armor.copperHelm));
       }
