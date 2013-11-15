@@ -17,15 +17,23 @@ public class HandlerJoinWorld
 
   public static RandomRange random = new RandomRange();
   
+  public static final String HANDLED_KEY = "simpleores.spawn.handled";
+  
   /**
    * This class allows zombies and skeletons to spawn holding/wearing SimpleOres items.
    */
   @ForgeSubscribe
   public void EntityJoinWorldEvent(EntityJoinWorldEvent event)
   {
+    if (event.world.isRemote
+        || !(event.entity instanceof EntitySkeleton || event.entity instanceof EntityZombie)
+        || event.entity.getEntityData().getBoolean(HANDLED_KEY))
+      return;
+    event.entity.getEntityData().setBoolean(HANDLED_KEY, true);
+      
     rand = Math.random();
     range = random.nextIntII(1, 16);
-    if ((rand <= 0.03D) && ((event.entity instanceof EntityLiving)) && ((event.entity instanceof EntitySkeleton | event.entity instanceof EntityZombie))) 
+    if (rand <= 0.03D)
     {
       EntityLiving living = (EntityLiving)event.entity;
       if (range == 1) {
