@@ -25,7 +25,8 @@ public class HandlerJoinWorld
   @ForgeSubscribe
   public void EntityJoinWorldEvent(EntityJoinWorldEvent event)
   {
-    if (!(event.entity instanceof EntitySkeleton || event.entity instanceof EntityZombie)
+    if (event.world.isRemote
+        || !(event.entity instanceof EntitySkeleton || event.entity instanceof EntityZombie)
         || event.entity.getEntityData().getBoolean(HANDLED_KEY))
       return;
     event.entity.getEntityData().setBoolean(HANDLED_KEY, true);
