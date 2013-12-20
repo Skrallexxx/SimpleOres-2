@@ -7,7 +7,9 @@ import java.util.regex.Pattern;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import alexndr.SimpleOres.api.HandlerLogger;
+import alexndr.SimpleOres.api.HandlerUpdateChecker;
 import alexndr.SimpleOres.core.SimpleOres;
+import alexndr.SimpleOres.core.conf.Settings;
 
 import com.google.common.reflect.ClassPath;
 import com.google.common.reflect.ClassPath.ResourceInfo;
@@ -23,7 +25,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
 @NetworkMod(clientSideRequired = true, serverSideRequired = false)
-@Mod(modid = "aestheticsplugin", name = "SimpleOres 2 Aesthetics Plugin", version = "1.0.0", dependencies = "required-after:simpleores; required-after:simpleoresfusion")
+@Mod(modid = ModInfo.ID, name = ModInfo.NAME, version = ModInfo.VERSION, dependencies = "required-after:simpleores; required-after:simpleoresfusion")
 
 public class AestheticsPlugin 
 {
@@ -48,6 +50,8 @@ public class AestheticsPlugin
 	public void Init(FMLInitializationEvent event)
 	{
 		INSTANCE = this;
+		
+	  	if(Settings.enableUpdateChecker){HandlerUpdateChecker.checkUpdates(ModInfo.VERSIONURL, ModInfo.ID, ModInfo.VERSION);}
 		
 		NetworkRegistry.instance().registerGuiHandler(INSTANCE, proxy);
 		GameRegistry.registerTileEntity(FFurnaceTileEntityTin.class, "tinFFurnace");

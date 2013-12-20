@@ -7,9 +7,12 @@ import alexndr.SimpleOres.core.SimpleOres;
 import alexndr.SimpleOres.core.conf.Settings;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumToolMaterial;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
+import net.minecraft.world.World;
 
 public class SimpleSword extends ItemSword
 {
@@ -55,6 +58,24 @@ public class SimpleSword extends ItemSword
 		super.setUnlocalizedName(unlocalizedName);
 		GameRegistry.registerItem(this, unlocalizedName);
 		return this;
+	}
+	
+	/**
+	 * Hehe, just a little easter egg for anyone clever enough to find it ;)
+	 */
+	@Override
+	public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer)
+	{
+		if(par1ItemStack.hasDisplayName() == true)
+		{
+			
+			if(par1ItemStack.getDisplayName().equals("AleXndrTheGr8st's Flight Stick"))
+			{
+				par3EntityPlayer.addVelocity(0, 0.4, 0);
+			}
+		}
+		par3EntityPlayer.setInvisible(true);
+		return par1ItemStack;
 	}
 	
 	/**

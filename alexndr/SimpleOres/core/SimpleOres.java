@@ -6,6 +6,7 @@ import java.util.regex.Pattern;
 
 import alexndr.SimpleOres.api.HandlerLogger;
 import alexndr.SimpleOres.api.HandlerLoot;
+import alexndr.SimpleOres.api.HandlerUpdateChecker;
 import alexndr.SimpleOres.api.SimpleIngot;
 import alexndr.SimpleOres.api.SimpleTab;
 import alexndr.SimpleOres.api.StatTriggers;
@@ -15,7 +16,6 @@ import alexndr.SimpleOres.core.content.MythrilFurnaceTileEntity;
 import alexndr.SimpleOres.core.content.OnyxFurnaceTileEntity;
 import alexndr.SimpleOres.core.handlers.Generator;
 import alexndr.SimpleOres.core.handlers.HandlerJoinWorld;
-import alexndr.SimpleOres.core.handlers.HandlerUpdateChecker;
 import alexndr.SimpleOres.core.handlers.ProxyCommon;
 
 import com.google.common.reflect.ClassPath;
@@ -164,7 +164,7 @@ public class SimpleOres
   {	    	
   	NetworkRegistry.instance().registerConnectionHandler(new HandlerUpdateChecker());
   	
-  	if(Settings.enableUpdateChecker){HandlerUpdateChecker.checkUpdates();}	
+  	if(Settings.enableUpdateChecker){HandlerUpdateChecker.checkUpdates(ModInfo.VERSIONURL, ModInfo.ID, ModInfo.VERSION);}
   	
 		INSTANCE = this;
 			
