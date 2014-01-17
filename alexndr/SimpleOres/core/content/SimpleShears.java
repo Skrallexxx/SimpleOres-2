@@ -3,10 +3,6 @@ package alexndr.SimpleOres.core.content;
 import java.util.ArrayList;
 import java.util.Random;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import alexndr.SimpleOres.core.SimpleOres;
-import alexndr.SimpleOres.core.conf.Settings;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.enchantment.Enchantment;
@@ -20,6 +16,11 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.stats.StatList;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IShearable;
+import alexndr.SimpleOres.api.helpers.TabHelper;
+import alexndr.SimpleOres.core.SimpleOres;
+import alexndr.SimpleOres.core.conf.Settings;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class SimpleShears extends Item
 {
@@ -28,12 +29,7 @@ public class SimpleShears extends Item
         super(par1);
         this.setMaxStackSize(1);
         this.setMaxDamage(maxDamage);
-        
-    	if(Settings.enableSeparateTabs == true)
-    	{
-            this.setCreativeTab(SimpleOres.tabSimpleTools);
-    	}
-    	else this.setCreativeTab(SimpleOres.tabSimpleBlocks);
+        this.setCreativeTab(TabHelper.getToolsTab());
     }
     
     /**

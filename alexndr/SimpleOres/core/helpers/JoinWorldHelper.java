@@ -1,0 +1,102 @@
+package alexndr.SimpleOres.core.helpers;
+
+import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.monster.EntitySkeleton;
+import net.minecraft.entity.monster.EntityZombie;
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.event.ForgeSubscribe;
+import net.minecraftforge.event.entity.EntityJoinWorldEvent;
+import alexndr.SimpleOres.core.Content;
+
+public class JoinWorldHelper
+{
+  public static double rand;
+  public static int range;
+
+  public static RandomRange random = new RandomRange();
+  
+  public static final String HANDLED_KEY = "simpleores.spawn.handled";
+  
+  /**
+   * This class allows zombies and skeletons to spawn holding/wearing SimpleOres items.
+   */
+  @ForgeSubscribe
+  public void EntityJoinWorldEvent(EntityJoinWorldEvent event)
+  {
+    if (event.world.isRemote
+        || !(event.entity instanceof EntitySkeleton || event.entity instanceof EntityZombie)
+        || event.entity.getEntityData().getBoolean(HANDLED_KEY))
+      return;
+    event.entity.getEntityData().setBoolean(HANDLED_KEY, true);
+      
+    rand = Math.random();
+    range = random.nextInt(1, 16);
+    if (rand <= 0.03D)
+    {
+      EntityLiving living = (EntityLiving)event.entity;
+      if (range == 1) {
+        living.setCurrentItemOrArmor(4, new ItemStack(Content.copperHelm));
+      }
+
+      if (range == 2) {
+        living.setCurrentItemOrArmor(3, new ItemStack(Content.copperChest));
+      }
+
+      if (range == 3) {
+        living.setCurrentItemOrArmor(2, new ItemStack(Content.copperLegs));
+      }
+
+      if (range == 4) {
+        living.setCurrentItemOrArmor(1, new ItemStack(Content.copperBoots));
+      }
+
+      if (range == 5) {
+        living.setCurrentItemOrArmor(4, new ItemStack(Content.mythrilHelm));
+      }
+
+      if (range == 6) {
+        living.setCurrentItemOrArmor(3, new ItemStack(Content.mythrilChest));
+      }
+
+      if (range == 7) {
+        living.setCurrentItemOrArmor(2, new ItemStack(Content.mythrilLegs));
+      }
+
+      if (range == 8) {
+        living.setCurrentItemOrArmor(1, new ItemStack(Content.mythrilBoots));
+      }
+
+      if (range == 9) {
+        living.setCurrentItemOrArmor(4, new ItemStack(Content.adamantiumHelm));
+      }
+
+      if (range == 10) {
+        living.setCurrentItemOrArmor(3, new ItemStack(Content.onyxChest));
+      }
+
+      if (range == 11) {
+        living.setCurrentItemOrArmor(2, new ItemStack(Content.adamantiumLegs));
+      }
+
+      if (range == 12) {
+        living.setCurrentItemOrArmor(1, new ItemStack(Content.onyxBoots));
+      }
+      
+      if (range == 13) {
+          living.setCurrentItemOrArmor(0, new ItemStack(Content.copperSword));
+        }
+      
+      if (range == 14) {
+          living.setCurrentItemOrArmor(0, new ItemStack(Content.mythrilSword));
+        }
+      
+      if (range == 15) {
+          living.setCurrentItemOrArmor(0, new ItemStack(Content.adamantiumSword));
+        }
+      
+      if (range == 16) {
+          living.setCurrentItemOrArmor(0, new ItemStack(Content.onyxSword));
+        }
+    }
+  }
+}

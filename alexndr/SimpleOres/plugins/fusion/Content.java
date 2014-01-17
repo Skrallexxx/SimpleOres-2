@@ -1,87 +1,22 @@
 package alexndr.SimpleOres.plugins.fusion;
 
-import cpw.mods.fml.common.registry.GameRegistry;
-import alexndr.SimpleOres.api.SimpleArmor;
-import alexndr.SimpleOres.api.SimpleAxe;
-import alexndr.SimpleOres.api.SimpleHoe;
-import alexndr.SimpleOres.api.SimpleIngot;
-import alexndr.SimpleOres.api.SimpleOre;
-import alexndr.SimpleOres.api.SimplePickaxe;
-import alexndr.SimpleOres.api.SimpleShovel;
-import alexndr.SimpleOres.api.SimpleSword;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.item.Item;
 import net.minecraftforge.common.MinecraftForge;
+import alexndr.SimpleOres.api.content.SimpleArmor;
+import alexndr.SimpleOres.api.content.SimpleAxe;
+import alexndr.SimpleOres.api.content.SimpleHoe;
+import alexndr.SimpleOres.api.content.SimpleIngot;
+import alexndr.SimpleOres.api.content.SimpleOre;
+import alexndr.SimpleOres.api.content.SimplePickaxe;
+import alexndr.SimpleOres.api.content.SimpleShovel;
+import alexndr.SimpleOres.api.content.SimpleSword;
+import cpw.mods.fml.common.registry.GameRegistry;
 
 public class Content 
 {
 	public static FusionPlugin mod;
-	
-	/**
-	 * Creating the blocks.
-	 */
-	public static Block bronzeBlock;
-	public static Block thyriumBlock;
-	public static Block sinisiteBlock;
-	public static Block fusionFurnace;
-	public static Block fusionFurnaceOn;
-	
-	/**
-	 * Creating the item int's. Fairly obvious.
-	 */
-	public static Item bronzeIngot;
-	public static Item sinisiteIngot;
-	public static Item thyriumIngot;
-	public static Item thyriumRod;
-	public static Item sinisiteRod;
-	
-	public static Item smallBronzeChunk;
-	public static Item mediumBronzeChunk;
-	public static Item largeBronzeChunk;
-	public static Item smallThyriumChunk;
-	public static Item mediumThyriumChunk;
-	public static Item largeThyriumChunk;
-	public static Item smallSinisiteChunk;
-	public static Item mediumSinisiteChunk;
-	public static Item largeSinisiteChunk;
-	
-	/**
-	 * Creating the tool items.
-	 */
-	public static Item bronzePick;
-	public static Item bronzeAxe;
-	public static Item bronzeShovel;
-	public static Item bronzeSword;
-	public static Item bronzeHoe;
-	public static Item thyriumPick;
-	public static Item thyriumAxe;
-	public static Item thyriumShovel;
-	public static Item thyriumSword;
-	public static Item thyriumHoe;
-	public static Item sinisitePick;
-	public static Item sinisiteAxe;
-	public static Item sinisiteShovel;
-	public static Item sinisiteSword;
-	public static Item sinisiteHoe;
-	public static Item thyriumBow;
-	public static Item sinisiteBow;
-	
-	/**
-	 * Creating the armor items.
-	 */
-	public static Item bronzeHelm;
-	public static Item bronzeChest;
-	public static Item bronzeLegs;
-	public static Item bronzeBoots;
-	public static Item thyriumHelm;
-	public static Item thyriumChest;
-	public static Item thyriumLegs;
-	public static Item thyriumBoots;
-	public static Item sinisiteHelm;
-	public static Item sinisiteChest;
-	public static Item sinisiteLegs;
-	public static Item sinisiteBoots;
 	
 	/**
 	 * The method that gives the armor items their properties and names. This is called by the main SimpleOres class.
@@ -180,5 +115,29 @@ public class Content
         //Register Items
         GameRegistry.registerItem(thyriumBow, "thyriumBow");
         GameRegistry.registerItem(sinisiteBow, "sinisiteBow");
-	}
+	}	
+	
+	//Blocks
+	public static Block bronzeBlock, thyriumBlock, sinisiteBlock;
+	public static Block fusionFurnace, fusionFurnaceOn;
+	
+	//Items
+	public static Item bronzeIngot, sinisiteIngot, thyriumIngot, thyriumRod, sinisiteRod;
+	public static Item smallBronzeChunk, smallThyriumChunk, smallSinisiteChunk;
+	public static Item mediumBronzeChunk, mediumThyriumChunk, mediumSinisiteChunk;
+	public static Item largeBronzeChunk, largeThyriumChunk, largeSinisiteChunk;
+	
+	//Tools
+	public static Item bronzePick, thyriumPick, sinisitePick;
+	public static Item bronzeAxe, thyriumAxe, sinisiteAxe;
+	public static Item bronzeShovel, thyriumShovel, sinisiteShovel;
+	public static Item bronzeSword, thyriumSword, sinisiteSword;
+	public static Item bronzeHoe, thyriumHoe, sinisiteHoe;
+	public static Item thyriumBow, sinisiteBow;
+	
+	//Armor
+	public static Item bronzeHelm, thyriumHelm, sinisiteHelm;
+	public static Item bronzeChest, thyriumChest, sinisiteChest;
+	public static Item bronzeLegs, thyriumLegs, sinisiteLegs;
+	public static Item bronzeBoots, thyriumBoots, sinisiteBoots;
 }

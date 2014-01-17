@@ -1,13 +1,13 @@
 package alexndr.SimpleOres.plugins.fusion;
 
-import alexndr.SimpleOres.api.StatTriggers;
-import alexndr.SimpleOres.core.SimpleOres;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stats.Achievement;
+import alexndr.SimpleOres.api.helpers.CoreHelper;
+import alexndr.SimpleOres.api.helpers.StatTriggersHelper;
 
 public class Achievements 
 {
-	private static StatTriggers triggers;
+	private static StatTriggersHelper triggers;
 
 	public static Achievement fusionAch;
 	public static Achievement bronzeAch;
@@ -17,7 +17,7 @@ public class Achievements
 		/**
 		 * Sets the properties of the Achievements, such as their ID, location in the GUI, image, prerequisites etc.
 		 */
-		fusionAch = new Achievement(Config.fusionAchID, "fusionAch", 6, 6, Content.fusionFurnace, alexndr.SimpleOres.core.Achievements.simpleOresAch).registerAchievement();
+		fusionAch = new Achievement(Config.fusionAchID, "fusionAch", 6, 6, Content.fusionFurnace, CoreHelper.coreContent.simpleOresAch).registerAchievement();
 		bronzeAch = new Achievement(Config.bronzeAchID, "bronzeAch", 8, 6, Content.bronzeIngot, fusionAch).registerAchievement();
 		
 	}

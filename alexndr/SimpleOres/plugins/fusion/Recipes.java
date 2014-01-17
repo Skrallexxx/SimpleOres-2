@@ -1,17 +1,17 @@
 package alexndr.SimpleOres.plugins.fusion;
 
-import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.CraftingManager;
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapedOreRecipe;
+import alexndr.SimpleOres.api.helpers.CoreHelper;
+import cpw.mods.fml.common.registry.GameRegistry;
 
 public class Recipes 
 {
 	private static final int WILDCARD_VALUE = OreDictionary.WILDCARD_VALUE;
-	public static alexndr.SimpleOres.core.Items coreItems;
 	/**
 	 * The constructor for the recipes. This is called by the main mod class.
 	 * This is where all the recipes are created, from tools and armor to block and smelting recipes.
@@ -179,19 +179,19 @@ public class Recipes
 		//Smelting Recipes
 			//Fusion Furnace
 				//Bronze
-		    	FusionRecipes.smelting().addSmelting(new ItemStack(coreItems.copperIngot), new ItemStack(coreItems.tinIngot), new ItemStack(Item.dyePowder, 1, 15), new ItemStack(Content.smallBronzeChunk), 2.0F);
-		    	FusionRecipes.smelting().addSmelting(new ItemStack(coreItems.copperIngot), new ItemStack(coreItems.tinIngot), new ItemStack(Item.gunpowder), new ItemStack(Content.mediumBronzeChunk), 3.0F);
-		    	FusionRecipes.smelting().addSmelting(new ItemStack(coreItems.copperIngot), new ItemStack(coreItems.tinIngot), new ItemStack(Item.redstone), new ItemStack(Content.largeBronzeChunk), 10.0F);
+		    	FusionRecipes.smelting().addSmelting(new ItemStack(CoreHelper.coreContent.copperIngot), new ItemStack(CoreHelper.coreContent.tinIngot), new ItemStack(Item.dyePowder, 1, 15), new ItemStack(Content.smallBronzeChunk), 2.0F);
+		    	FusionRecipes.smelting().addSmelting(new ItemStack(CoreHelper.coreContent.copperIngot), new ItemStack(CoreHelper.coreContent.tinIngot), new ItemStack(Item.gunpowder), new ItemStack(Content.mediumBronzeChunk), 3.0F);
+		    	FusionRecipes.smelting().addSmelting(new ItemStack(CoreHelper.coreContent.copperIngot), new ItemStack(CoreHelper.coreContent.tinIngot), new ItemStack(Item.redstone), new ItemStack(Content.largeBronzeChunk), 10.0F);
 		    	
 		    	//Thyrium
-		    	FusionRecipes.smelting().addSmelting(new ItemStack(coreItems.mythrilIngot), new ItemStack(coreItems.adamantiumIngot), new ItemStack(Item.redstone), new ItemStack(Content.smallThyriumChunk), 6.0F);
-		    	FusionRecipes.smelting().addSmelting(new ItemStack(coreItems.mythrilIngot), new ItemStack(coreItems.adamantiumIngot), new ItemStack(Item.dyePowder, 1, 4), new ItemStack(Content.mediumThyriumChunk), 10.0F);
-		    	FusionRecipes.smelting().addSmelting(new ItemStack(coreItems.mythrilIngot), new ItemStack(coreItems.adamantiumIngot), new ItemStack(Item.glowstone), new ItemStack(Content.largeThyriumChunk), 30.0F);
+		    	FusionRecipes.smelting().addSmelting(new ItemStack(CoreHelper.coreContent.mythrilIngot), new ItemStack(CoreHelper.coreContent.adamantiumIngot), new ItemStack(Item.redstone), new ItemStack(Content.smallThyriumChunk), 6.0F);
+		    	FusionRecipes.smelting().addSmelting(new ItemStack(CoreHelper.coreContent.mythrilIngot), new ItemStack(CoreHelper.coreContent.adamantiumIngot), new ItemStack(Item.dyePowder, 1, 4), new ItemStack(Content.mediumThyriumChunk), 10.0F);
+		    	FusionRecipes.smelting().addSmelting(new ItemStack(CoreHelper.coreContent.mythrilIngot), new ItemStack(CoreHelper.coreContent.adamantiumIngot), new ItemStack(Item.glowstone), new ItemStack(Content.largeThyriumChunk), 30.0F);
 		    	
 		    	//Sinisite				    	
-		    	FusionRecipes.smelting().addSmelting(new ItemStack(coreItems.onyxGem), new ItemStack(coreItems.mythrilIngot), new ItemStack(Item.glowstone), new ItemStack(Content.smallSinisiteChunk), 12.0F);
-		    	FusionRecipes.smelting().addSmelting(new ItemStack(coreItems.onyxGem), new ItemStack(coreItems.mythrilIngot), new ItemStack(Item.blazePowder), new ItemStack(Content.mediumSinisiteChunk), 20.0F);
-		    	FusionRecipes.smelting().addSmelting(new ItemStack(coreItems.onyxGem), new ItemStack(coreItems.mythrilIngot), new ItemStack(Item.ghastTear), new ItemStack(Content.largeSinisiteChunk), 60.0F);
+		    	FusionRecipes.smelting().addSmelting(new ItemStack(CoreHelper.coreContent.onyxGem), new ItemStack(CoreHelper.coreContent.mythrilIngot), new ItemStack(Item.glowstone), new ItemStack(Content.smallSinisiteChunk), 12.0F);
+		    	FusionRecipes.smelting().addSmelting(new ItemStack(CoreHelper.coreContent.onyxGem), new ItemStack(CoreHelper.coreContent.mythrilIngot), new ItemStack(Item.blazePowder), new ItemStack(Content.mediumSinisiteChunk), 20.0F);
+		    	FusionRecipes.smelting().addSmelting(new ItemStack(CoreHelper.coreContent.onyxGem), new ItemStack(CoreHelper.coreContent.mythrilIngot), new ItemStack(Item.ghastTear), new ItemStack(Content.largeSinisiteChunk), 60.0F);
 		    	
 		    //Regular Furnace
 				GameRegistry.addSmelting(Content.largeBronzeChunk.itemID, new ItemStack(Content.bronzeIngot, 1, 0), 0.3F);

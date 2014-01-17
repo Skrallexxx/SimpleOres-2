@@ -4,12 +4,9 @@ import java.io.IOException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import net.minecraft.block.Block;
-import net.minecraft.item.Item;
-import alexndr.SimpleOres.api.HandlerLogger;
-import alexndr.SimpleOres.api.HandlerUpdateChecker;
-import alexndr.SimpleOres.core.SimpleOres;
-import alexndr.SimpleOres.core.conf.Settings;
+import alexndr.SimpleOres.api.helpers.CoreHelper;
+import alexndr.SimpleOres.api.helpers.LogHelper;
+import alexndr.SimpleOres.api.helpers.UpdateCheckerHelper;
 
 import com.google.common.reflect.ClassPath;
 import com.google.common.reflect.ClassPath.ResourceInfo;
@@ -31,7 +28,6 @@ public class AestheticsPlugin
 {
 	@SidedProxy(clientSide = "alexndr.SimpleOres.plugins.aesthetics.ProxyClient", serverSide = "alexndr.SimpleOres.plugins.aesthetics.ProxyCommon")
 	public static ProxyCommon proxy;
-	public static SimpleOres simpleores;
 	public static AestheticsPlugin INSTANCE = new AestheticsPlugin();
 	
 	@EventHandler
@@ -51,7 +47,7 @@ public class AestheticsPlugin
 	{
 		INSTANCE = this;
 		
-	  	if(Settings.enableUpdateChecker){HandlerUpdateChecker.checkUpdates(ModInfo.VERSIONURL, ModInfo.ID, ModInfo.VERSION);}
+	  	if(CoreHelper.coreSettings.enableUpdateChecker){UpdateCheckerHelper.checkUpdates(ModInfo.VERSIONURL, ModInfo.ID, ModInfo.VERSION);}
 		
 		NetworkRegistry.instance().registerGuiHandler(INSTANCE, proxy);
 		GameRegistry.registerTileEntity(FFurnaceTileEntityTin.class, "tinFFurnace");
@@ -59,20 +55,24 @@ public class AestheticsPlugin
 		
 		this.addLocalisations();
 		
-		HandlerLogger.log("Plugin Loader: Aesthetics Plugin loaded successfully.");
+		LogHelper.info("Plugin Loader: Aesthetics Plugin loaded successfully.");
 	}
 	
 	public void addLocalisations()
 	{
+		int numLocalisations = 0;
 		try 
 		{
 			Pattern p = Pattern.compile("assets/aestheticsplugin/langs/(.*)\\.xml");
-			for (ResourceInfo i : ClassPath.from(getClass().getClassLoader())
-					.getResources()) {
+			for (ResourceInfo i : ClassPath.from(getClass().getClassLoader()).getResources()) 
+			{
 				Matcher m = p.matcher(i.getResourceName());
 				if (m.matches())
-					LanguageRegistry.instance().loadLocalization(i.url(),
-							m.group(1), true);
+				{
+					numLocalisations ++;
+					LanguageRegistry.instance().loadLocalization(i.url(), m.group(1), true);
+					LogHelper.verboseInfo("Aesthetics Plugin: Loaded Aesthetics localisation for: " + m.group(1));
+				}
 			}
 		}
 		catch (IOException e) 
@@ -81,7 +81,7 @@ public class AestheticsPlugin
 		}
 		finally
 		{
-			HandlerLogger.log("Aesthetics Plugin: Localisations loaded successfully.");
+			LogHelper.info("Aesthetics Plugin: " + numLocalisations + " Localisation(s) loaded successfully.");
 		}
 	}
 }

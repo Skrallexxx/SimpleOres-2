@@ -1,31 +1,13 @@
 package alexndr.SimpleOres.plugins.aesthetics;
 
-import alexndr.SimpleOres.api.SimpleOre;
-import alexndr.SimpleOres.core.SimpleOres;
-import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import alexndr.SimpleOres.api.content.SimpleOre;
+import cpw.mods.fml.common.registry.GameRegistry;
 
 public class Content 
 {
-	static SimpleOres simpleores;
 	static AestheticsPlugin mod;
-	
-	//Blocks
-	public static Block copperBricks;
-	public static Block tinBricks;
-	public static Block mythrilBricks;
-	public static Block adamantiumBricks;
-	public static Block onyxBricks;
-	public static Block tinFFurnace;
-	public static Block tinFFurnaceOn;
-	public static Block adamantiumFFurnace;
-	public static Block adamantiumFFurnaceOn;
-	public static Block copperBricksStairs;
-	public static Block tinBricksStairs;
-	public static Block mythrilBricksStairs;
-	public static Block adamantiumBricksStairs;
-	public static Block onyxBricksStairs;
 	
 	public static void doBlocks()
 	{
@@ -38,11 +20,11 @@ public class Content
 		tinFFurnaceOn = new FFurnaceTin(Config.tinFFurnaceOnID, true).setHardness(Settings.tinFFurnaceHardness).setResistance(Settings.tinFFurnaceResistance).setLightValue(Settings.tinFFurnaceLightValue).setUnlocalizedName("tinFFurnaceOn");
 		adamantiumFFurnace = new FFurnaceAdamantium(Config.adamantiumFFurnaceID, false).setHardness(Settings.adamantiumFFurnaceHardness).setResistance(Settings.adamantiumFFurnaceResistance).setUnlocalizedName("adamantiumFFurnace");
 		adamantiumFFurnaceOn = new FFurnaceAdamantium(Config.adamantiumFFurnaceOnID, true).setHardness(Settings.adamantiumFFurnaceHardness).setResistance(Settings.adamantiumFFurnaceResistance).setLightValue(Settings.adamantiumFFurnaceLightValue).setUnlocalizedName("adamantiumFFurnaceOn");
-		copperBricksStairs = new BlockSimpleStairs(Config.copperBricksStairsID, copperBricks, 0).setCreativeTab(SimpleOres.tabSimpleBlocks).setUnlocalizedName("copperBricksStairs");
-		tinBricksStairs = new BlockSimpleStairs(Config.tinBricksStairsID, tinBricks, 0).setCreativeTab(SimpleOres.tabSimpleBlocks).setUnlocalizedName("tinBricksStairs");
-		mythrilBricksStairs = new BlockSimpleStairs(Config.mythrilBricksStairsID, mythrilBricks, 0).setCreativeTab(SimpleOres.tabSimpleBlocks).setUnlocalizedName("mythrilBricksStairs");
-		adamantiumBricksStairs = new BlockSimpleStairs(Config.adamantiumBricksStairsID, adamantiumBricks, 0).setCreativeTab(SimpleOres.tabSimpleBlocks).setUnlocalizedName("adamantiumBricksStairs");
-		onyxBricksStairs = new BlockSimpleStairs(Config.onyxBricksStairsID, onyxBricks, 0).setCreativeTab(SimpleOres.tabSimpleBlocks).setUnlocalizedName("onyxBricksStairs");
+		copperBricksStairs = new BlockSimpleStairs(Config.copperBricksStairsID, copperBricks, 0).setUnlocalizedName("copperBricksStairs");
+		tinBricksStairs = new BlockSimpleStairs(Config.tinBricksStairsID, tinBricks, 0).setUnlocalizedName("tinBricksStairs");
+		mythrilBricksStairs = new BlockSimpleStairs(Config.mythrilBricksStairsID, mythrilBricks, 0).setUnlocalizedName("mythrilBricksStairs");
+		adamantiumBricksStairs = new BlockSimpleStairs(Config.adamantiumBricksStairsID, adamantiumBricks, 0).setUnlocalizedName("adamantiumBricksStairs");
+		onyxBricksStairs = new BlockSimpleStairs(Config.onyxBricksStairsID, onyxBricks, 0).setUnlocalizedName("onyxBricksStairs");
 		
 		GameRegistry.registerBlock(tinFFurnace, "tinFFurnace");
 		GameRegistry.registerBlock(tinFFurnaceOn, "tinFFurnaceOn");
@@ -64,4 +46,9 @@ public class Content
 	{
 		
 	}
+	
+	//Blocks
+	public static Block copperBricks, tinBricks, mythrilBricks, adamantiumBricks, onyxBricks;
+	public static Block tinFFurnace, tinFFurnaceOn, adamantiumFFurnace, adamantiumFFurnaceOn;
+	public static Block copperBricksStairs, tinBricksStairs, mythrilBricksStairs, adamantiumBricksStairs, onyxBricksStairs;
 }

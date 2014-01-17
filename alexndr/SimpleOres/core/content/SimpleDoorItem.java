@@ -1,10 +1,5 @@
 package alexndr.SimpleOres.core.content;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import alexndr.SimpleOres.core.Blocks;
-import alexndr.SimpleOres.core.SimpleOres;
-import alexndr.SimpleOres.core.conf.Settings;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.player.EntityPlayer;
@@ -12,6 +7,12 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
+import alexndr.SimpleOres.api.helpers.TabHelper;
+import alexndr.SimpleOres.core.Content;
+import alexndr.SimpleOres.core.SimpleOres;
+import alexndr.SimpleOres.core.conf.Settings;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class SimpleDoorItem extends Item
 {
@@ -22,12 +23,7 @@ public class SimpleDoorItem extends Item
         super(par1);
         this.material = doorMaterial;
         this.maxStackSize = 1;
-        if(Settings.enableSeparateTabs)
-        {
-            this.setCreativeTab(SimpleOres.tabSimpleDecorations);
-        }
-        else
-        	this.setCreativeTab(SimpleOres.tabSimpleBlocks);
+        this.setCreativeTab(TabHelper.getDecorationsTab());
     }
     
     /**
@@ -57,11 +53,11 @@ public class SimpleDoorItem extends Item
 
             if (this.material == "copper")
             {
-                block = Blocks.copperDoor;
+                block = Content.copperDoor;
             }
             else
             {
-            	block = Blocks.onyxDoor;
+            	block = Content.onyxDoor;
             }
 
             if (par2EntityPlayer.canPlayerEdit(par4, par5, par6, par7, par1ItemStack) && par2EntityPlayer.canPlayerEdit(par4, par5 + 1, par6, par7, par1ItemStack))

@@ -3,13 +3,6 @@
 import java.util.List;
 import java.util.Random;
 
-import org.lwjgl.opengl.GL11;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import alexndr.SimpleOres.core.SimpleOres;
-import alexndr.SimpleOres.core.Tools;
-import alexndr.SimpleOres.core.conf.Settings;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.enchantment.Enchantment;
@@ -26,6 +19,15 @@ import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.ArrowLooseEvent;
+
+import org.lwjgl.opengl.GL11;
+
+import alexndr.SimpleOres.api.helpers.TabHelper;
+import alexndr.SimpleOres.core.Content;
+import alexndr.SimpleOres.core.SimpleOres;
+import alexndr.SimpleOres.core.conf.Settings;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
  
 public class SimpleBow extends ItemBow
 {	
@@ -58,12 +60,7 @@ public class SimpleBow extends ItemBow
 		this.maxStackSize = 1;	
 		material = enumtoolmaterial;
 		this.canRepair = true;
-		
-    	if(Settings.enableSeparateTabs == true)
-    	{
-            this.setCreativeTab(SimpleOres.tabSimpleCombat);
-    	}
-    	else this.setCreativeTab(SimpleOres.tabSimpleBlocks);
+		this.setCreativeTab(TabHelper.getCombatTab());
     	
 	    this.bFull3D = true;
 	    this.setMaxDamage(dam);
@@ -80,12 +77,12 @@ public class SimpleBow extends ItemBow
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IconRegister iconRegister)
 	{		
-		if(itemID == Tools.mythrilBow.itemID)
+		if(itemID == Content.mythrilBow.itemID)
 		{
 			this.itemIcon = iconRegister.registerIcon("simpleores:" + "mythrilBow");
 		}
 		
-		if(itemID == Tools.onyxBow.itemID)
+		if(itemID == Content.onyxBow.itemID)
 		{
 			this.itemIcon = iconRegister.registerIcon("simpleores:" + "onyxBow");
 		}	
@@ -120,36 +117,36 @@ public class SimpleBow extends ItemBow
 		int var8 = itemStack.getMaxItemUseDuration() - useRemaining;
 		if (var8 >= 18)
 		{		
-			if(itemID == Tools.mythrilBow.itemID)
+			if(itemID == Content.mythrilBow.itemID)
 			{
 				return mythrilBow3;
 			}
 			
-			if(itemID == Tools.onyxBow.itemID)
+			if(itemID == Content.onyxBow.itemID)
 			{
 				return onyxBow3;
 			}
 		}
 		if (var8 > 13)
 		{
-			if(itemID == Tools.mythrilBow.itemID)
+			if(itemID == Content.mythrilBow.itemID)
 			{
 				return mythrilBow2;
 			}
 			
-			if(itemID == Tools.onyxBow.itemID)
+			if(itemID == Content.onyxBow.itemID)
 			{
 				return onyxBow2;
 			}
 		}		
 		if (var8 > 0)
 		{
-			if(itemID == Tools.mythrilBow.itemID)
+			if(itemID == Content.mythrilBow.itemID)
 			{
 				return mythrilBow1;
 			}
 			
-			if(itemID == Tools.onyxBow.itemID)
+			if(itemID == Content.onyxBow.itemID)
 			{
 				return onyxBow1;
 			}
@@ -188,13 +185,13 @@ public class SimpleBow extends ItemBow
 	 */
 	public void addInformation(ItemStack stack, EntityPlayer par2EntityPlayer, List par3List, boolean par4)
 	{
-		if(itemID == Tools.mythrilBow.itemID)
+		if(itemID == Content.mythrilBow.itemID)
 		{
 			par3List.add(StatCollector.translateToLocal("tips.damageTooltip"));
 			par3List.add(StatCollector.translateToLocal("tips.efficiencyTooltip"));
 		}
 		
-		if(itemID == Tools.onyxBow.itemID)
+		if(itemID == Content.onyxBow.itemID)
 		{
 			par3List.add(StatCollector.translateToLocal("tips.damageTooltip"));
 			par3List.add(StatCollector.translateToLocal("tips.flameTooltip"));
@@ -244,7 +241,7 @@ public class SimpleBow extends ItemBow
 				var8.setIsCritical(true);
 			}
 			
-			if (f == 1.0F && itemID == Tools.onyxBow.itemID) 
+			if (f == 1.0F && itemID == Content.onyxBow.itemID) 
 			{
 				var8.setIsCritical(true);
 				var8.setFire(100);
@@ -289,7 +286,7 @@ public class SimpleBow extends ItemBow
 			
 			if (!flag) 
 			{
-            	if(z == 1 && itemID == Tools.mythrilBow.itemID)
+            	if(z == 1 && itemID == Content.mythrilBow.itemID)
             	{
             		var8.canBePickedUp = 0;
             	}
@@ -309,12 +306,12 @@ public class SimpleBow extends ItemBow
 			{
 				par2World.spawnEntityInWorld(var8);
 				
-				if(itemID == Tools.mythrilBow.itemID)
+				if(itemID == Content.mythrilBow.itemID)
 				{
 					var8.setDamage(var8.getDamage() + Settings.mythrilBowDamageModifier * 0.5D + 0.5D);
 				}
 				
-				if(itemID == Tools.onyxBow.itemID)
+				if(itemID == Content.onyxBow.itemID)
 				{
 					var8.setDamage(var8.getDamage() + Settings.onyxBowDamageModifier * 0.5D + 0.5D);
 				}

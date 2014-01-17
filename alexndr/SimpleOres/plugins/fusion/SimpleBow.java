@@ -3,10 +3,6 @@
 import java.util.List;
 import java.util.Random;
 
-import org.lwjgl.opengl.GL11;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.enchantment.Enchantment;
@@ -14,7 +10,6 @@ import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.item.EnumAction;
-import net.minecraft.item.EnumRarity;
 import net.minecraft.item.EnumToolMaterial;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBow;
@@ -24,6 +19,13 @@ import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.ArrowLooseEvent;
+
+import org.lwjgl.opengl.GL11;
+
+import alexndr.SimpleOres.api.helpers.CoreHelper;
+import alexndr.SimpleOres.api.helpers.TabHelper;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
  
 public class SimpleBow extends ItemBow
 {	
@@ -32,8 +34,6 @@ public class SimpleBow extends ItemBow
 	 * The EnumToolMaterial for the tool. This is used to set what item can be used to repair it.
 	 */
     private final EnumToolMaterial material;
-    private static alexndr.SimpleOres.core.conf.Settings coreSettings;
-    private static alexndr.SimpleOres.core.SimpleOres simpleores;
 	
     /**
      * Creating the icons for the bows. As you draw the bows back, the icon changes, which is why there are 4 icons for each bow here.
@@ -59,13 +59,7 @@ public class SimpleBow extends ItemBow
 		this.maxStackSize = 1;	
 		material = enumtoolmaterial;
 		this.canRepair = true;
-		
-    	if(coreSettings.enableSeparateTabs == true)
-    	{
-            this.setCreativeTab(simpleores.tabSimpleCombat);
-    	}
-    	else this.setCreativeTab(simpleores.tabSimpleBlocks);
-    	
+		this.setCreativeTab(TabHelper.getCombatTab());
 	    this.bFull3D = true;
 	    this.setMaxDamage(dam);
 	}

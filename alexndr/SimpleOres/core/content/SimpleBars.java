@@ -3,10 +3,6 @@ package alexndr.SimpleOres.core.content;
 import java.util.List;
 import java.util.Random;
 
-import alexndr.SimpleOres.core.SimpleOres;
-import alexndr.SimpleOres.core.conf.Settings;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.BlockPane;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
@@ -16,6 +12,11 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import alexndr.SimpleOres.api.helpers.TabHelper;
+import alexndr.SimpleOres.core.SimpleOres;
+import alexndr.SimpleOres.core.conf.Settings;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class SimpleBars extends BlockPane
 {
@@ -39,12 +40,7 @@ public class SimpleBars extends BlockPane
         this.sideTextureIndex = par3Str;
         this.canDropItself = par5;
         this.field_94402_c = par2Str;
-        if(Settings.enableSeparateTabs)
-        {
-            this.setCreativeTab(SimpleOres.tabSimpleDecorations);
-        }
-        else
-        	this.setCreativeTab(SimpleOres.tabSimpleBlocks);
+        this.setCreativeTab(TabHelper.getDecorationsTab());
 
     }
 

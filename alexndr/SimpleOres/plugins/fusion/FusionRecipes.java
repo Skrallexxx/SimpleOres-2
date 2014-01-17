@@ -5,11 +5,12 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
-import com.google.common.collect.Lists;
-
+import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
+
+import com.google.common.collect.Lists;
 
 public class FusionRecipes
 {
@@ -408,5 +409,20 @@ public class FusionRecipes
 			return true;
 		} 
 		else return false;
+	}
+	
+	public static void getMaterial(Block block)	
+	{
+		
+	}
+	
+	public static void getMaterial(Item item)
+	{
+		
+	}
+	
+	public static void getMaterial(String string)
+	{
+		
 	}
 }

@@ -2,9 +2,6 @@ package alexndr.SimpleOres.core.content;
 
 import java.util.Random;
 
-import alexndr.SimpleOres.core.Items;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.IconFlipped;
@@ -17,6 +14,9 @@ import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import alexndr.SimpleOres.core.Content;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class SimpleDoor extends Block
 {
@@ -422,7 +422,7 @@ public class SimpleDoor extends Block
      */
     public int idDropped(int par1, Random par2Random, int par3)
     {
-        return (par1 & 8) != 0 ? 0 : (this.material == "copper" ? Items.copperDoorItem.itemID : Items.onyxDoorItem.itemID);
+        return (par1 & 8) != 0 ? 0 : (this.material == "copper" ? Content.copperDoorItem.itemID : Content.onyxDoorItem.itemID);
     }
 
     /**

@@ -1,17 +1,11 @@
 package alexndr.SimpleOres.plugins.aesthetics;
 
-import alexndr.SimpleOres.core.conf.Settings;
-import alexndr.SimpleOres.core.SimpleOres;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-
 import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
@@ -24,10 +18,13 @@ import net.minecraft.tileentity.TileEntityFurnace;
 import net.minecraft.util.Icon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
+import alexndr.SimpleOres.api.helpers.CoreHelper;
+import alexndr.SimpleOres.api.helpers.TabHelper;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class FFurnaceTin extends BlockContainer
 {
-	public static SimpleOres simpleores;
     /**
      * Is the random generator used by furnace to drop the inventory contents in random directions.
      */
@@ -53,11 +50,7 @@ public class FFurnaceTin extends BlockContainer
         
         if(par2 == false)
 		{
-        	if(Settings.enableSeparateTabs == true)
-        	{
-    			this.setCreativeTab(simpleores.tabSimpleDecorations);
-        	}
-        	else this.setCreativeTab(simpleores.tabSimpleBlocks);      		
+        	this.setCreativeTab(TabHelper.getDecorationsTab());
 		}
     }
 

@@ -4,17 +4,18 @@ import java.io.IOException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import com.google.common.reflect.ClassPath;
-import com.google.common.reflect.ClassPath.ResourceInfo;
-
 import net.minecraft.item.EnumArmorMaterial;
 import net.minecraft.item.EnumToolMaterial;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.EnumHelper;
-import alexndr.SimpleOres.api.HandlerLogger;
-import alexndr.SimpleOres.api.HandlerLoot;
-import alexndr.SimpleOres.api.HandlerUpdateChecker;
-import alexndr.SimpleOres.core.SimpleOres;
+import alexndr.SimpleOres.api.helpers.CoreHelper;
+import alexndr.SimpleOres.api.helpers.LogHelper;
+import alexndr.SimpleOres.api.helpers.LootHelper;
+import alexndr.SimpleOres.api.helpers.UpdateCheckerHelper;
+
+import com.google.common.reflect.ClassPath;
+import com.google.common.reflect.ClassPath.ResourceInfo;
+
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.SidedProxy;
@@ -33,7 +34,6 @@ public class FusionPlugin
 {
 	@SidedProxy(clientSide = "alexndr.SimpleOres.plugins.fusion.ProxyClient", serverSide = "alexndr.SimpleOres.plugins.fusion.ProxyCommon")	
 	public static ProxyCommon proxy;
-	public static SimpleOres simpleores;
 	public static FusionPlugin INSTANCE = new FusionPlugin();
 	
 	/**
@@ -80,8 +80,8 @@ public class FusionPlugin
     	Achievements.doAchievements();
     	
     	//Loot
-    	HandlerLoot.addLoot("villageBlacksmith", new ItemStack(Content.thyriumSword), 1, 1, 10);
-    	HandlerLoot.addLoot("mineshaftCorridor", new ItemStack(Content.sinisiteAxe), 1, 1, 4);
+    	LootHelper.addLoot("villageBlacksmith", new ItemStack(Content.thyriumSword), 1, 1, 10);
+    	LootHelper.addLoot("mineshaftCorridor", new ItemStack(Content.sinisiteAxe), 1, 1, 4);
     }
     
     public static void setToolsAndArmorStats()
@@ -100,7 +100,7 @@ public class FusionPlugin
     {
 		INSTANCE = this;
 		
-	  	if(alexndr.SimpleOres.core.conf.Settings.enableUpdateChecker){HandlerUpdateChecker.checkUpdates(ModInfo.VERSIONURL, ModInfo.ID, ModInfo.VERSION);}
+	  	if(CoreHelper.coreSettings.enableUpdateChecker){UpdateCheckerHelper.checkUpdates(ModInfo.VERSIONURL, ModInfo.ID, ModInfo.VERSION);}
 		
     	Recipes.doRecipes();
     	Recipes.addCustomFusionRecipes();
@@ -122,9 +122,9 @@ public class FusionPlugin
          * Adds the armor textures when you wear it. Calls a method in the CommonProxy (which is overridden by ClientProxy) called addArmor, and inputs the name of the material.
          * This allows the game to recognise that texture files called bronze_1, sinisite_2, etc. are corresponding to that armor set.
          */
-        rendererBronze = simpleores.proxy.addArmor("bronze");
-        rendererThyrium = simpleores.proxy.addArmor("thyrium");
-        rendererSinisite = simpleores.proxy.addArmor("sinisite");
+        rendererBronze = CoreHelper.simpleores.proxy.addArmor("bronze");
+        rendererThyrium = CoreHelper.simpleores.proxy.addArmor("thyrium");
+        rendererSinisite = CoreHelper.simpleores.proxy.addArmor("sinisite");
         
         /**
          * This sets what item can be used to repair tools/armor of that type. ie. Copper Ingot to repair copper tools and items.
@@ -137,18 +137,20 @@ public class FusionPlugin
         armorThyrium.customCraftingMaterial = Content.thyriumIngot;
         armorSinisite.customCraftingMaterial = Content.sinisiteIngot;
         
-        /**
-         * Simply prints to console the number of Fusion Furnace recipes that were loaded, then prints that all content was loaded successfully.
-         */
-    	HandlerLogger.log("Fusion Plugin: " + FusionRecipes.size / 2 + " Fusion Furnace recipes were loaded.");
-		HandlerLogger.log("Plugin Loader: Fusion Plugin loaded successfully.");
     	
     	//Stat Triggers
     	Achievements.setTriggers();
+        
+        /**
+         * Simply prints to console the number of Fusion Furnace recipes that were loaded, then prints that all content was loaded successfully.
+         */
+    	LogHelper.info("Fusion Plugin: " + FusionRecipes.size / 2 + " Fusion Furnace recipes were loaded.");
+		LogHelper.info("Plugin Loader: Fusion Plugin loaded successfully.");
     }
     
     public void addLocalisations()
     {
+    	int numLocalisations = 0;
 		try 
 		{
 			Pattern p = Pattern.compile("assets/simpleoresfusion/langs/(.*)\\.xml");
@@ -157,7 +159,9 @@ public class FusionPlugin
 				Matcher m = p.matcher(i.getResourceName());
 				if (m.matches())
 				{
-					LanguageRegistry.instance().loadLocalization(i.url(),m.group(1), true);
+					numLocalisations ++;
+					LanguageRegistry.instance().loadLocalization(i.url(), m.group(1), true);
+					LogHelper.verboseInfo("Fusion Plugin: Loaded Fusion localisation for: " + m.group(1));
 				}
 			}
 		}
@@ -168,7 +172,7 @@ public class FusionPlugin
 		}
 		finally
 		{
-			HandlerLogger.log("Fusion Plugin: Localisations loaded successfully.");
+			LogHelper.info("Fusion Plugin: " + numLocalisations + " Localisation(s) loaded successfully.");
 		}
     }
 }

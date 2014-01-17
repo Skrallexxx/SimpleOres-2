@@ -2,15 +2,14 @@ package alexndr.SimpleOres.plugins.fusion;
 
 import java.io.File;
 
-import alexndr.SimpleOres.api.HandlerGetFreeIds;
-import alexndr.SimpleOres.api.HandlerLogger;
 import net.minecraftforge.common.Configuration;
-import cpw.mods.fml.common.FMLLog;
+import alexndr.SimpleOres.api.helpers.FreeIdHelper;
+import alexndr.SimpleOres.api.helpers.LogHelper;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 
 public class Config 
 {
-	private static HandlerGetFreeIds get;
+	private static FreeIdHelper get;
 	
 	/**
 	 * The method that loads/creates the configuration file. The ID's can be changed, and their defaults are shown. This is called by the main SimpleOresFusion class.
@@ -21,10 +20,11 @@ public class Config
 		 * Creating the config file. installDir is the 'config' file within .minecraft. configDir adds a "SimpleOres Configuration/Addons" folder within there.
 		 */
 		File installDir = event.getModConfigurationDirectory();
-		File configDir = new File(installDir, "SimpleOres Configuration/Plugins");
-    	Configuration config = new Configuration(new File(configDir, "FusionIDs.cfg"));
-    	
-		HandlerGetFreeIds.compileIdList();
+		File configDir = new File(installDir, "SimpleOres/Plugins");
+		File configFile = new File(configDir, "Fusion Config.cfg");
+    	Configuration config = new Configuration(configFile);
+    	LogHelper.verboseInfo("Fusion Plugin: Loading config file at: '" + configFile.getAbsolutePath() + "'...");
+		FreeIdHelper.compileIdList();
     	
     	try 
     	{
@@ -88,12 +88,14 @@ public class Config
         	
         	//Achievement ID's
         	fusionAchID = config.get("Achievements", "Fusion Furnace Achievement", 5008).getInt();
-    		bronzeAchID = config.get("Achievements", "Bronze Achievement", 5009).getInt();        	
+    		bronzeAchID = config.get("Achievements", "Bronze Achievement", 5009).getInt(); 
+    		
+    		LogHelper.verboseInfo("Fusion Plugin: Config file loaded successfully.");
     	}
     	
     	catch (Exception e) 
     	{
-    		HandlerLogger.logSevere("Fusion Plugin: Failed to load the config.");
+    		LogHelper.severe("Fusion Plugin: Failed to load the config.");
     	}
     	
     	finally 
@@ -103,62 +105,30 @@ public class Config
     }
 	
 	//Block ID's
-	public static int bronzeBlockID;
-	public static int thyriumBlockID;
-	public static int sinisiteBlockID;
-	public static int fusionFurnaceID;
-	public static int fusionFurnaceOnID;	
+	public static int bronzeBlockID, thyriumBlockID, sinisiteBlockID;
+	public static int fusionFurnaceID, fusionFurnaceOnID;
 	
 	//Item ID's
-	public static int bronzeIngotID;
-    public static int sinisiteIngotID;
-    public static int thyriumIngotID;
-    public static int thyriumRodID;
-    public static int sinisiteRodID;
-    public static int smallBronzeChunkID;
-    public static int mediumBronzeChunkID;
-    public static int largeBronzeChunkID;
-    public static int smallThyriumChunkID;
-    public static int mediumThyriumChunkID;
-    public static int largeThyriumChunkID;
-    public static int smallSinisiteChunkID;
-    public static int mediumSinisiteChunkID;
-    public static int largeSinisiteChunkID;
+	public static int bronzeIngotID, sinisiteIngotID, thyriumIngotID;
+    public static int thyriumRodID, sinisiteRodID;
+    public static int smallBronzeChunkID, smallThyriumChunkID, smallSinisiteChunkID;
+    public static int mediumBronzeChunkID, mediumThyriumChunkID, mediumSinisiteChunkID;
+    public static int largeBronzeChunkID, largeThyriumChunkID, largeSinisiteChunkID;
     
 	//Tool ID's
-    public static int bronzePickID;
-    public static int bronzeAxeID;
-    public static int bronzeShovelID;
-    public static int bronzeSwordID;
-    public static int bronzeHoeID;
-    public static int thyriumPickID;
-    public static int thyriumAxeID;
-    public static int thyriumShovelID;
-    public static int thyriumSwordID;
-    public static int thyriumHoeID;
-    public static int sinisitePickID;
-    public static int sinisiteAxeID;
-    public static int sinisiteShovelID;
-    public static int sinisiteSwordID;
-    public static int sinisiteHoeID;
-    public static int thyriumBowID;
-    public static int sinisiteBowID;
+    public static int bronzePickID, thyriumPickID, sinisitePickID;
+    public static int bronzeAxeID, thyriumAxeID, sinisiteAxeID;
+    public static int bronzeShovelID, thyriumShovelID, sinisiteShovelID;
+    public static int bronzeSwordID, thyriumSwordID, sinisiteSwordID;
+    public static int bronzeHoeID, thyriumHoeID, sinisiteHoeID;
+    public static int thyriumBowID, sinisiteBowID;
     
 	//Armor ID's
-    public static int bronzeHelmID;
-    public static int bronzeChestID;
-    public static int bronzeLegsID;
-    public static int bronzeBootsID;
-    public static int thyriumHelmID;
-    public static int thyriumChestID;
-    public static int thyriumLegsID;
-    public static int thyriumBootsID;
-    public static int sinisiteHelmID;
-    public static int sinisiteChestID;
-    public static int sinisiteLegsID;
-    public static int sinisiteBootsID;
+    public static int bronzeHelmID, thyriumHelmID, sinisiteHelmID;
+    public static int bronzeChestID, thyriumChestID, sinisiteChestID;
+    public static int bronzeLegsID, thyriumLegsID, sinisiteLegsID;
+    public static int bronzeBootsID, thyriumBootsID, sinisiteBootsID;
     
 	//Achievement ID's
-	public static int fusionAchID;
-	public static int bronzeAchID;
+	public static int fusionAchID, bronzeAchID;
 }

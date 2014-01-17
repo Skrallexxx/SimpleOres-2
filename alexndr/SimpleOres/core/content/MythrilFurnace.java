@@ -2,11 +2,6 @@ package alexndr.SimpleOres.core.content;
 
 import java.util.Random;
 
-import alexndr.SimpleOres.core.Blocks;
-import alexndr.SimpleOres.core.SimpleOres;
-import alexndr.SimpleOres.core.conf.Settings;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
@@ -23,6 +18,12 @@ import net.minecraft.tileentity.TileEntityFurnace;
 import net.minecraft.util.Icon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
+import alexndr.SimpleOres.api.helpers.TabHelper;
+import alexndr.SimpleOres.core.Content;
+import alexndr.SimpleOres.core.SimpleOres;
+import alexndr.SimpleOres.core.conf.Settings;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class MythrilFurnace extends BlockContainer
 {	
@@ -51,11 +52,7 @@ public class MythrilFurnace extends BlockContainer
         
         if(par2 == false)
 		{
-        	if(Settings.enableSeparateTabs == true)
-        	{
-    			this.setCreativeTab(SimpleOres.tabSimpleDecorations);
-        	}
-        	else this.setCreativeTab(SimpleOres.tabSimpleBlocks);   
+        	this.setCreativeTab(TabHelper.getDecorationsTab());
 		}
     }
 
@@ -64,7 +61,7 @@ public class MythrilFurnace extends BlockContainer
      */
     public int idDropped(int par1, Random par2Random, int par3)
     {
-        return Blocks.mythrilFurnace.blockID;
+        return Content.mythrilFurnace.blockID;
     }
 
     /**
@@ -171,11 +168,11 @@ public class MythrilFurnace extends BlockContainer
 
         if (par0)
         {
-            par1World.setBlock(par2, par3, par4, Blocks.mythrilFurnaceOn.blockID);
+            par1World.setBlock(par2, par3, par4, Content.mythrilFurnaceOn.blockID);
         }
         else
         {
-            par1World.setBlock(par2, par3, par4, Blocks.mythrilFurnace.blockID);
+            par1World.setBlock(par2, par3, par4, Content.mythrilFurnace.blockID);
         }
 
         keepFurnaceInventory = false;

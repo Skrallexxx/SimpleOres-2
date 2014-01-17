@@ -1,10 +1,5 @@
 package alexndr.SimpleOres.core.content;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import alexndr.SimpleOres.core.Items;
-import alexndr.SimpleOres.core.SimpleOres;
-import alexndr.SimpleOres.core.conf.Settings;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
@@ -17,6 +12,12 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.Event;
 import net.minecraftforge.event.entity.player.FillBucketEvent;
+import alexndr.SimpleOres.api.helpers.TabHelper;
+import alexndr.SimpleOres.core.Content;
+import alexndr.SimpleOres.core.SimpleOres;
+import alexndr.SimpleOres.core.conf.Settings;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class SimpleBucket extends Item
 {
@@ -28,12 +29,7 @@ public class SimpleBucket extends Item
         super(par1);
         this.maxStackSize = 1;
         this.isFull = par2;
-        
-        if(Settings.enableSeparateTabs == true)
-        {
-        	this.setCreativeTab(SimpleOres.tabSimpleTools);
-        }
-        else this.setCreativeTab(SimpleOres.tabSimpleBlocks);
+        this.setCreativeTab(TabHelper.getToolsTab());
     }
     
     /**
@@ -115,12 +111,12 @@ public class SimpleBucket extends Item
 
                         if (--par1ItemStack.stackSize <= 0)
                         {
-                            return new ItemStack(Items.copperBucketWater);
+                            return new ItemStack(Content.copperBucketWater);
                         }
 
-                        if (!par3EntityPlayer.inventory.addItemStackToInventory(new ItemStack(Items.copperBucketWater)))
+                        if (!par3EntityPlayer.inventory.addItemStackToInventory(new ItemStack(Content.copperBucketWater)))
                         {
-                            par3EntityPlayer.dropPlayerItem(new ItemStack(Items.copperBucketWater.itemID, 1, 0));
+                            par3EntityPlayer.dropPlayerItem(new ItemStack(Content.copperBucketWater.itemID, 1, 0));
                         }
 
                         return par1ItemStack;
@@ -150,7 +146,7 @@ public class SimpleBucket extends Item
                 {
                     if (this.isFull < 0)
                     {
-                        return new ItemStack(Items.copperBucket);
+                        return new ItemStack(Content.copperBucket);
                     }
 
                     if (movingobjectposition.sideHit == 0)
@@ -190,7 +186,7 @@ public class SimpleBucket extends Item
 
                     if (this.tryPlaceContainedLiquid(par2World, i, j, k) && !par3EntityPlayer.capabilities.isCreativeMode)
                     {
-                        return new ItemStack(Items.copperBucket);
+                        return new ItemStack(Content.copperBucket);
                     }
                 }
             }

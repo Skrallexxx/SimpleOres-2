@@ -1,11 +1,9 @@
 package alexndr.SimpleOres.plugins.fusion;
 
 import java.io.File;
-import java.util.logging.Level;
 
-import alexndr.SimpleOres.api.HandlerLogger;
 import net.minecraftforge.common.Configuration;
-import cpw.mods.fml.common.FMLLog;
+import alexndr.SimpleOres.api.helpers.LogHelper;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 
 public class Settings 
@@ -19,8 +17,10 @@ public class Settings
 		 * Creating the settings file. installDir is the 'config' folder within .minecraft. configDir add a "SimpleOres Configuration/Plugins" folder within there.
 		 */
 		File installDir = event.getModConfigurationDirectory();
-		File configDir = new File(installDir, "SimpleOres Configuration/Plugins");
-		Configuration settings = new Configuration(new File(configDir, "FusionSettings.cfg"));
+		File configDir = new File(installDir, "SimpleOres/Plugins");
+		File settingsFile = new File(configDir, "Fusion Settings.cfg");
+		Configuration settings = new Configuration(settingsFile);
+		LogHelper.verboseInfo("Fusion Plugin: Loading settings file at: '" + settingsFile.getAbsolutePath() + "'...");
 		
 		try 
 	    {
@@ -111,11 +111,13 @@ public class Settings
 	    		outputSize = settings.get("Custom Fusion Recipes", "Output Stack Size List", new int[] {}).getIntList();
 	    		expAmount = settings.get("Custom Fusion Recipes", "Experience Amount List", new double[] {}).getDoubleList();
 	    	}
+	    	
+	    	LogHelper.verboseInfo("Fusion Plugin: Settings file loaded successfully.");
 	    }
 		
     	catch (Exception e) 
     	{
-    		HandlerLogger.log("Fusion Plugin: Failed to load the Settings file.");
+    		LogHelper.info("Fusion Plugin: Failed to load the Settings file.");
     	}
 		
     	finally 
@@ -170,69 +172,32 @@ public class Settings
 	}
 	
 	//Bow Modifiers
-	public static int thyriumBowDamageModifier;
-	public static int thyriumBowZoomModifier;
-	public static int sinisiteBowDamageModifier;
-	public static int sinisiteBowKnockbackModifier;
+	public static int thyriumBowDamageModifier, thyriumBowZoomModifier, sinisiteBowDamageModifier, sinisiteBowKnockbackModifier;
 	
 	//Toggles
-	public static boolean enableToolStatModification;
-	public static boolean enableArmorStatModification;
-	public static boolean enableBlockStatModification;
-	public static boolean enableCustomFusionRecipes;
-	public static boolean enableExtraChunkRecipes;
+	public static boolean enableToolStatModification, enableArmorStatModification, enableBlockStatModification;
+	public static boolean enableCustomFusionRecipes, enableExtraChunkRecipes;
 	
 	//Tool Stats
-	public static int bronzeMiningLevel;
-	public static int bronzeUsesNum;
-	public static float bronzeMiningSpeed;
-	public static int bronzeDamageVsEntity;
-	public static int bronzeEnchantability;
-	public static int thyriumMiningLevel;
-	public static int thyriumUsesNum;
-	public static float thyriumMiningSpeed;
-	public static int thyriumDamageVsEntity;
-	public static int thyriumEnchantability;
-	public static int sinisiteMiningLevel;
-	public static int sinisiteUsesNum;
-	public static float sinisiteMiningSpeed;
-	public static int sinisiteDamageVsEntity;
-	public static int sinisiteEnchantability;
+	public static int bronzeMiningLevel, thyriumMiningLevel, sinisiteMiningLevel;
+	public static int bronzeUsesNum, thyriumUsesNum, sinisiteUsesNum;
+	public static float bronzeMiningSpeed, thyriumMiningSpeed, sinisiteMiningSpeed;
+	public static int bronzeDamageVsEntity, thyriumDamageVsEntity, sinisiteDamageVsEntity;
+	public static int bronzeEnchantability, thyriumEnchantability, sinisiteEnchantability;
 	
 	//Armor Stats
-	public static int bronzeArmorDurability;
-	public static int[] bronzeArmorDamageReduction;
-	public static int bronzeArmorEnchantability;
-	public static int thyriumArmorDurability;
-	public static int[] thyriumArmorDamageReduction;
-	public static int thyriumArmorEnchantability;
-	public static int sinisiteArmorDurability;
-	public static int[] sinisiteArmorDamageReduction;
-	public static int sinisiteArmorEnchantability;
+	public static int bronzeArmorDurability, thyriumArmorDurability, sinisiteArmorDurability;
+	public static int[] bronzeArmorDamageReduction, thyriumArmorDamageReduction, sinisiteArmorDamageReduction;
+	public static int bronzeArmorEnchantability, thyriumArmorEnchantability, sinisiteArmorEnchantability;
 	
 	//Block Stats
-	public static float bronzeBlockHardness;
-	public static float bronzeBlockResistance;
-	public static float thyriumBlockHardness;
-	public static float thyriumBlockResistance;
-	public static float sinisiteBlockHardness;
-	public static float sinisiteBlockResistance;
-	public static float fusionFurnaceHardness;
-	public static float fusionFurnaceResistance;
-	public static float fusionFurnaceLightValue;
+	public static float bronzeBlockHardness, thyriumBlockHardness, sinisiteBlockHardness;
+	public static float bronzeBlockResistance, thyriumBlockResistance, sinisiteBlockResistance;
+	public static float fusionFurnaceHardness, fusionFurnaceResistance, fusionFurnaceLightValue;
 	
 	//Custom Fusion Recipes
-	public static int[] input1Id;
-	public static String[] input1Meta;
-	public static int[] input1Size;
-	public static int[] input2Id;
-	public static String[] input2Meta;
-	public static int[] input2Size;
-	public static int[] catalystId;
-	public static String[] catalystMeta;
-	public static int[] catalystSize;
-	public static int[] outputId;
-	public static String[] outputMeta;
-	public static int[] outputSize;
+	public static int[] input1Id, input2Id, catalystId, outputId;
+	public static String[] input1Meta, input2Meta, catalystMeta, outputMeta;
+	public static int[] input1Size, input2Size, catalystSize, outputSize;
 	public static double[] expAmount;
 }

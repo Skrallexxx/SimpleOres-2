@@ -1,33 +1,24 @@
 package alexndr.SimpleOres.plugins.aesthetics;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.logging.Level;
 
-import alexndr.SimpleOres.api.HandlerGetFreeIds;
-import alexndr.SimpleOres.api.HandlerLogger;
-
-import com.google.common.collect.Lists;
-
-import cpw.mods.fml.common.FMLLog;
-import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-import net.minecraft.block.Block;
-import net.minecraft.item.Item;
 import net.minecraftforge.common.Configuration;
+import alexndr.SimpleOres.api.helpers.FreeIdHelper;
+import alexndr.SimpleOres.api.helpers.LogHelper;
+import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 
 public class Config 
 {
-	private static HandlerGetFreeIds get;
+	private static FreeIdHelper get;
 	
 	public static void doIDs(FMLPreInitializationEvent event)
-	{
-		HandlerGetFreeIds.compileIdList();
-		
+	{	
 		File installDir = event.getModConfigurationDirectory();
-		File configDir = new File(installDir, "SimpleOres Configuration/Plugins");
-    	Configuration config = new Configuration(new File(configDir, "AestheticsIDs.cfg"));
-    	
+		File configDir = new File(installDir, "SimpleOres/Plugins");
+		File configFile = new File(configDir, "Aesthetics Config.cfg");
+    	Configuration config = new Configuration(configFile);
+		LogHelper.verboseInfo("Aesthetics Plugin: Loading config file at: '" + configFile.getAbsolutePath() + "'...");
+    	FreeIdHelper.compileIdList();
     	try
     	{
     		config.load();
@@ -46,11 +37,13 @@ public class Config
     		tinBricksStairsID = config.getBlock("Blocks", "Tin Bricks Stairs", get.freeBlock()).getInt();
     		mythrilBricksStairsID = config.getBlock("Blocks", "Mythril Bricks Stairs", get.freeBlock()).getInt();
     		adamantiumBricksStairsID = config.getBlock("Blocks", "Adamantium Bricks Stairs", get.freeBlock()).getInt();
-    		onyxBricksStairsID = config.getBlock("Blocks", "Onyx Bricks Stairs", get.freeBlock()).getInt();		
+    		onyxBricksStairsID = config.getBlock("Blocks", "Onyx Bricks Stairs", get.freeBlock()).getInt();
+    		
+    		LogHelper.verboseInfo("Aesthetics Plugin: Config loaded successfully.");
     	}
     	catch(Exception e)
     	{
-    		HandlerLogger.logSevere("Aesthetics Plugin: Failed to load the config.");
+    		LogHelper.severe("Aesthetics Plugin: Failed to load the config.");
     	}
     	finally
     	{
@@ -59,18 +52,7 @@ public class Config
 	}
 	
 	//Block IDs
-	public static int copperBricksID;
-	public static int tinBricksID;
-	public static int mythrilBricksID;
-	public static int adamantiumBricksID;
-	public static int onyxBricksID;
-	public static int tinFFurnaceID;
-	public static int tinFFurnaceOnID;
-	public static int adamantiumFFurnaceID;
-	public static int adamantiumFFurnaceOnID;
-	public static int copperBricksStairsID;
-	public static int tinBricksStairsID;
-	public static int mythrilBricksStairsID;
-	public static int adamantiumBricksStairsID;
-	public static int onyxBricksStairsID;
+	public static int copperBricksID, tinBricksID, mythrilBricksID, adamantiumBricksID, onyxBricksID;
+	public static int tinFFurnaceID, tinFFurnaceOnID, adamantiumFFurnaceID, adamantiumFFurnaceOnID;
+	public static int copperBricksStairsID, tinBricksStairsID, mythrilBricksStairsID, adamantiumBricksStairsID, onyxBricksStairsID;
 }
