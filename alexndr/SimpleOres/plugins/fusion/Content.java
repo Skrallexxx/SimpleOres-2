@@ -102,15 +102,15 @@ public class Content
 		sinisiteBow = new SimpleBow(Config.sinisiteBowID, 1200, mod.toolSinisite).setFull3D().setUnlocalizedName("sinisiteBow");
 		
 		//Tool Registering
-        MinecraftForge.setToolClass(bronzePick, "pickaxe", 2);
-        MinecraftForge.setToolClass(bronzeShovel, "shovel", 2);
-        MinecraftForge.setToolClass(bronzeAxe, "axe", 2);
-        MinecraftForge.setToolClass(thyriumPick, "pickaxe", 3);
-        MinecraftForge.setToolClass(thyriumShovel, "shovel", 3);
-        MinecraftForge.setToolClass(thyriumAxe, "axe", 3);
-        MinecraftForge.setToolClass(sinisitePick, "pickaxe", 4);
-        MinecraftForge.setToolClass(sinisiteShovel, "shovel", 4);
-        MinecraftForge.setToolClass(sinisiteAxe, "axe", 4);	
+        MinecraftForge.setToolClass(bronzePick, "pickaxe", Settings.bronzeMiningLevel);
+        MinecraftForge.setToolClass(bronzeShovel, "shovel", Settings.bronzeMiningLevel);
+        MinecraftForge.setToolClass(bronzeAxe, "axe", Settings.bronzeMiningLevel);
+        MinecraftForge.setToolClass(thyriumPick, "pickaxe", Settings.thyriumMiningLevel);
+        MinecraftForge.setToolClass(thyriumShovel, "shovel", Settings.thyriumMiningLevel);
+        MinecraftForge.setToolClass(thyriumAxe, "axe", Settings.thyriumMiningLevel);
+        MinecraftForge.setToolClass(sinisitePick, "pickaxe", Settings.sinisiteMiningLevel);
+        MinecraftForge.setToolClass(sinisiteShovel, "shovel", Settings.sinisiteMiningLevel);
+        MinecraftForge.setToolClass(sinisiteAxe, "axe", Settings.sinisiteMiningLevel);	
         
         //Register Items
         GameRegistry.registerItem(thyriumBow, "thyriumBow");
