@@ -1,9 +1,10 @@
 package alexndr.SimpleOres.api.helpers;
 
+import cpw.mods.fml.common.Loader;
+import alexndr.SimpleOres.core.Config;
 import alexndr.SimpleOres.core.Content;
+import alexndr.SimpleOres.core.Settings;
 import alexndr.SimpleOres.core.SimpleOres;
-import alexndr.SimpleOres.core.conf.Config;
-import alexndr.SimpleOres.core.conf.Settings;
 import alexndr.SimpleOres.core.helpers.RandomRange;
 
 public class CoreHelper 

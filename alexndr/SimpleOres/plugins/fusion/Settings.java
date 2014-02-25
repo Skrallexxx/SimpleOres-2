@@ -68,10 +68,10 @@ public class Settings
         		bronzeArmorDamageReduction = settings.get("Armor Stats", "Bronze Armor Damage Reduction Array", new int[] {3, 5, 3, 1}).getIntList();
         		bronzeArmorEnchantability = settings.get("Armor Stats", "Bronze Armor Enchantability", 7).getInt();
         		thyriumArmorDurability = settings.get("Armor Stats", "Thyrium Armor Durability", 39).getInt();
-        		thyriumArmorDamageReduction = settings.get("Armor Stats", "Thyrium Armor Damage Reduction Array", new int[] { 4, 8, 7, 4}).getIntList();
+        		thyriumArmorDamageReduction = settings.get("Armor Stats", "Thyrium Armor Damage Reduction Array", new int[] {4, 7, 6, 3}).getIntList();
         		thyriumArmorEnchantability = settings.get("Armor Stats", "Thyrium Armor Enchantability", 28).getInt();
         		sinisiteArmorDurability = settings.get("Armor Stats", "Sinisite Armor Durability", 56).getInt();
-        		sinisiteArmorDamageReduction = settings.get("Armor Stats", "Sinisite Armor Damage Reduction Array", new int[] {6, 8, 8, 7}).getIntList();
+        		sinisiteArmorDamageReduction = settings.get("Armor Stats", "Sinisite Armor Damage Reduction Array", new int[] {5, 8, 6, 5}).getIntList();
         		sinisiteArmorEnchantability = settings.get("Armor Stats", "Sinisite Armor Enchantability", 11).getInt();
         	}
         	else

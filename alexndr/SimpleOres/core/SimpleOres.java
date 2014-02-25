@@ -12,11 +12,8 @@ import net.minecraftforge.common.EnumHelper;
 import net.minecraftforge.common.MinecraftForge;
 import alexndr.SimpleOres.api.content.SimpleTab;
 import alexndr.SimpleOres.api.helpers.LogHelper;
-import alexndr.SimpleOres.api.helpers.LootHelper;
 import alexndr.SimpleOres.api.helpers.StatTriggersHelper;
 import alexndr.SimpleOres.api.helpers.UpdateCheckerHelper;
-import alexndr.SimpleOres.core.conf.Config;
-import alexndr.SimpleOres.core.conf.Settings;
 import alexndr.SimpleOres.core.content.MythrilFurnaceTileEntity;
 import alexndr.SimpleOres.core.content.OnyxFurnaceTileEntity;
 import alexndr.SimpleOres.core.helpers.Generator;
@@ -100,7 +97,7 @@ public class SimpleOres
 		//Content
 		setToolAndArmorStats();
 		Content.initialize();
-		Recipes.initialize();	
+		Recipes.preInitialize();	
   		setTabIcons();
 	}
   
@@ -146,7 +143,7 @@ public class SimpleOres
 	{
 		toolCopper = EnumHelper.addToolMaterial("COPPER", Settings.copperMiningLevel, Settings.copperUsesNum, Settings.copperMiningSpeed, Settings.copperDamageVsEntity, Settings.copperEnchantability);
   		toolTin = EnumHelper.addToolMaterial("TIN", Settings.tinMiningLevel, Settings.tinUsesNum, Settings.tinMiningSpeed, Settings.tinDamageVsEntity, Settings.tinEnchantability);
-  		toolMythril = EnumHelper.addToolMaterial("MYTHRIL", Settings.mythrilMiningLevel, Settings.mythrilUsesNum, Settings.mythrilMiningSpeed, Settings.mythrilDamageVsEntity, Settings.mythrilEnchantability);
+  		toolMythril = EnumHelper.addToolMaterial("MYTHRIL", Settings.mythrilMiningLevel, Settings.mythrilUsesNum * 2, Settings.mythrilMiningSpeed, Settings.mythrilDamageVsEntity, Settings.mythrilEnchantability);
   		toolAdamantium = EnumHelper.addToolMaterial("ADAMANTIUM", Settings.adamantiumMiningLevel, Settings.adamantiumUsesNum, Settings.adamantiumMiningSpeed, Settings.adamantiumDamageVsEntity, Settings.adamantiumEnchantability);
   		toolOnyx = EnumHelper.addToolMaterial("ONYX", Settings.onyxMiningLevel, Settings.onyxUsesNum, Settings.onyxMiningSpeed, Settings.onyxDamageVsEntity, Settings.onyxEnchantability);
   	
@@ -161,6 +158,8 @@ public class SimpleOres
 	  public void Init(FMLInitializationEvent event)
 	  {	    	
 		  NetworkRegistry.instance().registerConnectionHandler(new UpdateCheckerHelper());
+		  Recipes.initialize();
+		  proxy.addModderCapes();
 	  	
 		  if(Settings.enableUpdateChecker){UpdateCheckerHelper.checkUpdates(ModInfo.VERSIONURL, ModInfo.ID, ModInfo.VERSION);}
 	  	
@@ -171,7 +170,6 @@ public class SimpleOres
 		   * 
 		   * Thanks to @zot for the code for loading localisations automatically.
 		   */
-		  LootHelper.addLoot();
 		  setAchievementTriggers();
 		  addLocalisations();
 			
@@ -225,8 +223,7 @@ public class SimpleOres
 		  StatTriggersHelper.statTriggers().addPickupTrigger(new ItemStack(Content.copperOre), Content.simpleOresAch);
 		  StatTriggersHelper.statTriggers().addPickupTrigger(new ItemStack(Content.onyxGem), Content.onyxAch);
 		  StatTriggersHelper.statTriggers().addPickupTrigger(new ItemStack(Content.adamantiumOre), Content.adamantiumAch);
-	  }	    	  
-
+	  }	    
 	  
 	  public void addLocalisations()
 	  {
@@ -253,7 +250,7 @@ public class SimpleOres
 		  
 		  finally
 		  {
-			  LogHelper.info(numLocalisations + " Localisation(s) loaded successfully.");
+			  LogHelper.verboseInfo(numLocalisations + " Localisation(s) loaded successfully.");
 		  }
 	  }
 }

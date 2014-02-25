@@ -2,14 +2,14 @@ package alexndr.SimpleOres.core.conf;
 
 import java.io.File;
 
+import alexndr.SimpleOres.api.HandlerGetFreeIds;
+import alexndr.SimpleOres.api.HandlerLogger;
 import net.minecraftforge.common.Configuration;
-import alexndr.SimpleOres.api.helpers.FreeIdHelper;
-import alexndr.SimpleOres.api.helpers.LogHelper;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 
 public class Config 
 {	
-	private static FreeIdHelper get;
+	private static HandlerGetFreeIds get;
 	
 	/**
 	 * The method that loads/creates the configuration file. The ID's can be changed, and their defaults are shown. This is called by the main SimpleOres class.
@@ -20,11 +20,10 @@ public class Config
 		 * Creating the config file. installDir is the 'config' file within .minecraft. configDir add a "SimpleOres Configuration" folder within there.
 		 */
 		File installDir = event.getModConfigurationDirectory();
-		File configDir = new File(installDir, "SimpleOres");
-		File configFile = new File(configDir, "SimpleOres Config.cfg");
-    	Configuration config = new Configuration(configFile);
-		LogHelper.verboseInfo("Loading config file at '" + configFile.getAbsolutePath() + "'...");
-		FreeIdHelper.compileIdList();
+		File configDir = new File(installDir, "SimpleOres Configuration");
+    	Configuration config = new Configuration(new File(configDir, "SimpleOresIDs.cfg"));
+    	
+		HandlerGetFreeIds.compileIdList();
     	
     	try 
     	{
@@ -129,13 +128,11 @@ public class Config
     		onyxPickAchID = config.get("Achievements", "Onyx Pick Achievement", 5005).getInt();
     		mythrilBowAchID = config.get("Achievements", "Mythril Bow Achievement", 5006).getInt();
     		onyxBowAchID = config.get("Achievements", "Onyx Bow Achievement", 5007).getInt();
-    		
-    		LogHelper.verboseInfo("Config file loaded successfully.");
     	}
     	
     	catch (Exception e) 
     	{
-    		LogHelper.severe("Failed to load the config.");
+    		HandlerLogger.logSevere("Failed to load the config.");
     	}
     	
     	finally 
@@ -145,35 +142,103 @@ public class Config
     }
 	
 	//Block ID's
-	public static int copperOreID, tinOreID, mythrilOreID, adamantiumOreID, onyxOreID;
-	public static int copperBlockID, tinBlockID, mythrilBlockID, adamantiumBlockID, onyxBlockID;
-	public static int mythrilFurnaceID, mythrilFurnaceOnID, onyxFurnaceID, onyxFurnaceOnID;
-	public static int copperBarsID, tinBarsID, mythrilBarsID, adamantiumBarsID, onyxBarsID;
-	public static int copperDoorID, onyxDoorID;
+	public static int copperOreID;
+	public static int copperBlockID;
+	public static int tinOreID;
+	public static int tinBlockID;
+	public static int mythrilOreID;
+	public static int mythrilBlockID;
+	public static int adamantiumOreID;
+	public static int adamantiumBlockID;
+	public static int onyxOreID;
+	public static int onyxBlockID;
+	public static int mythrilFurnaceID;
+	public static int mythrilFurnaceOnID;
+	public static int onyxFurnaceID;
+	public static int onyxFurnaceOnID;	
+	public static int copperDoorID;
+	public static int onyxDoorID;
+	public static int copperBarsID;
+	public static int tinBarsID;
+	public static int mythrilBarsID;
+	public static int adamantiumBarsID;
+	public static int onyxBarsID;
 	
 	//Item ID's
-	public static int copperIngotID, tinIngotID, mythrilIngotID, adamantiumIngotID, onyxGemID;
-    public static int copperBucketID, copperBucketWaterID;
-    public static int mythrilRodID, onyxRodID;    
-    public static int copperDoorItemID, onyxDoorItemID;
+	public static int copperIngotID;
+	public static int tinIngotID;
+	public static int mythrilIngotID;
+	public static int adamantiumIngotID;
+	public static int onyxGemID;
+    public static int copperBucketID;
+    public static int copperBucketWaterID;
+    public static int mythrilRodID;
+    public static int onyxRodID;    
+    public static int copperDoorItemID;
+    public static int onyxDoorItemID;
 	
 	//Tool ID's
-    public static int copperPickID, tinPickID, mythrilPickID, adamantiumPickID, onyxPickID;
-    public static int copperAxeID, tinAxeID, mythrilAxeID, adamantiumAxeID, onyxAxeID;
-    public static int copperShovelID, tinShovelID, mythrilShovelID, adamantiumShovelID, onyxShovelID;
-    public static int copperSwordID, tinSwordID, mythrilSwordID, adamantiumSwordID, onyxSwordID;
-    public static int copperHoeID, tinHoeID, mythrilHoeID, adamantiumHoeID, onyxHoeID;
-    public static int mythrilBowID, onyxBowID;
-    public static int tinShearsID, adamantiumShearsID, onyxShearsID;
+    public static int copperPickID;
+    public static int copperAxeID;
+    public static int copperShovelID;
+    public static int copperSwordID;
+    public static int copperHoeID;
+    public static int tinPickID;
+    public static int tinAxeID;
+    public static int tinShovelID;
+    public static int tinSwordID;
+    public static int tinHoeID;
+    public static int mythrilPickID;
+    public static int mythrilAxeID;
+    public static int mythrilShovelID;
+    public static int mythrilSwordID;
+    public static int mythrilHoeID;
+    public static int adamantiumPickID;
+    public static int adamantiumAxeID;
+    public static int adamantiumShovelID;
+    public static int adamantiumSwordID;
+    public static int adamantiumHoeID;
+    public static int onyxPickID;
+    public static int onyxAxeID;
+    public static int onyxShovelID;
+    public static int onyxSwordID;
+    public static int onyxHoeID;
+    public static int tinBowID;
+    public static int mythrilBowID;
+    public static int onyxBowID;
+    public static int tinShearsID;
+    public static int adamantiumShearsID;
+    public static int onyxShearsID;
 	
 	//Armor ID's
-    public static int copperHelmID, tinHelmID, mythrilHelmID, adamantiumHelmID, onyxHelmID;
-    public static int copperChestID, tinChestID, mythrilChestID, adamantiumChestID, onyxChestID;
-    public static int copperLegsID, tinLegsID, mythrilLegsID, adamantiumLegsID, onyxLegsID;
-    public static int copperBootsID, tinBootsID, mythrilBootsID, adamantiumBootsID, onyxBootsID;
+    public static int copperHelmID;
+    public static int copperChestID;
+    public static int copperLegsID;
+    public static int copperBootsID;
+    public static int tinHelmID;
+    public static int tinChestID;
+    public static int tinLegsID;
+    public static int tinBootsID;
+    public static int mythrilHelmID;
+    public static int mythrilChestID;
+    public static int mythrilLegsID;
+    public static int mythrilBootsID;
+    public static int adamantiumHelmID;
+    public static int adamantiumChestID;
+    public static int adamantiumLegsID;
+    public static int adamantiumBootsID;
+    public static int onyxHelmID;
+    public static int onyxChestID;
+    public static int onyxLegsID;
+    public static int onyxBootsID;
 	
 	//Achievement ID's
-	public static int simpleOresAchID, adamantiumAchID, onyxAchID;
-	public static int ironPickAchID, adamantiumPickAchID, onyxPickAchID;
-	public static int mythrilBowAchID, onyxBowAchID;
+	public static int simpleOresAchID;
+	public static int adamantiumAchID;
+	public static int onyxAchID;
+	public static int ironPickAchID;
+	public static int adamantiumPickAchID;
+	public static int onyxPickAchID;
+	public static int mythrilBowAchID;
+	public static int onyxBowAchID;
 }

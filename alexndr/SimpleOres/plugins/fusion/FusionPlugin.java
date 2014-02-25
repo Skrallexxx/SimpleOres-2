@@ -73,10 +73,8 @@ public class FusionPlugin
     	
     	//Content
     	setToolsAndArmorStats();
-    	Content.doArmor();
-    	Content.doBlocks();
-    	Content.doItems();
-    	Content.doTools();
+    	Content.initialize();
+    	Recipes.preInitialize();
     	Achievements.doAchievements();
     	
     	//Loot
@@ -98,12 +96,10 @@ public class FusionPlugin
     @EventHandler
     public void Init(FMLInitializationEvent event)
     {
+    	Recipes.initialize();
 		INSTANCE = this;
 		
 	  	if(CoreHelper.coreSettings.enableUpdateChecker){UpdateCheckerHelper.checkUpdates(ModInfo.VERSIONURL, ModInfo.ID, ModInfo.VERSION);}
-		
-    	Recipes.doRecipes();
-    	Recipes.addCustomFusionRecipes();
 		
 		/**
 		 * Adding localisation files.
@@ -172,7 +168,7 @@ public class FusionPlugin
 		}
 		finally
 		{
-			LogHelper.info("Fusion Plugin: " + numLocalisations + " Localisation(s) loaded successfully.");
+			LogHelper.verboseInfo("Fusion Plugin: " + numLocalisations + " Localisation(s) loaded successfully.");
 		}
     }
 }

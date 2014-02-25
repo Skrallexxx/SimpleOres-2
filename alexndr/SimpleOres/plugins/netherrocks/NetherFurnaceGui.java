@@ -6,13 +6,18 @@ import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
 
+import alexndr.SimpleOres.api.helpers.CoreHelper;
+import alexndr.SimpleOres.core.Settings;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class NetherFurnaceGui extends GuiContainer
 {
-	private static final ResourceLocation field_110410_t = new ResourceLocation("textures/gui/container/furnace.png");
+    private static String defaultGui = "textures/gui/container/furnace.png";
+    private static String coloredGui = "netherrocks:" + "textures/gui/netherFurnace.png";
+    
+	private static final ResourceLocation field_110410_t = new ResourceLocation(CoreHelper.coreSettings.enableColoredGuis ? coloredGui : defaultGui);
 	private NetherFurnaceTileEntity furnaceInventory;
 
     public NetherFurnaceGui(InventoryPlayer par1InventoryPlayer, NetherFurnaceTileEntity par2TileEntityFurnace)

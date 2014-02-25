@@ -11,6 +11,7 @@ import alexndr.SimpleOres.api.helpers.UpdateCheckerHelper;
 import com.google.common.reflect.ClassPath;
 import com.google.common.reflect.ClassPath.ResourceInfo;
 
+import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.SidedProxy;
@@ -33,26 +34,27 @@ public class AestheticsPlugin
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event)
 	{
-		Config.doIDs(event);
 		Settings.doSettings(event);
+		Config.doIDs(event);
 		
-		Content.doBlocks();
-		Content.doItems();
-		Content.doAchievements();
-		Recipes.doRecipes();
+		Content.initialize();
 	}
 	
 	@EventHandler
 	public void Init(FMLInitializationEvent event)
 	{
+		Recipes.initialize();
 		INSTANCE = this;
 		
 	  	if(CoreHelper.coreSettings.enableUpdateChecker){UpdateCheckerHelper.checkUpdates(ModInfo.VERSIONURL, ModInfo.ID, ModInfo.VERSION);}
 		
 		NetworkRegistry.instance().registerGuiHandler(INSTANCE, proxy);
-		GameRegistry.registerTileEntity(FFurnaceTileEntityTin.class, "tinFFurnace");
-		GameRegistry.registerTileEntity(FFurnaceTileEntityAdamantium.class, "adamantiumFFurnace");
-		
+		if(Loader.isModLoaded("simpleoresfusion") && Settings.enableFusionContent)
+		{
+			GameRegistry.registerTileEntity(FFurnaceTileEntityTin.class, "tinFFurnace");
+			GameRegistry.registerTileEntity(FFurnaceTileEntityAdamantium.class, "adamantiumFFurnace");
+		}
+
 		this.addLocalisations();
 		
 		LogHelper.info("Plugin Loader: Aesthetics Plugin loaded successfully.");
@@ -81,7 +83,7 @@ public class AestheticsPlugin
 		}
 		finally
 		{
-			LogHelper.info("Aesthetics Plugin: " + numLocalisations + " Localisation(s) loaded successfully.");
+			LogHelper.verboseInfo("Aesthetics Plugin: " + numLocalisations + " Localisation(s) loaded successfully.");
 		}
 	}
 }

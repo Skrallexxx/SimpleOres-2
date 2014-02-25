@@ -4,16 +4,39 @@ import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.CraftingManager;
+import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import alexndr.SimpleOres.api.helpers.LogHelper;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 public class Recipes 
 {
+	public static void preInitialize()
+	{
+		try{doOreDictRecipes(); LogHelper.verboseInfo("Netherrocks Plugin: All OreDictionary entries were added successfully.");}
+		catch(Exception e){LogHelper.severe("Netherrocks Plugin: OreDictionary entries were not added successfully. This is a serious problem!"); e.printStackTrace();}
+	}
+	
 	public static void initialize()
 	{
 		try{doRecipes(); LogHelper.verboseInfo("Netherrocks Plugin: All recipes were added successfully.");}
 		catch(Exception e){LogHelper.severe("Netherrocks Plugin: Recipes were not added successfully. This is a serious problem!"); e.printStackTrace();}
+	}
+	
+	public static void doOreDictRecipes()
+	{
+		OreDictionary.registerOre("oreFyrite", new ItemStack(Content.fyriteOre));
+		OreDictionary.registerOre("oreMalachite", new ItemStack(Content.malachiteOre));
+		OreDictionary.registerOre("oreAshstone", new ItemStack(Content.ashstoneOre));
+		OreDictionary.registerOre("oreIllumenite", new ItemStack(Content.illumeniteOre));
+		OreDictionary.registerOre("oreDragonstone", new ItemStack(Content.dragonstoneOre));
+		OreDictionary.registerOre("oreArgonite", new ItemStack(Content.argoniteOre));
+		OreDictionary.registerOre("ingotFyrite", new ItemStack(Content.fyriteIngot));
+		OreDictionary.registerOre("ingotMalachite", new ItemStack(Content.malachiteIngot));
+		OreDictionary.registerOre("gemAshstone", new ItemStack(Content.ashstoneGem));
+		OreDictionary.registerOre("ingotIllumenite", new ItemStack(Content.illumeniteIngot));
+		OreDictionary.registerOre("gemDragonstone", new ItemStack(Content.dragonstoneGem));
+		OreDictionary.registerOre("ingotArgonite", new ItemStack(Content.argoniteIngot));
 	}
 	
 	public static void doRecipes()

@@ -18,7 +18,6 @@ import net.minecraft.tileentity.TileEntityFurnace;
 import net.minecraft.util.Icon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
-import alexndr.SimpleOres.api.helpers.CoreHelper;
 import alexndr.SimpleOres.api.helpers.TabHelper;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -59,7 +58,7 @@ public class FFurnaceTin extends BlockContainer
      */
     public int idDropped(int par1, Random par2Random, int par3)
     {
-        return Content.tinFFurnace.blockID;
+        return ContentFusion.tinFFurnace.blockID;
     }
 
     /**
@@ -166,11 +165,11 @@ public class FFurnaceTin extends BlockContainer
 
         if (par0)
         {
-            par1World.setBlock(par2, par3, par4, Content.tinFFurnaceOn.blockID);
+            par1World.setBlock(par2, par3, par4, ContentFusion.tinFFurnaceOn.blockID);
         }
         else
         {
-            par1World.setBlock(par2, par3, par4, Content.tinFFurnace.blockID);
+            par1World.setBlock(par2, par3, par4, ContentFusion.tinFFurnace.blockID);
         }
 
         keepFurnaceInventory = false;

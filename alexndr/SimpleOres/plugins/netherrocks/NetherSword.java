@@ -1,5 +1,7 @@
 package alexndr.SimpleOres.plugins.netherrocks;
 
+import java.util.List;
+
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.EntityLivingBase;
@@ -9,6 +11,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import alexndr.SimpleOres.api.helpers.TabHelper;
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -129,5 +132,18 @@ public class NetherSword extends ItemSword
 		super.setUnlocalizedName(unlocalizedName);
 		GameRegistry.registerItem(this, unlocalizedName);
 		return this;
+	}
+	
+	@Override
+	public void addInformation(ItemStack stack, EntityPlayer par2EntityPlayer, List par3List, boolean par4)
+	{
+		if(this.itemID == Content.fyriteSword.itemID)
+		{
+			par3List.add(StatCollector.translateToLocal("netherrocks.fyriteSword.info"));
+		}
+		if(this.itemID == Content.illumeniteSword.itemID)
+		{
+			par3List.add(StatCollector.translateToLocal("netherrocks.illumeniteSword.info"));
+		}
 	}
 }

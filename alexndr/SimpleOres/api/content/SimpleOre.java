@@ -1,17 +1,20 @@
 package alexndr.SimpleOres.api.content;
 
+import java.util.List;
 import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.MathHelper;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import alexndr.SimpleOres.api.helpers.TabHelper;
+import alexndr.SimpleOres.core.Settings;
 import alexndr.SimpleOres.core.SimpleOres;
-import alexndr.SimpleOres.core.conf.Settings;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;

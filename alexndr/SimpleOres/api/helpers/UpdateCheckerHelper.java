@@ -14,7 +14,7 @@ import net.minecraft.network.packet.NetHandler;
 import net.minecraft.network.packet.Packet1Login;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.StatCollector;
-import alexndr.SimpleOres.core.conf.Settings;
+import alexndr.SimpleOres.core.Settings;
 
 import com.google.common.collect.Lists;
 
@@ -25,17 +25,27 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class UpdateCheckerHelper implements IConnectionHandler
 {
+	static String modChecking = new String();
 	static StringBuffer newVersion = new StringBuffer();
 	static ArrayList<String> mods = Lists.newArrayList();
 	static HashMap<String, Boolean> isModOutOfDate = new HashMap<String, Boolean>();
 	static HashMap<String, String> newVersions = new HashMap<String, String>();
-	static String VERSION = "1.0.0";
+	static String VERSION = "";
 	static boolean hasChecked = false;
 	
+	/**
+	 * Easily way to have a mod check for updates. Requires an online text file containing the new version, a modId, and a current version.
+	 * Supports localisations. Add two entries to your localisation called modId.updateMessage1 and modId.updateMessage2.
+	 * 
+	 * @param linkToVersionFile The url for the text file that contains the newest version number. Must NOT be https:
+	 * @param modId The modId of the mod you want to check for. 
+	 * @param modInfoClassVersion The current version of the mod, such as the version number put in the @Mod line.
+	 */
 	public static void checkUpdates(String linkToVersionFile, String modId, String modInfoClassVersion)
 	{
 		try
 		{
+			modChecking = modId;
 			mods.add(modId);
 			VERSION = modInfoClassVersion;
 			
@@ -67,7 +77,15 @@ public class UpdateCheckerHelper implements IConnectionHandler
 				else
 				{
 					isModOutOfDate.put(modId, false);
+					newVersions.put(modId, newVersion.toString());
 				}
+			}
+			
+			LogHelper.verboseInfo("Total mods that UpdateCheckerHelper is checking for = " + mods.size());
+			
+			for(int i = 0; i < mods.size(); i++)
+			{
+				LogHelper.verboseInfo("Checking for updates for modId: " + mods.get(i) + ". Newest version is " + newVersions.get(mods.get(i)));
 			}
 		}
 		
@@ -75,7 +93,7 @@ public class UpdateCheckerHelper implements IConnectionHandler
 		{
 			if(!hasChecked)
 			{
-				LogHelper.warning("Update checker(s) could not reach server. The connection probably Timed Out.");
+				LogHelper.warning("Update checker(s) could not reach server when checking for mod " + modChecking + ". The connection probably Timed Out.");
 				hasChecked = true;
 			}
 		}
@@ -93,16 +111,31 @@ public class UpdateCheckerHelper implements IConnectionHandler
 	{
 		if(Settings.enableUpdateChecker)
 		{
-			if(mods.size() != 0 && isModOutOfDate.size() != 0 && newVersions.size() != 0)
+			try
 			{
-				for(int i = 0; i < mods.size(); i++)
+				if(mods.size() != 0 && isModOutOfDate.size() != 0 && newVersions.size() != 0)
 				{
-					if(isModOutOfDate.get(mods.get(i)) == true)
+					for(int i = 0; i < mods.size(); i++)
 					{
-						Minecraft.getMinecraft().thePlayer.addChatMessage(StatCollector.translateToLocal(mods.get(i) + ".updateMessage1") + newVersions.get(mods.get(i)) + StatCollector.translateToLocal(mods.get(i) + ".updateMessage2"));
+						if(newVersions.get(mods.get(i)) != null)
+						{
+							if(isModOutOfDate.get(mods.get(i)) == true)
+							{
+								Minecraft.getMinecraft().thePlayer.addChatMessage(StatCollector.translateToLocal(mods.get(i) + ".updateMessage1") + newVersions.get(mods.get(i)) + StatCollector.translateToLocal(mods.get(i) + ".updateMessage2"));
+							}
+						}
 					}
 				}
 			}
+			
+			catch(Exception e)
+			{
+				LogHelper.warning("Update checking failed for unknown reasons. Enable verbose logging and retry to see a stack-trace.");
+				if(Settings.enableVerboseLogging)
+				{
+					e.printStackTrace();
+				}
+			}	
 		}
 	}
 
