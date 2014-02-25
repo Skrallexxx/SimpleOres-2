@@ -1,14 +1,21 @@
 package alexndr.SimpleOres.api.content;
 
+import java.util.List;
+
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumToolMaterial;
 import net.minecraft.item.ItemAxe;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.StatCollector;
 import net.minecraftforge.common.MinecraftForge;
 import alexndr.SimpleOres.api.helpers.TabHelper;
 import alexndr.SimpleOres.core.SimpleOres;
-import alexndr.SimpleOres.core.conf.Settings;
+
+import com.google.common.collect.Lists;
+
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -18,13 +25,16 @@ public class SimpleAxe extends ItemAxe
 	private final EnumToolMaterial material;
 	private String modName = "simpleores";
 	private CreativeTabs tab = SimpleOres.tabSimpleTools;
-	private int toolLevel = 0;
+	private String infoString;
+	private boolean infoAdded = false;
+	private boolean unlocalized = true;
 
 	public SimpleAxe(int id, EnumToolMaterial toolmaterial) 
 	{
 		super(id, toolmaterial);
 		this.material = toolmaterial;
 		this.setCreativeTab(TabHelper.getToolsTab(tab));
+		MinecraftForge.setToolClass(this, "axe", material.getHarvestLevel());
 	}
 	
 	/**
@@ -47,12 +57,36 @@ public class SimpleAxe extends ItemAxe
 	}
 	
 	/**
-	 * Sets the harvest level of the tool. Defaults to 0 (wood).
+	 * Adds info to an item, shows up in the tooltip. Is always unlocalized.
 	 */
-	public SimpleAxe setToolLevel(int level)
+	public SimpleAxe addInfo(String info)
 	{
-		this.toolLevel = level;
-		MinecraftForge.setToolClass(this, "axe", this.toolLevel);
+		EntityPlayer player = Minecraft.getMinecraft().thePlayer;
+		ItemStack stack = new ItemStack(this);
+		List list = Lists.newArrayList();
+		Boolean bool = true;
+		infoString = info;
+		infoAdded = true;
+		unlocalized = true;
+		
+		addInformation(stack, player, list, bool);
+		return this;
+	}
+	
+	/**
+	 * Adds info to an item, shows up in the tooltip. Supports an unlocalized 'info' which can be translated for localisations.
+	 */
+	public SimpleAxe addInfo(String info, boolean isUnlocalized)
+	{
+		EntityPlayer player = Minecraft.getMinecraft().thePlayer;
+		ItemStack stack = new ItemStack(this);
+		List list = Lists.newArrayList();
+		Boolean bool = true;
+		infoString = info;
+		infoAdded = true;
+		unlocalized = isUnlocalized;
+		
+		addInformation(stack, player, list, bool);
 		return this;
 	}
 	
@@ -82,5 +116,21 @@ public class SimpleAxe extends ItemAxe
 	public boolean getIsRepairable(ItemStack par1ItemStack, ItemStack par2ItemStack)
 	{
 		return this.material.getToolCraftingMaterial() == par2ItemStack.itemID ? true : super.getIsRepairable(par1ItemStack, par2ItemStack);
+	}
+	
+	@Override
+	public void addInformation(ItemStack stack, EntityPlayer par2EntityPlayer, List par3List, boolean par4)
+	{
+		if(infoAdded)
+		{
+			if(unlocalized)
+			{
+				par3List.add(StatCollector.translateToLocal(infoString));
+			}
+			if(!unlocalized)
+			{
+				par3List.add(infoString);
+			}
+		}
 	}
 }

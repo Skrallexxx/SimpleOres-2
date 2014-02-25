@@ -7,7 +7,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.chunk.IChunkProvider;
 import alexndr.SimpleOres.api.helpers.WorldGenHelper;
 import alexndr.SimpleOres.core.Content;
-import alexndr.SimpleOres.core.conf.Settings;
+import alexndr.SimpleOres.core.Settings;
 import cpw.mods.fml.common.IWorldGenerator;
 
 public class Generator implements IWorldGenerator 
@@ -30,7 +30,7 @@ public class Generator implements IWorldGenerator
 			generateSurface(world, random, chunkX*16, chunkZ*16);
 		}
 		
-		if(Settings.dimensionIDsArray.length >= 1)
+		if(Settings.enableHigherDimensionGen && Settings.dimensionIDsArray.length >= 1)
 		{
 			for(int i = 0; i < Settings.dimensionIDsArray.length; i++)
 			{

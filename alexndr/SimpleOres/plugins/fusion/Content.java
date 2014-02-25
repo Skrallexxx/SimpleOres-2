@@ -3,7 +3,6 @@ package alexndr.SimpleOres.plugins.fusion;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.item.Item;
-import net.minecraftforge.common.MinecraftForge;
 import alexndr.SimpleOres.api.content.SimpleArmor;
 import alexndr.SimpleOres.api.content.SimpleAxe;
 import alexndr.SimpleOres.api.content.SimpleHoe;
@@ -12,11 +11,24 @@ import alexndr.SimpleOres.api.content.SimpleOre;
 import alexndr.SimpleOres.api.content.SimplePickaxe;
 import alexndr.SimpleOres.api.content.SimpleShovel;
 import alexndr.SimpleOres.api.content.SimpleSword;
+import alexndr.SimpleOres.api.helpers.LogHelper;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 public class Content 
 {
 	public static FusionPlugin mod;
+	
+	public static void initialize()
+	{
+		try{doItems(); LogHelper.verboseInfo("Fusion Plugin: All items were added successfully.");}
+		catch(Exception e){LogHelper.severe("Fusion Plugin: Items were not added successfully. This is a serious problem!"); e.printStackTrace();}
+		try{doBlocks(); LogHelper.verboseInfo("Fusion Plugin: All blocks were added successfully.");}
+		catch(Exception e){LogHelper.severe("Fusion Plugin: Blocks were not added successfully. This is a serious problem!"); e.printStackTrace();}
+		try{doTools(); LogHelper.verboseInfo("Fusion Plugin: All tools were added successfully.");}
+		catch(Exception e){LogHelper.severe("Fusion Plugin: Tools were not added successfully. This is a serious problem!"); e.printStackTrace();}
+		try{doArmor(); LogHelper.verboseInfo("Fusion Plugin: All armor was added successfully.");}
+		catch(Exception e){LogHelper.severe("Fusion Plugin: Armor was not added successfully. This is a serious problem!"); e.printStackTrace();}
+	}
 	
 	/**
 	 * The method that gives the armor items their properties and names. This is called by the main SimpleOres class.
@@ -100,17 +112,6 @@ public class Content
 		sinisiteHoe = new SimpleHoe(Config.sinisiteHoeID, mod.toolSinisite).modId("simpleoresfusion").setUnlocalizedName("sinisiteHoe");
 		thyriumBow = new SimpleBow(Config.thyriumBowID, 900, mod.toolThyrium).setFull3D().setUnlocalizedName("thyriumBow");
 		sinisiteBow = new SimpleBow(Config.sinisiteBowID, 1200, mod.toolSinisite).setFull3D().setUnlocalizedName("sinisiteBow");
-		
-		//Tool Registering
-        MinecraftForge.setToolClass(bronzePick, "pickaxe", 2);
-        MinecraftForge.setToolClass(bronzeShovel, "shovel", 2);
-        MinecraftForge.setToolClass(bronzeAxe, "axe", 2);
-        MinecraftForge.setToolClass(thyriumPick, "pickaxe", 3);
-        MinecraftForge.setToolClass(thyriumShovel, "shovel", 3);
-        MinecraftForge.setToolClass(thyriumAxe, "axe", 3);
-        MinecraftForge.setToolClass(sinisitePick, "pickaxe", 4);
-        MinecraftForge.setToolClass(sinisiteShovel, "shovel", 4);
-        MinecraftForge.setToolClass(sinisiteAxe, "axe", 4);	
         
         //Register Items
         GameRegistry.registerItem(thyriumBow, "thyriumBow");

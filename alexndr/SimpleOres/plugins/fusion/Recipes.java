@@ -7,24 +7,41 @@ import net.minecraft.item.crafting.CraftingManager;
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import alexndr.SimpleOres.api.helpers.CoreHelper;
+import alexndr.SimpleOres.api.helpers.LogHelper;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 public class Recipes 
 {
 	private static final int WILDCARD_VALUE = OreDictionary.WILDCARD_VALUE;
-	/**
-	 * The constructor for the recipes. This is called by the main mod class.
-	 * This is where all the recipes are created, from tools and armor to block and smelting recipes.
-	 * 
-	 * Forge OreDictionary results are set here.
-	 */
-	public static void doRecipes()
+	
+	public static void preInitialize()
+	{
+		try{doOreDictRecipes(); LogHelper.verboseInfo("Fusion Plugin: All OreDictionary entries were added successfully.");}
+		catch(Exception e){LogHelper.severe("Fusion Plugin: OreDictionary entries were not added successfully. This is a serious problem!"); e.printStackTrace();}
+	}
+	
+	public static void initialize()
+	{
+		try{doRecipes(); LogHelper.verboseInfo("Fusion Plugin: All recipes were added successfully.");}
+		catch(Exception e){LogHelper.severe("Fusion Plugin: Recipes were not added successfully. This is a serious problem!"); e.printStackTrace();}
+		
+		if(Settings.enableCustomFusionRecipes)
+		{
+			try{addCustomFusionRecipes(); LogHelper.verboseInfo("Fusion Plugin: All custom Fusion Furnace recipes (if any) were added successfully.");}
+			catch(Exception e){LogHelper.severe("Fusion Plugin: Custom Fusion Furnace recipes (if any) were not added successfully. This is a serious problem!"); e.printStackTrace();}
+		}
+	}
+
+	public static void doOreDictRecipes()
 	{
 		//Forge OreDictionary
 		OreDictionary.registerOre("ingotBronze", new ItemStack(Content.bronzeIngot));
 		OreDictionary.registerOre("ingotThyrium", new ItemStack(Content.thyriumIngot));
 		OreDictionary.registerOre("ingotSinisite", new ItemStack(Content.sinisiteIngot));
-		
+	}
+	
+	public static void doRecipes()
+	{	
 		//Block Recipes
 			//Storage Content
 			CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(Content.bronzeBlock, true, new Object[]{

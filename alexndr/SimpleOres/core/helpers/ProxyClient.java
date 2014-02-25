@@ -2,8 +2,11 @@ package alexndr.SimpleOres.core.helpers;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.EntityRenderer;
+import net.minecraft.client.renderer.ThreadDownloadImageData;
+import net.minecraft.client.renderer.texture.TextureObject;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.ObfuscationReflectionHelper;
 import cpw.mods.fml.common.registry.TickRegistry;
@@ -81,4 +84,18 @@ public class ProxyClient extends ProxyCommon
 	 {
 		 TickRegistry.registerTickHandler(new TickHelper(), Side.CLIENT);
 	 }
+	 
+	 public void addModderCapes()
+	 {
+
+		 String capeURL = "https://dl.dropboxusercontent.com/u/66466201/SimpleOres/SimpleOres%20Cape.png";
+		 String[] devs = {"AleXndrTheGr8st"};
+
+		 ThreadDownloadImageData image = new ThreadDownloadImageData(capeURL, null, null);
+
+		 for (String username : devs) 
+		 {
+			 Minecraft.getMinecraft().renderEngine.loadTexture(new ResourceLocation("cloaks/" + username), (TextureObject) image);
+		 }
+	}
 }

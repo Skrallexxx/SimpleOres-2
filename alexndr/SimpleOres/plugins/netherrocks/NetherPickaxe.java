@@ -1,6 +1,7 @@
 package alexndr.SimpleOres.plugins.netherrocks;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import net.minecraft.block.Block;
@@ -14,9 +15,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
-import alexndr.SimpleOres.api.helpers.CoreHelper;
 import alexndr.SimpleOres.api.helpers.TabHelper;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
@@ -142,5 +143,14 @@ public class NetherPickaxe extends ItemPickaxe
 		super.setUnlocalizedName(unlocalizedName);
 		GameRegistry.registerItem(this, unlocalizedName);
 		return this;
+	}
+	
+	@Override
+	public void addInformation(ItemStack stack, EntityPlayer par2EntityPlayer, List par3List, boolean par4)
+	{
+		if(this.itemID == Content.fyritePick.itemID)
+		{
+			par3List.add(StatCollector.translateToLocal("netherrocks.fyritePick.info"));
+		}
 	}
 }

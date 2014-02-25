@@ -16,8 +16,6 @@ import alexndr.SimpleOres.api.content.SimplePickaxe;
 import alexndr.SimpleOres.api.content.SimpleShovel;
 import alexndr.SimpleOres.api.content.SimpleSword;
 import alexndr.SimpleOres.api.helpers.LogHelper;
-import alexndr.SimpleOres.core.conf.Config;
-import alexndr.SimpleOres.core.conf.Settings;
 import alexndr.SimpleOres.core.content.MythrilFurnace;
 import alexndr.SimpleOres.core.content.OnyxFurnace;
 import alexndr.SimpleOres.core.content.SimpleBars;
@@ -151,23 +149,6 @@ public class Content
         GameRegistry.registerItem(tinShears, "tinShears");
         GameRegistry.registerItem(adamantiumShears, "adamantiumShears");
         GameRegistry.registerItem(onyxShears, "onyxShears");
-		
-		//Tool Registering
-        MinecraftForge.setToolClass(copperPick, "pickaxe", Settings.copperMiningLevel);
-        MinecraftForge.setToolClass(copperShovel, "shovel", Settings.copperMiningLevel);
-        MinecraftForge.setToolClass(copperAxe, "axe", Settings.copperMiningLevel);
-        MinecraftForge.setToolClass(tinPick, "pickaxe", Settings.tinMiningLevel);
-        MinecraftForge.setToolClass(tinShovel, "shovel", Settings.tinMiningLevel);
-        MinecraftForge.setToolClass(tinAxe, "axe", Settings.tinMiningLevel);
-        MinecraftForge.setToolClass(mythrilPick, "pickaxe", Settings.mythrilMiningLevel);
-        MinecraftForge.setToolClass(mythrilShovel, "shovel", Settings.mythrilMiningLevel);
-        MinecraftForge.setToolClass(mythrilAxe, "axe", Settings.mythrilMiningLevel);
-        MinecraftForge.setToolClass(adamantiumPick, "pickaxe", Settings.adamantiumMiningLevel);
-        MinecraftForge.setToolClass(adamantiumShovel, "shovel", Settings.adamantiumMiningLevel);
-        MinecraftForge.setToolClass(adamantiumAxe, "axe", Settings.adamantiumMiningLevel);
-        MinecraftForge.setToolClass(onyxPick, "pickaxe", Settings.onyxMiningLevel);
-        MinecraftForge.setToolClass(onyxShovel, "shovel", Settings.onyxMiningLevel);
-        MinecraftForge.setToolClass(onyxAxe, "axe", Settings.onyxMiningLevel);
 	}
 	
 	public static void doArmor()

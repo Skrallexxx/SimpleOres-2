@@ -3,7 +3,7 @@ package alexndr.SimpleOres.api.helpers;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import alexndr.SimpleOres.core.conf.Settings;
+import alexndr.SimpleOres.core.Settings;
 import cpw.mods.fml.common.FMLLog;
 
 public class LogHelper 

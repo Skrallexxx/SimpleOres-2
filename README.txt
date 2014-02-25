@@ -1,3 +1,63 @@
+Version 1.3.0
+Core
+-Preparation for 1.7 update.
+-Restructuring of the code. 
+-Lots of tidying and improving of the code.
+-Block and Item IDs are now grabbed from a list of free Ids. Should eliminate any ID conflicts with mods loaded BEFORE SimpleOres (mods are loaded in alphabetical order unless a special load order is specified). Old conflicts will still be compatible and shouldn't have any negative effects.
+-Config directory has changed to being in a folder called "SimpleOres" rather than "SimpleOres Configuration". If you wish to keep your old config, you must copy the values over to the new files. Some file names have changed also, in an attempt to standardise a bit more.
+-Coloured the Onyx and Mythril Furnace GUI's in their respective colours.
+-Additional OreDictionary entries for Adamantium and Mythril as Adamantite/Adamantine and Mithril.
+-Support for the new WorldGenHelper added to the Higher Dimension Generation code, to allow the user to choose which block the ores spawn inside of. Defaults to stone (duh!).
+-Removed SimpleOres stuff spawning in dungeon chests, etc. for the moment. May return in the future.
+-Added developer capes (only for developers, unless you are really clever ;)).
+-Fixed update checker displaying the version number more than once (properly this time). 
+-Fixed the Onyx Furnace not giving extra ingots if used with a hopper/not giving extra ingots on the first smelt.
+-Fixed Copper Buckets turning into Iron Buckets when picking up fluids from other mods (ie. oil).
+-Fixed Copper Buckets turning into Iron Buckets when picking up water if you had more than one Copper Bucket in the stack.
+-Fixed tool mining levels not being configurable.
+-New Settings toggle to enable/disable colored GUI's for SimpleOres machines (Mythril/Onyx Furnaces). Enabled by default.
+-New Settings toggle to enable/disable verbose logging mode. Useful for debugging. Disabled by default.
+-New Settings toggle to enable/disable SimpleOres Creative tabs completely. All blocks and items go in the vanilla tabs if disabled. Enabled by default, and applies to any plugins that use the new TabHelper class (all official ones and any unofficial ones that choose to).
+-[API] Added a new class to easily trigger achievements on crafting/smelting/pickup (StatTriggersHelper).
+-[API] Cleaned up the HandlerLoot class. Renamed to LootHelper.
+-[API] Added a class for getting free item and block ids. 
+-[API] Block Registering now handled by the SimpleOre class.
+-[API] Added the update checker to the API, so it can check for updates for all plugin if supported.
+-[API] Added new CoreHelper class, to easily have access to core files that you may not be able to import (ie. if they have the same names as your own, like Content or Settings).
+-[API] Added new WorldGenHelper class, to easily specify the block you want to replace during world gen. 
+-[API] Added a TabHelper class to determine where items should be placed. Supports plugin tabs, and has built in support for the Toggles that effect tabs, making them universal for any plugins using the TabHelper.
+-[API] Added tool tip support (addInfo()) to all content classes (except SimpleOre).
+
+Fusion Version 1.3.0
+-The Small Thyrium Chunk is no longer entered into the OreDictionary as a Copper Ingot.
+-Made Bronze slightly better (+200 uses, +1.5x Mining Speed, +1 Enchantability).
+-Added a toggle to enable extra chunk compounding recipes.
+-Added a FusionHelper class to allow plugins to access Fusion classes without hard references. Means less work if I change class names.
+-Altered Thyrium and Sinisite armor defense stats so they aren't so OP.
+
+Netherrocks Version 1.0.0
+-Now a plugin for SimpleOres, utilising the SimpleOres Plugin API.
+-Lots of code improvements.
+-Tool recipes now use the OreDictionary version of sticks.
+-Added an integrated Localisation, in the same fashion as how SimpleOres does it. Please go ahead and translate Netherrocks to your preferred language :).
+-Added Settings toggles to enable/disable advanced Tool, Armor and Block stat modification, all of which can be changed. Disabled by default.
+-Added Settings toggles to enable/disable special armor effects. Enabled by default.
+-Added Settings toggles to enable/disable special tool effects (Fyrite Pickaxe, Illumenite Sword, Fyrite Sword, etc.). Enabled by default.
+-Added Settings options to change certain properties of the the special tools/armor.
+-Added support for the new Verbose Logging of SimpleOres 1.3. Enabling it in SimpleOres will enable it in Netherrocks. Prints extra info to the console.
+-Added a special armor effect for Malachite Armor. Wearing a full set allows you to jump 2 blocks high. Hold sneak to jump only one.
+-Added tool tips to the armor items with special effects showing what the set bonus is if the whole set is worn.
+-Added tool tips to the tools/weapons with special effects showing what the special effect is.
+-Added a coloured GUI for the Nether Furnace. Enabled by default, can be disabled by using the appropriate toggle in the SimpleOres settings file.
+-Changed Nether Furnace fuel values: Blaze Rods (24 items), Netherrack (2 items), Fyrite Ingot (80 items).
+-Changed Ore Harvest Levels. Ashstone, Dragonstone and Argonite all require Diamond or better pickaxes to mine.
+-Changed Dragonstone Armor durability. It is now much higher.
+-Fixed shift-clicking in the Nether Furnace.
+-Fixed the Fyrite Pickaxe crashing the game when enchanted.
+-Fixed the Fyrite Pickaxe dropping items when player is in creative.
+-Fixed the Dragonstone Pickaxe being called the Dragonstone Hoe.
+-Fixed the Fyrite and Illumenite swords having their durability reduced twice for every hit.
+
 Version 1.2.1
 Core
 -Fixed Mythril Furnace not doubling the coal block length/fuel value.

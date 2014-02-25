@@ -19,9 +19,4 @@ public class LootHelper
 	{
 		ChestGenHooks.getInfo(location).addItem(new WeightedRandomChestContent(stack, minChance, maxChance, itemWeight));
 	}
-	
-	public static void addLoot()
-	{
-		
-	}
 }

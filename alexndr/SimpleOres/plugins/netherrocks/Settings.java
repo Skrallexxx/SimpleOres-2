@@ -124,7 +124,7 @@ public class Settings
     			illumeniteArmorDurability = settings.get("Armor Stats", "Illumenite Armor Durability", 12).getInt();
     			illumeniteArmorDamageReduction = settings.get("Armor Stats", "Illumenite Armor Damage Reduction Array", new int[] {4, 5, 5, 3}).getIntList();
     			illumeniteArmorEnchantability = settings.get("Armor Stats", "Illumenite Armor Enchantability", 15).getInt();
-    			dragonstoneArmorDurability = settings.get("Armor Stats", "Dragonstone Armor Durabilitiy", 30).getInt();
+    			dragonstoneArmorDurability = settings.get("Armor Stats", "Dragonstone Armor Durabilitiy", 48).getInt();
     			dragonstoneArmorDamageReduction = settings.get("Armor Stats", "Dragonstone Armor Damage Reduction Array", new int[] {3, 9, 7, 3}).getIntList();
     			dragonstoneArmorEnchantability = settings.get("Armor Stats", "Dragonstone Armor Enchantability", 27).getInt();
     		}

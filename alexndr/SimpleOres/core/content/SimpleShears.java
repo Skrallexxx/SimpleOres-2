@@ -17,8 +17,8 @@ import net.minecraft.stats.StatList;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IShearable;
 import alexndr.SimpleOres.api.helpers.TabHelper;
+import alexndr.SimpleOres.core.Settings;
 import alexndr.SimpleOres.core.SimpleOres;
-import alexndr.SimpleOres.core.conf.Settings;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 

@@ -13,8 +13,8 @@ import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import alexndr.SimpleOres.api.helpers.TabHelper;
+import alexndr.SimpleOres.core.Settings;
 import alexndr.SimpleOres.core.SimpleOres;
-import alexndr.SimpleOres.core.conf.Settings;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 

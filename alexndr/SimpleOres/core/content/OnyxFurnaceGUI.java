@@ -7,7 +7,7 @@ import net.minecraft.util.StatCollector;
 
 import org.lwjgl.opengl.GL11;
 
-import alexndr.SimpleOres.core.conf.Settings;
+import alexndr.SimpleOres.core.Settings;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 

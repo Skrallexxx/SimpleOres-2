@@ -9,8 +9,10 @@ import net.minecraft.item.EnumToolMaterial;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.EnumHelper;
 import net.minecraftforge.common.MinecraftForge;
+import alexndr.SimpleOres.api.helpers.CoreHelper;
 import alexndr.SimpleOres.api.helpers.LogHelper;
 import alexndr.SimpleOres.api.helpers.StatTriggersHelper;
+import alexndr.SimpleOres.api.helpers.UpdateCheckerHelper;
 
 import com.google.common.reflect.ClassPath;
 import com.google.common.reflect.ClassPath.ResourceInfo;
@@ -71,7 +73,7 @@ public class Netherrocks
 		//Content
 		setToolAndArmorStats();
 		Content.initialize();
-		Recipes.initialize();
+		Recipes.preInitialize();
 	}
 	
 	public void setToolAndArmorStats()
@@ -92,7 +94,9 @@ public class Netherrocks
 	@EventHandler
 	public void Init(FMLInitializationEvent event)
 	{
+		Recipes.initialize();
 		INSTANCE = this;
+		if(CoreHelper.coreSettings.enableUpdateChecker){UpdateCheckerHelper.checkUpdates(ModInfo.VERSIONURL, ModInfo.ID, ModInfo.VERSION);}
 		
 		setAchievementTriggers();
 		addLocalisations();
@@ -160,7 +164,7 @@ public class Netherrocks
 		}
 		finally
 		{
-			LogHelper.info("Netherrocks Plugin: " + numLocalisations + " Localisation(s) loaded successfully.");
+			LogHelper.verboseInfo("Netherrocks Plugin: " + numLocalisations + " Localisation(s) loaded successfully.");
 		}
 	}
 }
