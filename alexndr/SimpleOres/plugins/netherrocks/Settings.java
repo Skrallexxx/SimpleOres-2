@@ -228,7 +228,7 @@ public class Settings
 		illumeniteArmorDurability = 12;
 		illumeniteArmorDamageReduction = new int[] {4, 5, 5, 3};
 		illumeniteArmorEnchantability = 15;
-		dragonstoneArmorDurability = 30;
+		dragonstoneArmorDurability = 48;
 		dragonstoneArmorDamageReduction = new int[] {3, 9, 7, 3};
 		dragonstoneArmorEnchantability = 27;
 	}
