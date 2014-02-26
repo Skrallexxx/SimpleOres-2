@@ -120,11 +120,13 @@ public class Recipes
 			CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(Content.argoniteHoe, true, new Object [] {
 				"XX ", " Y ", " Y ", Character.valueOf('X'), Content.argoniteIngot, Character.valueOf('Y'), "stickWood"}));
 					
-			//Special Sword Recipes
+			//Special Tool Recipes
 			CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(Content.fyriteSword, true, new Object [] {
 				"X", "X", "Y", Character.valueOf('X'), Content.fyriteIngot, Character.valueOf('Y'), "stickWood"}));
 			CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(Content.illumeniteSword, true, new Object [] {
 				"X", "X", "Y", Character.valueOf('X'), Content.illumeniteIngot, Character.valueOf('Y'), "stickWood"}));
+			CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(Content.fyritePick, true, new Object [] {
+				"XXX", "Y", "Y", Character.valueOf('X'), Content.fyriteIngot, Character.valueOf('Y'), "stickWood"}));
 					
 		//Armor Recipes
 			//Fyrite Armor Recipes

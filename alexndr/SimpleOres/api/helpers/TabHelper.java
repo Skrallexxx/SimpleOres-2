@@ -15,7 +15,7 @@ public class TabHelper
 	{
 		if(tabs)
 		{
-			if(tab != CoreHelper.simpleores.tabSimpleCombat)
+			if(tab != CoreHelper.simpleores.tabSimpleBlocks)
 			{
 				return tab;
 			}
