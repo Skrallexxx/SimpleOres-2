@@ -126,7 +126,7 @@ public class Recipes
 			CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(Content.illumeniteSword, true, new Object [] {
 				"X", "X", "Y", Character.valueOf('X'), Content.illumeniteIngot, Character.valueOf('Y'), "stickWood"}));
 			CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(Content.fyritePick, true, new Object [] {
-				"XXX", "Y", "Y", Character.valueOf('X'), Content.fyriteIngot, Character.valueOf('Y'), "stickWood"}));
+				"XXX", " Y ", " Y ", Character.valueOf('X'), Content.fyriteIngot, Character.valueOf('Y'), "stickWood"}));
 					
 		//Armor Recipes
 			//Fyrite Armor Recipes
