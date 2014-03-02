@@ -90,11 +90,7 @@ public class SimpleOre extends Block
 	{
 		if(stackDrop != null)
 		{
-			if(stackDrop.itemID > 4095)
-			{
-				return stackDrop.itemID + 256;
-			}
-			else return stackDrop.itemID;
+			return stackDrop.itemID;
 
 		}
 		else return this.blockID;
