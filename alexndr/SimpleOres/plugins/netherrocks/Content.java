@@ -3,6 +3,7 @@ package alexndr.SimpleOres.plugins.netherrocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.stats.Achievement;
 import net.minecraft.stats.AchievementList;
 import net.minecraftforge.common.MinecraftForge;
@@ -21,10 +22,10 @@ public class Content
 {
 	public static void initialize()
 	{
-		try{doBlocks(); LogHelper.verboseInfo("Netherrocks Plugin: All blocks were added successfully.");}
-		catch(Exception e){LogHelper.severe("Netherrocks Plugin: Blocks were not added successfully. This is a serious problem!"); e.printStackTrace();}
 		try{doItems(); LogHelper.verboseInfo("Netherrocks Plugin: All items were added successfully.");}
 		catch(Exception e){LogHelper.severe("Netherrocks Plugin: Items were not added successfully. This is a serious problem!"); e.printStackTrace();}
+		try{doBlocks(); LogHelper.verboseInfo("Netherrocks Plugin: All blocks were added successfully.");}
+		catch(Exception e){LogHelper.severe("Netherrocks Plugin: Blocks were not added successfully. This is a serious problem!"); e.printStackTrace();}
 		try{doTools(); LogHelper.verboseInfo("Netherrocks Plugin: All tools were added successfully.");}
 		catch(Exception e){LogHelper.severe("Netherrocks Plugin: Tools were not added successfully. This is a serious problem!"); e.printStackTrace();}
 		try{doArmor(); LogHelper.verboseInfo("Netherrocks Plugin: All armor was added successfully.");}
@@ -39,11 +40,11 @@ public class Content
 		fyriteBlock = new SimpleOre(Config.fyriteBlockID, Material.iron).modId("netherrocks").setHardness(Settings.fyriteBlockHardness).setResistance(Settings.fyriteBlockResistance).setUnlocalizedName("fyriteBlock");
 		malachiteOre = new SimpleOre(Config.malachiteOreID, Material.rock).modId("netherrocks").setHardness(Settings.malachiteOreHardness).setResistance(Settings.malachiteOreResistance).setUnlocalizedName("malachiteOre");
 		malachiteBlock = new SimpleOre(Config.malachiteBlockID, Material.iron).modId("netherrocks").setHardness(Settings.malachiteBlockHardness).setResistance(Settings.malachiteBlockResistance).setUnlocalizedName("malachiteBlock");
-		ashstoneOre = new SimpleOre(Config.ashstoneOreID, Material.rock).modId("netherrocks").setHardness(Settings.ashstoneOreHardness).setResistance(Settings.ashstoneOreResistance).setUnlocalizedName("ashstoneOre");
+		ashstoneOre = new SimpleOre(Config.ashstoneOreID, Material.rock).modId("netherrocks").setStackToDrop(new ItemStack(Content.ashstoneGem)).setHardness(Settings.ashstoneOreHardness).setResistance(Settings.ashstoneOreResistance).setUnlocalizedName("ashstoneOre");
 		ashstoneBlock = new SimpleOre(Config.ashstoneBlockID, Material.iron).modId("netherrocks").setHardness(Settings.ashstoneBlockHardness).setResistance(Settings.ashstoneBlockResistance).setUnlocalizedName("ashstoneBlock");
 		illumeniteOre = new SimpleOre(Config.illumeniteOreID, Material.rock).modId("netherrocks").setHardness(Settings.illumeniteOreHardness).setResistance(Settings.illumeniteOreResistance).setLightValue(Settings.illumeniteOreLightValue).setUnlocalizedName("illumeniteOre");
 		illumeniteBlock = new SimpleOre(Config.illumeniteBlockID, Material.iron).modId("netherrocks").setHardness(Settings.illumeniteBlockHardness).setResistance(Settings.illumeniteBlockResistance).setLightValue(Settings.illumeniteBlockLightValue).setUnlocalizedName("illumeniteBlock");
-		dragonstoneOre = new SimpleOre(Config.dragonstoneOreID, Material.rock).modId("netherrocks").setHardness(Settings.dragonstoneOreHardness).setResistance(Settings.dragonstoneOreResistance).setUnlocalizedName("dragonstoneOre");
+		dragonstoneOre = new SimpleOre(Config.dragonstoneOreID, Material.rock).modId("netherrocks").setStackToDrop(new ItemStack(Content.dragonstoneGem)).setHardness(Settings.dragonstoneOreHardness).setResistance(Settings.dragonstoneOreResistance).setUnlocalizedName("dragonstoneOre");
 		dragonstoneBlock = new SimpleOre(Config.dragonstoneBlockID, Material.iron).modId("netherrocks").setHardness(Settings.dragonstoneBlockHardness).setResistance(Settings.dragonstoneBlockResistance).setUnlocalizedName("dragonstoneBlock");
 		argoniteOre = new SimpleOre(Config.argoniteOreID, Material.rock).modId("netherrocks").setHardness(Settings.argoniteOreHardness).setResistance(Settings.argoniteOreResistance).setUnlocalizedName("argoniteOre");
 		argoniteBlock = new SimpleOre(Config.argoniteBlockID, Material.iron).modId("netherrocks").setHardness(Settings.argoniteBlockHardness).setResistance(Settings.argoniteBlockResistance).setUnlocalizedName("argoniteBlock");
@@ -104,18 +105,18 @@ public class Content
 	
 	public static void doArmor()
 	{
-		fyriteHelm = new SimpleArmor(Config.fyriteHelmID, Netherrocks.armorFyrite, Netherrocks.rendererFyrite, 0).modId("netherrocks").setType("fyrite").addInfo("netherrocks.fyriteArmor.info").setUnlocalizedName("fyriteHelm");
-		fyriteChest = new SimpleArmor(Config.fyriteChestID, Netherrocks.armorFyrite, Netherrocks.rendererFyrite, 1).modId("netherrocks").setType("fyrite").addInfo("netherrocks.fyriteArmor.info").setUnlocalizedName("fyriteChest");
-		fyriteLegs = new SimpleArmor(Config.fyriteLegsID, Netherrocks.armorFyrite, Netherrocks.rendererFyrite, 2).modId("netherrocks").setType("fyrite").addInfo("netherrocks.fyriteArmor.info").setUnlocalizedName("fyriteLegs");
-		fyriteBoots = new SimpleArmor(Config.fyriteBootsID, Netherrocks.armorFyrite, Netherrocks.rendererFyrite, 3).modId("netherrocks").setType("fyrite").addInfo("netherrocks.fyriteArmor.info").setUnlocalizedName("fyriteBoots");
-		malachiteHelm = new SimpleArmor(Config.malachiteHelmID, Netherrocks.armorMalachite, Netherrocks.rendererMalachite, 0).modId("netherrocks").setType("malachite").addInfo("netherrocks.malachiteArmor.info").setUnlocalizedName("malachiteHelm");
-		malachiteChest = new SimpleArmor(Config.malachiteChestID, Netherrocks.armorMalachite, Netherrocks.rendererMalachite, 1).modId("netherrocks").setType("malachite").addInfo("netherrocks.malachiteArmor.info").setUnlocalizedName("malachiteChest");
-		malachiteLegs = new SimpleArmor(Config.malachiteLegsID, Netherrocks.armorMalachite, Netherrocks.rendererMalachite, 2).modId("netherrocks").setType("malachite").addInfo("netherrocks.malachiteArmor.info").setUnlocalizedName("malachiteLegs");
-		malachiteBoots = new SimpleArmor(Config.malachiteBootsID, Netherrocks.armorMalachite, Netherrocks.rendererMalachite, 3).modId("netherrocks").setType("malachite").addInfo("netherrocks.malachiteArmor.info").setUnlocalizedName("malachiteBoots");
-		illumeniteHelm = new SimpleArmor(Config.illumeniteHelmID, Netherrocks.armorIllumenite, Netherrocks.rendererIllumenite, 0).modId("netherrocks").setType("illumenite").addInfo("netherrocks.illumeniteArmor.info").setUnlocalizedName("illumeniteHelm");
-		illumeniteChest = new SimpleArmor(Config.illumeniteChestID, Netherrocks.armorIllumenite, Netherrocks.rendererIllumenite, 1).modId("netherrocks").setType("illumenite").addInfo("netherrocks.illumeniteArmor.info").setUnlocalizedName("illumeniteChest");
-		illumeniteLegs = new SimpleArmor(Config.illumeniteLegsID, Netherrocks.armorIllumenite, Netherrocks.rendererIllumenite, 2).modId("netherrocks").setType("illumenite").addInfo("netherrocks.illumeniteArmor.info").setUnlocalizedName("illumeniteLegs");
-		illumeniteBoots = new SimpleArmor(Config.illumeniteBootsID, Netherrocks.armorIllumenite, Netherrocks.rendererIllumenite, 3).modId("netherrocks").setType("illumenite").addInfo("netherrocks.illumeniteArmor.info").setUnlocalizedName("illumeniteBoots");
+		fyriteHelm = new SimpleArmor(Config.fyriteHelmID, Netherrocks.armorFyrite, Netherrocks.rendererFyrite, 0).modId("netherrocks").setType("fyrite").setUnlocalizedName("fyriteHelm");
+		fyriteChest = new SimpleArmor(Config.fyriteChestID, Netherrocks.armorFyrite, Netherrocks.rendererFyrite, 1).modId("netherrocks").setType("fyrite").setUnlocalizedName("fyriteChest");
+		fyriteLegs = new SimpleArmor(Config.fyriteLegsID, Netherrocks.armorFyrite, Netherrocks.rendererFyrite, 2).modId("netherrocks").setType("fyrite").setUnlocalizedName("fyriteLegs");
+		fyriteBoots = new SimpleArmor(Config.fyriteBootsID, Netherrocks.armorFyrite, Netherrocks.rendererFyrite, 3).modId("netherrocks").setType("fyrite").setUnlocalizedName("fyriteBoots");
+		malachiteHelm = new SimpleArmor(Config.malachiteHelmID, Netherrocks.armorMalachite, Netherrocks.rendererMalachite, 0).modId("netherrocks").setType("malachite").setUnlocalizedName("malachiteHelm");
+		malachiteChest = new SimpleArmor(Config.malachiteChestID, Netherrocks.armorMalachite, Netherrocks.rendererMalachite, 1).modId("netherrocks").setType("malachite").setUnlocalizedName("malachiteChest");
+		malachiteLegs = new SimpleArmor(Config.malachiteLegsID, Netherrocks.armorMalachite, Netherrocks.rendererMalachite, 2).modId("netherrocks").setType("malachite").setUnlocalizedName("malachiteLegs");
+		malachiteBoots = new SimpleArmor(Config.malachiteBootsID, Netherrocks.armorMalachite, Netherrocks.rendererMalachite, 3).modId("netherrocks").setType("malachite").setUnlocalizedName("malachiteBoots");
+		illumeniteHelm = new SimpleArmor(Config.illumeniteHelmID, Netherrocks.armorIllumenite, Netherrocks.rendererIllumenite, 0).modId("netherrocks").setType("illumenite").setUnlocalizedName("illumeniteHelm");
+		illumeniteChest = new SimpleArmor(Config.illumeniteChestID, Netherrocks.armorIllumenite, Netherrocks.rendererIllumenite, 1).modId("netherrocks").setType("illumenite").setUnlocalizedName("illumeniteChest");
+		illumeniteLegs = new SimpleArmor(Config.illumeniteLegsID, Netherrocks.armorIllumenite, Netherrocks.rendererIllumenite, 2).modId("netherrocks").setType("illumenite").setUnlocalizedName("illumeniteLegs");
+		illumeniteBoots = new SimpleArmor(Config.illumeniteBootsID, Netherrocks.armorIllumenite, Netherrocks.rendererIllumenite, 3).modId("netherrocks").setType("illumenite").setUnlocalizedName("illumeniteBoots");
 		dragonstoneHelm = new SimpleArmor(Config.dragonstoneHelmID, Netherrocks.armorDragonstone, Netherrocks.rendererDragonstone, 0).modId("netherrocks").setType("dragonstone").setUnlocalizedName("dragonstoneHelm");
 		dragonstoneChest = new SimpleArmor(Config.dragonstoneChestID, Netherrocks.armorDragonstone, Netherrocks.rendererDragonstone, 1).modId("netherrocks").setType("dragonstone").setUnlocalizedName("dragonstoneChest");
 		dragonstoneLegs = new SimpleArmor(Config.dragonstoneLegsID, Netherrocks.armorDragonstone, Netherrocks.rendererDragonstone, 2).modId("netherrocks").setType("dragonstone").setUnlocalizedName("dragonstoneLegs");

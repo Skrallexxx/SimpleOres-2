@@ -1,3 +1,8 @@
+Version 1.3.1
+-Fixed Onyx not dropping the gem again.
+-Fixed the server crashing due to tooltips.
+-Removed tooltip ability in the API content classes for the moment, due to the above.
+
 Version 1.3.0
 Core
 -Preparation for 1.7 update.

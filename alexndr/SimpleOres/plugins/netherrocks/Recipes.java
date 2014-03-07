@@ -126,7 +126,7 @@ public class Recipes
 			CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(Content.illumeniteSword, true, new Object [] {
 				"X", "X", "Y", Character.valueOf('X'), Content.illumeniteIngot, Character.valueOf('Y'), "stickWood"}));
 			CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(Content.fyritePick, true, new Object [] {
-				"XXX", "Y", "Y", Character.valueOf('X'), Content.fyriteIngot, Character.valueOf('Y'), "stickWood"}));
+				"XXX", " Y ", " Y ", Character.valueOf('X'), Content.fyriteIngot, Character.valueOf('Y'), "stickWood"}));
 					
 		//Armor Recipes
 			//Fyrite Armor Recipes
@@ -172,7 +172,9 @@ public class Recipes
 		//Furnace Recipes
 		GameRegistry.addSmelting(Content.fyriteOre.blockID, new ItemStack(Content.fyriteIngot, 1, 0), 0.8F);
 		GameRegistry.addSmelting(Content.malachiteOre.blockID, new ItemStack(Content.malachiteIngot, 1, 0), 0.5F);
+		GameRegistry.addSmelting(Content.ashstoneOre.blockID, new ItemStack(Content.ashstoneGem, 1, 0), 0.8F);
 		GameRegistry.addSmelting(Content.illumeniteOre.blockID, new ItemStack(Content.illumeniteIngot, 1, 0), 0.8F);
 		GameRegistry.addSmelting(Content.argoniteOre.blockID, new ItemStack(Content.argoniteIngot, 1, 0), 0.7F);
+		GameRegistry.addSmelting(Content.dragonstoneOre.blockID, new ItemStack(Content.dragonstoneGem, 1, 0), 1.0F);
 	}
 }
