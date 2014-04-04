@@ -97,7 +97,7 @@ public class SimpleOres
 		//Content
 		setToolAndArmorStats();
 		Content.initialize();
-		Recipes.preInitialize();	
+		Recipes.preInitialize();
   		setTabIcons();
 	}
   
@@ -143,7 +143,7 @@ public class SimpleOres
 	{
 		toolCopper = EnumHelper.addToolMaterial("COPPER", Settings.copperMiningLevel, Settings.copperUsesNum, Settings.copperMiningSpeed, Settings.copperDamageVsEntity, Settings.copperEnchantability);
   		toolTin = EnumHelper.addToolMaterial("TIN", Settings.tinMiningLevel, Settings.tinUsesNum, Settings.tinMiningSpeed, Settings.tinDamageVsEntity, Settings.tinEnchantability);
-  		toolMythril = EnumHelper.addToolMaterial("MYTHRIL", Settings.mythrilMiningLevel, Settings.mythrilUsesNum * 2, Settings.mythrilMiningSpeed, Settings.mythrilDamageVsEntity, Settings.mythrilEnchantability);
+  		toolMythril = EnumHelper.addToolMaterial("MYTHRIL", Settings.mythrilMiningLevel, Settings.mythrilUsesNum, Settings.mythrilMiningSpeed, Settings.mythrilDamageVsEntity, Settings.mythrilEnchantability);
   		toolAdamantium = EnumHelper.addToolMaterial("ADAMANTIUM", Settings.adamantiumMiningLevel, Settings.adamantiumUsesNum, Settings.adamantiumMiningSpeed, Settings.adamantiumDamageVsEntity, Settings.adamantiumEnchantability);
   		toolOnyx = EnumHelper.addToolMaterial("ONYX", Settings.onyxMiningLevel, Settings.onyxUsesNum, Settings.onyxMiningSpeed, Settings.onyxDamageVsEntity, Settings.onyxEnchantability);
   	
@@ -170,8 +170,8 @@ public class SimpleOres
 		   * 
 		   * Thanks to @zot for the code for loading localisations automatically.
 		   */
-		  setAchievementTriggers();
 		  addLocalisations();
+		  setAchievementTriggers();
 			
 		  /**
 		   * Registering things such as the world generator, tile entities and GUI's.

@@ -87,7 +87,7 @@ public class NetherPickaxe extends ItemPickaxe
 		            
 		            int quantity = Block.blocksList[blockID].quantityDropped(random) * (var3 + 1);
 					
-					ItemStack drop = new ItemStack(FurnaceRecipes.smelting().getSmeltingResult(item).copy().itemID, quantity, meta);
+					ItemStack drop = new ItemStack(FurnaceRecipes.smelting().getSmeltingResult(item).copy().itemID, quantity, FurnaceRecipes.smelting().getSmeltingResult(item).copy().getItemDamage());
 					world.playSoundEffect(i + 0.5F, j + 0.5F, k + 0.5F,
 							Block.blocksList[blockID].stepSound.getBreakSound(),
 							(Block.blocksList[blockID].stepSound.getVolume() + 1.0F) / 2.0F,

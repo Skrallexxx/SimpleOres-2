@@ -24,7 +24,10 @@ public class Recipes
 	{
 		try{doRecipes(); LogHelper.verboseInfo("Fusion Plugin: All recipes were added successfully.");}
 		catch(Exception e){LogHelper.severe("Fusion Plugin: Recipes were not added successfully. This is a serious problem!"); e.printStackTrace();}
-		
+	}
+	
+	public static void postInitialize()
+	{
 		if(Settings.enableCustomFusionRecipes)
 		{
 			try{addCustomFusionRecipes(); LogHelper.verboseInfo("Fusion Plugin: All custom Fusion Furnace recipes (if any) were added successfully.");}

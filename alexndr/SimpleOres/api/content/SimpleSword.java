@@ -67,8 +67,16 @@ public class SimpleSword extends ItemSword
 			{
 				par3EntityPlayer.addVelocity(0, 0.4, 0);
 			}
+			else
+			{
+				return super.onItemRightClick(par1ItemStack, par2World, par3EntityPlayer);
+			}
 		}
-		return par1ItemStack;
+		else
+		{
+			return super.onItemRightClick(par1ItemStack, par2World, par3EntityPlayer);
+		}
+		return super.onItemRightClick(par1ItemStack, par2World, par3EntityPlayer);
 	}
 	
 	/**

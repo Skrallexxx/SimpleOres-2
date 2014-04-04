@@ -105,7 +105,7 @@ public class Settings
     			dragonstoneMiningSpeed = (float) settings.get("Tool Stats", "Dragonstone Mining Speed", 10.0).getDouble(dragonstoneMiningSpeed);
     			dragonstoneDamageVsEntity = settings.get("Tool Stats", "Dragonstone Damage Vs. Entity", 8).getInt();
     			dragonstoneEnchantability = settings.get("Tool Stats", "Dragonstone Enchantability", 27).getInt();
-    			argoniteMiningLevel = settings.get("Tool Stats", "Argonite Mining Level", 4).getInt();
+    			argoniteMiningLevel = settings.get("Tool Stats", "Argonite Mining Level", 3).getInt();
     			argoniteUsesNum = settings.get("Tool Stats", "Argonite Uses Number", 1300).getInt();
     			argoniteMiningSpeed = (float) settings.get("Tool Stats", "Argonite Mining Speed", 8.0).getDouble(argoniteMiningSpeed);
     			argoniteDamageVsEntity = settings.get("Tool Stats", "Argonite Damage Vs. Entity", 3).getInt();

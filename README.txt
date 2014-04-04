@@ -1,3 +1,9 @@
+Version 1.3.2
+-Fixed swords not being able to block.
+-Fixed Mythril tool's durability being doubled.
+-Fixed achievements not working.
+-[API] Removed the onItemRightClick override from SimpleSword.
+
 Version 1.3.1
 -Fixed Onyx not dropping the gem again.
 -Fixed the server crashing due to tooltips.
