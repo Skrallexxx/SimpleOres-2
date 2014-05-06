@@ -1,33 +1,28 @@
 package alexndr.SimpleOres.api.helpers;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import alexndr.SimpleOres.core.Settings;
-import cpw.mods.fml.common.FMLLog;
 
 public class LogHelper 
 {
-	private static Logger logger = Logger.getLogger("SimpleOres 2");
+	private static Logger logger = LogManager.getLogger("SimpleOres");
 	
-	public static void init()
+    public static void info(String message)
+    {
+    	logger.log(Level.INFO, message);
+    }
+    
+    public static void warning(String message)
 	{
-		logger.setParent(FMLLog.getLogger());
-	}
-	
-	public static void info(String message)
-	{
-		logger.log(Level.INFO, message);
-	}
-	
-	public static void warning(String message)
-	{
-		logger.log(Level.WARNING, message);
+		logger.log(Level.WARN, message);
 	}
 	
 	public static void severe(String message)
 	{
-		logger.log(Level.SEVERE, message);
+		logger.log(Level.ERROR, message);
 	}
 	
 	public static void verboseInfo(String message)
@@ -42,7 +37,7 @@ public class LogHelper
 	{
 		if(Settings.enableVerboseLogging)
 		{
-			logger.log(Level.WARNING, message);
+			logger.log(Level.WARN, message);
 		}
 	}
 }

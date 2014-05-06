@@ -1,6 +1,9 @@
 package alexndr.SimpleOres.plugins.fusion;
 
-import net.minecraft.block.Block;
+import java.util.List;
+
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.CraftingManager;
@@ -8,6 +11,10 @@ import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import alexndr.SimpleOres.api.helpers.CoreHelper;
 import alexndr.SimpleOres.api.helpers.LogHelper;
+
+import com.google.common.base.Splitter;
+import com.google.common.collect.Lists;
+
 import cpw.mods.fml.common.registry.GameRegistry;
 
 public class Recipes 
@@ -38,243 +45,227 @@ public class Recipes
 	public static void doOreDictRecipes()
 	{
 		//Forge OreDictionary
-		OreDictionary.registerOre("ingotBronze", new ItemStack(Content.bronzeIngot));
-		OreDictionary.registerOre("ingotThyrium", new ItemStack(Content.thyriumIngot));
-		OreDictionary.registerOre("ingotSinisite", new ItemStack(Content.sinisiteIngot));
+		OreDictionary.registerOre("ingotBronze", new ItemStack(Content.bronze_ingot));
+		OreDictionary.registerOre("ingotThyrium", new ItemStack(Content.thyrium_ingot));
+		OreDictionary.registerOre("ingotSinisite", new ItemStack(Content.sinisite_ingot));
+		OreDictionary.registerOre("blockBronze", new ItemStack(Content.bronze_block));
+		OreDictionary.registerOre("blockThyrium", new ItemStack(Content.thyrium_block));
+		OreDictionary.registerOre("blockSinisite", new ItemStack(Content.sinisite_block));
 	}
 	
 	public static void doRecipes()
 	{	
 		//Block Recipes
 			//Storage Content
-			CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(Content.bronzeBlock, true, new Object[]{
+			CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(Content.bronze_block, true, new Object[]{
 				"XXX", "XXX", "XXX", Character.valueOf('X'), "ingotBronze"}));
-			CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(Content.thyriumBlock, true, new Object[]{
+			CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(Content.thyrium_block, true, new Object[]{
 				"XXX", "XXX", "XXX", Character.valueOf('X'), "ingotThyrium"}));
-			CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(Content.sinisiteBlock, true, new Object[]{
+			CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(Content.sinisite_block, true, new Object[]{
 				"XXX", "XXX", "XXX", Character.valueOf('X'), "ingotSinisite"}));
 		
 			//Special Furnace Recipes
-			CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(Content.fusionFurnace, true, new Object[]{
-				"XWX", "ZYZ", "XWX", Character.valueOf('X'), Block.brick, Character.valueOf('Y'), Block.furnaceIdle, Character.valueOf('W'), Item.coal, Character.valueOf('Z'), Item.ingotIron}));
+			CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(Content.fusion_furnace, true, new Object[]{
+				"XWX", "ZYZ", "XWX", Character.valueOf('X'), Blocks.brick_block, Character.valueOf('Y'), Blocks.furnace, Character.valueOf('W'), Items.coal, Character.valueOf('Z'), Items.iron_ingot}));
 			
 		//Item Recipes
 			//Ingot Recipes
-			GameRegistry.addShapelessRecipe(new ItemStack(Content.bronzeIngot, 9), new Object[] { 
-				Content.bronzeBlock });
-			GameRegistry.addShapelessRecipe(new ItemStack(Content.thyriumIngot, 9), new Object[] { 
-				Content.thyriumBlock });
-			GameRegistry.addShapelessRecipe(new ItemStack(Content.sinisiteIngot, 9), new Object[] { 
-				Content.sinisiteBlock });
+			GameRegistry.addShapelessRecipe(new ItemStack(Content.bronze_ingot, 9), new Object[] { 
+				Content.bronze_block });
+			GameRegistry.addShapelessRecipe(new ItemStack(Content.thyrium_ingot, 9), new Object[] { 
+				Content.thyrium_block });
+			GameRegistry.addShapelessRecipe(new ItemStack(Content.sinisite_ingot, 9), new Object[] { 
+				Content.sinisite_block });
 			
 			//Bronze Ingot
-			GameRegistry.addShapelessRecipe(new ItemStack(Content.largeBronzeChunk, 1), new Object[] { 
-				Content.smallBronzeChunk, Content.smallBronzeChunk, Content.smallBronzeChunk, Content.smallBronzeChunk, Content.smallBronzeChunk });
-			GameRegistry.addShapelessRecipe(new ItemStack(Content.largeBronzeChunk, 1), new Object[] { 
-				Content.mediumBronzeChunk, Content.mediumBronzeChunk, Content.mediumBronzeChunk });
+			GameRegistry.addShapelessRecipe(new ItemStack(Content.large_bronze_chunk, 1), new Object[] { 
+				Content.small_bronze_chunk, Content.small_bronze_chunk, Content.small_bronze_chunk, Content.small_bronze_chunk, Content.small_bronze_chunk });
+			GameRegistry.addShapelessRecipe(new ItemStack(Content.large_bronze_chunk, 1), new Object[] { 
+				Content.medium_bronze_chunk, Content.medium_bronze_chunk, Content.medium_bronze_chunk });
 			
 			//Thyrium Ingot
-			GameRegistry.addShapelessRecipe(new ItemStack(Content.largeThyriumChunk, 1), new Object[] { 
-				Content.smallThyriumChunk, Content.smallThyriumChunk, Content.smallThyriumChunk, Content.smallThyriumChunk, Content.smallThyriumChunk });
-			GameRegistry.addShapelessRecipe(new ItemStack(Content.largeThyriumChunk, 1), new Object[] { 
-				Content.mediumThyriumChunk, Content.mediumThyriumChunk, Content.mediumThyriumChunk });
+			GameRegistry.addShapelessRecipe(new ItemStack(Content.large_thyrium_chunk, 1), new Object[] { 
+				Content.small_thyrium_chunk, Content.small_thyrium_chunk, Content.small_thyrium_chunk, Content.small_thyrium_chunk, Content.small_thyrium_chunk });
+			GameRegistry.addShapelessRecipe(new ItemStack(Content.large_thyrium_chunk, 1), new Object[] { 
+				Content.medium_thyrium_chunk, Content.medium_thyrium_chunk, Content.medium_thyrium_chunk });
 			
 			//Sinisite Ingot
-			GameRegistry.addShapelessRecipe(new ItemStack(Content.largeSinisiteChunk, 1), new Object[] { 
-				Content.smallSinisiteChunk, Content.smallSinisiteChunk, Content.smallSinisiteChunk, Content.smallSinisiteChunk, Content.smallSinisiteChunk });
-			GameRegistry.addShapelessRecipe(new ItemStack(Content.largeSinisiteChunk, 1), new Object[] { 
-				Content.mediumSinisiteChunk, Content.mediumSinisiteChunk, Content.mediumSinisiteChunk });
+			GameRegistry.addShapelessRecipe(new ItemStack(Content.large_sinisite_chunk, 1), new Object[] { 
+				Content.small_sinisite_chunk, Content.small_sinisite_chunk, Content.small_sinisite_chunk, Content.small_sinisite_chunk, Content.small_sinisite_chunk });
+			GameRegistry.addShapelessRecipe(new ItemStack(Content.large_sinisite_chunk, 1), new Object[] { 
+				Content.medium_sinisite_chunk, Content.medium_sinisite_chunk, Content.medium_sinisite_chunk });
 			
 			//Extra Chunk Recipes
 			if(Settings.enableExtraChunkRecipes)
 			{
-				GameRegistry.addShapelessRecipe(new ItemStack(Content.largeBronzeChunk, 1), new Object[] { 
-					Content.smallBronzeChunk, Content.smallBronzeChunk, Content.mediumBronzeChunk, Content.mediumBronzeChunk });
-				GameRegistry.addShapelessRecipe(new ItemStack(Content.mediumBronzeChunk, 1), new Object[] { 
-					Content.smallBronzeChunk, Content.smallBronzeChunk, Content.smallBronzeChunk});
-				GameRegistry.addShapelessRecipe(new ItemStack(Content.mediumBronzeChunk, 2), new Object[] { 
-					Content.largeBronzeChunk});
-				GameRegistry.addShapelessRecipe(new ItemStack(Content.smallBronzeChunk, 2), new Object[] { 
-					Content.mediumBronzeChunk});
+				GameRegistry.addShapelessRecipe(new ItemStack(Content.large_bronze_chunk, 1), new Object[] { 
+					Content.small_bronze_chunk, Content.small_bronze_chunk, Content.medium_bronze_chunk, Content.medium_bronze_chunk });
+				GameRegistry.addShapelessRecipe(new ItemStack(Content.medium_bronze_chunk, 1), new Object[] { 
+					Content.small_bronze_chunk, Content.small_bronze_chunk, Content.small_bronze_chunk});
+				GameRegistry.addShapelessRecipe(new ItemStack(Content.medium_bronze_chunk, 2), new Object[] { 
+					Content.large_bronze_chunk});
+				GameRegistry.addShapelessRecipe(new ItemStack(Content.small_bronze_chunk, 2), new Object[] { 
+					Content.medium_bronze_chunk});
 				
-				GameRegistry.addShapelessRecipe(new ItemStack(Content.largeThyriumChunk, 1), new Object[] { 
-					Content.smallThyriumChunk, Content.smallThyriumChunk, Content.mediumThyriumChunk, Content.mediumThyriumChunk });
-				GameRegistry.addShapelessRecipe(new ItemStack(Content.mediumThyriumChunk, 1), new Object[] { 
-					Content.smallThyriumChunk, Content.smallThyriumChunk, Content.smallThyriumChunk});
-				GameRegistry.addShapelessRecipe(new ItemStack(Content.mediumThyriumChunk, 2), new Object[] { 
-					Content.largeThyriumChunk});
-				GameRegistry.addShapelessRecipe(new ItemStack(Content.smallThyriumChunk, 2), new Object[] { 
-					Content.mediumThyriumChunk});
+				GameRegistry.addShapelessRecipe(new ItemStack(Content.large_thyrium_chunk, 1), new Object[] { 
+					Content.small_thyrium_chunk, Content.small_thyrium_chunk, Content.medium_thyrium_chunk, Content.medium_thyrium_chunk });
+				GameRegistry.addShapelessRecipe(new ItemStack(Content.medium_thyrium_chunk, 1), new Object[] { 
+					Content.small_thyrium_chunk, Content.small_thyrium_chunk, Content.small_thyrium_chunk});
+				GameRegistry.addShapelessRecipe(new ItemStack(Content.medium_thyrium_chunk, 2), new Object[] { 
+					Content.large_thyrium_chunk});
+				GameRegistry.addShapelessRecipe(new ItemStack(Content.small_thyrium_chunk, 2), new Object[] { 
+					Content.medium_thyrium_chunk});
 				
-				GameRegistry.addShapelessRecipe(new ItemStack(Content.largeSinisiteChunk, 1), new Object[] { 
-					Content.smallSinisiteChunk, Content.smallSinisiteChunk, Content.mediumSinisiteChunk, Content.mediumSinisiteChunk });
-				GameRegistry.addShapelessRecipe(new ItemStack(Content.mediumSinisiteChunk, 1), new Object[] { 
-					Content.smallSinisiteChunk, Content.smallSinisiteChunk, Content.smallSinisiteChunk});
-				GameRegistry.addShapelessRecipe(new ItemStack(Content.mediumSinisiteChunk, 2), new Object[] { 
-					Content.largeSinisiteChunk});
-				GameRegistry.addShapelessRecipe(new ItemStack(Content.smallSinisiteChunk, 2), new Object[] { 
-					Content.mediumSinisiteChunk});
+				GameRegistry.addShapelessRecipe(new ItemStack(Content.large_sinisite_chunk, 1), new Object[] { 
+					Content.small_sinisite_chunk, Content.small_sinisite_chunk, Content.medium_sinisite_chunk, Content.medium_sinisite_chunk });
+				GameRegistry.addShapelessRecipe(new ItemStack(Content.medium_sinisite_chunk, 1), new Object[] { 
+					Content.small_sinisite_chunk, Content.small_sinisite_chunk, Content.small_sinisite_chunk});
+				GameRegistry.addShapelessRecipe(new ItemStack(Content.medium_sinisite_chunk, 2), new Object[] { 
+					Content.large_sinisite_chunk});
+				GameRegistry.addShapelessRecipe(new ItemStack(Content.small_sinisite_chunk, 2), new Object[] { 
+					Content.medium_sinisite_chunk});
 			}
 			
 			//Rods
-			CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(Content.thyriumRod, true, new Object[]{
+			CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(Content.thyrium_rod, true, new Object[]{
 				"X", "X", Character.valueOf('X'), "ingotThyrium"}));
-			CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(Content.sinisiteRod, true, new Object[]{
+			CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(Content.sinisite_rod, true, new Object[]{
 				"X", "X", Character.valueOf('X'), "ingotSinisite"}));
 			
 		//Tool Recipes
 			//Bronze Tool Recipes
-			CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(Content.bronzePick, true, new Object[]{
+			CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(Content.bronze_pickaxe, true, new Object[]{
 				"XXX", " Y ", " Y ", Character.valueOf('X'), "ingotBronze", Character.valueOf('Y'), "stickWood"}));
-			CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(Content.bronzeAxe, true, new Object[]{
+			CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(Content.bronze_axe, true, new Object[]{
 				"XX ", "XY ", " Y ", Character.valueOf('X'), "ingotBronze", Character.valueOf('Y'), "stickWood"}));
-			CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(Content.bronzeShovel, true, new Object[]{
+			CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(Content.bronze_shovel, true, new Object[]{
 				"X", "Y", "Y", Character.valueOf('X'), "ingotBronze", Character.valueOf('Y'), "stickWood"}));
-			CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(Content.bronzeSword, true, new Object[]{
+			CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(Content.bronze_sword, true, new Object[]{
 				"X", "X", "Y", Character.valueOf('X'), "ingotBronze", Character.valueOf('Y'), "stickWood"}));
-			CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(Content.bronzeHoe, true, new Object[]{
+			CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(Content.bronze_hoe, true, new Object[]{
 				"XX ", " Y ", " Y ", Character.valueOf('X'), "ingotBronze", Character.valueOf('Y'), "stickWood"}));
 			
 			//Thyrium Tool Recipes
-			CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(Content.thyriumPick, true, new Object[]{
+			CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(Content.thyrium_pickaxe, true, new Object[]{
 				"XXX", " Y ", " Y ", Character.valueOf('X'), "ingotThyrium", Character.valueOf('Y'), "stickWood"}));
-			CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(Content.thyriumAxe, true, new Object[]{
+			CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(Content.thyrium_axe, true, new Object[]{
 				"XX ", "XY ", " Y ", Character.valueOf('X'), "ingotThyrium", Character.valueOf('Y'), "stickWood"}));
-			CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(Content.thyriumShovel, true, new Object[]{
+			CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(Content.thyrium_shovel, true, new Object[]{
 				"X", "Y", "Y", Character.valueOf('X'), "ingotThyrium", Character.valueOf('Y'), "stickWood"}));
-			CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(Content.thyriumSword, true, new Object[]{
+			CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(Content.thyrium_sword, true, new Object[]{
 				"X", "X", "Y", Character.valueOf('X'), "ingotThyrium", Character.valueOf('Y'), "stickWood"}));
-			CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(Content.thyriumHoe, true, new Object[]{
+			CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(Content.thyrium_hoe, true, new Object[]{
 				"XX ", " Y ", " Y ", Character.valueOf('X'), "ingotThyrium", Character.valueOf('Y'), "stickWood"}));
 			
 			//Sinisite Tool Recipes
-			CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(Content.sinisitePick, true, new Object[]{
+			CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(Content.sinisite_pickaxe, true, new Object[]{
 				"XXX", " Y ", " Y ", Character.valueOf('X'), "ingotSinisite", Character.valueOf('Y'), "stickWood"}));
-			CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(Content.sinisiteAxe, true, new Object[]{
+			CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(Content.sinisite_axe, true, new Object[]{
 				"XX ", "XY ", " Y ", Character.valueOf('X'), "ingotSinisite", Character.valueOf('Y'), "stickWood"}));
-			CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(Content.sinisiteShovel, true, new Object[]{
+			CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(Content.sinisite_shovel, true, new Object[]{
 				"X", "Y", "Y", Character.valueOf('X'), "ingotSinisite", Character.valueOf('Y'), "stickWood"}));
-			CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(Content.sinisiteSword, true, new Object[]{
+			CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(Content.sinisite_sword, true, new Object[]{
 				"X", "X", "Y", Character.valueOf('X'), "ingotSinisite", Character.valueOf('Y'), "stickWood"}));
-			CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(Content.sinisiteHoe, true, new Object[]{
+			CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(Content.sinisite_hoe, true, new Object[]{
 				"XX ", " Y ", " Y ", Character.valueOf('X'), "ingotSinisite", Character.valueOf('Y'), "stickWood"}));
 			
 			//Bow Recipes
-			CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(Content.thyriumBow, true, new Object[]{
-				" XY", "Z Y", " XY", Character.valueOf('X'), Content.thyriumRod, Character.valueOf('Y'), Item.silk, Character.valueOf('Z'), Item.ingotGold}));
-			CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(Content.sinisiteBow, true, new Object[]{
-				" XY", "Z Y", " XY", Character.valueOf('X'), Content.sinisiteRod, Character.valueOf('Y'), Item.silk, Character.valueOf('Z'), "gemOnyx"}));
+			CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(Content.thyrium_bow, true, new Object[]{
+				" XY", "Z Y", " XY", Character.valueOf('X'), Content.thyrium_rod, Character.valueOf('Y'), Items.string, Character.valueOf('Z'), Items.gold_ingot}));
+			CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(Content.sinisite_bow, true, new Object[]{
+				" XY", "Z Y", " XY", Character.valueOf('X'), Content.sinisite_rod, Character.valueOf('Y'), Items.string, Character.valueOf('Z'), "gemOnyx"}));
 			
 		//Armour Recipes
 			//Bronze Armour Recipes
-			CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(Content.bronzeHelm, true, new Object[]{
+			CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(Content.bronze_helmet, true, new Object[]{
 				"XXX", "X X", Character.valueOf('X'), "ingotBronze"}));
-			CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(Content.bronzeChest, true, new Object[]{
+			CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(Content.bronze_chestplate, true, new Object[]{
 				"X X", "XXX", "XXX", Character.valueOf('X'), "ingotBronze"}));
-			CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(Content.bronzeLegs, true, new Object[]{
+			CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(Content.bronze_leggings, true, new Object[]{
 				"XXX", "X X", "X X", Character.valueOf('X'), "ingotBronze"}));
-			CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(Content.bronzeBoots, true, new Object[]{
+			CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(Content.bronze_boots, true, new Object[]{
 				"X X", "X X", Character.valueOf('X'), "ingotBronze"}));
 			
 			//Thyrium Armour Recipes
-			CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(Content.thyriumHelm, true, new Object[]{
+			CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(Content.thyrium_helmet, true, new Object[]{
 				"XXX", "X X", Character.valueOf('X'), "ingotThyrium"}));
-			CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(Content.thyriumChest, true, new Object[]{
+			CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(Content.thyrium_chestplate, true, new Object[]{
 				"X X", "XXX", "XXX", Character.valueOf('X'), "ingotThyrium"}));
-			CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(Content.thyriumLegs, true, new Object[]{
+			CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(Content.thyrium_leggings, true, new Object[]{
 				"XXX", "X X", "X X", Character.valueOf('X'), "ingotThyrium"}));
-			CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(Content.thyriumBoots, true, new Object[]{
+			CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(Content.thyrium_boots, true, new Object[]{
 				"X X", "X X", Character.valueOf('X'), "ingotThyrium"}));
 			
 			//Sinisite Armour Recipes
-			CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(Content.sinisiteHelm, true, new Object[]{
+			CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(Content.sinisite_helmet, true, new Object[]{
 				"XXX", "X X", Character.valueOf('X'), "ingotSinisite"}));
-			CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(Content.sinisiteChest, true, new Object[]{
+			CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(Content.sinisite_chestplate, true, new Object[]{
 				"X X", "XXX", "XXX", Character.valueOf('X'), "ingotSinisite"}));
-			CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(Content.sinisiteLegs, true, new Object[]{
+			CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(Content.sinisite_leggings, true, new Object[]{
 				"XXX", "X X", "X X", Character.valueOf('X'), "ingotSinisite"}));
-			CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(Content.sinisiteBoots, true, new Object[]{
+			CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(Content.sinisite_boots, true, new Object[]{
 				"X X", "X X", Character.valueOf('X'), "ingotSinisite"}));
 			
 		//Smelting Recipes
 			//Fusion Furnace
 				//Bronze
-		    	FusionRecipes.smelting().addSmelting(new ItemStack(CoreHelper.coreContent.copperIngot), new ItemStack(CoreHelper.coreContent.tinIngot), new ItemStack(Item.dyePowder, 1, 15), new ItemStack(Content.smallBronzeChunk), 2.0F);
-		    	FusionRecipes.smelting().addSmelting(new ItemStack(CoreHelper.coreContent.copperIngot), new ItemStack(CoreHelper.coreContent.tinIngot), new ItemStack(Item.gunpowder), new ItemStack(Content.mediumBronzeChunk), 3.0F);
-		    	FusionRecipes.smelting().addSmelting(new ItemStack(CoreHelper.coreContent.copperIngot), new ItemStack(CoreHelper.coreContent.tinIngot), new ItemStack(Item.redstone), new ItemStack(Content.largeBronzeChunk), 10.0F);
+		    	FusionRecipes.addSmelting(new ItemStack(CoreHelper.coreContent.copper_ingot), new ItemStack(CoreHelper.coreContent.tin_ingot), new ItemStack(Items.dye, 1, 15), new ItemStack(Content.small_bronze_chunk), 2.0F);
+		    	FusionRecipes.addSmelting(new ItemStack(CoreHelper.coreContent.copper_ingot), new ItemStack(CoreHelper.coreContent.tin_ingot), new ItemStack(Items.gunpowder), new ItemStack(Content.medium_bronze_chunk), 3.0F);
+		    	FusionRecipes.addSmelting(new ItemStack(CoreHelper.coreContent.copper_ingot), new ItemStack(CoreHelper.coreContent.tin_ingot), new ItemStack(Items.redstone), new ItemStack(Content.large_bronze_chunk), 10.0F);
 		    	
-		    	//Thyrium
-		    	FusionRecipes.smelting().addSmelting(new ItemStack(CoreHelper.coreContent.mythrilIngot), new ItemStack(CoreHelper.coreContent.adamantiumIngot), new ItemStack(Item.redstone), new ItemStack(Content.smallThyriumChunk), 6.0F);
-		    	FusionRecipes.smelting().addSmelting(new ItemStack(CoreHelper.coreContent.mythrilIngot), new ItemStack(CoreHelper.coreContent.adamantiumIngot), new ItemStack(Item.dyePowder, 1, 4), new ItemStack(Content.mediumThyriumChunk), 10.0F);
-		    	FusionRecipes.smelting().addSmelting(new ItemStack(CoreHelper.coreContent.mythrilIngot), new ItemStack(CoreHelper.coreContent.adamantiumIngot), new ItemStack(Item.glowstone), new ItemStack(Content.largeThyriumChunk), 30.0F);
+		    	//_thyrium
+		    	FusionRecipes.addSmelting(new ItemStack(CoreHelper.coreContent.mythril_ingot), new ItemStack(CoreHelper.coreContent.adamantium_ingot), new ItemStack(Items.redstone), new ItemStack(Content.small_thyrium_chunk), 6.0F);
+		    	FusionRecipes.addSmelting(new ItemStack(CoreHelper.coreContent.mythril_ingot), new ItemStack(CoreHelper.coreContent.adamantium_ingot), new ItemStack(Items.dye, 1, 4), new ItemStack(Content.medium_thyrium_chunk), 10.0F);
+		    	FusionRecipes.addSmelting(new ItemStack(CoreHelper.coreContent.mythril_ingot), new ItemStack(CoreHelper.coreContent.adamantium_ingot), new ItemStack(Items.glowstone_dust), new ItemStack(Content.large_thyrium_chunk), 30.0F);
 		    	
-		    	//Sinisite				    	
-		    	FusionRecipes.smelting().addSmelting(new ItemStack(CoreHelper.coreContent.onyxGem), new ItemStack(CoreHelper.coreContent.mythrilIngot), new ItemStack(Item.glowstone), new ItemStack(Content.smallSinisiteChunk), 12.0F);
-		    	FusionRecipes.smelting().addSmelting(new ItemStack(CoreHelper.coreContent.onyxGem), new ItemStack(CoreHelper.coreContent.mythrilIngot), new ItemStack(Item.blazePowder), new ItemStack(Content.mediumSinisiteChunk), 20.0F);
-		    	FusionRecipes.smelting().addSmelting(new ItemStack(CoreHelper.coreContent.onyxGem), new ItemStack(CoreHelper.coreContent.mythrilIngot), new ItemStack(Item.ghastTear), new ItemStack(Content.largeSinisiteChunk), 60.0F);
+		    	//_sinisite				    	
+		    	FusionRecipes.addSmelting(new ItemStack(CoreHelper.coreContent.onyx_gem), new ItemStack(CoreHelper.coreContent.mythril_ingot), new ItemStack(Items.glowstone_dust), new ItemStack(Content.small_sinisite_chunk), 12.0F);
+		    	FusionRecipes.addSmelting(new ItemStack(CoreHelper.coreContent.onyx_gem), new ItemStack(CoreHelper.coreContent.mythril_ingot), new ItemStack(Items.blaze_powder), new ItemStack(Content.medium_sinisite_chunk), 20.0F);
+		    	FusionRecipes.addSmelting(new ItemStack(CoreHelper.coreContent.onyx_gem), new ItemStack(CoreHelper.coreContent.mythril_ingot), new ItemStack(Items.ghast_tear), new ItemStack(Content.large_sinisite_chunk), 60.0F);
 		    	
 		    //Regular Furnace
-				GameRegistry.addSmelting(Content.largeBronzeChunk.itemID, new ItemStack(Content.bronzeIngot, 1, 0), 0.3F);
-				GameRegistry.addSmelting(Content.largeThyriumChunk.itemID, new ItemStack(Content.thyriumIngot, 1, 0), 0.6F);
-				GameRegistry.addSmelting(Content.largeSinisiteChunk.itemID, new ItemStack(Content.sinisiteIngot, 1, 0), 1.0F);
+				GameRegistry.addSmelting(Content.large_bronze_chunk, new ItemStack(Content.bronze_ingot, 1, 0), 0.3F);
+				GameRegistry.addSmelting(Content.large_thyrium_chunk, new ItemStack(Content.thyrium_ingot, 1, 0), 0.6F);
+				GameRegistry.addSmelting(Content.large_sinisite_chunk, new ItemStack(Content.sinisite_ingot, 1, 0), 1.0F);
 	}
 	
 	public static void addCustomFusionRecipes()
-	{
-		int[] id1 = Settings.input1Id;
-		String[] meta1 = Settings.input1Meta;
-		int[] size1 = Settings.input1Size;
-		int[] id2 = Settings.input2Id;
-		String[] meta2 = Settings.input2Meta;
-		int[] size2 = Settings.input2Size;
-		int[] id3 = Settings.catalystId;
-		String[] meta3 = Settings.catalystMeta;
-		int[] size3 = Settings.catalystSize;
-		int[] id4 = Settings.outputId;
-		String[] meta4 = Settings.outputMeta;
-		int[] size4 = Settings.outputSize;
-		double[] exp = Settings.expAmount;
+	{	
+		int recipeNum = Settings.recipeNum;
 		
-		if(Settings.enableCustomFusionRecipes)
+		if(recipeNum > 0)
 		{
-			if(id1.length > 0 && id2.length > 0 && id3.length > 0 && id4.length > 0)
+			for(int i = 0; i < recipeNum; i++)
 			{
-				if(id1.length == id2.length && id1.length == id3.length && id1.length == id4.length)
+				String recipe = Settings.settings.get("Custom Fusion Recipes", "Custom Recipe #" + (i+1), new String()).getString();
+				
+				if(recipe != null)
 				{
-					for(int i = 0; i < id1.length; i++)
-					{
-						float experience = (float) exp[i];
-						int dam1, dam2, dam3, dam4;
-						
-						if(meta1[i].contains("WILDCARD_VALUE"))
-							dam1 = WILDCARD_VALUE;
-						else
-							dam1 = Integer.parseInt(meta1[i]);
-						
-						if(meta2[i].contains("WILDCARD_VALUE"))
-							dam2 = WILDCARD_VALUE;
-						else
-							dam2 = Integer.parseInt(meta2[i]);
-						
-						if(meta3[i].contains("WILDCARD_VALUE"))
-							dam3 = WILDCARD_VALUE;
-						else
-							dam3 = Integer.parseInt(meta3[i]);
-						
-						if(meta4[i].contains("WILDCARD_VALUE"))
-							dam4 = WILDCARD_VALUE;
-						else
-							dam4 = Integer.parseInt(meta4[i]);
-						
-						try
-						{
-							FusionRecipes.smelting().addSmelting(new ItemStack(id1[i], size1[i], dam1), new ItemStack(id2[i], size2[i], dam2), new ItemStack(id3[i], size3[i], dam3), new ItemStack(id4[i], size4[i], dam4), experience);						
-						}
-						catch(Exception e)
-						{
-							System.out.println("[SimpleOres 2] Couldn't add a custom Fusion Furnace recipe for some reason. Try checking your values at index #" + i + " and then try again.");
-						}
-					}
+					List recipeParts = Lists.newArrayList(Splitter.on(',').trimResults().split(recipe));
+
+					Item input1 = (Item) Item.itemRegistry.getObject(Lists.newArrayList(Splitter.on('@').split(recipeParts.get(0).toString())).get(0).toString());
+					String meta1String = Lists.newArrayList(Splitter.on('#').split(Lists.newArrayList(Splitter.on('@').split(recipeParts.get(0).toString())).get(1).toString())).get(0).toString();
+					int meta1 = meta1String.equals("ALL") ? WILDCARD_VALUE : Integer.parseInt(meta1String);
+					int size1 = Integer.parseInt(Lists.newArrayList(Splitter.on('#').split(Lists.newArrayList(Splitter.on('@').split(recipeParts.get(0).toString())).get(1).toString())).get(1).toString());
+					
+					Item input2 = (Item) Item.itemRegistry.getObject(Lists.newArrayList(Splitter.on('@').split(recipeParts.get(1).toString())).get(0).toString());
+					String meta2String = Lists.newArrayList(Splitter.on('#').split(Lists.newArrayList(Splitter.on('@').split(recipeParts.get(1).toString())).get(1).toString())).get(0).toString();
+					int meta2 = meta2String.equals("ALL") ? WILDCARD_VALUE : Integer.parseInt(meta2String);
+					int size2 = Integer.parseInt(Lists.newArrayList(Splitter.on('#').split(Lists.newArrayList(Splitter.on('@').split(recipeParts.get(1).toString())).get(1).toString())).get(1).toString());
+					
+					Item catalyst = (Item) Item.itemRegistry.getObject(Lists.newArrayList(Splitter.on('@').split(recipeParts.get(2).toString())).get(0).toString());
+					String catalystMetaString = Lists.newArrayList(Splitter.on('#').split(Lists.newArrayList(Splitter.on('@').split(recipeParts.get(2).toString())).get(1).toString())).get(0).toString();
+					int catalystMeta = catalystMetaString.equals("ALL") ? WILDCARD_VALUE : Integer.parseInt(catalystMetaString);
+					int catalystSize = Integer.parseInt(Lists.newArrayList(Splitter.on('#').split(Lists.newArrayList(Splitter.on('@').split(recipeParts.get(2).toString())).get(1).toString())).get(1).toString());
+					
+					Item output = (Item) Item.itemRegistry.getObject(Lists.newArrayList(Splitter.on('@').split(recipeParts.get(3).toString())).get(0).toString());
+					String outputMetaString = Lists.newArrayList(Splitter.on('#').split(Lists.newArrayList(Splitter.on('@').split(recipeParts.get(3).toString())).get(1).toString())).get(0).toString();
+					int outputMeta = outputMetaString.equals("ALL") ? WILDCARD_VALUE : Integer.parseInt(outputMetaString);
+					int outputSize = Integer.parseInt(Lists.newArrayList(Splitter.on('#').split(Lists.newArrayList(Splitter.on('@').split(recipeParts.get(3).toString())).get(1).toString())).get(1).toString());
+					
+					Float experience = (float) Double.parseDouble(recipeParts.get(4).toString());
+					
+					FusionRecipes.addSmelting(new ItemStack(input1, size1, meta1), new ItemStack(input2, size2, meta2), new ItemStack(catalyst, catalystSize, catalystMeta), new ItemStack(output, outputSize, outputMeta), experience);
 				}
 			}
 		}

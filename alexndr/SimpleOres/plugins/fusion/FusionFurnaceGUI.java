@@ -14,7 +14,7 @@ public class FusionFurnaceGUI extends GuiContainer
 {
     private FusionFurnaceTileEntity furnaceInventory;
 
-    private static final ResourceLocation field_110410_t = new ResourceLocation("simpleoresfusion:" + "textures/gui/fusionFurnace.png");
+    private static final ResourceLocation field_110410_t = new ResourceLocation("simpleoresfusion:" + "textures/gui/fusion_furnace_gui.png");
     
     public FusionFurnaceGUI(InventoryPlayer par1InventoryPlayer, FusionFurnaceTileEntity par2TileEntityFurnace)
     {
@@ -27,7 +27,7 @@ public class FusionFurnaceGUI extends GuiContainer
      */
     protected void drawGuiContainerForegroundLayer(int par1, int par2)
     {
-    	this.fontRenderer.drawString("   Fusion             Furnace", this.xSize / 2 - this.fontRenderer.getStringWidth("   Fusion             Furnace") / 2, 6, 4210752);
+    	this.fontRendererObj.drawString("   Fusion             Furnace", this.xSize / 2 - this.fontRendererObj.getStringWidth("   Fusion             Furnace") / 2, 6, 4210752);
     }
 
     /**

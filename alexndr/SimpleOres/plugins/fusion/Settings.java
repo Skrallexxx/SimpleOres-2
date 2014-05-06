@@ -2,12 +2,13 @@ package alexndr.SimpleOres.plugins.fusion;
 
 import java.io.File;
 
-import net.minecraftforge.common.Configuration;
+import net.minecraftforge.common.config.Configuration;
 import alexndr.SimpleOres.api.helpers.LogHelper;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 
 public class Settings 
 {
+	public static Configuration settings;
 	/**
 	 * The method that loads/creates the settings file. Values can be changed from true to false depending on user preference, and certain other values can be set. This is called by the main SimpleOresFusion class.
 	 */
@@ -19,7 +20,7 @@ public class Settings
 		File installDir = event.getModConfigurationDirectory();
 		File configDir = new File(installDir, "SimpleOres/Plugins");
 		File settingsFile = new File(configDir, "Fusion Settings.cfg");
-		Configuration settings = new Configuration(settingsFile);
+		settings = new Configuration(settingsFile);
 		LogHelper.verboseInfo("Fusion Plugin: Loading settings file at: '" + settingsFile.getAbsolutePath() + "'...");
 		
 		try 
@@ -96,20 +97,23 @@ public class Settings
         	//Custom Fusion Furnace Recipes
 	    	if(enableCustomFusionRecipes)
 	    	{
-	    		settings.addCustomCategoryComment("Custom Fusion Recipes", "Instructions: 1. Every list must have the same number of values in it. 2. Metadata supports the string 'WILDCARD_VALUE' to denote ANY metadata value. 3. ID's are ints only, so no colon (ie. 101:10). Metadata goes in the metadata list.");
-	    		input1Id = settings.get("Custom Fusion Recipes", "Input 1 ID List", new int[] {}).getIntList();
-	    		input1Meta = settings.get("Custom Fusion Recipes", "Input 1 Metadata List", new String[] {}).getStringList();
-	    		input1Size = settings.get("Custom Fusion Recipes", "Input 1 Stack Size List", new int[] {}).getIntList();
-	    		input2Id = settings.get("Custom Fusion Recipes", "Input 2 ID List", new int[] {}).getIntList();
-	    		input2Meta = settings.get("Custom Fusion Recipes", "Input 2 Metadata List", new String[] {}).getStringList();
-	    		input2Size = settings.get("Custom Fusion Recipes", "Input 2 Stack Size List", new int[] {}).getIntList();
-	    		catalystId = settings.get("Custom Fusion Recipes", "Catalyst ID List", new int[] {}).getIntList();
-	    		catalystMeta = settings.get("Custom Fusion Recipes", "Catalyst Metadata List", new String[] {}).getStringList();
-	    		catalystSize = settings.get("Custom Fusion Recipes", "Catalyst Stack Size List", new int[] {}).getIntList();
-	    		outputId = settings.get("Custom Fusion Recipes", "Output ID List", new int[] {}).getIntList();
-	    		outputMeta = settings.get("Custom Fusion Recipes", "Output Metadata List", new String[] {}).getStringList();
-	    		outputSize = settings.get("Custom Fusion Recipes", "Output Stack Size List", new int[] {}).getIntList();
-	    		expAmount = settings.get("Custom Fusion Recipes", "Experience Amount List", new double[] {}).getDoubleList();
+	    		String example = "simpleores:copper_ore@0#2, minecraft:dye@15#1, minecraft:dye@ALL#3, simpleores:adamantium_helmet@0#2, 5.80";
+	    		
+	    		settings.addCustomCategoryComment("Custom Fusion Recipes", "Instructions: Change 'Number of Custom Recipes' to how many recipes you want. "
+	    				+ "Restart game. Fill each 'Recipe #X' with your custom recipe. Format: input1, input2, catalyst, output, experience. "
+	    				+ "Each item is in format: modid:item@metadata. Experience is a double, so 1.00, 10.76, etc. are all accepted. "
+	    				+ "For metadata, type ALL if you want any subtype of that item to be usable (AKA Wildcard Value). See the example." );
+	    		
+	    		recipeNum = settings.get("Custom Fusion Recipes", "Number of Custom Recipes", 0).getInt();
+	    		exampleRecipe = settings.get("Custom Fusion Recipes", "Example Recipe (isn't actually loaded)", example).getString();
+	    		
+	    		if(recipeNum > 0)
+	    		{
+	    			for(int i = 0; i < recipeNum; i++)
+	    			{
+	    				settings.get("Custom Fusion Recipes", "Custom Recipe #" + (i+1), new String()).getString();
+	    			}
+	    		}
 	    	}
 	    	
 	    	LogHelper.verboseInfo("Fusion Plugin: Settings file loaded successfully.");
@@ -196,8 +200,6 @@ public class Settings
 	public static float fusionFurnaceHardness, fusionFurnaceResistance, fusionFurnaceLightValue;
 	
 	//Custom Fusion Recipes
-	public static int[] input1Id, input2Id, catalystId, outputId;
-	public static String[] input1Meta, input2Meta, catalystMeta, outputMeta;
-	public static int[] input1Size, input2Size, catalystSize, outputSize;
-	public static double[] expAmount;
+	public static int recipeNum;
+	public static String exampleRecipe;
 }

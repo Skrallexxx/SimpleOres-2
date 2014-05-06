@@ -5,11 +5,11 @@ import java.util.List;
 import java.util.Random;
 
 import net.minecraft.block.Block;
-import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.EnumToolMaterial;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemPickaxe;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
@@ -17,7 +17,6 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
-import net.minecraftforge.common.MinecraftForge;
 import alexndr.SimpleOres.api.helpers.TabHelper;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
@@ -25,14 +24,14 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class NetherPickaxe extends ItemPickaxe
 {
-	private final EnumToolMaterial toolMaterial;
-	private int toolLevel = 0;
+	private final ToolMaterial toolMaterial;
 	
-	public NetherPickaxe(int par1, EnumToolMaterial par2EnumToolMaterial) 
+	public NetherPickaxe(ToolMaterial par2EnumToolMaterial) 
 	{
-		super(par1, par2EnumToolMaterial);
+		super(par2EnumToolMaterial);
 		this.toolMaterial = par2EnumToolMaterial;
 		this.setCreativeTab(TabHelper.getToolsTab());
+		this.setHarvestLevel("pickaxe", toolMaterial.getHarvestLevel());
 	}
 	
 	/**
@@ -43,11 +42,11 @@ public class NetherPickaxe extends ItemPickaxe
 	public boolean onBlockStartBreak(ItemStack itemstack, int i, int j, int k, EntityPlayer player)
 	{
 		Random random = new Random();
-		if(itemID == Content.fyritePick.itemID && !player.capabilities.isCreativeMode)
+		if(this == Content.fyrite_pickaxe && !player.capabilities.isCreativeMode)
 		{
 			Boolean flag = false;
 			World world = player.worldObj;
-			int blockID = world.getBlockId(i, j, k);
+			Block block = world.getBlock(i, j, k);
 			int meta = world.getBlockMetadata(i, j, k);
 
 			NBTTagList ench = itemstack.getEnchantmentTagList();
@@ -56,7 +55,7 @@ public class NetherPickaxe extends ItemPickaxe
 			{
 				for (int x = 0; x < ench.tagCount(); x++)
 				{
-					NBTTagCompound nbt = (NBTTagCompound) ench.tagAt(x);
+					NBTTagCompound nbt = (NBTTagCompound) ench.getCompoundTagAt(x);
 					short id = nbt.getShort("id");
 					if (id == Enchantment.fortune.effectId)
 					{
@@ -64,12 +63,13 @@ public class NetherPickaxe extends ItemPickaxe
 					}
 				}
 			}
-			ArrayList<ItemStack> items = Block.blocksList[blockID].getBlockDropped(world, i, j, k, meta, level);
+			
+			ArrayList<ItemStack> items = block.getDrops(world, i, j, k, meta, level);
 			if(items == null || items.size() == 0)
 			{
 				return false;
 			}
-			if(Block.blocksList[blockID] != null && getStrVsBlock(itemstack, Block.blocksList[blockID], meta) > 1.0F)
+			if(block != null && this.getDigSpeed(itemstack, block, meta) > 1.0F)
 			{
 				for (ItemStack item : items)
 				{
@@ -85,15 +85,15 @@ public class NetherPickaxe extends ItemPickaxe
 		                var3 = 0;
 		            }
 		            
-		            int quantity = Block.blocksList[blockID].quantityDropped(random) * (var3 + 1);
+		            int quantity = block.quantityDropped(random) * (var3 + 1);
 					
-					ItemStack drop = new ItemStack(FurnaceRecipes.smelting().getSmeltingResult(item).copy().itemID, quantity, FurnaceRecipes.smelting().getSmeltingResult(item).copy().getItemDamage());
+					ItemStack drop = new ItemStack(FurnaceRecipes.smelting().getSmeltingResult(item).copy().getItem(), quantity, FurnaceRecipes.smelting().getSmeltingResult(item).copy().getItemDamage());
 					world.playSoundEffect(i + 0.5F, j + 0.5F, k + 0.5F,
-							Block.blocksList[blockID].stepSound.getBreakSound(),
-							(Block.blocksList[blockID].stepSound.getVolume() + 1.0F) / 2.0F,
-							Block.blocksList[blockID].stepSound.getPitch() * 0.8F);
+							block.stepSound.getBreakSound(),
+							(block.stepSound.getVolume() + 1.0F) / 2.0F,
+							block.stepSound.getPitch() * 0.8F);
 
-					world.setBlock(i, j, k, 0);
+					world.setBlock(i, j, k, Blocks.air);
 					if(!world.isRemote)
 					{		
 						EntityItem entityitem = new EntityItem(world, i + 0.5, j + 0.5, k + 0.5, drop);
@@ -115,24 +115,14 @@ public class NetherPickaxe extends ItemPickaxe
      */
     @Override
     @SideOnly(Side.CLIENT)
-    public void registerIcons(IconRegister iconRegister) 
+    public void registerIcons(IIconRegister iconRegister) 
     {
     	 this.itemIcon = iconRegister.registerIcon("netherrocks:" + (this.getUnlocalizedName().substring(5)));
     }
     
-    public boolean getIsRepairable(ItemStack par1ItemStack, ItemStack par2ItemStack)
-    {
-        return this.toolMaterial.getToolCraftingMaterial() == par2ItemStack.itemID ? true : super.getIsRepairable(par1ItemStack, par2ItemStack);
-    }
-    
-	/**
-	 * Sets the harvest level of the tool. Defaults to 0 (wood).
-	 */
-	public NetherPickaxe setToolLevel(int level)
+	public boolean getIsRepairable(ItemStack par1ItemStack, ItemStack par2ItemStack)
 	{
-		this.toolLevel = level;
-		MinecraftForge.setToolClass(this, "pickaxe", this.toolLevel);
-		return this;
+		return this.toolMaterial.customCraftingMaterial == par2ItemStack.getItem() ? true : super.getIsRepairable(par1ItemStack, par2ItemStack);
 	}
 	
 	/**
@@ -148,9 +138,9 @@ public class NetherPickaxe extends ItemPickaxe
 	@Override
 	public void addInformation(ItemStack stack, EntityPlayer par2EntityPlayer, List par3List, boolean par4)
 	{
-		if(this.itemID == Content.fyritePick.itemID)
+		if(this == Content.fyrite_pickaxe)
 		{
-			par3List.add(StatCollector.translateToLocal("netherrocks.fyritePick.info"));
+			par3List.add(StatCollector.translateToLocal("netherrocks.fyrite_pickaxe.info"));
 		}
 	}
 }

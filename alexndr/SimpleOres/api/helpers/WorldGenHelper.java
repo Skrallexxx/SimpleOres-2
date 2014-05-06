@@ -3,6 +3,7 @@ package alexndr.SimpleOres.api.helpers;
 import java.util.Random;
 
 import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
@@ -10,7 +11,7 @@ import net.minecraft.world.gen.feature.WorldGenerator;
 public class WorldGenHelper extends WorldGenerator
 {
 	/** The block ID of the ore to be placed using this generator. */
-    private int minableBlockId;
+    private Block minableBlock;
     private int minableBlockMeta = 0;
 
     /** The number of blocks to generate. */
@@ -18,18 +19,18 @@ public class WorldGenHelper extends WorldGenerator
     
     /** Block that the new block will spawn inside of. For most ores, this is Stone for example. 
      * Defaults to stone, can be overridden by the constructor call.*/
-    private Block replacedBlock = Block.stone;
+    private Block replacedBlock = Blocks.stone;
 
-    public WorldGenHelper(int id, int number, Block blockToReplace)
+    public WorldGenHelper(Block blockToMine, int number, Block blockToReplace)
     {
-        this.minableBlockId = id;
+        this.minableBlock = blockToMine;
         this.numberOfBlocks = number;
         this.replacedBlock = blockToReplace;
     }
 
-    public WorldGenHelper(int id, int meta, int number, Block blockToReplace)
+    public WorldGenHelper(Block blockToMine, int meta, int number, Block blockToReplace)
     {
-        this(id, number, blockToReplace);
+        this(blockToMine, number, blockToReplace);
         this.minableBlockMeta = meta;
         this.replacedBlock = blockToReplace;
     }
@@ -75,10 +76,9 @@ public class WorldGenHelper extends WorldGenerator
                             {
                                 double var45 = ((double)var44 + 0.5D - var24) / (var28 / 2.0D);
 
-                                Block block = Block.blocksList[par1World.getBlockId(var38, var41, var44)];
-                                if (var39 * var39 + var42 * var42 + var45 * var45 < 1.0D && par1World.getBlockId(var38, var41, var44) == replacedBlock.blockID)
+                                if (var39 * var39 + var42 * var42 + var45 * var45 < 1.0D && par1World.getBlock(var38, var41, var44) == replacedBlock)
                                 {
-                                    par1World.setBlock(var38, var41, var44, this.minableBlockId, minableBlockMeta, 2);
+                                    par1World.setBlock(var38, var41, var44, this.minableBlock, minableBlockMeta, 2);
                                 }
                             }
                         }

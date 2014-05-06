@@ -2,11 +2,12 @@ package alexndr.SimpleOres.core;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stats.Achievement;
 import net.minecraft.stats.AchievementList;
-import net.minecraftforge.common.MinecraftForge;
 import alexndr.SimpleOres.api.content.SimpleArmor;
 import alexndr.SimpleOres.api.content.SimpleAxe;
 import alexndr.SimpleOres.api.content.SimpleHoe;
@@ -45,176 +46,177 @@ public class Content
 	public static void doBlocks()
 	{
 		//Block Properties
-		copperOre = new SimpleOre(Config.copperOreID, Material.rock).setHardness(Settings.copperOreHardness).setResistance(Settings.copperOreResistance).setUnlocalizedName("copperOre");
-		copperBlock = new SimpleOre(Config.copperBlockID, Material.iron).setHardness(Settings.copperBlockHardness).setResistance(Settings.copperBlockResistance).setUnlocalizedName("copperBlock"); 
-		tinOre = new SimpleOre(Config.tinOreID, Material.rock).setHardness(Settings.tinOreHardness).setResistance(Settings.tinOreResistance).setUnlocalizedName("tinOre");
-		tinBlock = new SimpleOre(Config.tinBlockID, Material.iron).setHardness(Settings.tinBlockHardness).setResistance(Settings.tinBlockResistance).setUnlocalizedName("tinBlock"); 
-		mythrilOre = new SimpleOre(Config.mythrilOreID, Material.rock).setHardness(Settings.mythrilOreHardness).setResistance(Settings.mythrilOreResistance).setUnlocalizedName("mythrilOre");
-		mythrilBlock = new SimpleOre(Config.mythrilBlockID, Material.iron).setHardness(Settings.mythrilBlockHardness).setResistance(Settings.mythrilBlockResistance).setUnlocalizedName("mythrilBlock");
-		adamantiumOre = new SimpleOre(Config.adamantiumOreID, Material.rock).setHardness(Settings.adamantiumOreHardness).setResistance(Settings.adamantiumOreResistance).setUnlocalizedName("adamantiumOre");
-		adamantiumBlock = new SimpleOre(Config.adamantiumBlockID, Material.iron).setHardness(Settings.adamantiumBlockHardness).setResistance(Settings.adamantiumBlockResistance).setUnlocalizedName("adamantiumBlock");
-		onyxOre = new SimpleOre(Config.onyxOreID, Material.rock).setStackToDrop(new ItemStack(onyxGem)).setHardness(Settings.onyxOreHardness).setResistance(Settings.onyxOreResistance).setUnlocalizedName("onyxOre");
-		onyxBlock = new SimpleOre(Config.onyxBlockID, Material.iron).setHardness(Settings.onyxBlockHardness).setResistance(Settings.onyxBlockResistance).setUnlocalizedName("onyxBlock");
-		mythrilFurnace = new MythrilFurnace(Config.mythrilFurnaceID, false).setHardness(Settings.mythrilFurnaceHardness).setResistance(Settings.mythrilFurnaceResistance).setUnlocalizedName("mythrilFurnace");
-		mythrilFurnaceOn = new MythrilFurnace(Config.mythrilFurnaceOnID, true).setHardness(Settings.mythrilFurnaceHardness).setLightValue(Settings.mythrilFurnaceLightValue).setResistance(Settings.mythrilFurnaceResistance).setUnlocalizedName("mythrilFurnaceOn");
-		onyxFurnace = new OnyxFurnace(Config.onyxFurnaceID, false).setHardness(Settings.onyxFurnaceHardness).setResistance(Settings.onyxFurnaceResistance).setUnlocalizedName("onyxFurnace");
-		onyxFurnaceOn = new OnyxFurnace(Config.onyxFurnaceOnID, true).setHardness(Settings.onyxFurnaceHardness).setResistance(Settings.onyxFurnaceResistance).setLightValue(Settings.onyxFurnaceLightValue).setUnlocalizedName("onyxFurnaceOn");
-		copperDoor = new SimpleDoor(Config.copperDoorID, "copper").setHardness(Settings.copperDoorHardness).setResistance(Settings.copperDoorResistance).setStepSound(Block.soundMetalFootstep).setUnlocalizedName("copperDoor");
-		onyxDoor = new SimpleDoor(Config.onyxDoorID, "onyx").setHardness(Settings.onyxDoorHardness).setResistance(Settings.onyxDoorResistance).setStepSound(Block.soundMetalFootstep).setUnlocalizedName("onyxDoor");
-		copperBars = new SimpleBars(Config.copperBarsID, "simpleores:" + "copperBars", "simpleores:" + "copperBars", Material.iron, true).setHardness(Settings.copperBarsHardness).setResistance(Settings.copperBarsResistance).setStepSound(Block.soundMetalFootstep).setUnlocalizedName("copperBars");
-		tinBars = new SimpleBars(Config.tinBarsID, "simpleores:" + "tinBars", "simpleores:" + "tinBars", Material.iron, true).setHardness(Settings.tinBarsHardness).setResistance(Settings.tinBarsResistance).setStepSound(Block.soundMetalFootstep).setUnlocalizedName("tinBars");
-		mythrilBars = new SimpleBars(Config.mythrilBarsID, "simpleores:" + "mythrilBars", "simpleores:" + "mythrilBars", Material.iron, true).setHardness(Settings.mythrilBarsHardness).setResistance(Settings.mythrilBarsResistance).setStepSound(Block.soundMetalFootstep).setUnlocalizedName("mythrilBars");
-		adamantiumBars = new SimpleBars(Config.adamantiumBarsID, "simpleores:" + "adamantiumBars", "simpleores:" + "adamantiumBars", Material.iron, true).setHardness(Settings.adamantiumBarsHardness).setResistance(Settings.adamantiumBarsResistance).setStepSound(Block.soundMetalFootstep).setUnlocalizedName("adamantiumBars");
-	    onyxBars = new SimpleBars(Config.onyxBarsID, "simpleores:" + "onyxBars", "simpleores:" + "onyxBars", Material.iron, true).setHardness(Settings.onyxBarsHardness).setResistance(Settings.onyxBarsResistance).setStepSound(Block.soundMetalFootstep).setUnlocalizedName("onyxBars");
+		copper_ore = new SimpleOre(Material.rock).setHardness(Settings.copperOreHardness).setResistance(Settings.copperOreResistance).setBlockName("copper_ore");
+		copper_block = new SimpleOre(Material.iron).setHardness(Settings.copperBlockHardness).setResistance(Settings.copperBlockResistance).setBlockName("copper_block"); 
+		tin_ore = new SimpleOre(Material.rock).setHardness(Settings.tinOreHardness).setResistance(Settings.tinOreResistance).setBlockName("tin_ore");
+		tin_block = new SimpleOre(Material.iron).setHardness(Settings.tinBlockHardness).setResistance(Settings.tinBlockResistance).setBlockName("tin_block"); 
+		mythril_ore = new SimpleOre(Material.rock).setHardness(Settings.mythrilOreHardness).setResistance(Settings.mythrilOreResistance).setBlockName("mythril_ore");
+		mythril_block = new SimpleOre(Material.iron).setHardness(Settings.mythrilBlockHardness).setResistance(Settings.mythrilBlockResistance).setBlockName("mythril_block");
+		adamantium_ore = new SimpleOre(Material.rock).setHardness(Settings.adamantiumOreHardness).setResistance(Settings.adamantiumOreResistance).setBlockName("adamantium_ore");
+		adamantium_block = new SimpleOre(Material.iron).setHardness(Settings.adamantiumBlockHardness).setResistance(Settings.adamantiumBlockResistance).setBlockName("adamantium_block");
+		onyx_ore = new SimpleOre(Material.rock).setStackToDrop(new ItemStack(onyx_gem)).setHardness(Settings.onyxOreHardness).setResistance(Settings.onyxOreResistance).setBlockName("onyx_ore");
+		onyx_block = new SimpleOre(Material.iron).setHardness(Settings.onyxBlockHardness).setResistance(Settings.onyxBlockResistance).setBlockName("onyx_block");
+		mythril_furnace = new MythrilFurnace(false).setHardness(Settings.mythrilFurnaceHardness).setResistance(Settings.mythrilFurnaceResistance).setBlockName("mythril_furnace");
+		mythril_furnace_lit = new MythrilFurnace(true).setHardness(Settings.mythrilFurnaceHardness).setLightLevel(Settings.mythrilFurnaceLightValue).setResistance(Settings.mythrilFurnaceResistance).setBlockName("mythril_furnace_lit");
+		onyx_furnace = new OnyxFurnace(false).setHardness(Settings.onyxFurnaceHardness).setResistance(Settings.onyxFurnaceResistance).setBlockName("onyx_furnace");
+		onyx_furnace_lit = new OnyxFurnace(true).setHardness(Settings.onyxFurnaceHardness).setResistance(Settings.onyxFurnaceResistance).setLightLevel(Settings.onyxFurnaceLightValue).setBlockName("onyx_furnace_lit");
+		copper_door_block = new SimpleDoor("copper").setHardness(Settings.copperDoorHardness).setResistance(Settings.copperDoorResistance).setStepSound(Block.soundTypeMetal).setBlockName("copper_door_block");
+		onyx_door_block = new SimpleDoor("onyx").setHardness(Settings.onyxDoorHardness).setResistance(Settings.onyxDoorResistance).setStepSound(Block.soundTypeMetal).setBlockName("onyx_door_block");
+		copper_bars = new SimpleBars("simpleores:" + "copper_bars", "simpleores:" + "copper_bars", Material.iron, true).setHardness(Settings.copperBarsHardness).setResistance(Settings.copperBarsResistance).setStepSound(Block.soundTypeMetal).setBlockName("copper_bars");
+		tin_bars = new SimpleBars("simpleores:" + "tin_bars", "simpleores:" + "tin_bars", Material.iron, true).setHardness(Settings.tinBarsHardness).setResistance(Settings.tinBarsResistance).setStepSound(Block.soundTypeMetal).setBlockName("tin_bars");
+		mythril_bars = new SimpleBars("simpleores:" + "mythril_bars", "simpleores:" + "mythril_bars", Material.iron, true).setHardness(Settings.mythrilBarsHardness).setResistance(Settings.mythrilBarsResistance).setStepSound(Block.soundTypeMetal).setBlockName("mythril_bars");
+		adamantium_bars = new SimpleBars("simpleores:" + "adamantium_bars", "simpleores:" + "adamantium_bars", Material.iron, true).setHardness(Settings.adamantiumBarsHardness).setResistance(Settings.adamantiumBarsResistance).setStepSound(Block.soundTypeMetal).setBlockName("adamantium_bars");
+	    onyx_bars = new SimpleBars("simpleores:" + "onyx_bars", "simpleores:" + "onyx_bars", Material.iron, true).setHardness(Settings.onyxBarsHardness).setResistance(Settings.onyxBarsResistance).setStepSound(Block.soundTypeMetal).setBlockName("onyx_bars");
 		
 		//Block Registering
-		GameRegistry.registerBlock(mythrilFurnace, "mythrilFurnace");
-		GameRegistry.registerBlock(mythrilFurnaceOn, "mythrilFurnaceOn");
-		GameRegistry.registerBlock(onyxFurnace, "onyxFurnace");
-		GameRegistry.registerBlock(onyxFurnaceOn, "onyxFurnaceOn");		
-		GameRegistry.registerBlock(copperDoor, "copperDoor");
-		GameRegistry.registerBlock(copperBars, "copperBars");
-		GameRegistry.registerBlock(tinBars, "tinBars");
-		GameRegistry.registerBlock(mythrilBars, "mythrilBars");
-		GameRegistry.registerBlock(adamantiumBars, "adamantiumBars");
-		GameRegistry.registerBlock(onyxBars, "onyxBars");
+		GameRegistry.registerBlock(mythril_furnace, "mythril_furnace");
+		GameRegistry.registerBlock(mythril_furnace_lit, "mythril_furnace_lit");
+		GameRegistry.registerBlock(onyx_furnace, "onyx_furnace");
+		GameRegistry.registerBlock(onyx_furnace_lit, "onyx_furnace_lit");
+		GameRegistry.registerBlock(copper_door_block, "copper_door_block");
+		GameRegistry.registerBlock(onyx_door_block, "onyx_door_block");
+		GameRegistry.registerBlock(copper_bars, "copper_bars");
+		GameRegistry.registerBlock(tin_bars, "tin_bars");
+		GameRegistry.registerBlock(mythril_bars, "mythril_bars");
+		GameRegistry.registerBlock(adamantium_bars, "adamantium_bars");
+		GameRegistry.registerBlock(onyx_bars, "onyx_bars");
 	    
 		//Block Harvest Levels
-        MinecraftForge.setBlockHarvestLevel(copperOre, "pickaxe", Settings.copperOreHarvestLevel);
-        MinecraftForge.setBlockHarvestLevel(tinOre, "pickaxe", Settings.tinOreHarvestLevel);
-        MinecraftForge.setBlockHarvestLevel(mythrilOre, "pickaxe", Settings.mythrilOreHarvestLevel);
-        MinecraftForge.setBlockHarvestLevel(adamantiumOre, "pickaxe", Settings.adamantiumOreHarvestLevel);
-        MinecraftForge.setBlockHarvestLevel(onyxOre, "pickaxe", Settings.onyxOreHarvestLevel);
+		copper_ore.setHarvestLevel("pickaxe", Settings.copperOreHarvestLevel);
+		tin_ore.setHarvestLevel("pickaxe", Settings.tinOreHarvestLevel);
+		mythril_ore.setHarvestLevel("pickaxe", Settings.mythrilOreHarvestLevel);
+		adamantium_ore.setHarvestLevel("pickaxe", Settings.adamantiumOreHarvestLevel);
+		onyx_ore.setHarvestLevel("pickaxe", Settings.onyxOreHarvestLevel);
 	}
 	
 	public static void doItems()
 	{
 		//Item Details
-        copperIngot = new SimpleIngot(Config.copperIngotID).setUnlocalizedName("copperIngot");
-		tinIngot = new SimpleIngot(Config.tinIngotID).setUnlocalizedName("tinIngot");
-		mythrilIngot = new SimpleIngot(Config.mythrilIngotID).setUnlocalizedName("mythrilIngot");
-		adamantiumIngot = new SimpleIngot(Config.adamantiumIngotID).setUnlocalizedName("adamantiumIngot");
-		onyxGem = new SimpleIngot(Config.onyxGemID).setUnlocalizedName("onyxGem");
-		copperBucket = new SimpleBucket(Config.copperBucketID, 0).setUnlocalizedName("copperBucket").setMaxStackSize(16);
-		copperBucketWater = new SimpleBucket(Config.copperBucketWaterID, Block.waterMoving.blockID).setContainerItem(copperBucket).setUnlocalizedName("copperBucketWater");
-		mythrilRod = new SimpleIngot(Config.mythrilRodID).setUnlocalizedName("mythrilRod");
-		onyxRod = new SimpleIngot(Config.onyxRodID).setUnlocalizedName("onyxRod");
-		copperDoorItem = new SimpleDoorItem(Config.copperDoorItemID, "copper").setUnlocalizedName("copperDoor");
-		onyxDoorItem = new SimpleDoorItem(Config.onyxDoorItemID, "onyx").setUnlocalizedName("onyxDoor");
+        copper_ingot = new SimpleIngot().setUnlocalizedName("copper_ingot");
+		tin_ingot = new SimpleIngot().setUnlocalizedName("tin_ingot");
+		mythril_ingot = new SimpleIngot().setUnlocalizedName("mythril_ingot");
+		adamantium_ingot = new SimpleIngot().setUnlocalizedName("adamantium_ingot");
+		onyx_gem = new SimpleIngot().setUnlocalizedName("onyx_gem");
+		copper_bucket = new SimpleBucket(Blocks.air).setUnlocalizedName("copper_bucket").setMaxStackSize(16);
+		copper_bucket_water = new SimpleBucket(Blocks.flowing_water).setContainerItem(copper_bucket).setUnlocalizedName("copper_bucket_water");
+		mythril_rod = new SimpleIngot().setUnlocalizedName("mythril_rod");
+		onyx_rod = new SimpleIngot().setUnlocalizedName("onyx_rod");
+		copper_door = new SimpleDoorItem("copper").setUnlocalizedName("copper_door");
+		onyx_door = new SimpleDoorItem("onyx").setUnlocalizedName("onyx_door");
 		
 		//Register Items
-		GameRegistry.registerItem(copperBucket, "copperBucket");
-		GameRegistry.registerItem(copperBucketWater, "copperBucketWater");
-		GameRegistry.registerItem(copperDoorItem, "copperDoorItem");
-		GameRegistry.registerItem(onyxDoorItem, "onyxDoorItem");
+		GameRegistry.registerItem(copper_bucket, "copper_bucket");
+		GameRegistry.registerItem(copper_bucket_water, "copper_bucket_water");
+		GameRegistry.registerItem(copper_door, "copper_door");
+		GameRegistry.registerItem(onyx_door, "onyx_door");
 	}
 	
 	public static void doTools()
 	{
 		//Tool Details
-		copperPick = new SimplePickaxe(Config.copperPickID, SimpleOres.toolCopper).setUnlocalizedName("copperPick");
-		copperAxe = new SimpleAxe(Config.copperAxeID, SimpleOres.toolCopper).setUnlocalizedName("copperAxe");
-		copperShovel = new SimpleShovel(Config.copperShovelID, SimpleOres.toolCopper).setUnlocalizedName("copperShovel");
-		copperSword = new SimpleSword(Config.copperSwordID, SimpleOres.toolCopper).setUnlocalizedName("copperSword");
-		copperHoe = new SimpleHoe(Config.copperHoeID, SimpleOres.toolCopper).setUnlocalizedName("copperHoe");
-		tinPick = new SimplePickaxe(Config.tinPickID, SimpleOres.toolTin).setUnlocalizedName("tinPick");
-		tinAxe = new SimpleAxe(Config.tinAxeID, SimpleOres.toolTin).setUnlocalizedName("tinAxe");
-		tinShovel = new SimpleShovel(Config.tinShovelID, SimpleOres.toolTin).setUnlocalizedName("tinShovel");
-		tinSword = new SimpleSword(Config.tinSwordID, SimpleOres.toolTin).setUnlocalizedName("tinSword");
-		tinHoe = new SimpleHoe(Config.tinHoeID, SimpleOres.toolTin).setUnlocalizedName("tinHoe");
-		mythrilPick = new SimplePickaxe(Config.mythrilPickID, SimpleOres.toolMythril).setUnlocalizedName("mythrilPick");
-		mythrilAxe = new SimpleAxe(Config.mythrilAxeID, SimpleOres.toolMythril).setUnlocalizedName("mythrilAxe");
-		mythrilShovel = new SimpleShovel(Config.mythrilShovelID, SimpleOres.toolMythril).setUnlocalizedName("mythrilShovel");
-		mythrilSword = new SimpleSword(Config.mythrilSwordID, SimpleOres.toolMythril).setUnlocalizedName("mythrilSword");
-		mythrilHoe = new SimpleHoe(Config.mythrilHoeID, SimpleOres.toolMythril).setUnlocalizedName("mythrilHoe");
-		adamantiumPick = new SimplePickaxe(Config.adamantiumPickID, SimpleOres.toolAdamantium).setUnlocalizedName("adamantiumPick");
-		adamantiumAxe = new SimpleAxe(Config.adamantiumAxeID, SimpleOres.toolAdamantium).setUnlocalizedName("adamantiumAxe");
-		adamantiumShovel = new SimpleShovel(Config.adamantiumShovelID, SimpleOres.toolAdamantium).setUnlocalizedName("adamantiumShovel");
-		adamantiumSword = new SimpleSword(Config.adamantiumSwordID, SimpleOres.toolAdamantium).setUnlocalizedName("adamantiumSword");
-		adamantiumHoe = new SimpleHoe(Config.adamantiumHoeID, SimpleOres.toolAdamantium).setUnlocalizedName("adamantiumHoe");
-		onyxPick = new SimplePickaxe(Config.onyxPickID, SimpleOres.toolOnyx).setUnlocalizedName("onyxPick");
-		onyxAxe = new SimpleAxe(Config.onyxAxeID, SimpleOres.toolOnyx).setUnlocalizedName("onyxAxe");
-		onyxShovel = new SimpleShovel(Config.onyxShovelID, SimpleOres.toolOnyx).setUnlocalizedName("onyxShovel");
-		onyxSword = new SimpleSword(Config.onyxSwordID, SimpleOres.toolOnyx).setUnlocalizedName("onyxSword");
-		onyxHoe = new SimpleHoe(Config.onyxHoeID, SimpleOres.toolOnyx).setUnlocalizedName("onyxHoe");		
-		mythrilBow = new SimpleBow(Config.mythrilBowID, 750, SimpleOres.toolMythril).setFull3D().setUnlocalizedName("mythrilBow");
-		onyxBow = new SimpleBow(Config.onyxBowID, 1000, SimpleOres.toolOnyx).setFull3D().setUnlocalizedName("onyxBow");
-		tinShears = new SimpleShears(Config.tinShearsID, 176).setUnlocalizedName("tinShears");
-		adamantiumShears = new SimpleShears(Config.adamantiumShearsID, 1092).setUnlocalizedName("adamantiumShears");
-		onyxShears = new SimpleShears(Config.onyxShearsID, 3116).setUnlocalizedName("onyxShears");
+		copper_pickaxe = new SimplePickaxe(SimpleOres.toolCopper).setUnlocalizedName("copper_pickaxe");
+		copper_axe = new SimpleAxe(SimpleOres.toolCopper).setUnlocalizedName("copper_axe");
+		copper_shovel = new SimpleShovel(SimpleOres.toolCopper).setUnlocalizedName("copper_shovel");
+		copper_sword = new SimpleSword(SimpleOres.toolCopper).setUnlocalizedName("copper_sword");
+		copper_hoe = new SimpleHoe(SimpleOres.toolCopper).setUnlocalizedName("copper_hoe");
+		tin_pickaxe = new SimplePickaxe(SimpleOres.toolTin).setUnlocalizedName("tin_pickaxe");
+		tin_axe = new SimpleAxe(SimpleOres.toolTin).setUnlocalizedName("tin_axe");
+		tin_shovel = new SimpleShovel(SimpleOres.toolTin).setUnlocalizedName("tin_shovel");
+		tin_sword = new SimpleSword(SimpleOres.toolTin).setUnlocalizedName("tin_sword");
+		tin_hoe = new SimpleHoe(SimpleOres.toolTin).setUnlocalizedName("tin_hoe");
+		mythril_pickaxe = new SimplePickaxe(SimpleOres.toolMythril).setUnlocalizedName("mythril_pickaxe");
+		mythril_axe = new SimpleAxe(SimpleOres.toolMythril).setUnlocalizedName("mythril_axe");
+		mythril_shovel = new SimpleShovel(SimpleOres.toolMythril).setUnlocalizedName("mythril_shovel");
+		mythril_sword = new SimpleSword(SimpleOres.toolMythril).setUnlocalizedName("mythril_sword");
+		mythril_hoe = new SimpleHoe(SimpleOres.toolMythril).setUnlocalizedName("mythril_hoe");
+		adamantium_pickaxe = new SimplePickaxe(SimpleOres.toolAdamantium).setUnlocalizedName("adamantium_pickaxe");
+		adamantium_axe = new SimpleAxe(SimpleOres.toolAdamantium).setUnlocalizedName("adamantium_axe");
+		adamantium_shovel = new SimpleShovel(SimpleOres.toolAdamantium).setUnlocalizedName("adamantium_shovel");
+		adamantium_sword = new SimpleSword(SimpleOres.toolAdamantium).setUnlocalizedName("adamantium_sword");
+		adamantium_hoe = new SimpleHoe(SimpleOres.toolAdamantium).setUnlocalizedName("adamantium_hoe");
+		onyx_pickaxe = new SimplePickaxe(SimpleOres.toolOnyx).setUnlocalizedName("onyx_pickaxe");
+		onyx_axe = new SimpleAxe(SimpleOres.toolOnyx).setUnlocalizedName("onyx_axe");
+		onyx_shovel = new SimpleShovel(SimpleOres.toolOnyx).setUnlocalizedName("onyx_shovel");
+		onyx_sword = new SimpleSword(SimpleOres.toolOnyx).setUnlocalizedName("onyx_sword");
+		onyx_hoe = new SimpleHoe(SimpleOres.toolOnyx).setUnlocalizedName("onyx_hoe");		
+		mythril_bow = new SimpleBow(750, SimpleOres.toolMythril).setFull3D().setUnlocalizedName("mythril_bow");
+		onyx_bow = new SimpleBow(1000, SimpleOres.toolOnyx).setFull3D().setUnlocalizedName("onyx_bow");
+		tin_shears = new SimpleShears(176).setUnlocalizedName("tin_shears");
+		adamantium_shears = new SimpleShears(1092).setUnlocalizedName("adamantium_shears");
+		onyx_shears = new SimpleShears(3116).setUnlocalizedName("onyx_shears");
 		
         //Item Registering
-        GameRegistry.registerItem(mythrilBow, "mythrilBow");
-        GameRegistry.registerItem(onyxBow, "onyxBow");
-        GameRegistry.registerItem(tinShears, "tinShears");
-        GameRegistry.registerItem(adamantiumShears, "adamantiumShears");
-        GameRegistry.registerItem(onyxShears, "onyxShears");
+        GameRegistry.registerItem(mythril_bow, "mythril_bow");
+        GameRegistry.registerItem(onyx_bow, "onyx_bow");
+        GameRegistry.registerItem(tin_shears, "tin_shears");
+        GameRegistry.registerItem(adamantium_shears, "adamantium_shears");
+        GameRegistry.registerItem(onyx_shears, "onyx_shears");
 	}
 	
 	public static void doArmor()
 	{
         //Armour Details
-        copperHelm = new SimpleArmor(Config.copperHelmID, SimpleOres.armorCopper, SimpleOres.rendererCopper, 0).setType("copper").setUnlocalizedName("copperHelm");
-		copperChest = new SimpleArmor(Config.copperChestID, SimpleOres.armorCopper, SimpleOres.rendererCopper, 1).setType("copper").setUnlocalizedName("copperChest");
-		copperLegs = new SimpleArmor(Config.copperLegsID, SimpleOres.armorCopper, SimpleOres.rendererCopper, 2).setType("copper").setUnlocalizedName("copperLegs");
-		copperBoots = new SimpleArmor(Config.copperBootsID, SimpleOres.armorCopper, SimpleOres.rendererCopper, 3).setType("copper").setUnlocalizedName("copperBoots");
-        tinHelm = new SimpleArmor(Config.tinHelmID, SimpleOres.armorTin, SimpleOres.rendererTin, 0).setType("tin").setUnlocalizedName("tinHelm");
-		tinChest = new SimpleArmor(Config.tinChestID, SimpleOres.armorTin, SimpleOres.rendererTin, 1).setType("tin").setUnlocalizedName("tinChest");
-		tinLegs = new SimpleArmor(Config.tinLegsID, SimpleOres.armorTin, SimpleOres.rendererTin, 2).setType("tin").setUnlocalizedName("tinLegs");
-		tinBoots = new SimpleArmor(Config.tinBootsID, SimpleOres.armorTin, SimpleOres.rendererTin, 3).setType("tin").setUnlocalizedName("tinBoots");
-		mythrilHelm = new SimpleArmor(Config.mythrilHelmID, SimpleOres.armorMythril, SimpleOres.rendererMythril, 0).setType("mythril").setUnlocalizedName("mythrilHelm");
-		mythrilChest = new SimpleArmor(Config.mythrilChestID, SimpleOres.armorMythril, SimpleOres.rendererMythril, 1).setType("mythril").setUnlocalizedName("mythrilChest");
-		mythrilLegs = new SimpleArmor(Config.mythrilLegsID, SimpleOres.armorMythril, SimpleOres.rendererMythril, 2).setType("mythril").setUnlocalizedName("mythrilLegs");
-		mythrilBoots = new SimpleArmor(Config.mythrilBootsID, SimpleOres.armorMythril, SimpleOres.rendererMythril, 3).setType("mythril").setUnlocalizedName("mythrilBoots");
-		adamantiumHelm = new SimpleArmor(Config.adamantiumHelmID, SimpleOres.armorAdamantium, SimpleOres.rendererAdamantium, 0).setType("adamantium").setUnlocalizedName("adamantiumHelm");
-		adamantiumChest = new SimpleArmor(Config.adamantiumChestID, SimpleOres.armorAdamantium, SimpleOres.rendererAdamantium, 1).setType("adamantium").setUnlocalizedName("adamantiumChest");
-		adamantiumLegs = new SimpleArmor(Config.adamantiumLegsID, SimpleOres.armorAdamantium, SimpleOres.rendererAdamantium, 2).setType("adamantium").setUnlocalizedName("adamantiumLegs");
-		adamantiumBoots = new SimpleArmor(Config.adamantiumBootsID, SimpleOres.armorAdamantium, SimpleOres.rendererAdamantium, 3).setType("adamantium").setUnlocalizedName("adamantiumBoots");
-		onyxHelm = new SimpleArmor(Config.onyxHelmID, SimpleOres.armorOnyx, SimpleOres.rendererOnyx, 0).setType("onyx").setUnlocalizedName("onyxHelm");
-		onyxChest = new SimpleArmor(Config.onyxChestID, SimpleOres.armorOnyx, SimpleOres.rendererOnyx, 1).setType("onyx").setUnlocalizedName("onyxChest");
-		onyxLegs = new SimpleArmor(Config.onyxLegsID, SimpleOres.armorOnyx, SimpleOres.rendererOnyx, 2).setType("onyx").setUnlocalizedName("onyxLegs");
-		onyxBoots = new SimpleArmor(Config.onyxBootsID, SimpleOres.armorOnyx, SimpleOres.rendererOnyx, 3).setType("onyx").setUnlocalizedName("onyxBoots");
+        copper_helmet = new SimpleArmor(SimpleOres.armorCopper, SimpleOres.rendererCopper, 0).setType("copper").setUnlocalizedName("copper_helmet");
+		copper_chestplate = new SimpleArmor(SimpleOres.armorCopper, SimpleOres.rendererCopper, 1).setType("copper").setUnlocalizedName("copper_chestplate");
+		copper_leggings = new SimpleArmor(SimpleOres.armorCopper, SimpleOres.rendererCopper, 2).setType("copper").setUnlocalizedName("copper_leggings");
+		copper_boots = new SimpleArmor(SimpleOres.armorCopper, SimpleOres.rendererCopper, 3).setType("copper").setUnlocalizedName("copper_boots");
+        tin_helmet = new SimpleArmor(SimpleOres.armorTin, SimpleOres.rendererTin, 0).setType("tin").setUnlocalizedName("tin_helmet");
+		tin_chestplate = new SimpleArmor(SimpleOres.armorTin, SimpleOres.rendererTin, 1).setType("tin").setUnlocalizedName("tin_chestplate");
+		tin_leggings = new SimpleArmor(SimpleOres.armorTin, SimpleOres.rendererTin, 2).setType("tin").setUnlocalizedName("tin_leggings");
+		tin_boots = new SimpleArmor(SimpleOres.armorTin, SimpleOres.rendererTin, 3).setType("tin").setUnlocalizedName("tin_boots");
+		mythril_helmet = new SimpleArmor(SimpleOres.armorMythril, SimpleOres.rendererMythril, 0).setType("mythril").setUnlocalizedName("mythril_helmet");
+		mythril_chestplate = new SimpleArmor(SimpleOres.armorMythril, SimpleOres.rendererMythril, 1).setType("mythril").setUnlocalizedName("mythril_chestplate");
+		mythril_leggings = new SimpleArmor(SimpleOres.armorMythril, SimpleOres.rendererMythril, 2).setType("mythril").setUnlocalizedName("mythril_leggings");
+		mythril_boots = new SimpleArmor(SimpleOres.armorMythril, SimpleOres.rendererMythril, 3).setType("mythril").setUnlocalizedName("mythril_boots");
+		adamantium_helmet = new SimpleArmor(SimpleOres.armorAdamantium, SimpleOres.rendererAdamantium, 0).setType("adamantium").setUnlocalizedName("adamantium_helmet");
+		adamantium_chestplate = new SimpleArmor(SimpleOres.armorAdamantium, SimpleOres.rendererAdamantium, 1).setType("adamantium").setUnlocalizedName("adamantium_chestplate");
+		adamantium_leggings = new SimpleArmor(SimpleOres.armorAdamantium, SimpleOres.rendererAdamantium, 2).setType("adamantium").setUnlocalizedName("adamantium_leggings");
+		adamantium_boots = new SimpleArmor(SimpleOres.armorAdamantium, SimpleOres.rendererAdamantium, 3).setType("adamantium").setUnlocalizedName("adamantium_boots");
+		onyx_helmet = new SimpleArmor(SimpleOres.armorOnyx, SimpleOres.rendererOnyx, 0).setType("onyx").setUnlocalizedName("onyx_helmet");
+		onyx_chestplate = new SimpleArmor(SimpleOres.armorOnyx, SimpleOres.rendererOnyx, 1).setType("onyx").setUnlocalizedName("onyx_chestplate");
+		onyx_leggings = new SimpleArmor(SimpleOres.armorOnyx, SimpleOres.rendererOnyx, 2).setType("onyx").setUnlocalizedName("onyx_leggings");
+		onyx_boots = new SimpleArmor(SimpleOres.armorOnyx, SimpleOres.rendererOnyx, 3).setType("onyx").setUnlocalizedName("onyx_boots");
 	}
 	
 	public static void doAchievements()
 	{
-		simpleOresAch = new Achievement(Config.simpleOresAchID, "simpleOresAch", 5, 4, copperOre, AchievementList.buildPickaxe).registerAchievement();
-		adamantiumAch = new Achievement(Config.adamantiumAchID, "adamantiumAch", 7, 4, adamantiumOre, simpleOresAch).registerAchievement();
-		onyxAch = new Achievement(Config.onyxAchID, "onyxAch", 9, 4, onyxOre, adamantiumAch).setSpecial().registerAchievement();
-		ironPickAch = new Achievement(Config.ironPickAchID, "ironPickAch", 8, 2, Item.pickaxeIron, AchievementList.buildBetterPickaxe).registerAchievement();
-		adamantiumPickAch = new Achievement(Config.adamantiumPickAchID, "adamantiumPickAch", 10, 2, adamantiumPick, ironPickAch).registerAchievement();
-		onyxPickAch = new Achievement(Config.onyxPickAchID, "onyxPickAch", 12, 2, onyxPick, adamantiumPickAch).setSpecial().registerAchievement();
-		mythrilBowAch = new Achievement(Config.mythrilBowAchID, "mythrilBowAch", 4, 5, mythrilBow, simpleOresAch).registerAchievement();
-		onyxBowAch = new Achievement(Config.onyxBowAchID, "onyxBowAch", 4, 7, onyxBow, simpleOresAch).setSpecial().registerAchievement();
+		simpleOresAch = new Achievement("achievement.simpleOresAch", "simpleOresAch", 5, 4, copper_ore, AchievementList.buildPickaxe).registerStat();
+		adamantiumAch = new Achievement("achievement.adamantiumAch", "adamantiumAch", 7, 4, adamantium_ore, simpleOresAch).registerStat();
+		onyxAch = new Achievement("achievement.onyxAch", "onyxAch", 9, 4, onyx_ore, adamantiumAch).setSpecial().registerStat();
+		ironPickAch = new Achievement("achievement.ironPickAch", "ironPickAch", 8, 2, Items.iron_pickaxe, AchievementList.buildBetterPickaxe).registerStat();
+		adamantiumPickAch = new Achievement("achievement.adamantiumPickAch", "adamantiumPickAch", 10, 2, adamantium_pickaxe, ironPickAch).registerStat();
+		onyxPickAch = new Achievement("achievement.onyxPickAch", "onyxPickAch", 12, 2, onyx_pickaxe, adamantiumPickAch).setSpecial().registerStat();
+		mythrilBowAch = new Achievement("achievement.mythrilBowAch", "mythrilBowAch", 4, 5, mythril_bow, simpleOresAch).registerStat();
+		onyxBowAch = new Achievement("achievement.onyxBowAch", "onyxBowAch", 4, 7, onyx_bow, simpleOresAch).setSpecial().registerStat();
 	}
 	
 	//Blocks
-	public static Block copperOre, tinOre, mythrilOre, adamantiumOre, onyxOre;
-	public static Block copperBlock, tinBlock, mythrilBlock, adamantiumBlock, onyxBlock;
-	public static Block mythrilFurnace, mythrilFurnaceOn, onyxFurnace, onyxFurnaceOn;
-	public static Block copperDoor, onyxDoor;
-	public static Block copperBars, tinBars, mythrilBars, adamantiumBars, onyxBars;
+	public static Block copper_ore, tin_ore, mythril_ore, adamantium_ore, onyx_ore;
+	public static Block copper_block, tin_block, mythril_block, adamantium_block, onyx_block;
+	public static Block mythril_furnace, mythril_furnace_lit, onyx_furnace, onyx_furnace_lit;
+	public static Block copper_door_block, onyx_door_block;
+	public static Block copper_bars, tin_bars, mythril_bars, adamantium_bars, onyx_bars;
 	
 	//Items
-	public static Item copperIngot, tinIngot, mythrilIngot, adamantiumIngot, onyxGem;
-	public static Item copperBucket, copperBucketWater;
-	public static Item mythrilRod, onyxRod;
-	public static Item copperDoorItem, onyxDoorItem;
+	public static Item copper_ingot, tin_ingot, mythril_ingot, adamantium_ingot, onyx_gem;
+	public static Item copper_bucket, copper_bucket_water;
+	public static Item mythril_rod, onyx_rod;
+	public static Item copper_door, onyx_door;
 	
 	//Tools
-	public static Item copperPick, tinPick, mythrilPick, adamantiumPick, onyxPick;
-	public static Item copperAxe, tinAxe, mythrilAxe, adamantiumAxe, onyxAxe;
-	public static Item copperShovel, tinShovel, mythrilShovel, adamantiumShovel, onyxShovel;
-	public static Item copperSword, tinSword, mythrilSword, adamantiumSword, onyxSword;
-	public static Item copperHoe, tinHoe, mythrilHoe, adamantiumHoe, onyxHoe;
-	public static Item mythrilBow, onyxBow;
-	public static Item tinShears, adamantiumShears, onyxShears;
+	public static Item copper_pickaxe, tin_pickaxe, mythril_pickaxe, adamantium_pickaxe, onyx_pickaxe;
+	public static Item copper_axe, tin_axe, mythril_axe, adamantium_axe, onyx_axe;
+	public static Item copper_shovel, tin_shovel, mythril_shovel, adamantium_shovel, onyx_shovel;
+	public static Item copper_sword, tin_sword, mythril_sword, adamantium_sword, onyx_sword;
+	public static Item copper_hoe, tin_hoe, mythril_hoe, adamantium_hoe, onyx_hoe;
+	public static Item mythril_bow, onyx_bow;
+	public static Item tin_shears, adamantium_shears, onyx_shears;
 	
 	//Armor
-	public static Item copperHelm, tinHelm, mythrilHelm, adamantiumHelm, onyxHelm;
-	public static Item copperChest, tinChest, mythrilChest, adamantiumChest, onyxChest;
-	public static Item copperLegs, tinLegs, mythrilLegs, adamantiumLegs, onyxLegs;
-	public static Item copperBoots, tinBoots, mythrilBoots, adamantiumBoots, onyxBoots;
+	public static Item copper_helmet, tin_helmet, mythril_helmet, adamantium_helmet, onyx_helmet;
+	public static Item copper_chestplate, tin_chestplate, mythril_chestplate, adamantium_chestplate, onyx_chestplate;
+	public static Item copper_leggings, tin_leggings, mythril_leggings, adamantium_leggings, onyx_leggings;
+	public static Item copper_boots, tin_boots, mythril_boots, adamantium_boots, onyx_boots;
 	
 	//Achievements
 	public static Achievement simpleOresAch, adamantiumAch, onyxAch, ironPickAch;

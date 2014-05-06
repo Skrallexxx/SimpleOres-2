@@ -3,31 +3,31 @@ package alexndr.SimpleOres.plugins.netherrocks;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
-import net.minecraftforge.event.ForgeSubscribe;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingJumpEvent;
 import alexndr.SimpleOres.api.helpers.LogHelper;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
 public class EventHelper 
 {
 	/**
 	 * Detects whether the player is wearing a full set of Fyrite Armor, then if they are on fire will cancel the "damage" event, making the player fireproof.
 	 */
-	@ForgeSubscribe
+	@SubscribeEvent
 	public void onBurnDamage(LivingAttackEvent event)
 	{   	
 		if(event.entity instanceof EntityPlayer)
 		{
 			EntityPlayer player = (EntityPlayer)event.entity;
 			
-			ItemStack helmet = player.getCurrentItemOrArmor(4);
-			ItemStack chest = player.getCurrentItemOrArmor(3);
-			ItemStack legs = player.getCurrentItemOrArmor(2);
-			ItemStack boots = player.getCurrentItemOrArmor(1);
+			ItemStack helmet = player.getCurrentArmor(3);
+			ItemStack chest = player.getCurrentArmor(2);
+			ItemStack legs = player.getCurrentArmor(1);
+			ItemStack boots = player.getCurrentArmor(0);
 			
 	        if(helmet != null && chest != null && legs != null && boots != null)
 	        {
-	        	if(helmet.getItem() == Content.fyriteHelm && chest.getItem() == Content.fyriteChest && legs.getItem() == Content.fyriteLegs && boots.getItem() == Content.fyriteBoots)
+	        	if(helmet.getItem() == Content.fyrite_helmet && chest.getItem() == Content.fyrite_chestplate && legs.getItem() == Content.fyrite_leggings && boots.getItem() == Content.fyrite_boots)
 	        	{
 	    	    	if(event.source.equals(DamageSource.lava) || event.source.equals(DamageSource.inFire) || event.source.equals(DamageSource.onFire))
 	    	    	{
@@ -46,22 +46,22 @@ public class EventHelper
 	/**
 	 * Detects whether the player is wearing a full set of Illumenite Armor, then if they take fall damage it will cancel the "damage" even, meaning the player doesn't take any fall damage.
 	 */
-	@ForgeSubscribe
+	@SubscribeEvent
 	public void onFallDamage(LivingAttackEvent event)
 	{  	
 		if(event.entity instanceof EntityPlayer)
 		{
 			EntityPlayer player = (EntityPlayer)event.entity;
 			
-			ItemStack helmet = player.getCurrentItemOrArmor(4);
-			ItemStack chest = player.getCurrentItemOrArmor(3);
-			ItemStack legs = player.getCurrentItemOrArmor(2);
-			ItemStack boots = player.getCurrentItemOrArmor(1);
+			ItemStack helmet = player.getCurrentArmor(3);
+			ItemStack chest = player.getCurrentArmor(2);
+			ItemStack legs = player.getCurrentArmor(1);
+			ItemStack boots = player.getCurrentArmor(0);
 			
 	        
 	        if(helmet != null && chest != null && legs != null && boots != null)
 	        {
-	        	if(helmet.getItem() == Content.illumeniteHelm && chest.getItem() == Content.illumeniteChest && legs.getItem() == Content.illumeniteLegs && boots.getItem() == Content.illumeniteBoots)
+	        	if(helmet.getItem() == Content.illumenite_helmet && chest.getItem() == Content.illumenite_chestplate && legs.getItem() == Content.illumenite_leggings && boots.getItem() == Content.illumenite_boots)
 	        	{
 	    	    	if(event.source.equals(DamageSource.fall) && Settings.enableArmorEffects)
 	    	    	{
@@ -76,7 +76,7 @@ public class EventHelper
 	        
 			if(helmet != null && chest != null && legs != null && boots != null)
 			{
-				if(helmet.getItem() == Content.malachiteHelm && chest.getItem() == Content.malachiteChest && legs.getItem() == Content.malachiteLegs && boots.getItem() == Content.malachiteBoots)
+				if(helmet.getItem() == Content.malachite_helmet && chest.getItem() == Content.malachite_chestplate && legs.getItem() == Content.malachite_leggings && boots.getItem() == Content.malachite_boots)
 				{	
 					if(event.source.equals(DamageSource.fall) && Settings.enableArmorEffects)
 					{
@@ -91,21 +91,21 @@ public class EventHelper
 		}
 	}
 	
-	@ForgeSubscribe
+	@SubscribeEvent
 	public void onPlayerJump(LivingJumpEvent event)
 	{
 		if(event.entity instanceof EntityPlayer)
 		{
 			EntityPlayer player = (EntityPlayer)event.entity;
 			
-			ItemStack helmet = player.getCurrentItemOrArmor(4);
-			ItemStack chest = player.getCurrentItemOrArmor(3);
-			ItemStack legs = player.getCurrentItemOrArmor(2);
-			ItemStack boots = player.getCurrentItemOrArmor(1);
+			ItemStack helmet = player.getCurrentArmor(3);
+			ItemStack chest = player.getCurrentArmor(2);
+			ItemStack legs = player.getCurrentArmor(1);
+			ItemStack boots = player.getCurrentArmor(0);
 			
 			if(helmet != null && chest != null && legs != null && boots != null)
 			{
-				if(helmet.getItem() == Content.malachiteHelm && chest.getItem() == Content.malachiteChest && legs.getItem() == Content.malachiteLegs && boots.getItem() == Content.malachiteBoots)
+				if(helmet.getItem() == Content.malachite_helmet && chest.getItem() == Content.malachite_chestplate && legs.getItem() == Content.malachite_leggings && boots.getItem() == Content.malachite_boots)
 				{	
 					if(!player.isSneaking() && Settings.enableArmorEffects)
 					{

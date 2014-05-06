@@ -4,29 +4,28 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import net.minecraft.block.Block;
-import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stats.StatList;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IShearable;
 import alexndr.SimpleOres.api.helpers.TabHelper;
-import alexndr.SimpleOres.core.Settings;
-import alexndr.SimpleOres.core.SimpleOres;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 public class SimpleShears extends Item
 {
-    public SimpleShears(int par1, int maxDamage)
+    public SimpleShears(int maxDamage)
     {
-        super(par1);
+        super();
         this.setMaxStackSize(1);
         this.setMaxDamage(maxDamage);
         this.setCreativeTab(TabHelper.getToolsTab());
@@ -37,14 +36,14 @@ public class SimpleShears extends Item
      */
     @Override
     @SideOnly(Side.CLIENT)
-    public void registerIcons(IconRegister iconRegister) 
+    public void registerIcons(IIconRegister iconRegister) 
     {
     	 this.itemIcon = iconRegister.registerIcon("simpleores:" + (this.getUnlocalizedName().substring(5)));
     }
 
-    public boolean onBlockDestroyed(ItemStack par1ItemStack, World par2World, int par3, int par4, int par5, int par6, EntityLiving par7EntityLiving)
+    public boolean onBlockDestroyed(ItemStack par1ItemStack, World par2World, Block par3, int par4, int par5, int par6, EntityLiving par7EntityLiving)
     {
-        if (par3 != Block.leaves.blockID && par3 != Block.web.blockID && par3 != Block.tallGrass.blockID && par3 != Block.vine.blockID && par3 != Block.tripWire.blockID && !(Block.blocksList[par3] instanceof IShearable))
+        if (par3 != Blocks.leaves && par3 != Blocks.web && par3 != Blocks.tallgrass && par3 != Blocks.vine && par3 != Blocks.tripwire && !(par3 instanceof IShearable))
         {
             return super.onBlockDestroyed(par1ItemStack, par2World, par3, par4, par5, par6, par7EntityLiving);
         }
@@ -57,18 +56,18 @@ public class SimpleShears extends Item
     /**
      * Returns if the item (tool) can harvest results from the block type.
      */
-    public boolean canHarvestBlock(Block par1Block)
+    public boolean func_150897_b(Block par1Block)
     {
-        return par1Block.blockID == Block.web.blockID || par1Block.blockID == Block.redstoneWire.blockID || par1Block.blockID == Block.tripWire.blockID;
+        return par1Block == Blocks.web || par1Block == Blocks.redstone_wire || par1Block == Blocks.tripwire;
     }
 
     /**
      * Returns the strength of the stack against a given block. 1.0F base, (Quality+1)*2 if correct blocktype, 1.5F if
      * sword
      */
-    public float getStrVsBlock(ItemStack par1ItemStack, Block par2Block)
+    public float func_150893_a(ItemStack par1ItemStack, Block par2Block)
     {
-        return par2Block.blockID != Block.web.blockID && par2Block.blockID != Block.leaves.blockID ? (par2Block.blockID == Block.cloth.blockID ? 5.0F : super.getStrVsBlock(par1ItemStack, par2Block)) : 15.0F;
+        return par2Block != Blocks.web && par2Block != Blocks.leaves ? (par2Block == Blocks.wool ? 5.0F : super.func_150893_a(par1ItemStack, par2Block)) : 15.0F;
     }
     
     @Override
@@ -108,10 +107,10 @@ public class SimpleShears extends Item
         {
             return false;
         }
-        int id = player.worldObj.getBlockId(x, y, z);
-        if (Block.blocksList[id] instanceof IShearable)
+        Block block = player.worldObj.getBlock(x, y, z);
+        if (block instanceof IShearable)
         {
-            IShearable target = (IShearable)Block.blocksList[id];
+            IShearable target = (IShearable)block;
             if (target.isShearable(itemstack, player.worldObj, x, y, z))
             {
                 ArrayList<ItemStack> drops = target.onSheared(itemstack, player.worldObj, x, y, z,
@@ -130,7 +129,7 @@ public class SimpleShears extends Item
                 }
 
                 itemstack.damageItem(1, player);
-                player.addStat(StatList.mineBlockStatArray[id], 1);
+                player.addStat(StatList.mineBlockStatArray[Block.getIdFromBlock(block)], 1);
             }
         }
         return false;

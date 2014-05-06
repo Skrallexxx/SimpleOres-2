@@ -2,7 +2,7 @@ package alexndr.SimpleOres.plugins.netherrocks;
 
 import java.io.File;
 
-import net.minecraftforge.common.Configuration;
+import net.minecraftforge.common.config.Configuration;
 import alexndr.SimpleOres.api.helpers.LogHelper;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 

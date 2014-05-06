@@ -1,11 +1,13 @@
 package alexndr.SimpleOres.api.content;
 
-import net.minecraft.client.renderer.texture.IconRegister;
+import java.util.List;
+
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.EnumToolMaterial;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemPickaxe;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.common.MinecraftForge;
+import net.minecraft.util.StatCollector;
 import alexndr.SimpleOres.api.helpers.TabHelper;
 import alexndr.SimpleOres.core.SimpleOres;
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -14,16 +16,18 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class SimplePickaxe extends ItemPickaxe
 {
-	private final EnumToolMaterial material;
+	private final ToolMaterial material;
 	private String modName = "simpleores";
+	private String infoString;
 	private CreativeTabs tab = SimpleOres.tabSimpleTools;
+	private boolean infoAdded = false;
 
-	public SimplePickaxe(int id, EnumToolMaterial toolmaterial) 
+	public SimplePickaxe(ToolMaterial toolmaterial) 
 	{
-		super(id, toolmaterial);
+		super(toolmaterial);
 		this.material = toolmaterial;
 		this.setCreativeTab(TabHelper.getToolsTab(tab));
-		MinecraftForge.setToolClass(this, "pickaxe", material.getHarvestLevel());
+		this.setHarvestLevel("pickaxe", material.getHarvestLevel());
 	}
 	
 	/**
@@ -46,6 +50,17 @@ public class SimplePickaxe extends ItemPickaxe
 	}
 	
 	/**
+	 * Adds a tooltip to the item. Must be unlocalised, so you need to have it somewhere in your lang files.
+	 * @param info A String normally in format modId.theItem.info.
+	 */
+	public SimplePickaxe addInfo(String info)
+	{
+		infoString = info;
+		infoAdded = true;
+		return this;
+	}
+	
+	/**
 	 * Registers the item in the GameRegistry, with the name given, and sends the name through to setUnlocalizedName in the super class.
 	 */
 	public SimplePickaxe setUnlocalizedName(String unlocalizedName)
@@ -60,7 +75,7 @@ public class SimplePickaxe extends ItemPickaxe
 	 */
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void registerIcons(IconRegister iconRegister)
+	public void registerIcons(IIconRegister iconRegister)
 	{
 		this.itemIcon = iconRegister.registerIcon(modName + ":" + (this.getUnlocalizedName().substring(5)));
 	}
@@ -70,6 +85,15 @@ public class SimplePickaxe extends ItemPickaxe
 	 */
 	public boolean getIsRepairable(ItemStack par1ItemStack, ItemStack par2ItemStack)
 	{
-		return this.material.getToolCraftingMaterial() == par2ItemStack.itemID ? true : super.getIsRepairable(par1ItemStack, par2ItemStack);
+		return this.material.customCraftingMaterial == par2ItemStack.getItem() ? true : super.getIsRepairable(par1ItemStack, par2ItemStack);
+	}
+	
+	@Override
+	public void addInformation(ItemStack stack, EntityPlayer par2EntityPlayer, List par3List, boolean par4)
+	{
+		if(infoAdded)
+		{
+			par3List.add(StatCollector.translateToLocal(infoString));
+		}
 	}
 }

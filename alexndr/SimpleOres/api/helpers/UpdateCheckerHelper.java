@@ -6,24 +6,13 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.network.INetworkManager;
-import net.minecraft.network.NetLoginHandler;
-import net.minecraft.network.packet.NetHandler;
-import net.minecraft.network.packet.Packet1Login;
-import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.StatCollector;
-import alexndr.SimpleOres.core.Settings;
 
 import com.google.common.collect.Lists;
 
-import cpw.mods.fml.common.network.IConnectionHandler;
-import cpw.mods.fml.common.network.Player;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-
-public class UpdateCheckerHelper implements IConnectionHandler
+public class UpdateCheckerHelper
 {
 	static String modChecking = new String();
 	static StringBuffer newVersion = new StringBuffer();
@@ -42,7 +31,7 @@ public class UpdateCheckerHelper implements IConnectionHandler
 	 * @param modInfoClassVersion The current version of the mod, such as the version number put in the @Mod line.
 	 */
 	public static void checkUpdates(String linkToVersionFile, String modId, String modInfoClassVersion)
-	{
+	{	
 		try
 		{
 			modChecking = modId;
@@ -104,44 +93,28 @@ public class UpdateCheckerHelper implements IConnectionHandler
 		}
 	}
 	
-	
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void clientLoggedIn(NetHandler clientHandler, INetworkManager manager, Packet1Login login) 
+	/**
+	 * Called by the EventHandler when a player logs in. Return the constructed message to be displayed to player. 
+	 * @return List of messages.
+	 */
+	public static List<String> getMessages()
 	{
-		if(Settings.enableUpdateChecker)
+		List<String> messages = Lists.newArrayList();
+		if(mods.size()  != 0 && isModOutOfDate.size() != 0 && newVersions.size() != 0)
 		{
-			try
+			for(int i = 0; i < mods.size(); i++)
 			{
-				if(mods.size() != 0 && isModOutOfDate.size() != 0 && newVersions.size() != 0)
+				if(newVersions.get(mods.get(i)) != null)
 				{
-					for(int i = 0; i < mods.size(); i++)
+					if(isModOutOfDate.get(mods.get(i)) == true)
 					{
-						if(newVersions.get(mods.get(i)) != null)
-						{
-							if(isModOutOfDate.get(mods.get(i)) == true)
-							{
-								Minecraft.getMinecraft().thePlayer.addChatMessage(StatCollector.translateToLocal(mods.get(i) + ".updateMessage1") + newVersions.get(mods.get(i)) + StatCollector.translateToLocal(mods.get(i) + ".updateMessage2"));
-							}
-						}
+						String message = StatCollector.translateToLocal(mods.get(i) + ".updateMessage1") + newVersions.get(mods.get(i)) + StatCollector.translateToLocal(mods.get(i) + ".updateMessage2");
+						messages.add(message);
 					}
 				}
 			}
-			
-			catch(Exception e)
-			{
-				LogHelper.warning("Update checking failed for unknown reasons. Enable verbose logging and retry to see a stack-trace.");
-				if(Settings.enableVerboseLogging)
-				{
-					e.printStackTrace();
-				}
-			}	
+			return messages;
 		}
+		return null;
 	}
-
-	public void playerLoggedIn(Player player, NetHandler netHandler, INetworkManager manager) {}
-	public String connectionReceived(NetLoginHandler netHandler, INetworkManager manager) {return null;}
-	public void connectionOpened(NetHandler netClientHandler, String server, int port, INetworkManager manager) {}
-	public void connectionOpened(NetHandler netClientHandler, MinecraftServer server, INetworkManager manager){}
-	public void connectionClosed(INetworkManager manager) {}
 }

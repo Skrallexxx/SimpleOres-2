@@ -1,7 +1,6 @@
 package alexndr.SimpleOres.core.helpers;
 
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import alexndr.SimpleOres.core.content.MythrilFurnaceContainer;
@@ -15,40 +14,20 @@ import cpw.mods.fml.common.network.IGuiHandler;
 public class ProxyCommon implements IGuiHandler
 {
 	/**
-	 * Method for adding armor textures. Actually overridden by ProxyClient, as it is a client-side feature. Look there for explanation.
+	 * Server side method for adding armor renderers. Overridden by ProxyClient.
 	 */
-	 public int addArmor(String armor) 
-	 {
-	  	 return 0;
-	 }
-	
+	public int addArmor(String armor)
+	{
+		return 0;
+	}
+
 	/**
-	 * The methods used to add a zoom feature to the custom bows. The code is messy as it is mostly copy/paste. Obviously overriden by ProxyClient, so look there
-	 * if you are curious to see the code.
+	 * Gets machine GUI's for the server.
 	 */
-	 public void onBowUse(ItemStack stack, EntityPlayer player) 
-	 {
-
-	 }
-	 
-	 public void resetSavedFOV() 
-	 {
-		 
-	 }
-	 
-	 public void registerClientTickHandler()
-	 {
-
-	 }
-
-	 /**
-	  * Determines whether to return the Container or GUI for certain 'machines' (ie. furnaces, in this case), depending upon if this is being 
-	  * called by the server or client. Server will call the Containers, while Client will call the GUI (so the player can actually see them).
-	  */
 	@Override
-    public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z)
-    {
-		TileEntity machine = world.getBlockTileEntity(x, y, z);
+	public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) 
+	{
+		TileEntity machine = world.getTileEntity(x, y, z);
 		
         if(machine == null)
         {
@@ -66,16 +45,15 @@ public class ProxyCommon implements IGuiHandler
         }
             
         return null;
-    }
-	
-	 /**
-	  * Determines whether to return the Container or GUI for certain 'machines' (ie. furnaces, in this case), depending upon if this is being 
-	  * called by the server or client. Server will call the Containers, while Client will call the GUI (so the player can actually see them).
-	  */
+	}
+
+	/**
+	 * Gets machine GUI's for the client.
+	 */
 	@Override
-    public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z)
-    {
-		TileEntity machine = world.getBlockTileEntity(x, y, z);
+	public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) 
+	{
+		TileEntity machine = world.getTileEntity(x, y, z);
 		
         if(machine == null)
         {
@@ -93,8 +71,11 @@ public class ProxyCommon implements IGuiHandler
         }
 		
         return null;
-    }
-
+	}
+	
+	/**
+	 * Adds capes for AleXndr and a select few plugin developers as a sign of appreciation.
+	 */
 	public void addModderCapes() 
 	{
 		

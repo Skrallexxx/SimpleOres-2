@@ -1,7 +1,8 @@
 package alexndr.SimpleOres.plugins.netherrocks;
 
-import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -119,21 +120,21 @@ public class NetherFurnaceTileEntity extends TileEntity implements ISidedInvento
     /**
      * Returns the name of the inventory.
      */
-    public String getInvName()
+    public String getInventoryName()
     {
-        return this.isInvNameLocalized() ? this.field_94130_e : "container.furnace";
+        return this.hasCustomInventoryName() ? this.field_94130_e : "container.furnace";
     }
 
     /**
      * If this returns false, the inventory name will be used as an unlocalized name, and translated into the player's
      * language. Otherwise it will be used directly.
      */
-    public boolean isInvNameLocalized()
+    public boolean hasCustomInventoryName()
     {
         return this.field_94130_e != null && this.field_94130_e.length() > 0;
     }
 
-    public void func_94129_a(String par1Str)
+    public void func_145951_a(String par1Str)
     {
         this.field_94130_e = par1Str;
     }
@@ -144,12 +145,12 @@ public class NetherFurnaceTileEntity extends TileEntity implements ISidedInvento
     public void readFromNBT(NBTTagCompound par1NBTTagCompound)
     {
         super.readFromNBT(par1NBTTagCompound);
-        NBTTagList nbttaglist = par1NBTTagCompound.getTagList("Items");
+        NBTTagList nbttaglist = par1NBTTagCompound.getTagList("Items", 10);
         this.furnaceItemStacks = new ItemStack[this.getSizeInventory()];
 
         for (int i = 0; i < nbttaglist.tagCount(); ++i)
         {
-            NBTTagCompound nbttagcompound1 = (NBTTagCompound)nbttaglist.tagAt(i);
+            NBTTagCompound nbttagcompound1 = (NBTTagCompound)nbttaglist.getCompoundTagAt(i);
             byte b0 = nbttagcompound1.getByte("Slot");
 
             if (b0 >= 0 && b0 < this.furnaceItemStacks.length)
@@ -191,7 +192,7 @@ public class NetherFurnaceTileEntity extends TileEntity implements ISidedInvento
 
         par1NBTTagCompound.setTag("Items", nbttaglist);
 
-        if (this.isInvNameLocalized())
+        if (this.hasCustomInventoryName())
         {
             par1NBTTagCompound.setString("CustomName", this.field_94130_e);
         }
@@ -206,23 +207,21 @@ public class NetherFurnaceTileEntity extends TileEntity implements ISidedInvento
         return 64;
     }
 
-    @SideOnly(Side.CLIENT)
-
     /**
      * Returns an integer between 0 and the passed value representing how close the current item is to being completely
      * cooked
      */
+    @SideOnly(Side.CLIENT)
     public int getCookProgressScaled(int par1)
     {
         return this.furnaceCookTime * par1 / Settings.netherFurnaceSpeed;
     }
 
-    @SideOnly(Side.CLIENT)
-
     /**
      * Returns an integer between 0 and the passed value representing how much burn time is left on the current fuel
      * item, where 0 means that the item is exhausted and the passed value means that the item is fresh
      */
+    @SideOnly(Side.CLIENT)
     public int getBurnTimeRemainingScaled(int par1)
     {
         if (this.currentItemBurnTime == 0)
@@ -271,7 +270,7 @@ public class NetherFurnaceTileEntity extends TileEntity implements ISidedInvento
 
                         if (this.furnaceItemStacks[1].stackSize == 0)
                         {
-                            this.furnaceItemStacks[1] = this.furnaceItemStacks[1].getItem().getContainerItemStack(furnaceItemStacks[1]);
+                            this.furnaceItemStacks[1] = this.furnaceItemStacks[1].getItem().getContainerItem(furnaceItemStacks[1]);
                         }
                     }
                 }
@@ -302,7 +301,7 @@ public class NetherFurnaceTileEntity extends TileEntity implements ISidedInvento
 
         if (flag1)
         {
-            this.onInventoryChanged();
+            this.markDirty();
         }
     }
 
@@ -365,12 +364,11 @@ public class NetherFurnaceTileEntity extends TileEntity implements ISidedInvento
         }
         else
         {
-            int i = par0ItemStack.getItem().itemID;
-            Item item = par0ItemStack.getItem();
+            Item i = par0ItemStack.getItem();
 
-            if (i == Block.netherrack.blockID) return Settings.netherrackBurnTime;
-            if (i == Content.fyriteIngot.itemID) return Settings.fyriteIngotBurnTime;
-            if (i == Item.blazeRod.itemID) return Settings.blazeRodBurnTime;
+            if (i == Item.getItemFromBlock(Blocks.netherrack)) return Settings.netherrackBurnTime;
+            if (i == Content.fyrite_ingot) return Settings.fyriteIngotBurnTime;
+            if (i == Items.blaze_rod) return Settings.blazeRodBurnTime;
         }
         return 0;
     }
@@ -388,12 +386,12 @@ public class NetherFurnaceTileEntity extends TileEntity implements ISidedInvento
      */
     public boolean isUseableByPlayer(EntityPlayer par1EntityPlayer)
     {
-        return this.worldObj.getBlockTileEntity(this.xCoord, this.yCoord, this.zCoord) != this ? false : par1EntityPlayer.getDistanceSq((double)this.xCoord + 0.5D, (double)this.yCoord + 0.5D, (double)this.zCoord + 0.5D) <= 64.0D;
+        return this.worldObj.getTileEntity(this.xCoord, this.yCoord, this.zCoord) != this ? false : par1EntityPlayer.getDistanceSq((double)this.xCoord + 0.5D, (double)this.yCoord + 0.5D, (double)this.zCoord + 0.5D) <= 64.0D;
     }
 
-    public void openChest() {}
+    public void openInventory() {}
 
-    public void closeChest() {}
+    public void closeInventory() {}
 
     /**
      * Returns true if automation is allowed to insert the given stack (ignoring stack size) into the given slot.
@@ -427,7 +425,7 @@ public class NetherFurnaceTileEntity extends TileEntity implements ISidedInvento
      */
     public boolean canExtractItem(int par1, ItemStack par2ItemStack, int par3)
     {
-        return par3 != 0 || par1 != 1 || par2ItemStack.itemID == Item.bucketEmpty.itemID;
+        return par3 != 0 || par1 != 1 || par2ItemStack.getItem() == Items.bucket;
     }
 
     /**

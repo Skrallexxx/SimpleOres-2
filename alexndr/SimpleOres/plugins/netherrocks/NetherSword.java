@@ -3,10 +3,10 @@ package alexndr.SimpleOres.plugins.netherrocks;
 import java.util.List;
 
 import net.minecraft.block.Block;
-import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.EnumToolMaterial;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.potion.Potion;
@@ -20,11 +20,11 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class NetherSword extends ItemSword
 {
-	private final EnumToolMaterial toolMaterial;
+	private final ToolMaterial toolMaterial;
 	
-	public NetherSword(int par1, EnumToolMaterial par2EnumToolMaterial) 
+	public NetherSword(ToolMaterial par2EnumToolMaterial) 
 	{
-		super(par1, par2EnumToolMaterial);
+		super(par2EnumToolMaterial);
 		this.toolMaterial = par2EnumToolMaterial;
 		this.setCreativeTab(TabHelper.getCombatTab());
 	}
@@ -34,15 +34,15 @@ public class NetherSword extends ItemSword
      */
     @Override
     @SideOnly(Side.CLIENT)
-    public void registerIcons(IconRegister iconRegister) 
+    public void registerIcons(IIconRegister iconRegister) 
     {
     	 this.itemIcon = iconRegister.registerIcon("netherrocks:" + (this.getUnlocalizedName().substring(5)));
     }
     
-    public boolean getIsRepairable(ItemStack par1ItemStack, ItemStack par2ItemStack)
-    {
-        return this.toolMaterial.getToolCraftingMaterial() == par2ItemStack.itemID ? true : super.getIsRepairable(par1ItemStack, par2ItemStack);
-    }
+	public boolean getIsRepairable(ItemStack par1ItemStack, ItemStack par2ItemStack)
+	{
+		return this.toolMaterial.customCraftingMaterial == par2ItemStack.getItem() ? true : super.getIsRepairable(par1ItemStack, par2ItemStack);
+	}
     
     /**	
      * Adds special effects to the Fyrite and Illumenite Swords.
@@ -50,12 +50,12 @@ public class NetherSword extends ItemSword
     @Override
     public boolean hitEntity(ItemStack par1ItemStack, EntityLivingBase par2EntityLivingBase, EntityLivingBase par3EntityLivingBase)
     {
-    	if(itemID == Content.fyriteSword.itemID)
+    	if(this == Content.fyrite_sword)
     	{
             par2EntityLivingBase.setFire(100);
     	}
     	
-    	if(itemID == Content.illumeniteSword.itemID)
+    	if(this == Content.illumenite_sword)
     	{
             par3EntityLivingBase.addPotionEffect(new PotionEffect(Potion.nightVision.id, Settings.illumeniteSwordNVLength));
             par2EntityLivingBase.addPotionEffect(new PotionEffect(Potion.blindness.id, Settings.illumeniteSwordBlindnessLength));
@@ -72,7 +72,7 @@ public class NetherSword extends ItemSword
     @Override
     public boolean onItemUse(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, World par3World, int par4, int par5, int par6, int par7, float par8, float par9, float par10)
     {
-    	if(itemID == Content.fyriteSword.itemID)
+    	if(this == Content.fyrite_sword)
     	{
             if (par7 == 0)
             {
@@ -110,18 +110,19 @@ public class NetherSword extends ItemSword
             }
             else
             {
-                int var11 = par3World.getBlockId(par4, par5, par6);
+                Block var11 = par3World.getBlock(par4, par5, par6);
 
-                if (var11 == 0)
+                if (var11 == Blocks.air)
                 {
                     par3World.playSoundEffect((double)par4 + 0.5D, (double)par5 + 0.5D, (double)par6 + 0.5D, "fire.ignite", 1.0F, itemRand.nextFloat() * 0.4F + 0.8F);
-                    par3World.setBlock(par4, par5, par6, Block.fire.blockID);
+                    par3World.setBlock(par4, par5, par6, Blocks.fire);
+                    par1ItemStack.setItemDamage(par1ItemStack.getItemDamage() + 1);
                 }
 
                 return true;
             }
     	}
-    	return true;  	
+    	return false;  	
     }
 	
 	/**
@@ -137,13 +138,13 @@ public class NetherSword extends ItemSword
 	@Override
 	public void addInformation(ItemStack stack, EntityPlayer par2EntityPlayer, List par3List, boolean par4)
 	{
-		if(this.itemID == Content.fyriteSword.itemID)
+		if(this == Content.fyrite_sword)
 		{
-			par3List.add(StatCollector.translateToLocal("netherrocks.fyriteSword.info"));
+			par3List.add(StatCollector.translateToLocal("netherrocks.fyrite_sword.info"));
 		}
-		if(this.itemID == Content.illumeniteSword.itemID)
+		if(this == Content.illumenite_sword)
 		{
-			par3List.add(StatCollector.translateToLocal("netherrocks.illumeniteSword.info"));
+			par3List.add(StatCollector.translateToLocal("netherrocks.illumenite_sword.info"));
 		}
 	}
 }

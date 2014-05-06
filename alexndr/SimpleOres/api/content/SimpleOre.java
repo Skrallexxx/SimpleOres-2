@@ -4,8 +4,9 @@ import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
@@ -24,18 +25,18 @@ public class SimpleOre extends Block
 	/**
 	 * Constructor for a basic block.
 	 */
-	public SimpleOre(int id, Material material) 
+	public SimpleOre(Material material) 
 	{
-		super(id, material);
+		super(material);
 		this.setCreativeTab(TabHelper.getBlocksTab(tab));
 	}
 	
 	/**
 	 * Registers the textures for the blocks.
 	 */
-	@Override
 	@SideOnly(Side.CLIENT)
-	public void registerIcons(IconRegister iconRegister)
+	@Override
+	public void registerBlockIcons(IIconRegister iconRegister)
 	{
 		this.blockIcon = iconRegister.registerIcon(modName + ":" + (this.getUnlocalizedName().substring(5)));
 	}
@@ -71,9 +72,9 @@ public class SimpleOre extends Block
 	/**
 	 * Registers the block in the GameRegistry, with the name given, and sends the name through to setUnlocalizedName in the super class.
 	 */
-	public SimpleOre setUnlocalizedName(String unlocalizedName)
+	public SimpleOre setBlockName(String unlocalizedName)
 	{
-		super.setUnlocalizedName(unlocalizedName);
+		super.setBlockName(unlocalizedName);
 		GameRegistry.registerBlock(this, unlocalizedName);
 		return this;
 	}
@@ -82,18 +83,13 @@ public class SimpleOre extends Block
 	 * The ID dropped when the block is broken.
 	 */
 	@Override
-	public int idDropped(int i, Random random, int j)
+	public Item getItemDropped(int i, Random random, int j)
 	{
 		if(stackDrop != null)
 		{
-			if(stackDrop.itemID > 255)
-			{
-				return stackDrop.itemID;
-			}
-			else return stackDrop.itemID;
-
+			return stackDrop.getItem();
 		}
-		else return this.blockID;
+		else return Item.getItemFromBlock(this);
 	}
 	
 	/**
@@ -104,7 +100,7 @@ public class SimpleOre extends Block
     {
         super.dropBlockAsItemWithChance(par1World, par2, par3, par4, par5, par6, par7);
 
-        if (this.idDropped(par5, par1World.rand, par7) != this.blockID)
+        if (this.getItemDropped(par5, par1World.rand, par7) != Item.getItemFromBlock(this))
         {
         	int var8 = MathHelper.getRandomIntegerInRange(par1World.rand, 16, 33);
 
@@ -117,7 +113,7 @@ public class SimpleOre extends Block
 	 */
     public int quantityDroppedWithBonus(int par1, Random par2Random)
     {
-        if (par1 > 0 && this.blockID != this.idDropped(0, par2Random, par1))
+        if (par1 > 0 && Item.getItemFromBlock(this) != this.getItemDropped(0, par2Random, par1))
         {
             int var3 = par2Random.nextInt(par1 + 2) - 1;
 

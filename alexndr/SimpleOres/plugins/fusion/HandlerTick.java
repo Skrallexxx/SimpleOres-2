@@ -1,13 +1,7 @@
 package alexndr.SimpleOres.plugins.fusion;
 
-import java.util.EnumSet;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.entity.player.EntityPlayer;
-import cpw.mods.fml.common.ITickHandler;
-import cpw.mods.fml.common.TickType;
-
-public class HandlerTick implements ITickHandler 
+public class HandlerTick //implements ITickHandler 
 {
 	public static float zoomAmount;
 	
@@ -18,6 +12,7 @@ public class HandlerTick implements ITickHandler
 	 * In the case of the bows, if it returns true, it calls the zoom method (onBowUse) in ProxyCommon (which is overridden by ProxyClient).
 	 * If it returns false, it calls the reset zoom method (resetSavedFOV) in ProxyCommon (which is also overridden by ProxyClient).
 	 */
+	/*
 	@Override
 	public void tickStart(EnumSet<TickType> type, Object... tickData) 
 	{
@@ -67,4 +62,5 @@ public class HandlerTick implements ITickHandler
 	{
 		return null;
 	}
+	*/
 }

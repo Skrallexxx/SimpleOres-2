@@ -2,7 +2,7 @@ package alexndr.SimpleOres.core;
 
 import java.io.File;
 
-import net.minecraftforge.common.Configuration;
+import net.minecraftforge.common.config.Configuration;
 import alexndr.SimpleOres.api.helpers.LogHelper;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 
@@ -28,13 +28,12 @@ public class Settings
 			enableSimpleOresTabs = settings.get("Toggles", "Enable SimpleOres Creative Tabs?", true).getBoolean(enableSimpleOresTabs);
 	    	enableSeparateTabs = settings.get("Toggles", "Enable Separate Creative Tabs?", true).getBoolean(enableSeparateTabs);
 	    	enableUpdateChecker = settings.get("Toggles", "Enable Update Checker?", true).getBoolean(enableUpdateChecker);
-	    	enableToolStatModification = settings.get("Toggles", "Enable Tool Stat Modification? (Advanced)", false).getBoolean(enableToolStatModification);
-	    	enableArmorStatModification = settings.get("Toggles", "Enable Armor Stat Modification? (Advanced)", false).getBoolean(enableArmorStatModification);
-	    	enableBlockStatModification = settings.get("Toggles", "Enable Block Stat Modification? (Advanced)", false).getBoolean(enableBlockStatModification);
-	    	enableHigherDimensionGen = settings.get("Toggles", "Enable Higher Dimension Generation? (Advanced)", false).getBoolean(enableHigherDimensionGen);
+	    	enableToolStatModification = settings.get("Toggles", "(Advanced) Enable Tool Stat Modification?", false).getBoolean(enableToolStatModification);
+	    	enableArmorStatModification = settings.get("Toggles", "(Advanced) Enable Armor Stat Modification?", false).getBoolean(enableArmorStatModification);
+	    	enableBlockStatModification = settings.get("Toggles", "(Advanced) Enable Block Stat Modification?", false).getBoolean(enableBlockStatModification);
+	    	enableCustomGeneration = settings.get("Toggles", "(Advanced) Enable Custom Generation?", false).getBoolean(enableCustomGeneration);
 	    	enableColoredGuis = settings.get("Toggles", "Enable Colored Gui's?", true).getBoolean(enableColoredGuis);
 	    	enableVerboseLogging = settings.get("Toggles", "Enable Verbose Logging?", false).getBoolean(enableColoredGuis);
-	    	enableChestLoot = settings.get("Toggles", "Enable Default Chest Loot Settings?", true).getBoolean(enableChestLoot);
 	    	
         	//Ore Spawn Rates 
         	copperSpawnRate = settings.get("Spawn Rates", "Copper Spawn Rate", 35).getInt();
@@ -72,44 +71,25 @@ public class Settings
         	onyxBowDamageModifier = settings.get("Bow Modifiers", "Onyx Bow Damage Modifier", 5).getInt();
         	
         	//Higher Dimensions
-        	if(enableHigherDimensionGen)
-        	{
-        		settings.addCustomCategoryComment("Higher Dimensions", "Instructions: Add each dimension ID to a new line between the '<' and '>'.");
-        		dimensionIDsArray = settings.get("Higher Dimensions", "Higher Dimensions ID List", new int[]{}).getIntList();
+        	if(enableCustomGeneration)
+        	{	
+        		settings.addCustomCategoryComment("Custom Generation Rules", "Used to define extra oregen rules, such as higher dimension generation. "
+        				+ "Doesn't override default generation values. Can be used to spawn non-SimpleOres blocks too. "
+        				+ "Format is: dimensionId, modId:hostBlock@metadata, modId:blockToSpawn@metadata, spawnRate, maxHeight, minHeight, veinSize");
         		
-        		LogHelper.verboseInfo("Detected an extra " + dimensionIDsArray.length + " dimensions to spawn ores in.");
-    			try
-    			{
-            		for(int i = 0; i < dimensionIDsArray.length; i++)
-            		{
-            			settings.get("Higher Dimension ID: " + dimensionIDsArray[i], "Copper Spawn Rate", 35).getInt();
-            			settings.get("Higher Dimension ID: " + dimensionIDsArray[i], "Tin Spawn Rate", 30).getInt();
-            			settings.get("Higher Dimension ID: " + dimensionIDsArray[i], "Mythril Spawn Rate", 8).getInt();
-            			settings.get("Higher Dimension ID: " + dimensionIDsArray[i], "Adamantium Spawn Rate", 4).getInt();
-            			settings.get("Higher Dimension ID: " + dimensionIDsArray[i], "Copper Max Spawn Height", 90).getInt();
-            			settings.get("Higher Dimension ID: " + dimensionIDsArray[i], "Copper Min Spawn Height", 0).getInt();
-            			settings.get("Higher Dimension ID: " + dimensionIDsArray[i], "Tin Max Spawn Height", 90).getInt();
-            			settings.get("Higher Dimension ID: " + dimensionIDsArray[i], "Tin Min Spawn Height", 0).getInt();
-            			settings.get("Higher Dimension ID: " + dimensionIDsArray[i], "Mythril Max Spawn Height", 35).getInt();
-            			settings.get("Higher Dimension ID: " + dimensionIDsArray[i], "Mythril Min Spawn Height", 0).getInt();
-            			settings.get("Higher Dimension ID: " + dimensionIDsArray[i], "Adamantium Max Spawn Height", 20).getInt();
-            			settings.get("Higher Dimension ID: " + dimensionIDsArray[i], "Adamantium Min Spawn Height", 0).getInt();
-            			settings.get("Higher Dimension ID: " + dimensionIDsArray[i], "Copper Vein Size", 7).getInt();
-            			settings.get("Higher Dimension ID: " + dimensionIDsArray[i], "Tin Vein Size", 7).getInt();
-            			settings.get("Higher Dimension ID: " + dimensionIDsArray[i], "Mythril Vein Size", 4).getInt();
-            			settings.get("Higher Dimension ID: " + dimensionIDsArray[i], "Adamantium Vein Size", 4).getInt();
-            			settings.get("Higher Dimension ID: " + dimensionIDsArray[i], "Copper BlockID To Spawn In", 1).getInt();
-            			settings.get("Higher Dimension ID: " + dimensionIDsArray[i], "Tin BlockID To Spawn In", 1).getInt();
-            			settings.get("Higher Dimension ID: " + dimensionIDsArray[i], "Mythril BlockID To Spawn In", 1).getInt();
-            			settings.get("Higher Dimension ID: " + dimensionIDsArray[i], "Adamantium BlockID To Spawn In", 1).getInt();
-            		}
-    			}
-    			catch(Exception e)
-    			{
-    				
-    			}
+        		String example = "1, minecraft:end_stone@0, minecraft:diamond_block@0, 500, 256, 0, 20";
+        		numCustomGenerationRules = settings.get("Custom Generation Rules", "Number of Custom Generation Rules", 0).getInt();	
+        		exampleCustomRule = settings.get("Custom Generation Rules", "Example Custom Rule (not loaded)", example).getString();
+        		
+        		
+        		if(numCustomGenerationRules > 0)
+        		{
+        			for(int i = 0; i < numCustomGenerationRules; i++)
+        			{
+        				settings.get("Custom Generation Rules", "Custom Rule #" + (i+1), new String()).getString();
+        			}
+        		}
         	}
-        	else dimensionIDsArray = new int[]{};
         	
         	//Tool Stat Modifiers
 	    	if(enableToolStatModification)
@@ -339,8 +319,8 @@ public class Settings
 	}
 	
 	//Toggles
-	public static boolean enableSimpleOresTabs, enableSeparateTabs, enableColoredGuis, enableChestLoot;
-	public static boolean enableUpdateChecker, enableVerboseLogging, enableHigherDimensionGen;
+	public static boolean enableSimpleOresTabs, enableSeparateTabs, enableColoredGuis;
+	public static boolean enableUpdateChecker, enableVerboseLogging, enableCustomGeneration;
 	public static boolean enableToolStatModification, enableArmorStatModification, enableBlockStatModification;
 		
 	//Ore Spawn Rates
@@ -360,7 +340,8 @@ public class Settings
 	public static int mythrilBowDamageModifier, onyxBowDamageModifier;
 		
 	//Higher Dimensions
-	public static int[] dimensionIDsArray;
+	public static int numCustomGenerationRules = 0;
+	public static String exampleCustomRule;
 		
 	//Tool Stats
 	public static int copperMiningLevel, tinMiningLevel, mythrilMiningLevel, adamantiumMiningLevel, onyxMiningLevel;

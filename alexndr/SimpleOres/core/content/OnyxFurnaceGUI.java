@@ -17,7 +17,7 @@ public class OnyxFurnaceGUI extends GuiContainer
     private OnyxFurnaceTileEntity furnaceInventory;
     
     private static String defaultGui = "textures/gui/container/furnace.png";
-    private static String coloredGui = "simpleores:" + "textures/gui/onyxFurnace.png";
+    private static String coloredGui = "simpleores:" + "textures/gui/onyx_furnace_gui.png";
 
     private static final ResourceLocation field_110410_t = new ResourceLocation(Settings.enableColoredGuis ? coloredGui : defaultGui);
     
@@ -32,7 +32,7 @@ public class OnyxFurnaceGUI extends GuiContainer
      */
     protected void drawGuiContainerForegroundLayer(int par1, int par2)
     {
-        this.fontRenderer.drawString(StatCollector.translateToLocal("tile.onyxFurnace.name"), this.xSize / 2 - this.fontRenderer.getStringWidth(StatCollector.translateToLocal("tile.onyxFurnace.name")) / 2, 6, Settings.enableColoredGuis ? 0xFFFFFF : 4210752);
+        this.fontRendererObj.drawString(StatCollector.translateToLocal("tile.onyx_furnace.name"), this.xSize / 2 - this.fontRendererObj.getStringWidth(StatCollector.translateToLocal("tile.onyxFurnace.name")) / 2, 6, Settings.enableColoredGuis ? 0xFFFFFF : 4210752);
     }
 
     /**

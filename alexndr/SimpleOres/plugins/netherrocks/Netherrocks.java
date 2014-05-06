@@ -1,33 +1,22 @@
 package alexndr.SimpleOres.plugins.netherrocks;
 
-import java.io.IOException;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-import net.minecraft.item.EnumArmorMaterial;
-import net.minecraft.item.EnumToolMaterial;
+import net.minecraft.item.Item.ToolMaterial;
+import net.minecraft.item.ItemArmor.ArmorMaterial;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.common.EnumHelper;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.util.EnumHelper;
 import alexndr.SimpleOres.api.helpers.CoreHelper;
 import alexndr.SimpleOres.api.helpers.LogHelper;
 import alexndr.SimpleOres.api.helpers.StatTriggersHelper;
 import alexndr.SimpleOres.api.helpers.UpdateCheckerHelper;
-
-import com.google.common.reflect.ClassPath;
-import com.google.common.reflect.ClassPath.ResourceInfo;
-
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.common.registry.LanguageRegistry;
 
-@NetworkMod(clientSideRequired = true, serverSideRequired = false)
 @Mod(modid = ModInfo.ID, name = ModInfo.NAME, version = ModInfo.VERSION, dependencies = "required-after:simpleores")
 public class Netherrocks 
 {
@@ -38,28 +27,17 @@ public class Netherrocks
 	/**
 	 * Creating the ToolMaterial Enum's.
 	 */
-	public static EnumToolMaterial toolFyrite;
-	public static EnumToolMaterial toolMalachite;
-	public static EnumToolMaterial toolAshstone;
-	public static EnumToolMaterial toolIllumenite;
-	public static EnumToolMaterial toolDragonstone;
-	public static EnumToolMaterial toolArgonite;
+	public static ToolMaterial toolFyrite, toolMalachite, toolAshstone, toolIllumenite, toolDragonstone, toolArgonite;
 	
   	/**
   	 * Creating the ArmorMaterial Enum's
   	 */
-  	public static EnumArmorMaterial armorFyrite;
-  	public static EnumArmorMaterial armorMalachite;
-	public static EnumArmorMaterial armorIllumenite;
-  	public static EnumArmorMaterial armorDragonstone;
+  	public static ArmorMaterial armorFyrite, armorMalachite, armorIllumenite, armorDragonstone;
 	
     /**
      * Creating the Armor Renderers. This is simply so you can see the armor texture when you wear it.
      */
-  	public static int rendererFyrite;
-  	public static int rendererMalachite;
-  	public static int rendererIllumenite;
-  	public static int rendererDragonstone;
+  	public static int rendererFyrite, rendererMalachite, rendererIllumenite, rendererDragonstone;
 	
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event)
@@ -67,7 +45,6 @@ public class Netherrocks
 		MinecraftForge.EVENT_BUS.register(new EventHelper());
 		
 		//Configuration
-		Config.loadConfig(event);
 		Settings.loadSettings(event);
 		
 		//Content
@@ -99,14 +76,13 @@ public class Netherrocks
 		if(CoreHelper.coreSettings.enableUpdateChecker){UpdateCheckerHelper.checkUpdates(ModInfo.VERSIONURL, ModInfo.ID, ModInfo.VERSION);}
 		
 		setAchievementTriggers();
-		addLocalisations();
 		
 		/**
 		 * Registering things such as the world generator, tile entities and GUI's. Adds localisations.
 		 * Thanks to @zot for the code for loading localisations automatically.
 		 */
-		NetworkRegistry.instance().registerGuiHandler(INSTANCE, proxy);
-		GameRegistry.registerWorldGenerator(new Generator());
+		NetworkRegistry.INSTANCE.registerGuiHandler(INSTANCE, proxy);
+		GameRegistry.registerWorldGenerator(new Generator(), 2);
 		GameRegistry.registerTileEntity(NetherFurnaceTileEntity.class, "NetherrocksNetherFurnace");
 		
         /**
@@ -120,51 +96,24 @@ public class Netherrocks
         /**
          * Sets what item can be used to repair tools/armor of that type. ie. Copper Ingot to repair copper tools and items.
          */   
-        toolMalachite.customCraftingMaterial = Content.malachiteIngot;
-        toolAshstone.customCraftingMaterial = Content.ashstoneGem;
-        toolDragonstone.customCraftingMaterial = Content.dragonstoneGem;
-        toolArgonite.customCraftingMaterial = Content.argoniteIngot;
-        toolFyrite.customCraftingMaterial = Content.fyriteIngot;
-        toolIllumenite.customCraftingMaterial = Content.illumeniteIngot;
+        toolMalachite.customCraftingMaterial = Content.malachite_ingot;
+        toolAshstone.customCraftingMaterial = Content.ashstone_gem;
+        toolDragonstone.customCraftingMaterial = Content.dragonstone_gem;
+        toolArgonite.customCraftingMaterial = Content.argonite_ingot;
+        toolFyrite.customCraftingMaterial = Content.fyrite_ingot;
+        toolIllumenite.customCraftingMaterial = Content.illumenite_ingot;
         
-        armorFyrite.customCraftingMaterial = Content.fyriteIngot;
-        armorMalachite.customCraftingMaterial = Content.malachiteIngot;
-        armorIllumenite.customCraftingMaterial = Content.illumeniteIngot;
-        armorDragonstone.customCraftingMaterial = Content.dragonstoneGem;
+        armorFyrite.customCraftingMaterial = Content.fyrite_ingot;
+        armorMalachite.customCraftingMaterial = Content.malachite_ingot;
+        armorIllumenite.customCraftingMaterial = Content.illumenite_ingot;
+        armorDragonstone.customCraftingMaterial = Content.dragonstone_gem;
 		
 		LogHelper.info("Plugin Loader: Netherrocks Plugin loaded successfully.");
 	}
 	
 	public static void setAchievementTriggers()
 	{
-		StatTriggersHelper.statTriggers().addCraftingTrigger(new ItemStack(Content.netherFurnace), Content.netherFurnaceAch);
-		StatTriggersHelper.statTriggers().addPickupTrigger(new ItemStack(Content.fyriteOre), Content.netherRocksAch);
-	}
-	
-	public void addLocalisations()
-	{
-		int numLocalisations = 0;
-		try 
-		{
-			Pattern p = Pattern.compile("assets/netherrocks/langs/(.*)\\.xml");
-			for (ResourceInfo i : ClassPath.from(getClass().getClassLoader()).getResources()) 
-			{
-				Matcher m = p.matcher(i.getResourceName());
-				if (m.matches())
-				{
-					numLocalisations ++;
-					LanguageRegistry.instance().loadLocalization(i.url(), m.group(1), true);
-					LogHelper.verboseInfo("Netherrocks Plugin: Loaded Netherrocks localisation for: " + m.group(1));
-				}
-			}
-		}
-		catch (IOException e) 
-		{
-			e.printStackTrace();
-		}
-		finally
-		{
-			LogHelper.verboseInfo("Netherrocks Plugin: " + numLocalisations + " Localisation(s) loaded successfully.");
-		}
+		StatTriggersHelper.statTriggers().addCraftingTrigger(new ItemStack(Content.nether_furnace), Content.netherFurnaceAch);
+		StatTriggersHelper.statTriggers().addPickupTrigger(new ItemStack(Content.fyrite_ore), Content.netherRocksAch);
 	}
 }

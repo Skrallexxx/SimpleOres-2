@@ -10,19 +10,16 @@ import net.minecraft.stats.Achievement;
 
 import com.google.common.collect.Lists;
 
-import cpw.mods.fml.common.ICraftingHandler;
-import cpw.mods.fml.common.IPickupNotifier;
-
-public class StatTriggersHelper implements ICraftingHandler, IPickupNotifier
+public class StatTriggersHelper
 {
 	private static final StatTriggersHelper statTriggers = new StatTriggersHelper();
 	
-	private static ArrayList<ItemStack> craftingItems = Lists.newArrayList();
-	private static ArrayList<Achievement> craftingAchievs = Lists.newArrayList();
-	private static ArrayList<ItemStack> smeltingItems = Lists.newArrayList();
-	private static ArrayList<Achievement> smeltingAchievs = Lists.newArrayList();
-	private static ArrayList<ItemStack> pickupItems = Lists.newArrayList();
-	private static ArrayList<Achievement> pickupAchievs = Lists.newArrayList();
+	private ArrayList<ItemStack> craftingItems = Lists.newArrayList();
+	private ArrayList<Achievement> craftingAchievs = Lists.newArrayList();
+	private ArrayList<ItemStack> smeltingItems = Lists.newArrayList();
+	private ArrayList<Achievement> smeltingAchievs = Lists.newArrayList();
+	private ArrayList<ItemStack> pickupItems = Lists.newArrayList();
+	private ArrayList<Achievement> pickupAchievs = Lists.newArrayList();
 	
 	public static final StatTriggersHelper statTriggers()
 	{
@@ -39,7 +36,6 @@ public class StatTriggersHelper implements ICraftingHandler, IPickupNotifier
 	{
 		this.craftingItems.add(itemstackTakenFromCrafting);
 		this.craftingAchievs.add(achievementToTrigger);
-		LogHelper.verboseInfo("StatTriggersHelper: Total number of crafting triggers registered = " + craftingAchievs.size());
 	}
 	
 	/**
@@ -52,7 +48,6 @@ public class StatTriggersHelper implements ICraftingHandler, IPickupNotifier
 	{
 		this.smeltingItems.add(itemstackTakenFromSmelting);
 		this.smeltingAchievs.add(achievementToTrigger);
-		LogHelper.verboseInfo("StatTriggersHelper: Total number of smelting triggers registered = " + smeltingAchievs.size());
 	}
 	
 	/**
@@ -65,17 +60,15 @@ public class StatTriggersHelper implements ICraftingHandler, IPickupNotifier
 	{
 		this.pickupItems.add(itemstackPickedUp);
 		this.pickupAchievs.add(achievementToTrigger);
-		LogHelper.verboseInfo("StatTriggersHelper: Total number of pickup triggers registered = " + pickupAchievs.size());
 	}
 
-	@Override
-	public void onCrafting(EntityPlayer player, ItemStack item, IInventory craftMatrix) 
+	public void notifyCrafting(EntityPlayer player, ItemStack item, IInventory craftMatrix) 
 	{
 		if(craftingItems.size() == craftingAchievs.size() && craftingItems.size() != 0)
 		{
 			for(int i = 0; i < craftingItems.size(); i ++)
 			{
-				if(item.itemID == craftingItems.get(i).itemID)
+				if(item.getItem() == craftingItems.get(i).getItem())
 				{
 					player.addStat(craftingAchievs.get(i), 1);
 				}
@@ -83,14 +76,13 @@ public class StatTriggersHelper implements ICraftingHandler, IPickupNotifier
 		}
 	}
 
-	@Override
-	public void onSmelting(EntityPlayer player, ItemStack item) 
+	public void notifySmelting(EntityPlayer player, ItemStack item) 
 	{
 		if(smeltingItems.size() == smeltingAchievs.size() && smeltingItems.size() != 0)
 		{
 			for(int i = 0; i < smeltingItems.size(); i ++)
 			{
-				if(item.itemID == smeltingItems.get(i).itemID)
+				if(item.getItem() == smeltingItems.get(i).getItem())
 				{
 					player.addStat(smeltingAchievs.get(i), 1);
 				}
@@ -98,14 +90,13 @@ public class StatTriggersHelper implements ICraftingHandler, IPickupNotifier
 		}
 	}
 
-	@Override
-	public void notifyPickup(EntityItem item, EntityPlayer player)
+	public void notifyPickup(EntityItem item, EntityPlayer player) 
 	{
 		if(pickupItems.size() == pickupAchievs.size() && pickupItems.size() != 0)
 		{
 			for(int i = 0; i < pickupItems.size(); i++)
 			{
-				if(item.getEntityItem().itemID == pickupItems.get(i).itemID)
+				if(item.getEntityItem().getItem() == pickupItems.get(i).getItem())
 				{
 					player.addStat(pickupAchievs.get(i), 1);
 				}

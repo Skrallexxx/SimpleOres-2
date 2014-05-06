@@ -1,8 +1,9 @@
 package alexndr.SimpleOres.plugins.netherrocks;
 
-import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.Slot;
@@ -130,14 +131,14 @@ public class NetherFurnaceContainer extends Container
             }
             else if (par2 != 1 && par2 != 0)
             {
-                if (FurnaceRecipes.smelting().getSmeltingResult(itemstack1) != null && itemstack1.itemID != Block.netherrack.blockID)
+                if (FurnaceRecipes.smelting().getSmeltingResult(itemstack1) != null && itemstack1.getItem() != Item.getItemFromBlock(Blocks.netherrack))
                 {
                     if (!this.mergeItemStack(itemstack1, 0, 1, false))
                     {
                         return null;
                     }
                 }
-                else if (itemstack1.itemID == Block.netherrack.blockID || itemstack1.itemID == Content.fyriteIngot.itemID || itemstack1.itemID == Item.blazeRod.itemID)
+                else if (itemstack1.getItem() == Item.getItemFromBlock(Blocks.netherrack) || itemstack1.getItem() == Content.fyrite_ingot || itemstack1.getItem() == Items.blaze_rod)
                 {
                     if (!this.mergeItemStack(itemstack1, 1, 2, false))
                     {

@@ -5,8 +5,6 @@ import net.minecraft.client.renderer.EntityRenderer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import cpw.mods.fml.common.ObfuscationReflectionHelper;
-import cpw.mods.fml.common.registry.TickRegistry;
-import cpw.mods.fml.relauncher.Side;
 
 public class ProxyClient extends ProxyCommon
 {
@@ -27,7 +25,6 @@ public class ProxyClient extends ProxyCommon
             f *= 1.1F;
         }
         
-        float speedOnGround = 0.1F;
         int i = player.getItemInUseDuration();
         float f1 = (float)i / 20.0F;
 
@@ -67,6 +64,6 @@ public class ProxyClient extends ProxyCommon
 	 @Override
 	 public void registerClientTickHandler()
 	 {
-		 TickRegistry.registerTickHandler(new HandlerTick(), Side.CLIENT);
+		 //TickRegistry.registerTickHandler(new HandlerTick(), Side.CLIENT);
 	 }
 }

@@ -5,22 +5,22 @@ import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityFurnace;
-import net.minecraft.util.Icon;
+import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import alexndr.SimpleOres.api.helpers.TabHelper;
 import alexndr.SimpleOres.core.Content;
-import alexndr.SimpleOres.core.Settings;
 import alexndr.SimpleOres.core.SimpleOres;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -41,13 +41,13 @@ public class MythrilFurnace extends BlockContainer
      */
     private static boolean keepFurnaceInventory = false;
     @SideOnly(Side.CLIENT)
-    private Icon furnaceIconTop;
+    private IIcon furnaceIconTop;
     @SideOnly(Side.CLIENT)
-    private Icon furnaceIconFront;
+    private IIcon furnaceIconFront;
 
-    public MythrilFurnace(int par1, boolean par2)
+    public MythrilFurnace(boolean par2)
     {
-        super(par1, Material.rock);
+        super(Material.iron);
         this.isActive = par2;
         
         if(par2 == false)
@@ -59,9 +59,10 @@ public class MythrilFurnace extends BlockContainer
     /**
      * Returns the ID of the items to drop on destruction.
      */
-    public int idDropped(int par1, Random par2Random, int par3)
+    @Override
+    public Item getItemDropped(int par1, Random par2Random, int par3)
     {
-        return Content.mythrilFurnace.blockID;
+        return Item.getItemFromBlock(Content.mythril_furnace);
     }
 
     /**
@@ -80,28 +81,28 @@ public class MythrilFurnace extends BlockContainer
     {
         if (!par1World.isRemote)
         {
-            int l = par1World.getBlockId(par2, par3, par4 - 1);
-            int i1 = par1World.getBlockId(par2, par3, par4 + 1);
-            int j1 = par1World.getBlockId(par2 - 1, par3, par4);
-            int k1 = par1World.getBlockId(par2 + 1, par3, par4);
+            Block l = par1World.getBlock(par2, par3, par4 - 1);
+            Block i1 = par1World.getBlock(par2, par3, par4 + 1);
+            Block j1 = par1World.getBlock(par2 - 1, par3, par4);
+            Block k1 = par1World.getBlock(par2 + 1, par3, par4);
             byte b0 = 3;
 
-            if (Block.opaqueCubeLookup[l] && !Block.opaqueCubeLookup[i1])
+            if (l.func_149730_j() && !i1.func_149730_j())
             {
                 b0 = 3;
             }
 
-            if (Block.opaqueCubeLookup[i1] && !Block.opaqueCubeLookup[l])
+            if (i1.func_149730_j() && !l.func_149730_j())
             {
                 b0 = 2;
             }
 
-            if (Block.opaqueCubeLookup[j1] && !Block.opaqueCubeLookup[k1])
+            if (j1.func_149730_j() && !k1.func_149730_j())
             {
                 b0 = 5;
             }
 
-            if (Block.opaqueCubeLookup[k1] && !Block.opaqueCubeLookup[j1])
+            if (k1.func_149730_j() && !j1.func_149730_j())
             {
                 b0 = 4;
             }
@@ -110,12 +111,11 @@ public class MythrilFurnace extends BlockContainer
         }
     }
 
-    @SideOnly(Side.CLIENT)
-
     /**
      * From the specified side and block metadata retrieves the blocks texture. Args: side, metadata
      */
-    public Icon getIcon(int par1, int par2)
+    @SideOnly(Side.CLIENT)
+    public IIcon getIcon(int par1, int par2)
     {
         if(par2 == 0 || par2 == 1)
         {
@@ -124,20 +124,19 @@ public class MythrilFurnace extends BlockContainer
         else
         {
         	return par1 == 1 ? this.furnaceIconTop : (par1 == 0 ? this.furnaceIconTop : (par1 != par2 ? this.blockIcon : this.furnaceIconFront));
-        }          
+        }      
     }
    
-    @SideOnly(Side.CLIENT)
-
     /**
      * When this method is called, your block should register all the icons it needs with the given IconRegister. This
      * is the only chance you get to register icons.
      */
-    public void registerIcons(IconRegister par1IconRegister)
+    @SideOnly(Side.CLIENT)
+    public void registerBlockIcons(IIconRegister par1IIconRegister)
     {
-        this.blockIcon = par1IconRegister.registerIcon("simpleores:" + "mythrilFurnaceSide");
-        this.furnaceIconFront = par1IconRegister.registerIcon(this.isActive ? "simpleores:" + "mythrilFurnaceFrontLit" : "simpleores:" + "mythrilFurnaceFront");
-        this.furnaceIconTop = par1IconRegister.registerIcon("simpleores:" + "mythrilFurnaceTop");
+        this.blockIcon = par1IIconRegister.registerIcon("simpleores:" + "mythril_furnace_side");
+        this.furnaceIconFront = par1IIconRegister.registerIcon(this.isActive ? "simpleores:" + "mythril_furnace_front_lit" : "simpleores:" + "mythril_furnace_front");
+        this.furnaceIconTop = par1IIconRegister.registerIcon("simpleores:" + "mythril_furnace_top");
     }
 
     /**
@@ -163,16 +162,16 @@ public class MythrilFurnace extends BlockContainer
     public static void updateFurnaceBlockState(boolean par0, World par1World, int par2, int par3, int par4)
     {
         int l = par1World.getBlockMetadata(par2, par3, par4);
-        TileEntity tileentity = par1World.getBlockTileEntity(par2, par3, par4);
+        TileEntity tileentity = par1World.getTileEntity(par2, par3, par4);
         keepFurnaceInventory = true;
 
         if (par0)
         {
-            par1World.setBlock(par2, par3, par4, Content.mythrilFurnaceOn.blockID);
+            par1World.setBlock(par2, par3, par4, Content.mythril_furnace_lit);
         }
         else
         {
-            par1World.setBlock(par2, par3, par4, Content.mythrilFurnace.blockID);
+            par1World.setBlock(par2, par3, par4, Content.mythril_furnace);
         }
 
         keepFurnaceInventory = false;
@@ -181,15 +180,14 @@ public class MythrilFurnace extends BlockContainer
         if (tileentity != null)
         {
             tileentity.validate();
-            par1World.setBlockTileEntity(par2, par3, par4, tileentity);
+            par1World.setTileEntity(par2, par3, par4, tileentity);
         }
     }
-
-    @SideOnly(Side.CLIENT)
 
     /**
      * A randomly called display update to be able to add particles or other items for display
      */
+    @SideOnly(Side.CLIENT)
     public void randomDisplayTick(World par1World, int par2, int par3, int par4, Random par5Random)
     {
         if (this.isActive)
@@ -227,7 +225,8 @@ public class MythrilFurnace extends BlockContainer
     /**
      * Returns a new instance of a block's tile entity class. Called on placing the block.
      */
-    public TileEntity createNewTileEntity(World par1World)
+    @Override
+    public TileEntity createNewTileEntity(World par1World, int var2)
     {
         return new MythrilFurnaceTileEntity();
     }
@@ -261,18 +260,18 @@ public class MythrilFurnace extends BlockContainer
 
         if (par6ItemStack.hasDisplayName())
         {
-            ((TileEntityFurnace)par1World.getBlockTileEntity(par2, par3, par4)).setGuiDisplayName(par6ItemStack.getDisplayName());
+            ((TileEntityFurnace)par1World.getTileEntity(par2, par3, par4)).func_145951_a(par6ItemStack.getDisplayName());
         }
     }
 
     /**
      * ejects contained items into the world, and notifies neighbours of an update, as appropriate
      */
-    public void breakBlock(World par1World, int par2, int par3, int par4, int par5, int par6)
+    public void breakBlock(World par1World, int par2, int par3, int par4, Block par5, int par6)
     {
         if (!keepFurnaceInventory)
         {
-            MythrilFurnaceTileEntity tileentityfurnace = (MythrilFurnaceTileEntity)par1World.getBlockTileEntity(par2, par3, par4);
+            MythrilFurnaceTileEntity tileentityfurnace = (MythrilFurnaceTileEntity)par1World.getTileEntity(par2, par3, par4);
 
             if (tileentityfurnace != null)
             {
@@ -296,7 +295,7 @@ public class MythrilFurnace extends BlockContainer
                             }
 
                             itemstack.stackSize -= k1;
-                            EntityItem entityitem = new EntityItem(par1World, (double)((float)par2 + f), (double)((float)par3 + f1), (double)((float)par4 + f2), new ItemStack(itemstack.itemID, k1, itemstack.getItemDamage()));
+                            EntityItem entityitem = new EntityItem(par1World, (double)((float)par2 + f), (double)((float)par3 + f1), (double)((float)par4 + f2), new ItemStack(itemstack.getItem(), k1, itemstack.getItemDamage()));
 
                             if (itemstack.hasTagCompound())
                             {
@@ -312,7 +311,7 @@ public class MythrilFurnace extends BlockContainer
                     }
                 }
 
-                par1World.func_96440_m(par2, par3, par4, par5);
+                par1World.func_147453_f(par2, par3, par4, par5);
             }
         }
 
@@ -334,6 +333,6 @@ public class MythrilFurnace extends BlockContainer
      */
     public int getComparatorInputOverride(World par1World, int par2, int par3, int par4, int par5)
     {
-        return Container.calcRedstoneFromInventory((IInventory)par1World.getBlockTileEntity(par2, par3, par4));
+        return Container.calcRedstoneFromInventory((IInventory)par1World.getTileEntity(par2, par3, par4));
     }
 }

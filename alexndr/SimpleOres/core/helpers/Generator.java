@@ -1,13 +1,20 @@
 package alexndr.SimpleOres.core.helpers;
 
+import java.util.List;
 import java.util.Random;
 
 import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
+import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.IChunkProvider;
 import alexndr.SimpleOres.api.helpers.WorldGenHelper;
 import alexndr.SimpleOres.core.Content;
 import alexndr.SimpleOres.core.Settings;
+
+import com.google.common.base.Splitter;
+import com.google.common.collect.Lists;
+
 import cpw.mods.fml.common.IWorldGenerator;
 
 public class Generator implements IWorldGenerator 
@@ -30,15 +37,18 @@ public class Generator implements IWorldGenerator
 			generateSurface(world, random, chunkX*16, chunkZ*16);
 		}
 		
-		if(Settings.enableHigherDimensionGen && Settings.dimensionIDsArray.length >= 1)
+		if(Settings.enableCustomGeneration && Settings.numCustomGenerationRules > 0)
 		{
-			for(int i = 0; i < Settings.dimensionIDsArray.length; i++)
-			{
-				if(world.provider.dimensionId == Settings.dimensionIDsArray[i])
-				{
-					generateHigher(world, random, chunkX*16, chunkZ*16, Settings.dimensionIDsArray[i]);
-				}
-			}
+    		
+    		for(int i = 0; i < Settings.numCustomGenerationRules; i++)
+    		{
+    			String customRule = Settings.settings.get("Custom Generation Rules", "Custom Rule #" + (i+1), new String()).getString();
+    			
+    			if(world.provider.dimensionId == splitCustomRuleInts(customRule, "dimensionId"))
+    			{
+    				generateHigher(customRule, world, random, chunkX*16, chunkZ*16);
+    			}
+    		}
 		}
 	}
 	
@@ -61,7 +71,7 @@ public class Generator implements IWorldGenerator
 		    int Xcoord = blockX + random.nextInt(16);
 		    int Ycoord = random.nextInt(Settings.copperMaxHeight - Settings.copperMinHeight);
 		    int Zcoord = blockZ + random.nextInt(16);
-		    new WorldGenHelper(Content.copperOre.blockID, Settings.copperVeinSize, Block.stone).generate(world, random, Xcoord, Ycoord + Settings.copperMinHeight, Zcoord);		   
+		    new WorldGenHelper(Content.copper_ore, Settings.copperVeinSize, Blocks.stone).generate(world, random, Xcoord, Ycoord + Settings.copperMinHeight, Zcoord);		   
 		}
 		
 		for(int x = 0; x < Settings.tinSpawnRate; x++)
@@ -69,7 +79,7 @@ public class Generator implements IWorldGenerator
 			int Xcoord = blockX + random.nextInt(16);
 		    int Ycoord = random.nextInt(Settings.tinMaxHeight - Settings.tinMinHeight);
 		    int Zcoord = blockZ + random.nextInt(16);
-		    new WorldGenHelper(Content.tinOre.blockID, Settings.tinVeinSize, Block.stone).generate(world, random, Xcoord, Ycoord + Settings.tinMinHeight, Zcoord);
+		    new WorldGenHelper(Content.tin_ore, Settings.tinVeinSize, Blocks.stone).generate(world, random, Xcoord, Ycoord + Settings.tinMinHeight, Zcoord);
 		}
 
 		for(int x = 0; x < Settings.mythrilSpawnRate; x++)
@@ -77,7 +87,7 @@ public class Generator implements IWorldGenerator
 		    int Xcoord = blockX + random.nextInt(16);
 		    int Ycoord = random.nextInt(Settings.mythrilMaxHeight - Settings.mythrilMinHeight);
 		    int Zcoord = blockZ + random.nextInt(16);
-		    new WorldGenHelper(Content.mythrilOre.blockID, Settings.mythrilVeinSize, Block.stone).generate(world, random, Xcoord, Ycoord + Settings.mythrilMinHeight, Zcoord);
+		    new WorldGenHelper(Content.mythril_ore, Settings.mythrilVeinSize, Blocks.stone).generate(world, random, Xcoord, Ycoord + Settings.mythrilMinHeight, Zcoord);
 
 		}
 
@@ -86,7 +96,7 @@ public class Generator implements IWorldGenerator
 		    int Xcoord = blockX + random.nextInt(16);
 		    int Ycoord = random.nextInt(Settings.adamantiumMaxHeight - Settings.adamantiumMinHeight);
 		    int Zcoord = blockZ + random.nextInt(16);
-		    new WorldGenHelper(Content.adamantiumOre.blockID, Settings.adamantiumVeinSize, Block.stone).generate(world, random, Xcoord, Ycoord + Settings.adamantiumMinHeight, Zcoord);
+		    new WorldGenHelper(Content.adamantium_ore, Settings.adamantiumVeinSize, Blocks.stone).generate(world, random, Xcoord, Ycoord + Settings.adamantiumMinHeight, Zcoord);
 		}
 	}
 	
@@ -109,7 +119,7 @@ public class Generator implements IWorldGenerator
 	    	int randPosX = baseX + rand.nextInt(16);
 	        int randPosY = rand.nextInt(Settings.onyxMaxHeight - Settings.onyxMinHeight);
 	        int randPosZ = baseZ + rand.nextInt(16);
-	        new WorldGenHelper(Content.onyxOre.blockID, Settings.onyxVeinSize, Block.netherrack).generate(world, rand, randPosX, randPosY + Settings.onyxMinHeight, randPosZ);
+	        new WorldGenHelper(Content.onyx_ore, Settings.onyxVeinSize, Blocks.netherrack).generate(world, rand, randPosX, randPosY + Settings.onyxMinHeight, randPosZ);
 	    }
 	}
 	
@@ -119,65 +129,89 @@ public class Generator implements IWorldGenerator
 	 * 
 	 * Each different dimension can have different spawn rates, with support for up to ~30000 dimensions (I think).
 	 */
-	private void generateHigher(World world, Random random, int blockX, int blockZ, int dimensionID) 
+	private void generateHigher(String customRule, World world, Random random, int blockX, int blockZ) 
 	{
-		if(Settings.enableHigherDimensionGen)
+		if(Settings.enableCustomGeneration)
 		{
-			for(int i = 0; i < Settings.dimensionIDsArray.length; i++)
-			{
-				int copperRate = Settings.settings.get("Higher Dimension ID: " + dimensionID, "Copper Spawn Rate", 35).getInt();
-				int tinRate = Settings.settings.get("Higher Dimension ID: " + dimensionID, "Tin Spawn Rate", 30).getInt();
-				int mythrilRate = Settings.settings.get("Higher Dimension ID: " + dimensionID, "Mythril Spawn Rate", 8).getInt();
-				int adamantiumRate = Settings.settings.get("Higher Dimension ID: " + dimensionID, "Adamantium Spawn Rate", 4).getInt();
-				
-				for(int x = 0; x < copperRate; x++)
-				{
-					int maxHeight = Settings.settings.get("Higher Dimension ID: " + dimensionID, "Copper Max Spawn Height", 90).getInt();
-					int minHeight = Settings.settings.get("Higher Dimension ID: " + dimensionID, "Copper Min Spawn Height", 0).getInt();
-					int veinSize = Settings.settings.get("Higher Dimension ID: " + dimensionID, "Copper Vein Size", 7).getInt();
-					
-				    int Xcoord = blockX + random.nextInt(16);
-				    int Ycoord = random.nextInt(maxHeight - minHeight);
-				    int Zcoord = blockZ + random.nextInt(16);
-				    new WorldGenHelper(Content.copperOre.blockID, veinSize, Block.blocksList[Settings.settings.get("Higher Dimension ID: " + dimensionID, "Copper BlockID To Spawn In", 1).getInt()]).generate(world, random, Xcoord, Ycoord + minHeight, Zcoord);				    
-				}
-				
-				for(int x = 0; x < tinRate; x++)
-				{
-					int maxHeight = Settings.settings.get("Higher Dimension ID: " + dimensionID, "Tin Max Spawn Height", 90).getInt();
-					int minHeight = Settings.settings.get("Higher Dimension ID: " + dimensionID, "Tin Min Spawn Height", 0).getInt();
-					int veinSize = Settings.settings.get("Higher Dimension ID: " + dimensionID, "Tin Vein Size", 7).getInt();
-					
-				    int Xcoord = blockX + random.nextInt(16);
-				    int Ycoord = random.nextInt(maxHeight - minHeight);
-				    int Zcoord = blockZ + random.nextInt(16);
-				    new WorldGenHelper(Content.tinOre.blockID, veinSize, Block.blocksList[Settings.settings.get("Higher Dimension ID: " + dimensionID, "Tin BlockID To Spawn In", 1).getInt()]).generate(world, random, Xcoord, Ycoord + minHeight, Zcoord);				 
-				}
-				
-				for(int x = 0; x < mythrilRate; x++)
-				{
-					int maxHeight = Settings.settings.get("Higher Dimension ID: " + dimensionID, "Mythril Max Spawn Height", 35).getInt();
-					int minHeight = Settings.settings.get("Higher Dimension ID: " + dimensionID, "Mythril Min Spawn Height", 0).getInt();
-					int veinSize = Settings.settings.get("Higher Dimension ID: " + dimensionID, "Mythril Vein Size", 4).getInt();
-					
-				    int Xcoord = blockX + random.nextInt(16);
-				    int Ycoord = random.nextInt(maxHeight - minHeight);
-				    int Zcoord = blockZ + random.nextInt(16);
-				    new WorldGenHelper(Content.mythrilOre.blockID, veinSize, Block.blocksList[Settings.settings.get("Higher Dimension ID: " + dimensionID, "Mythril BlockID To Spawn In", 1).getInt()]).generate(world, random, Xcoord, Ycoord + minHeight, Zcoord);				   
-				}
-				
-				for(int x = 0; x < adamantiumRate; x++)
-				{
-					int maxHeight = Settings.settings.get("Higher Dimension ID: " + dimensionID, "Adamantium Max Spawn Height", 20).getInt();
-					int minHeight = Settings.settings.get("Higher Dimension ID: " + dimensionID, "Adamantium Min Spawn Height", 0).getInt();
-					int veinSize = Settings.settings.get("Higher Dimension ID: " + dimensionID, "Adamantium Vein Size", 4).getInt();
-					
-				    int Xcoord = blockX + random.nextInt(16);
-				    int Ycoord = random.nextInt(maxHeight - minHeight);
-				    int Zcoord = blockZ + random.nextInt(16);
-				    new WorldGenHelper(Content.adamantiumOre.blockID, veinSize, Block.blocksList[Settings.settings.get("Higher Dimension ID: " + dimensionID, "Adamantium BlockID To Spawn In", 1).getInt()]).generate(world, random, Xcoord, Ycoord + minHeight, Zcoord);				    
-				}
-			}
+			int spawnRate = splitCustomRuleInts(customRule, "spawnRate");
+			int maxHeight = splitCustomRuleInts(customRule, "maxHeight");
+			int minHeight = splitCustomRuleInts(customRule, "minHeight");
+			int veinSize = splitCustomRuleInts(customRule, "veinSize");
+			Block hostBlock = splitCustomRuleBlocks(customRule, "hostBlock");
+			Block spawningBlock = splitCustomRuleBlocks(customRule, "spawningBlock");
+			
+		    for(int i = 0; i < spawnRate; i++)
+		    {	
+			    int Xcoord = blockX + random.nextInt(16);
+			    int Ycoord = random.nextInt(maxHeight - minHeight);
+			    int Zcoord = blockZ + random.nextInt(16);
+			    new WorldGenHelper(spawningBlock, veinSize, hostBlock).generate(world, random, Xcoord, Ycoord + minHeight, Zcoord);
+		    }
 		}
 	}
-}
+	
+	private int splitCustomRuleInts(String customRule, String requestedComponent)
+	{
+		String rule = customRule;
+		List ruleParts = Lists.newArrayList(Splitter.on(',').trimResults().split(rule));
+		
+		if(requestedComponent == "dimensionId")
+		{
+			return Integer.parseInt(ruleParts.get(0).toString());
+		}
+		
+		if(requestedComponent == "spawnRate")
+		{
+			return Integer.parseInt(ruleParts.get(3).toString());
+		}
+			
+		if(requestedComponent == "maxHeight")
+		{
+			return Integer.parseInt(ruleParts.get(4).toString());
+		}
+		
+		if(requestedComponent == "minHeight")
+		{
+			return Integer.parseInt(ruleParts.get(5).toString());
+		}
+		
+		if(requestedComponent == "veinSize")
+		{
+			return Integer.parseInt(ruleParts.get(6).toString());
+		}
+		
+		else
+		{
+			return 0;
+		}
+	}
+	
+	private Block splitCustomRuleBlocks(String customRule, String requestedComponent)
+	{
+		String rule = customRule;
+		List ruleParts = Lists.newArrayList(Splitter.on(',').trimResults().split(rule));
+		List hostBlockInfo = Lists.newArrayList(Splitter.on('@').split(ruleParts.get(1).toString()));
+		List spawningBlockInfo = Lists.newArrayList(Splitter.on('@').split(ruleParts.get(2).toString()));
+		
+		if(requestedComponent == "hostBlock")
+		{
+			Block hostBlock = (Block) Block.blockRegistry.getObject(hostBlockInfo.get(0).toString());
+			int meta = Integer.parseInt(hostBlockInfo.get(1).toString());
+			ItemStack stack = new ItemStack(hostBlock, 1, meta);
+			return Block.getBlockFromItem(stack.getItem());
+		}
+		
+		if(requestedComponent == "spawningBlock")
+		{
+			Block spawningBlock = (Block) Block.blockRegistry.getObject(spawningBlockInfo.get(0).toString());
+			int meta = Integer.parseInt(spawningBlockInfo.get(1).toString());
+			ItemStack stack = new ItemStack(spawningBlock, 1, meta);
+			return Block.getBlockFromItem(stack.getItem());
+		}
+		
+		else
+		{
+			return null;
+		}
+	}
+}		

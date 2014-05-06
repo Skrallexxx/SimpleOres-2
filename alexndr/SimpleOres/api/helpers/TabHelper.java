@@ -2,6 +2,7 @@ package alexndr.SimpleOres.api.helpers;
 
 import net.minecraft.creativetab.CreativeTabs;
 
+@SuppressWarnings("static-access")
 public class TabHelper 
 {
 	private static boolean tabs = CoreHelper.coreSettings.enableSimpleOresTabs;

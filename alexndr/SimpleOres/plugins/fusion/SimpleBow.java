@@ -1,20 +1,18 @@
  package alexndr.SimpleOres.plugins.fusion;
 
 import java.util.List;
-import java.util.Random;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
+import net.minecraft.init.Items;
 import net.minecraft.item.EnumAction;
-import net.minecraft.item.EnumToolMaterial;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemBow;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.Icon;
+import net.minecraft.util.IIcon;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
@@ -22,7 +20,6 @@ import net.minecraftforge.event.entity.player.ArrowLooseEvent;
 
 import org.lwjgl.opengl.GL11;
 
-import alexndr.SimpleOres.api.helpers.CoreHelper;
 import alexndr.SimpleOres.api.helpers.TabHelper;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -33,19 +30,19 @@ public class SimpleBow extends ItemBow
 	/**
 	 * The EnumToolMaterial for the tool. This is used to set what item can be used to repair it.
 	 */
-    private final EnumToolMaterial material;
+    private final ToolMaterial material;
 	
     /**
      * Creating the icons for the bows. As you draw the bows back, the icon changes, which is why there are 4 icons for each bow here.
      */ 
-	public static Icon thyriumBow;
-	public static Icon thyriumBow1;
-	public static Icon thyriumBow2;
-	public static Icon thyriumBow3;
-	public static Icon sinisiteBow;
-	public static Icon sinisiteBow1;
-	public static Icon sinisiteBow2;
-	public static Icon sinisiteBow3;
+	public static IIcon thyriumBow;
+	public static IIcon thyriumBow1;
+	public static IIcon thyriumBow2;
+	public static IIcon thyriumBow3;
+	public static IIcon sinisiteBow;
+	public static IIcon sinisiteBow1;
+	public static IIcon sinisiteBow2;
+	public static IIcon sinisiteBow3;
 		
 	/**
 	 * Constructor for the bows. Worth noting are the following:
@@ -53,9 +50,9 @@ public class SimpleBow extends ItemBow
 	 * "this.maxStackSize = 1;" This basically just sets it so that you can only have one per stack.
 	 * "this.bFull3D = true;" This allows it to be rendered in proper 3D when held in your hand. Tools are rendered like this, while items such as sugar are not. 
 	 */
-	public SimpleBow(int par1, int dam, EnumToolMaterial enumtoolmaterial)
+	public SimpleBow(int dam, ToolMaterial enumtoolmaterial)
 	{
-		super(par1);
+		super();
 		this.maxStackSize = 1;	
 		material = enumtoolmaterial;
 		this.canRepair = true;
@@ -71,26 +68,26 @@ public class SimpleBow extends ItemBow
 	 * The default image for the sinisite bow is set as sinisiteBow.
 	 */
 	@SideOnly(Side.CLIENT)
-	public void registerIcons(IconRegister iconRegister)
+	public void registerIcons(IIconRegister iconRegister)
 	{			
-		if(itemID == Content.thyriumBow.itemID)
+		if(this == Content.thyrium_bow)
 		{
-			this.itemIcon = iconRegister.registerIcon("simpleoresfusion:" + "thyriumBow");
+			this.itemIcon = iconRegister.registerIcon("simpleoresfusion:" + "thyrium_bow");
 		}
 		
-		if(itemID == Content.sinisiteBow.itemID)
+		if(this == Content.sinisite_bow)
 		{
-			this.itemIcon = iconRegister.registerIcon("simpleoresfusion:" + "sinisiteBow");
+			this.itemIcon = iconRegister.registerIcon("simpleoresfusion:" + "sinisite_bow");
 		}
 		
-		thyriumBow = iconRegister.registerIcon("simpleoresfusion:" + "thyriumBow");
-		thyriumBow1 = iconRegister.registerIcon("simpleoresfusion:" + "thyriumBow1");
-		thyriumBow2 = iconRegister.registerIcon("simpleoresfusion:" + "thyriumBow2");
-		thyriumBow3 = iconRegister.registerIcon("simpleoresfusion:" + "thyriumBow3");
-		sinisiteBow = iconRegister.registerIcon("simpleoresfusion:" + "sinisiteBow");
-		sinisiteBow1 = iconRegister.registerIcon("simpleoresfusion:" + "sinisiteBow1");
-		sinisiteBow2 = iconRegister.registerIcon("simpleoresfusion:" + "sinisiteBow2");
-		sinisiteBow3 = iconRegister.registerIcon("simpleoresfusion:" + "sinisiteBow3");
+		thyriumBow = iconRegister.registerIcon("simpleoresfusion:" + "thyrium_bow");
+		thyriumBow1 = iconRegister.registerIcon("simpleoresfusion:" + "thyrium_bow_1");
+		thyriumBow2 = iconRegister.registerIcon("simpleoresfusion:" + "thyrium_bow_2");
+		thyriumBow3 = iconRegister.registerIcon("simpleoresfusion:" + "thyrium_bow_3");
+		sinisiteBow = iconRegister.registerIcon("simpleoresfusion:" + "sinisite_bow");
+		sinisiteBow1 = iconRegister.registerIcon("simpleoresfusion:" + "sinisite_bow_1");
+		sinisiteBow2 = iconRegister.registerIcon("simpleoresfusion:" + "sinisite_bow_2");
+		sinisiteBow3 = iconRegister.registerIcon("simpleoresfusion:" + "sinisite_bow_3");
 	}
 	
 	/**
@@ -99,7 +96,7 @@ public class SimpleBow extends ItemBow
 	 * The GL11.glTranslate/Rotate sets how the item is held in third person, so it is held like a bow rather than a tool
 	 * (ie. hand on the grip in the middle, not at the bottom.
 	 */
-	public Icon getIcon(ItemStack itemStack, int renderPass, EntityPlayer player, ItemStack usingItem, int useRemaining) 
+	public IIcon getIcon(ItemStack itemStack, int renderPass, EntityPlayer player, ItemStack usingItem, int useRemaining) 
 	{	
 		if(Minecraft.getMinecraft().gameSettings.thirdPersonView != 0)
 		{
@@ -113,36 +110,36 @@ public class SimpleBow extends ItemBow
 		int var8 = itemStack.getMaxItemUseDuration() - useRemaining;
 		if (var8 >= 18)
 		{						
-			if(itemID == Content.thyriumBow.itemID)
+			if(this == Content.thyrium_bow)
 			{
 				return thyriumBow3;
 			}
 			
-			if(itemID == Content.sinisiteBow.itemID)
+			if(this == Content.sinisite_bow)
 			{
 				return sinisiteBow3;
 			}
 		}
 		if (var8 > 13)
 		{			
-			if(itemID == Content.thyriumBow.itemID)
+			if(this == Content.thyrium_bow)
 			{
 				return thyriumBow2;
 			}
 			
-			if(itemID == Content.sinisiteBow.itemID)
+			if(this == Content.sinisite_bow)
 			{
 				return sinisiteBow2;
 			}
 		}		
 		if (var8 > 0)
 		{			
-			if(itemID == Content.thyriumBow.itemID)
+			if(this == Content.thyrium_bow)
 			{
 				return thyriumBow1;
 			}
 			
-			if(itemID == Content.sinisiteBow.itemID)
+			if(this == Content.sinisite_bow)
 			{
 				return sinisiteBow1;
 			}
@@ -179,15 +176,16 @@ public class SimpleBow extends ItemBow
 	/**
 	 * Adds info to the tool tip when you hover over the item. This is just to show the special effects of the bows.
 	 */
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public void addInformation(ItemStack stack, EntityPlayer par2EntityPlayer, List par3List, boolean par4)
 	{	
-		if(itemID == Content.thyriumBow.itemID)
+		if(this == Content.thyrium_bow)
 		{
 			par3List.add(StatCollector.translateToLocal("tips.damageTooltip"));
 			par3List.add(StatCollector.translateToLocal("tips.zoomTooltip"));
 		}
 		
-		if(itemID == Content.sinisiteBow.itemID)
+		if(this == Content.sinisite_bow)
 		{
 			par3List.add(StatCollector.translateToLocal("tips.damageTooltip"));
 			par3List.add(StatCollector.translateToLocal("tips.knockbackTooltip"));
@@ -214,7 +212,7 @@ public class SimpleBow extends ItemBow
 		var6 = event.charge;
 		boolean flag = (par3EntityPlayer.capabilities.isCreativeMode) || (EnchantmentHelper.getEnchantmentLevel(Enchantment.infinity.effectId, par1ItemStack) > 0);
 		
-		if ((flag) || (par3EntityPlayer.inventory.hasItem(Item.arrow.itemID))) 
+		if ((flag) || (par3EntityPlayer.inventory.hasItem(Items.arrow))) 
 		{
 			int i = getMaxItemUseDuration(par1ItemStack) - par4;
 			float f = i / 20.0F;
@@ -258,25 +256,10 @@ public class SimpleBow extends ItemBow
 			
 			par1ItemStack.damageItem(1, par3EntityPlayer);
 			par2World.playSoundAtEntity(par3EntityPlayer, "random.bow", 1.0F, 1.0F / (itemRand.nextFloat() * 0.4F + 1.2F) + f * 0.5F);
-			
-            Random generator = new Random();
             
-        	int z;
-        	int r = generator.nextInt(100);
-        	
-        	if(r <= 50)
-        	{
-        		z = 1;
-        	}
-        	
-           	else
-        	{
-        		z = 0;
-        	}
-			
 			if (!flag) 
 			{
-				par3EntityPlayer.inventory.consumeInventoryItem(Item.arrow.itemID);	
+				par3EntityPlayer.inventory.consumeInventoryItem(Items.arrow);	
 			}
 						
 			else 
@@ -288,12 +271,12 @@ public class SimpleBow extends ItemBow
 			{
 				par2World.spawnEntityInWorld(var8);			
 				
-				if(itemID == Content.thyriumBow.itemID)
+				if(this == Content.thyrium_bow)
 				{
 					var8.setDamage(var8.getDamage() + Settings.thyriumBowDamageModifier * 0.5D + 0.5D);
 				}
 				
-				if(itemID == Content.sinisiteBow.itemID)
+				if(this == Content.sinisite_bow)
 				{
 					var8.setDamage(var8.getDamage() + Settings.sinisiteBowDamageModifier * 0.5D + 0.5D);
 					var8.setKnockbackStrength(k + Settings.sinisiteBowKnockbackModifier);
@@ -323,12 +306,9 @@ public class SimpleBow extends ItemBow
 		return EnumAction.bow;
 	}
 	
-	/**
-	 * 
-	 */
 	public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer) 
 	{
-		if ((par3EntityPlayer.capabilities.isCreativeMode) || (par3EntityPlayer.inventory.hasItem(Item.arrow.itemID))) 
+		if ((par3EntityPlayer.capabilities.isCreativeMode) || (par3EntityPlayer.inventory.hasItem(Items.arrow))) 
 		{
 			par3EntityPlayer.setItemInUse(par1ItemStack, getMaxItemUseDuration(par1ItemStack));
 		}
@@ -351,6 +331,6 @@ public class SimpleBow extends ItemBow
 	 */
     public boolean getIsRepairable(ItemStack par1ItemStack, ItemStack par2ItemStack)
     {
-        return this.material.getToolCraftingMaterial() == par2ItemStack.itemID ? true : super.getIsRepairable(par1ItemStack, par2ItemStack);
+        return this.material.customCraftingMaterial == par2ItemStack.getItem() ? true : super.getIsRepairable(par1ItemStack, par2ItemStack);
     }
 }

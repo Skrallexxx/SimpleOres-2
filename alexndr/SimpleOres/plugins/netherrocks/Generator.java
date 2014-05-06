@@ -2,7 +2,7 @@ package alexndr.SimpleOres.plugins.netherrocks;
 
 import java.util.Random;
 
-import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.IChunkProvider;
 import alexndr.SimpleOres.api.helpers.WorldGenHelper;
@@ -39,7 +39,7 @@ public class Generator implements IWorldGenerator
 			int randPosX = Xcoord + random.nextInt(16);
             int randPosY = random.nextInt(Settings.fyriteSpawnHeightMax);
             int randPosZ = Zcoord + random.nextInt(16);
-            new WorldGenHelper(Content.fyriteOre.blockID, Settings.fyriteVeinSize, Block.netherrack).generate(world, random, randPosX, randPosY + Settings.fyriteSpawnHeightMin, randPosZ); 
+            new WorldGenHelper(Content.fyrite_ore, Settings.fyriteVeinSize, Blocks.netherrack).generate(world, random, randPosX, randPosY + Settings.fyriteSpawnHeightMin, randPosZ); 
 		}
 		
 		for(int i = 0; i < Settings.malachiteSpawnRate; i++)
@@ -47,7 +47,7 @@ public class Generator implements IWorldGenerator
 			int randPosX = Xcoord + random.nextInt(16);
             int randPosY = random.nextInt(Settings.malachiteSpawnHeightMax);
             int randPosZ = Zcoord + random.nextInt(16);
-            new WorldGenHelper(Content.malachiteOre.blockID, Settings.malachiteVeinSize, Block.netherrack).generate(world, random, randPosX, randPosY + Settings.malachiteSpawnHeightMin, randPosZ); 
+            new WorldGenHelper(Content.malachite_ore, Settings.malachiteVeinSize, Blocks.netherrack).generate(world, random, randPosX, randPosY + Settings.malachiteSpawnHeightMin, randPosZ); 
 		}
 		
 		for(int i = 0; i < Settings.ashstoneSpawnRate; i++)
@@ -55,7 +55,7 @@ public class Generator implements IWorldGenerator
 			int randPosX = Xcoord + random.nextInt(16);
             int randPosY = random.nextInt(Settings.ashstoneSpawnHeightMax);
             int randPosZ = Zcoord + random.nextInt(16);
-            new WorldGenHelper(Content.ashstoneOre.blockID, Settings.ashstoneVeinSize, Block.netherrack).generate(world, random, randPosX, randPosY + Settings.ashstoneSpawnHeightMin, randPosZ); 
+            new WorldGenHelper(Content.ashstone_ore, Settings.ashstoneVeinSize, Blocks.netherrack).generate(world, random, randPosX, randPosY + Settings.ashstoneSpawnHeightMin, randPosZ); 
 		}
 		
 		for(int i = 0; i < Settings.illumeniteSpawnRate; i++)
@@ -63,7 +63,7 @@ public class Generator implements IWorldGenerator
 			int randPosX = Xcoord + random.nextInt(16);
             int randPosY = random.nextInt(Settings.illumeniteSpawnHeightMax);
             int randPosZ = Zcoord + random.nextInt(16);
-            new WorldGenHelper(Content.illumeniteOre.blockID, Settings.illumeniteVeinSize, Block.glowStone).generate(world, random, randPosX, randPosY + Settings.illumeniteSpawnHeightMin, randPosZ); 
+            new WorldGenHelper(Content.illumenite_ore, Settings.illumeniteVeinSize, Blocks.glowstone).generate(world, random, randPosX, randPosY + Settings.illumeniteSpawnHeightMin, randPosZ); 
 		}
 		
 		for(int i = 0; i < Settings.dragonstoneSpawnRate; i++)
@@ -71,7 +71,7 @@ public class Generator implements IWorldGenerator
 			int randPosX = Xcoord + random.nextInt(16);
             int randPosY = random.nextInt(Settings.dragonstoneSpawnHeightMax);
             int randPosZ = Zcoord + random.nextInt(16);
-            new WorldGenHelper(Content.dragonstoneOre.blockID, Settings.dragonstoneVeinSize, Block.netherrack).generate(world, random, randPosX, randPosY + Settings.dragonstoneSpawnHeightMin, randPosZ); 
+            new WorldGenHelper(Content.dragonstone_ore, Settings.dragonstoneVeinSize, Blocks.netherrack).generate(world, random, randPosX, randPosY + Settings.dragonstoneSpawnHeightMin, randPosZ); 
 		}
 		
 		for(int i = 0; i < Settings.argoniteSpawnRate; i++)
@@ -79,7 +79,7 @@ public class Generator implements IWorldGenerator
 			int randPosX = Xcoord + random.nextInt(16);
             int randPosY = random.nextInt(Settings.argoniteSpawnHeightMax);
             int randPosZ = Zcoord + random.nextInt(16);
-            new WorldGenHelper(Content.argoniteOre.blockID, Settings.argoniteVeinSize, Block.netherrack).generate(world, random, randPosX, randPosY + Settings.argoniteSpawnHeightMin, randPosZ); 
+            new WorldGenHelper(Content.argonite_ore, Settings.argoniteVeinSize, Blocks.netherrack).generate(world, random, randPosX, randPosY + Settings.argoniteSpawnHeightMin, randPosZ); 
 		}
 	}
 }

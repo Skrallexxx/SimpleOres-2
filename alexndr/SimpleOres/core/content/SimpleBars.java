@@ -1,20 +1,24 @@
 package alexndr.SimpleOres.core.content;
 
+import static net.minecraftforge.common.util.ForgeDirection.EAST;
+import static net.minecraftforge.common.util.ForgeDirection.NORTH;
+import static net.minecraftforge.common.util.ForgeDirection.SOUTH;
+import static net.minecraftforge.common.util.ForgeDirection.WEST;
+
 import java.util.List;
 import java.util.Random;
 
 import net.minecraft.block.BlockPane;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.Icon;
+import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import alexndr.SimpleOres.api.helpers.TabHelper;
-import alexndr.SimpleOres.core.Settings;
-import alexndr.SimpleOres.core.SimpleOres;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -32,11 +36,11 @@ public class SimpleBars extends BlockPane
     private final boolean canDropItself;
     private final String field_94402_c;
     @SideOnly(Side.CLIENT)
-    private Icon theIcon;
+    private IIcon theIcon;
 
-    public SimpleBars(int par1, String par2Str, String par3Str, Material par4Material, boolean par5)
+    public SimpleBars(String par2Str, String par3Str, Material par4Material, boolean par5)
     {
-        super(par1, par2Str, par3Str, par4Material, par5);
+        super(par2Str, par3Str, par4Material, par5);
         this.sideTextureIndex = par3Str;
         this.canDropItself = par5;
         this.field_94402_c = par2Str;
@@ -47,9 +51,9 @@ public class SimpleBars extends BlockPane
     /**
      * Returns the ID of the items to drop on destruction.
      */
-    public int idDropped(int par1, Random par2Random, int par3)
+    public Item getItemDropped(int par1, Random par2Random, int par3)
     {
-        return !this.canDropItself ? 0 : super.idDropped(par1, par2Random, par3);
+        return !this.canDropItself ? null : super.getItemDropped(par1, par2Random, par3);
     }
 
     /**
@@ -77,28 +81,26 @@ public class SimpleBars extends BlockPane
         return 18;
     }
 
-    @SideOnly(Side.CLIENT)
-
     /**
      * Returns true if the given side of this block type should be rendered, if the adjacent block is at the given
      * coordinates.  Args: blockAccess, x, y, z, side
      */
+    @SideOnly(Side.CLIENT)
     public boolean shouldSideBeRendered(IBlockAccess par1IBlockAccess, int par2, int par3, int par4, int par5)
     {
-        int i1 = par1IBlockAccess.getBlockId(par2, par3, par4);
-        return i1 == this.blockID ? false : super.shouldSideBeRendered(par1IBlockAccess, par2, par3, par4, par5);
+    	return par1IBlockAccess.getBlock(par2, par3, par4) == this ? false : super.shouldSideBeRendered(par1IBlockAccess, par2, par3, par4, par5);
     }
 
     /**
      * Adds all intersecting collision boxes to a list. (Be sure to only add boxes to the list if they intersect the
      * mask.) Parameters: World, X, Y, Z, mask, list, colliding entity
      */
-    public void addCollisionBoxesToList(World par1World, int par2, int par3, int par4, AxisAlignedBB par5AxisAlignedBB, List par6List, Entity par7Entity)
+	public void addCollisionBoxesToList(World par1World, int par2, int par3, int par4, AxisAlignedBB par5AxisAlignedBB, List par6List, Entity par7Entity)
     {
-        boolean flag = this.canThisPaneConnectToThisBlockID(par1World.getBlockId(par2, par3, par4 - 1));
-        boolean flag1 = this.canThisPaneConnectToThisBlockID(par1World.getBlockId(par2, par3, par4 + 1));
-        boolean flag2 = this.canThisPaneConnectToThisBlockID(par1World.getBlockId(par2 - 1, par3, par4));
-        boolean flag3 = this.canThisPaneConnectToThisBlockID(par1World.getBlockId(par2 + 1, par3, par4));
+        boolean flag = this.canPaneConnectTo(par1World, par2, par3, par4 - 1, NORTH);
+        boolean flag1 = this.canPaneConnectTo(par1World, par2, par3, par4 + 1, SOUTH);
+        boolean flag2 = this.canPaneConnectTo(par1World, par2 - 1, par3, par4, WEST);
+        boolean flag3 = this.canPaneConnectTo(par1World, par2 + 1, par3, par4, EAST);
 
         if ((!flag2 || !flag3) && (flag2 || flag3 || flag || flag1))
         {
@@ -156,10 +158,10 @@ public class SimpleBars extends BlockPane
         float f1 = 0.5625F;
         float f2 = 0.4375F;
         float f3 = 0.5625F;
-        boolean flag = this.canThisPaneConnectToThisBlockID(par1IBlockAccess.getBlockId(par2, par3, par4 - 1));
-        boolean flag1 = this.canThisPaneConnectToThisBlockID(par1IBlockAccess.getBlockId(par2, par3, par4 + 1));
-        boolean flag2 = this.canThisPaneConnectToThisBlockID(par1IBlockAccess.getBlockId(par2 - 1, par3, par4));
-        boolean flag3 = this.canThisPaneConnectToThisBlockID(par1IBlockAccess.getBlockId(par2 + 1, par3, par4));
+        boolean flag = this.canPaneConnectTo(par1IBlockAccess, par2, par3, par4 - 1, NORTH);
+        boolean flag1 = this.canPaneConnectTo(par1IBlockAccess, par2, par3, par4 + 1, SOUTH);
+        boolean flag2 = this.canPaneConnectTo(par1IBlockAccess, par2 - 1, par3, par4, WEST);
+        boolean flag3 = this.canPaneConnectTo(par1IBlockAccess, par2 + 1, par3, par4, EAST);
 
         if ((!flag2 || !flag3) && (flag2 || flag3 || flag || flag1))
         {
@@ -203,7 +205,7 @@ public class SimpleBars extends BlockPane
     /**
      * Returns the texture index of the thin side of the pane.
      */
-    public Icon getSideTextureIndex()
+    public IIcon getSideTextureIndex()
     {
         return this.theIcon;
     }
@@ -222,7 +224,7 @@ public class SimpleBars extends BlockPane
      */
     protected ItemStack createStackedBlock(int par1)
     {
-        return new ItemStack(this.blockID, 1, par1);
+        return new ItemStack(this, 1, par1);
     }
 
     @SideOnly(Side.CLIENT)
@@ -231,7 +233,7 @@ public class SimpleBars extends BlockPane
      * When this method is called, your block should register all the icons it needs with the given IconRegister. This
      * is the only chance you get to register icons.
      */
-    public void registerIcons(IconRegister par1IconRegister)
+    public void registerIcons(IIconRegister par1IconRegister)
     {
         this.blockIcon = par1IconRegister.registerIcon(this.field_94402_c);
         this.theIcon = par1IconRegister.registerIcon(this.sideTextureIndex);

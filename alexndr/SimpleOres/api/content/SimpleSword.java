@@ -1,11 +1,13 @@
 package alexndr.SimpleOres.api.content;
 
-import net.minecraft.client.renderer.texture.IconRegister;
+import java.util.List;
+
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.EnumToolMaterial;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import alexndr.SimpleOres.api.helpers.TabHelper;
 import alexndr.SimpleOres.core.SimpleOres;
@@ -15,13 +17,15 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class SimpleSword extends ItemSword
 {
-	private final EnumToolMaterial material;
+	private final ToolMaterial material;
 	private String modName = "simpleores";
+	private String infoString;
 	private CreativeTabs tab = SimpleOres.tabSimpleCombat;
+	private boolean infoAdded = false;
 
-	public SimpleSword(int id, EnumToolMaterial toolmaterial) 
+	public SimpleSword(ToolMaterial toolmaterial) 
 	{
-		super(id, toolmaterial);
+		super(toolmaterial);
 		this.material = toolmaterial;
 		this.setCreativeTab(TabHelper.getCombatTab(tab));
 	}
@@ -42,6 +46,17 @@ public class SimpleSword extends ItemSword
 	{
 		this.tab = creativetab;
 		this.setCreativeTab(TabHelper.getCombatTab(tab));
+		return this;
+	}
+	
+	/**
+	 * Adds a tooltip to the item. Must be unlocalised, so you need to have it somewhere in your lang files.
+	 * @param info A String normally in format modId.theItem.info.
+	 */
+	public SimpleSword addInfo(String info)
+	{
+		infoString = info;
+		infoAdded = true;
 		return this;
 	}
 	
@@ -67,10 +82,6 @@ public class SimpleSword extends ItemSword
 			{
 				par3EntityPlayer.addVelocity(0, 0.4, 0);
 			}
-			else
-			{
-				return super.onItemRightClick(par1ItemStack, par2World, par3EntityPlayer);
-			}
 		}
 		else
 		{
@@ -84,7 +95,7 @@ public class SimpleSword extends ItemSword
 	 */
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void registerIcons(IconRegister iconRegister)
+	public void registerIcons(IIconRegister iconRegister)
 	{
 		this.itemIcon = iconRegister.registerIcon(modName + ":" + (this.getUnlocalizedName().substring(5)));
 	}
@@ -94,6 +105,15 @@ public class SimpleSword extends ItemSword
 	 */
 	public boolean getIsRepairable(ItemStack par1ItemStack, ItemStack par2ItemStack)
 	{
-		return this.material.getToolCraftingMaterial() == par2ItemStack.itemID ? true : super.getIsRepairable(par1ItemStack, par2ItemStack);
+		return this.material.customCraftingMaterial == par2ItemStack.getItem() ? true : super.getIsRepairable(par1ItemStack, par2ItemStack);
+	}
+	
+	@Override
+	public void addInformation(ItemStack stack, EntityPlayer par2EntityPlayer, List par3List, boolean par4)
+	{
+		if(infoAdded)
+		{
+			par3List.add(StatCollector.translateToLocal(infoString));
+		}
 	}
 }
