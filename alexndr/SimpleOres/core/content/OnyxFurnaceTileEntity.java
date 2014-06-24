@@ -18,6 +18,7 @@ import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraftforge.oredict.OreDictionary;
 import alexndr.SimpleOres.core.Settings;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
@@ -347,7 +348,7 @@ public class OnyxFurnaceTileEntity extends TileEntity implements ISidedInventory
     	int k;
     	int r = generator.nextInt(100);
     	
-    	if(r <= Settings.onyxFurnaceMultiChance)
+    	if(r <= Settings.onyxFurnaceMultiChance && !getDust(this.furnaceItemStacks[0]))
     	{
     		k = Settings.onyxFurnaceMultiplier;
     	}
@@ -489,4 +490,23 @@ public class OnyxFurnaceTileEntity extends TileEntity implements ISidedInventory
     {
         return par1 == 2 ? false : (par1 == 1 ? isItemFuel(par2ItemStack) : true);
     }
+	
+	public boolean getDust(ItemStack item)
+	{
+		for (String name : OreDictionary.getOreNames())
+        {
+			for (final ItemStack oreItem : OreDictionary.getOres(name))
+            {
+				if (oreItem.getItem() == item.getItem() && oreItem.getItemDamage() == item.getItemDamage())
+				{
+                    if (name.contains("dust"))
+                    {
+                    	return true;
+                    }
+                    return false;
+                }
+            }
+        }
+        return false;
+	}
 }

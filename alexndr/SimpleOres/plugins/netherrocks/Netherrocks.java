@@ -73,7 +73,7 @@ public class Netherrocks
 	{
 		Recipes.initialize();
 		INSTANCE = this;
-		if(CoreHelper.coreSettings.enableUpdateChecker){UpdateCheckerHelper.checkUpdates(ModInfo.VERSIONURL, ModInfo.ID, ModInfo.VERSION);}
+		if(CoreHelper.coreSettings.enableUpdateChecker){UpdateCheckerHelper.checkUpdates(ModInfo.VERSIONURL, ModInfo.ID, ModInfo.VERSION, ModInfo.UPDATEURL);}
 		
 		setAchievementTriggers();
 		

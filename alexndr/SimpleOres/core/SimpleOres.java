@@ -7,6 +7,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.EnumHelper;
 import alexndr.SimpleOres.api.content.SimpleTab;
+import alexndr.SimpleOres.api.helpers.LogHelper;
 import alexndr.SimpleOres.api.helpers.StatTriggersHelper;
 import alexndr.SimpleOres.api.helpers.UpdateCheckerHelper;
 import alexndr.SimpleOres.core.content.MythrilFurnaceTileEntity;
@@ -69,10 +70,12 @@ public class SimpleOres
   	{
 		INSTANCE = this;
   		proxy.addModderCapes();
+  		proxy.registerClientTickHandler();
+  		proxy.setZoomAmounts();
   		Recipes.initialize();
   		tabInit();
   		setAchievementTriggers();
-  		if(Settings.enableUpdateChecker){UpdateCheckerHelper.checkUpdates(ModInfo.VERSIONURL, ModInfo.ID, ModInfo.VERSION);}
+  		if(Settings.enableUpdateChecker){UpdateCheckerHelper.checkUpdates(ModInfo.VERSIONURL, ModInfo.ID, ModInfo.VERSION, ModInfo.UPDATEURL);}
   		
 		/**
 		 * Registering things such as the world generator, tile entities and GUI's.
@@ -81,6 +84,7 @@ public class SimpleOres
 		GameRegistry.registerWorldGenerator(new Generator(), 1);
 		GameRegistry.registerTileEntity(MythrilFurnaceTileEntity.class, "mythrilFurnace");
 		GameRegistry.registerTileEntity(OnyxFurnaceTileEntity.class, "onyxFurnace");
+		LogHelper.verboseInfo("Loaded " + Settings.numCustomGenerationRules + " custom generation rules!");
 		
 		/**
 		 * Adds the armor textures when you wear it. Calls a method in the CommonProxy (which is overridden by ClientProxy) called addArmor, and inputs the name of the material.
@@ -138,7 +142,7 @@ public class SimpleOres
 		/**
 		 * Setting the Creative Tab icons.
 		 */  	
-		if(Settings.enableSeparateTabs)
+		if(Settings.enableSimpleOresTabs)
 		{
 			tabSimpleBlocks.setIcon(new ItemStack(Content.copper_ore));
 			
@@ -184,6 +188,4 @@ public class SimpleOres
 		//Smelting Triggers
 		StatTriggersHelper.statTriggers().addSmeltingTrigger(new ItemStack(Content.onyx_gem), Content.onyxAch);
   	}
-  	
-  	
 }

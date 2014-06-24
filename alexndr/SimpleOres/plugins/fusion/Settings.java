@@ -28,10 +28,10 @@ public class Settings
 			settings.load();
 			
 			//Toggles
-			enableToolStatModification = settings.get("Toggles", "Enable Tool Stat Modification? (Advanced)", false).getBoolean(enableToolStatModification);
-			enableArmorStatModification = settings.get("Toggles", "Enable Armor Stat Modification? (Advanced)", false).getBoolean(enableArmorStatModification);
-			enableBlockStatModification = settings.get("Toggles", "Enable Block Stat Modification? (Advanced)", false).getBoolean(enableBlockStatModification);
-	    	enableCustomFusionRecipes = settings.get("Toggles", "Enable Custom Fusion Furnace Recipes? (Advanced)", false).getBoolean(enableCustomFusionRecipes);
+			enableToolStatModification = settings.get("Toggles", "(Advanced) Enable Tool Stat Modification?", false).getBoolean(enableToolStatModification);
+			enableArmorStatModification = settings.get("Toggles", "(Advanced) Enable Armor Stat Modification?", false).getBoolean(enableArmorStatModification);
+			enableBlockStatModification = settings.get("Toggles", "(Advanced) Enable Block Stat Modification?", false).getBoolean(enableBlockStatModification);
+	    	enableCustomFusionRecipes = settings.get("Toggles", "(Advanced) Enable Custom Fusion Furnace Recipes?", false).getBoolean(enableCustomFusionRecipes);
 	    	enableExtraChunkRecipes = settings.get("Toggles", "Enable Extra Chunk Recipes?", false).getBoolean(enableExtraChunkRecipes);
 			
         	//Bow Modifiers
@@ -46,17 +46,17 @@ public class Settings
         		bronzeMiningLevel = settings.get("Tool Stats", "Bronze Mining Level", 2).getInt();
         		bronzeUsesNum = settings.get("Tool Stats", "Bronze Uses Number", 600).getInt();
         		bronzeMiningSpeed = (float) settings.get("Tool Stats", "Bronze Mining Speed", 9.0).getDouble(bronzeMiningSpeed);
-        		bronzeDamageVsEntity = settings.get("Tool Stats", "Bronze Damage Vs Entity", 2).getInt();
+        		bronzeDamageVsEntity = (float) settings.get("Tool Stats", "Bronze Damage Vs Entity", 2).getDouble(bronzeDamageVsEntity);
         		bronzeEnchantability = settings.get("Tool Stats", "Bronze Enchantability", 7).getInt();
         		thyriumMiningLevel = settings.get("Tool Stats", "Thyrium Mining Level", 3).getInt();
         		thyriumUsesNum = settings.get("Tool Stats", "Thyrium Uses Number", 2000).getInt();
         		thyriumMiningSpeed = (float) settings.get("Tool Stats", "Thyrium Mining Speed", 22.0).getDouble(thyriumMiningSpeed);
-        		thyriumDamageVsEntity = settings.get("Tool Stats", "Thyrium Damage Vs Entity", 6).getInt();
+        		thyriumDamageVsEntity = (float) settings.get("Tool Stats", "Thyrium Damage Vs Entity", 6).getDouble(thyriumDamageVsEntity);
         		thyriumEnchantability = settings.get("Tool Stats", "Thyrium Enchantability", 28).getInt();
         		sinisiteMiningLevel = settings.get("Tool Stats", "Sinisite Mining Level", 5).getInt();
         		sinisiteUsesNum = settings.get("Tool Stats", "Sinisite Uses Number", 4100).getInt();
         		sinisiteMiningSpeed = (float) settings.get("Tool Stats", "Sinisite Mining Speed", 18.0).getDouble(sinisiteMiningSpeed);
-        		sinisiteDamageVsEntity = settings.get("Tool Stats", "Sinisite Damage Vs Entity", 8).getInt();
+        		sinisiteDamageVsEntity = (float) settings.get("Tool Stats", "Sinisite Damage Vs Entity", 8).getDouble(sinisiteDamageVsEntity);
         		sinisiteEnchantability = settings.get("Tool Stats", "Sinisite Enchantability", 11).getInt();
         	}
         	else
@@ -135,17 +135,17 @@ public class Settings
 		bronzeMiningLevel = 2;
 		bronzeUsesNum = 600;
 		bronzeMiningSpeed = 9.0F;
-		bronzeDamageVsEntity = 2;
+		bronzeDamageVsEntity = 2.0F;
 		bronzeEnchantability = 7;
 		thyriumMiningLevel = 3;
 		thyriumUsesNum = 2000;
 		thyriumMiningSpeed = 22.0F;
-		thyriumDamageVsEntity = 6;
+		thyriumDamageVsEntity = 6.0F;
 		thyriumEnchantability = 28;
 		sinisiteMiningLevel = 5;
 		sinisiteUsesNum = 4100;
 		sinisiteMiningSpeed = 18.0F;
-		sinisiteDamageVsEntity = 8;
+		sinisiteDamageVsEntity = 8.0F;
 		sinisiteEnchantability = 11;
 	}
 	
@@ -186,7 +186,7 @@ public class Settings
 	public static int bronzeMiningLevel, thyriumMiningLevel, sinisiteMiningLevel;
 	public static int bronzeUsesNum, thyriumUsesNum, sinisiteUsesNum;
 	public static float bronzeMiningSpeed, thyriumMiningSpeed, sinisiteMiningSpeed;
-	public static int bronzeDamageVsEntity, thyriumDamageVsEntity, sinisiteDamageVsEntity;
+	public static float bronzeDamageVsEntity, thyriumDamageVsEntity, sinisiteDamageVsEntity;
 	public static int bronzeEnchantability, thyriumEnchantability, sinisiteEnchantability;
 	
 	//Armor Stats

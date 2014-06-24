@@ -71,4 +71,9 @@ public class ProxyCommon implements IGuiHandler
 		
         return null;
     }
+	
+	public void setZoomAmounts()
+	{
+		
+	}
 }

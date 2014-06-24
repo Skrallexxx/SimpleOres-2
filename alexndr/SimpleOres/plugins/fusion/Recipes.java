@@ -213,15 +213,18 @@ public class Recipes
 		    	FusionRecipes.addSmelting(new ItemStack(CoreHelper.coreContent.copper_ingot), new ItemStack(CoreHelper.coreContent.tin_ingot), new ItemStack(Items.gunpowder), new ItemStack(Content.medium_bronze_chunk), 3.0F);
 		    	FusionRecipes.addSmelting(new ItemStack(CoreHelper.coreContent.copper_ingot), new ItemStack(CoreHelper.coreContent.tin_ingot), new ItemStack(Items.redstone), new ItemStack(Content.large_bronze_chunk), 10.0F);
 		    	
-		    	//_thyrium
+		    	//Thyrium
 		    	FusionRecipes.addSmelting(new ItemStack(CoreHelper.coreContent.mythril_ingot), new ItemStack(CoreHelper.coreContent.adamantium_ingot), new ItemStack(Items.redstone), new ItemStack(Content.small_thyrium_chunk), 6.0F);
 		    	FusionRecipes.addSmelting(new ItemStack(CoreHelper.coreContent.mythril_ingot), new ItemStack(CoreHelper.coreContent.adamantium_ingot), new ItemStack(Items.dye, 1, 4), new ItemStack(Content.medium_thyrium_chunk), 10.0F);
 		    	FusionRecipes.addSmelting(new ItemStack(CoreHelper.coreContent.mythril_ingot), new ItemStack(CoreHelper.coreContent.adamantium_ingot), new ItemStack(Items.glowstone_dust), new ItemStack(Content.large_thyrium_chunk), 30.0F);
 		    	
-		    	//_sinisite				    	
+		    	//Sinisite				    	
 		    	FusionRecipes.addSmelting(new ItemStack(CoreHelper.coreContent.onyx_gem), new ItemStack(CoreHelper.coreContent.mythril_ingot), new ItemStack(Items.glowstone_dust), new ItemStack(Content.small_sinisite_chunk), 12.0F);
 		    	FusionRecipes.addSmelting(new ItemStack(CoreHelper.coreContent.onyx_gem), new ItemStack(CoreHelper.coreContent.mythril_ingot), new ItemStack(Items.blaze_powder), new ItemStack(Content.medium_sinisite_chunk), 20.0F);
 		    	FusionRecipes.addSmelting(new ItemStack(CoreHelper.coreContent.onyx_gem), new ItemStack(CoreHelper.coreContent.mythril_ingot), new ItemStack(Items.ghast_tear), new ItemStack(Content.large_sinisite_chunk), 60.0F);
+		    	
+		    	FusionRecipes.addSmelting(new ItemStack(Items.dye, 1, 1), new ItemStack(CoreHelper.coreContent.mythril_ingot), new ItemStack(Items.dye, 1, WILDCARD_VALUE), new ItemStack(Content.bronze_ingot), 10.0F);
+		    	FusionRecipes.addSmelting(new ItemStack(Items.dye, 1, WILDCARD_VALUE), new ItemStack(CoreHelper.coreContent.adamantium_ingot), new ItemStack(Items.dye, 1, WILDCARD_VALUE), new ItemStack(Content.bronze_ingot), 10.0F);
 		    	
 		    //Regular Furnace
 				GameRegistry.addSmelting(Content.large_bronze_chunk, new ItemStack(Content.bronze_ingot, 1, 0), 0.3F);

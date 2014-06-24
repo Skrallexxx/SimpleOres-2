@@ -23,20 +23,9 @@ public class FusionPlugin
 	@SidedProxy(clientSide = "alexndr.SimpleOres.plugins.fusion.ProxyClient", serverSide = "alexndr.SimpleOres.plugins.fusion.ProxyCommon")	
 	public static ProxyCommon proxy;
 	public static FusionPlugin INSTANCE = new FusionPlugin();
-	
-	/**
-	 * EnumToolMaterial. In form ("NAME", mining level, max uses, speed, damage to entity, enchantability)
-	 */
+
     public static ToolMaterial toolBronze, toolThyrium, toolSinisite;
-    
-    /**
-     * EnumArmorMaterial. In form ("NAME", max damage (like uses, multiply by pieces for their max damage), new int[] {helmet defense, chestplate defense, leggings defense, boots defense}, enchantability)
-     */
     public static ArmorMaterial armorBronze, armorThyrium, armorSinisite;
-    
-    /**
-     * Creating the Armor Renderers. This is simply so you can see the armor texture when you wear it.
-     */
 	public static int rendererBronze, rendererThyrium, rendererSinisite;
 	
 	/**
@@ -45,8 +34,6 @@ public class FusionPlugin
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) 
     {
-    	proxy.registerClientTickHandler();
-
     	//Configuration
     	Settings.doSettings(event);
     	
@@ -60,9 +47,11 @@ public class FusionPlugin
     public void Init(FMLInitializationEvent event)
     {
 		INSTANCE = this;
+    	proxy.registerClientTickHandler();
+    	proxy.setZoomAmounts();
     	Recipes.initialize();
     	setAchievementTriggers();
-    	if(CoreHelper.coreSettings.enableUpdateChecker){UpdateCheckerHelper.checkUpdates(ModInfo.VERSIONURL, ModInfo.ID, ModInfo.VERSION);}
+    	if(CoreHelper.coreSettings.enableUpdateChecker){UpdateCheckerHelper.checkUpdates(ModInfo.VERSIONURL, ModInfo.ID, ModInfo.VERSION, ModInfo.UPDATEURL);}
 		
 		GameRegistry.registerTileEntity(FusionFurnaceTileEntity.class, "fusionFurnace");
 		NetworkRegistry.INSTANCE.registerGuiHandler(INSTANCE, proxy);
@@ -79,7 +68,7 @@ public class FusionPlugin
         armorThyrium.customCraftingMaterial = Content.thyrium_ingot;
         armorSinisite.customCraftingMaterial = Content.sinisite_ingot;
 		
-    	LogHelper.info("Fusion Plugin: " + FusionRecipes.size() / 2 + " Fusion Furnace recipes were loaded.");
+    	LogHelper.info("Fusion Plugin: " + FusionRecipes.size() + " Fusion Furnace recipes were loaded.");
     }
     
     @EventHandler

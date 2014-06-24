@@ -73,11 +73,13 @@ public class Settings
         	//Higher Dimensions
         	if(enableCustomGeneration)
         	{	
-        		settings.addCustomCategoryComment("Custom Generation Rules", "Used to define extra oregen rules, such as higher dimension generation. "
-        				+ "Doesn't override default generation values. Can be used to spawn non-SimpleOres blocks too. "
-        				+ "Format is: dimensionId, modId:hostBlock@metadata, modId:blockToSpawn@metadata, spawnRate, maxHeight, minHeight, veinSize");
+        		settings.addCustomCategoryComment("Custom Generation Rules", "Instructions: Allows you to add new custom world gen rules. "
+        				+ "Can add non-SimpleOres blocks too. Set numCustomGenerationRules to however many rules you want, then restart to"
+        				+ "generate the new lines. The format is as follows:"
+        				+ "dimensionId, modId:host_block_name@blockMeta, modId:spawning_block_name@blockMeta, spawnRate, maxHeight, minHeight, veinSize."
+        				+ "Additionally, dimensionId can be a range, or all dimensions. For a range, use 'lowerId:upperId' and for all use 'ALL'.");
         		
-        		String example = "1, minecraft:end_stone@0, minecraft:diamond_block@0, 500, 256, 0, 20";
+        		String example = "1-5, minecraft:end_stone@0, minecraft:diamond_block@0, 500, 256, 0, 20";
         		numCustomGenerationRules = settings.get("Custom Generation Rules", "Number of Custom Generation Rules", 0).getInt();	
         		exampleCustomRule = settings.get("Custom Generation Rules", "Example Custom Rule (not loaded)", example).getString();
         		
@@ -97,27 +99,27 @@ public class Settings
 	    		copperMiningLevel = settings.get("Tool Stats", "Copper Mining Level", 1).getInt();
 	    		copperUsesNum = settings.get("Tool Stats", "Copper Uses Number", 185).getInt();
 	    		copperMiningSpeed = (float) settings.get("Tool Stats", "Copper Mining Speed", 4.0).getDouble(copperMiningSpeed);
-	    		copperDamageVsEntity = settings.get("Tool Stats", "Copper Damage Vs Entity", 1).getInt();
+	    		copperDamageVsEntity = (float) settings.get("Tool Stats", "Copper Damage Vs Entity", 1).getDouble(copperDamageVsEntity);
 	    		copperEnchantability = settings.get("Tool Stats", "Copper Enchantability", 8).getInt();
 	    		tinMiningLevel = settings.get("Tool Stats", "Tin Mining Level", 1).getInt();
 	    		tinUsesNum = settings.get("Tool Stats", "Tin Uses Number", 220).getInt();
 	    		tinMiningSpeed = (float) settings.get("Tool Stats", "Tin Mining Speed", 3.5).getDouble(tinMiningSpeed);
-	    		tinDamageVsEntity = settings.get("Tool Stats", "Tin Damage Vs Entity", 1).getInt();
+	    		tinDamageVsEntity = (float) settings.get("Tool Stats", "Tin Damage Vs Entity", 1).getDouble(tinDamageVsEntity);
 	    		tinEnchantability = settings.get("Tool Stats", "Tin Enchantability", 8).getInt();
 	    		mythrilMiningLevel = settings.get("Tool Stats", "Mythril Mining Level", 2).getInt();
 	    		mythrilUsesNum = settings.get("Tool Stats", "Mythril Uses Number", 800).getInt();
 	    		mythrilMiningSpeed = (float) settings.get("Tool Stats", "Mythril Mining Speed", 8.0).getDouble(mythrilMiningSpeed);
-	    		mythrilDamageVsEntity = settings.get("Tool Stats", "Mythril Damage Vs Entity", 3).getInt();
+	    		mythrilDamageVsEntity = (float) settings.get("Tool Stats", "Mythril Damage Vs Entity", 3).getDouble(mythrilDamageVsEntity);
 	    		mythrilEnchantability = settings.get("Tool Stats", "Mythril Enchantability", 12).getInt();
 	    		adamantiumMiningLevel = settings.get("Tool Stats", "Adamantium Mining Level", 2).getInt();
 	    		adamantiumUsesNum = settings.get("Tool Stats", "Adamantium Uses Number", 1150).getInt();
 	    		adamantiumMiningSpeed = (float) settings.get("Tool Stats", "Adamantium Mining Speed", 14.0).getDouble(adamantiumMiningSpeed);
-	    		adamantiumDamageVsEntity = settings.get("Tool Stats", "Adamantium Damage Vs Entity", 3).getInt();
+	    		adamantiumDamageVsEntity = (float) settings.get("Tool Stats", "Adamantium Damage Vs Entity", 3).getDouble(adamantiumDamageVsEntity);
 	    		adamantiumEnchantability = settings.get("Tool Stats", "Adamantium Enchantability", 3).getInt();
 	    		onyxMiningLevel = settings.get("Tool Stats", "Onyx Mining Level", 4).getInt();
 	    		onyxUsesNum = settings.get("Tool Stats", "Onyx Uses Number", 3280).getInt();
 	    		onyxMiningSpeed = (float) settings.get("Tool Stats", "Onyx Mining Speed", 10.0).getDouble(onyxMiningSpeed);
-	    		onyxDamageVsEntity = settings.get("Tool Stats", "Onyx Damage Vs Entity", 5).getInt();
+	    		onyxDamageVsEntity = (float) settings.get("Tool Stats", "Onyx Damage Vs Entity", 5).getDouble(onyxDamageVsEntity);
 	    		onyxEnchantability = settings.get("Tool Stats", "Onyx Enchantability", 15).getInt();
 	    	}    	
 	    	else toolStatDefaults();
@@ -222,27 +224,27 @@ public class Settings
 		copperMiningLevel = 1;
 		copperUsesNum = 185;
 		copperMiningSpeed = 4.0F;
-		copperDamageVsEntity = 1;
+		copperDamageVsEntity = 1.0F;
 		copperEnchantability = 8;
 		tinMiningLevel = 1;
 		tinUsesNum = 220;
 		tinMiningSpeed = 3.5F;
-		tinDamageVsEntity = 1;
+		tinDamageVsEntity = 1.0F;
 		tinEnchantability = 8;
 		mythrilMiningLevel = 2;
 		mythrilUsesNum = 800;
 		mythrilMiningSpeed = 8.0F;
-		mythrilDamageVsEntity = 3;
+		mythrilDamageVsEntity = 3.0F;
 		mythrilEnchantability = 12;
 		adamantiumMiningLevel = 2;
 		adamantiumUsesNum = 1150;
 		adamantiumMiningSpeed = 14.0F;
-		adamantiumDamageVsEntity = 3;
+		adamantiumDamageVsEntity = 3.0F;
 		adamantiumEnchantability = 3;
 		onyxMiningLevel = 4;
 		onyxUsesNum = 3280;
 		onyxMiningSpeed = 10.0F;
-		onyxDamageVsEntity = 5;
+		onyxDamageVsEntity = 5.0F;
 		onyxEnchantability = 15;
 	}
 	
@@ -347,7 +349,7 @@ public class Settings
 	public static int copperMiningLevel, tinMiningLevel, mythrilMiningLevel, adamantiumMiningLevel, onyxMiningLevel;
 	public static int copperUsesNum, tinUsesNum, mythrilUsesNum, adamantiumUsesNum, onyxUsesNum;
 	public static float copperMiningSpeed, tinMiningSpeed, mythrilMiningSpeed, adamantiumMiningSpeed, onyxMiningSpeed;
-	public static int copperDamageVsEntity, tinDamageVsEntity, mythrilDamageVsEntity, adamantiumDamageVsEntity, onyxDamageVsEntity;
+	public static float copperDamageVsEntity, tinDamageVsEntity, mythrilDamageVsEntity, adamantiumDamageVsEntity, onyxDamageVsEntity;
 	public static int copperEnchantability, tinEnchantability, mythrilEnchantability, adamantiumEnchantability, onyxEnchantability;
 		
 	//Armor Stats

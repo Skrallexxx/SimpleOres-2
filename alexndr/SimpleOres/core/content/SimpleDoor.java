@@ -21,7 +21,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class SimpleDoor extends Block
 {
-	private static final String[] doorTextureNames = new String[] {"door_copper_lower", "door_copper_upper", "door_onyx_lower", "door_onyx_Upper"};
+	private static final String[] doorTextureNames = new String[] {"door_copper_lower", "door_copper_upper", "door_onyx_lower", "door_onyx_upper"};
     @SideOnly(Side.CLIENT)
     private IIcon[] textureArray; 
     private int doorTypeForIcon;

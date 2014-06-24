@@ -12,18 +12,9 @@ import cpw.mods.fml.common.gameevent.PlayerEvent.ItemCraftedEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent.ItemPickupEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent.ItemSmeltedEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent;
-import cpw.mods.fml.common.gameevent.TickEvent.PlayerTickEvent;
 
 public class EventHelper 
 {
-	public static float zoomAmount;
-	
-	@SubscribeEvent
-	public void bowZoom(PlayerTickEvent event)
-	{
-	  
-	}
-	
 	@SubscribeEvent
 	public void onItemPickup(ItemPickupEvent event)
 	{

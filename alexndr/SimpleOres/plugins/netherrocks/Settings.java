@@ -83,32 +83,32 @@ public class Settings
     			fyriteMiningLevel = settings.get("Tool Stats", "Fyrite Mining Level", 3).getInt();
     			fyriteUsesNum = settings.get("Tool Stats", "Fyrite Uses Number", 150).getInt();
     			fyriteMiningSpeed = (float) settings.get("Tool Stats", "Fyrite Mining Speed", 8.0).getDouble(fyriteMiningSpeed);
-    			fyriteDamageVsEntity = settings.get("Tool Stats", "Fyrite Damage Vs. Entity", 4).getInt();
+    			fyriteDamageVsEntity = (float) settings.get("Tool Stats", "Fyrite Damage Vs. Entity", 4).getDouble(fyriteDamageVsEntity);
     			fyriteEnchantability = settings.get("Tool Stats", "Fyrite Enchantability", 7).getInt();
     			malachiteMiningLevel = settings.get("Tool Stats", "Malachite Mining Level", 3).getInt();
     			malachiteUsesNum = settings.get("Tool Stats", "Malachite Uses Number", 700).getInt();
     			malachiteMiningSpeed = (float) settings.get("Tool Stats", "Malachite Mining Speed", 9.0).getDouble(malachiteMiningSpeed);
-    			malachiteDamageVsEntity = settings.get("Tool Stats", "Malachite Damage Vs. Entity", 3).getInt();
+    			malachiteDamageVsEntity = (float) settings.get("Tool Stats", "Malachite Damage Vs. Entity", 3).getDouble(malachiteDamageVsEntity);
     			malachiteEnchantability = settings.get("Tool Stats", "Malachite Enchantability", 39).getInt();
     			ashstoneMiningLevel = settings.get("Tool Stats", "Ashstone Mining Level", 3).getInt();
     			ashstoneUsesNum = settings.get("Tool Stats", "Ashstone Uses Number", 900).getInt();
     			ashstoneMiningSpeed = (float) settings.get("Tool Stats", "Ashstone Mining Speed", 16.0).getDouble(ashstoneMiningSpeed);
-    			ashstoneDamageVsEntity = settings.get("Tool Stats", "Ashstone Damage Vs. Entity", 2).getInt();
+    			ashstoneDamageVsEntity = (float) settings.get("Tool Stats", "Ashstone Damage Vs. Entity", 2).getDouble(ashstoneDamageVsEntity);
     			ashstoneEnchantability = settings.get("Tool Stats", "Ashstone Enchantability", 7).getInt();
     			illumeniteMiningLevel = settings.get("Tool Stats", "Illumenite Mining Level", 3).getInt();
     			illumeniteUsesNum = settings.get("Tool Stats", "Illumenite Uses Number", 700).getInt();
     			illumeniteMiningSpeed = (float) settings.get("Tool Stats", "Illumenite Mining Speed", 8.0F).getDouble(illumeniteMiningSpeed);
-    			illumeniteDamageVsEntity = settings.get("Tool Stats", "Illumenite Damage Vs. Entity", 4).getInt();
+    			illumeniteDamageVsEntity = (float) settings.get("Tool Stats", "Illumenite Damage Vs. Entity", 4).getDouble(illumeniteDamageVsEntity);
     			illumeniteEnchantability = settings.get("Tool Stats", "Illumenite Enchantability", 7).getInt();
     			dragonstoneMiningLevel = settings.get("Tool Stats", "Dragonstone Mining Level", 4).getInt();
     			dragonstoneUsesNum = settings.get("Tool Stats", "Dragonstone Uses Number", 4000).getInt();
     			dragonstoneMiningSpeed = (float) settings.get("Tool Stats", "Dragonstone Mining Speed", 10.0).getDouble(dragonstoneMiningSpeed);
-    			dragonstoneDamageVsEntity = settings.get("Tool Stats", "Dragonstone Damage Vs. Entity", 8).getInt();
+    			dragonstoneDamageVsEntity = (float) settings.get("Tool Stats", "Dragonstone Damage Vs. Entity", 8).getDouble(dragonstoneDamageVsEntity);
     			dragonstoneEnchantability = settings.get("Tool Stats", "Dragonstone Enchantability", 27).getInt();
     			argoniteMiningLevel = settings.get("Tool Stats", "Argonite Mining Level", 3).getInt();
     			argoniteUsesNum = settings.get("Tool Stats", "Argonite Uses Number", 1300).getInt();
     			argoniteMiningSpeed = (float) settings.get("Tool Stats", "Argonite Mining Speed", 8.0).getDouble(argoniteMiningSpeed);
-    			argoniteDamageVsEntity = settings.get("Tool Stats", "Argonite Damage Vs. Entity", 3).getInt();
+    			argoniteDamageVsEntity = (float) settings.get("Tool Stats", "Argonite Damage Vs. Entity", 3).getDouble(argoniteDamageVsEntity);
     			argoniteEnchantability = settings.get("Tool Stats", "Argonite Enchantability", 18).getInt();
     		}
     		else toolStatDefaults();
@@ -298,7 +298,7 @@ public class Settings
 	public static int fyriteMiningLevel, malachiteMiningLevel, ashstoneMiningLevel, illumeniteMiningLevel, dragonstoneMiningLevel, argoniteMiningLevel;
 	public static int fyriteUsesNum, malachiteUsesNum, ashstoneUsesNum, illumeniteUsesNum, dragonstoneUsesNum, argoniteUsesNum;
 	public static float fyriteMiningSpeed, malachiteMiningSpeed, ashstoneMiningSpeed, illumeniteMiningSpeed, dragonstoneMiningSpeed, argoniteMiningSpeed;
-	public static int fyriteDamageVsEntity, malachiteDamageVsEntity, ashstoneDamageVsEntity, illumeniteDamageVsEntity, dragonstoneDamageVsEntity, argoniteDamageVsEntity;
+	public static float fyriteDamageVsEntity, malachiteDamageVsEntity, ashstoneDamageVsEntity, illumeniteDamageVsEntity, dragonstoneDamageVsEntity, argoniteDamageVsEntity;
 	public static int fyriteEnchantability, malachiteEnchantability, ashstoneEnchantability, illumeniteEnchantability, dragonstoneEnchantability, argoniteEnchantability;
 	
 	//Armor Stats

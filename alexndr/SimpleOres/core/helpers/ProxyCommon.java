@@ -73,10 +73,23 @@ public class ProxyCommon implements IGuiHandler
         return null;
 	}
 	
+	public void registerClientTickHandler()
+	{
+		
+	}
+	
 	/**
 	 * Adds capes for AleXndr and a select few plugin developers as a sign of appreciation.
 	 */
 	public void addModderCapes() 
+	{
+		
+	}
+	
+	/**
+	 * Sets the zoom amounts for bows. Overridden by ProxyClient.
+	 */
+	public void setZoomAmounts()
 	{
 		
 	}

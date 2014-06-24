@@ -8,6 +8,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.IChunkProvider;
+import alexndr.SimpleOres.api.helpers.LogHelper;
 import alexndr.SimpleOres.api.helpers.WorldGenHelper;
 import alexndr.SimpleOres.core.Content;
 import alexndr.SimpleOres.core.Settings;
@@ -19,6 +20,7 @@ import cpw.mods.fml.common.IWorldGenerator;
 
 public class Generator implements IWorldGenerator 
 {	
+	public String dimensionRange;
 	/**
 	 * Generates the ores in the world. Depending on which 'world' the player is in (ie. Nether or Surface), different methods are called.
 	 * These two methods are generateSurface and generateNether, which are below.
@@ -39,12 +41,11 @@ public class Generator implements IWorldGenerator
 		
 		if(Settings.enableCustomGeneration && Settings.numCustomGenerationRules > 0)
 		{
-    		
     		for(int i = 0; i < Settings.numCustomGenerationRules; i++)
     		{
     			String customRule = Settings.settings.get("Custom Generation Rules", "Custom Rule #" + (i+1), new String()).getString();
     			
-    			if(world.provider.dimensionId == splitCustomRuleInts(customRule, "dimensionId"))
+    			if(world.provider.dimensionId == splitCustomRuleInts(customRule, "dimensionId") || splitCustomRuleInts(customRule, "dimensionId") == -99999 || (splitCustomRuleInts(customRule, "dimensionId") == 99999 && isInRange(world.provider.dimensionId, dimensionRange)))
     			{
     				generateHigher(customRule, world, random, chunkX*16, chunkZ*16);
     			}
@@ -157,7 +158,17 @@ public class Generator implements IWorldGenerator
 		
 		if(requestedComponent == "dimensionId")
 		{
-			return Integer.parseInt(ruleParts.get(0).toString());
+			if(ruleParts.get(0).toString() == "ALL")
+			{
+				return -99999;
+			}
+			else if(ruleParts.get(0).toString().contains(":"))
+			{
+				dimensionRange = ruleParts.get(0).toString();
+				return 99999;
+			}
+			else
+				return Integer.parseInt(ruleParts.get(0).toString());
 		}
 		
 		if(requestedComponent == "spawnRate")
@@ -213,5 +224,32 @@ public class Generator implements IWorldGenerator
 		{
 			return null;
 		}
+	}
+	
+	private boolean isInRange(int worldId, String customRule)
+	{
+		List dimensionRange = Lists.newArrayList(Splitter.on(':').split(customRule));
+		try
+		{
+			int lowerId = Integer.parseInt(dimensionRange.get(0).toString());
+			int upperId = Integer.parseInt(dimensionRange.get(1).toString());
+			if(lowerId < upperId)
+			{
+				if(worldId >= lowerId && worldId <= upperId)
+				{
+					return true;
+				}
+			}
+			
+			else
+				return false;
+		}
+		catch(Exception e)
+		{
+			LogHelper.warning("Error processing custom dimension generation rule: " + customRule);
+			LogHelper.warning("You attempted to enter a dimension range, but have done so incorrectly. Make sure the first number is LESS THAN the second number.");;
+		}
+		
+		return false;
 	}
 }		

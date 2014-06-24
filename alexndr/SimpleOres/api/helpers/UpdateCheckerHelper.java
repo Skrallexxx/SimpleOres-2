@@ -20,6 +20,7 @@ public class UpdateCheckerHelper
 	static HashMap<String, Boolean> isModOutOfDate = new HashMap<String, Boolean>();
 	static HashMap<String, String> newVersions = new HashMap<String, String>();
 	static String VERSION = "";
+	static String UPDATEURL = "http://bit.ly/SimpleOres";
 	static boolean hasChecked = false;
 	
 	/**
@@ -30,13 +31,14 @@ public class UpdateCheckerHelper
 	 * @param modId The modId of the mod you want to check for. 
 	 * @param modInfoClassVersion The current version of the mod, such as the version number put in the @Mod line.
 	 */
-	public static void checkUpdates(String linkToVersionFile, String modId, String modInfoClassVersion)
+	public static void checkUpdates(String linkToVersionFile, String modId, String modInfoClassVersion, String updateUrl)
 	{	
 		try
 		{
 			modChecking = modId;
 			mods.add(modId);
 			VERSION = modInfoClassVersion;
+			UPDATEURL = updateUrl;
 			
 			URL url = new URL(linkToVersionFile);
 			HttpURLConnection connection = (HttpURLConnection) url.openConnection();
