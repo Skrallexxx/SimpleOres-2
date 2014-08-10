@@ -34,48 +34,57 @@ public class FusionPlugin
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) 
     {
-    	//Configuration
-    	Settings.doSettings(event);
-    	
-    	//Content
-    	setToolsAndArmorStats();
-    	Content.initialize();
-    	Recipes.preInitialize();
+		if(CoreHelper.coreSettings.enableFusionPlugin)
+		{
+	    	//Configuration
+	    	Settings.doSettings(event);
+	    	
+	    	//Content
+	    	setToolsAndArmorStats();
+	    	Content.initialize();
+	    	Recipes.preInitialize();
+		}
     }
     
     @EventHandler
     public void Init(FMLInitializationEvent event)
     {
-		INSTANCE = this;
-    	proxy.registerClientTickHandler();
-    	proxy.setZoomAmounts();
-    	Recipes.initialize();
-    	setAchievementTriggers();
-    	if(CoreHelper.coreSettings.enableUpdateChecker){UpdateCheckerHelper.checkUpdates(ModInfo.VERSIONURL, ModInfo.ID, ModInfo.VERSION, ModInfo.UPDATEURL);}
-		
-		GameRegistry.registerTileEntity(FusionFurnaceTileEntity.class, "fusionFurnace");
-		NetworkRegistry.INSTANCE.registerGuiHandler(INSTANCE, proxy);
-		
-        rendererBronze = CoreHelper.simpleores.proxy.addArmor("bronze");
-        rendererThyrium = CoreHelper.simpleores.proxy.addArmor("thyrium");
-        rendererSinisite = CoreHelper.simpleores.proxy.addArmor("sinisite");
-        
-        toolBronze.customCraftingMaterial = Content.bronze_ingot;
-        toolThyrium.customCraftingMaterial = Content.thyrium_ingot;
-        toolSinisite.customCraftingMaterial = Content.sinisite_ingot;
-        
-        armorBronze.customCraftingMaterial = Content.bronze_ingot;
-        armorThyrium.customCraftingMaterial = Content.thyrium_ingot;
-        armorSinisite.customCraftingMaterial = Content.sinisite_ingot;
-		
-    	LogHelper.info("Fusion Plugin: " + FusionRecipes.size() + " Fusion Furnace recipes were loaded.");
+		if(CoreHelper.coreSettings.enableFusionPlugin)
+		{
+			INSTANCE = this;
+	    	proxy.registerClientTickHandler();
+	    	proxy.setZoomAmounts();
+	    	Recipes.initialize();
+	    	setAchievementTriggers();
+	    	if(CoreHelper.coreSettings.enableUpdateChecker){UpdateCheckerHelper.checkUpdates(ModInfo.VERSIONURL, ModInfo.ID, ModInfo.VERSION, ModInfo.UPDATEURL);}
+			
+			GameRegistry.registerTileEntity(FusionFurnaceTileEntity.class, "fusionFurnace");
+			NetworkRegistry.INSTANCE.registerGuiHandler(INSTANCE, proxy);
+			
+	        rendererBronze = CoreHelper.simpleores.proxy.addArmor("bronze");
+	        rendererThyrium = CoreHelper.simpleores.proxy.addArmor("thyrium");
+	        rendererSinisite = CoreHelper.simpleores.proxy.addArmor("sinisite");
+	        
+	        toolBronze.customCraftingMaterial = Content.bronze_ingot;
+	        toolThyrium.customCraftingMaterial = Content.thyrium_ingot;
+	        toolSinisite.customCraftingMaterial = Content.sinisite_ingot;
+	        
+	        armorBronze.customCraftingMaterial = Content.bronze_ingot;
+	        armorThyrium.customCraftingMaterial = Content.thyrium_ingot;
+	        armorSinisite.customCraftingMaterial = Content.sinisite_ingot;
+			
+	    	LogHelper.info("Fusion Plugin: " + FusionRecipes.size() + " Fusion Furnace recipes were loaded.");
+		}
     }
     
     @EventHandler
     public void postInit(FMLPostInitializationEvent event)
     {
-    	Recipes.postInitialize();
-		LogHelper.info("Plugin Loader: Fusion Plugin loaded successfully.");
+		if(CoreHelper.coreSettings.enableFusionPlugin)
+		{
+	    	Recipes.postInitialize();
+			LogHelper.info("Plugin Loader: Fusion Plugin loaded successfully.");
+		}
     }
     
     public static void setToolsAndArmorStats()

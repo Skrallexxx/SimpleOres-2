@@ -12,7 +12,7 @@ import alexndr.SimpleOres.api.content.SimpleArmor;
 import alexndr.SimpleOres.api.content.SimpleAxe;
 import alexndr.SimpleOres.api.content.SimpleHoe;
 import alexndr.SimpleOres.api.content.SimpleIngot;
-import alexndr.SimpleOres.api.content.SimpleOre;
+import alexndr.SimpleOres.api.content.SimpleBlock;
 import alexndr.SimpleOres.api.content.SimplePickaxe;
 import alexndr.SimpleOres.api.content.SimpleShovel;
 import alexndr.SimpleOres.api.content.SimpleSword;
@@ -46,16 +46,16 @@ public class Content
 	public static void doBlocks()
 	{
 		//Block Properties
-		copper_ore = new SimpleOre(Material.rock).setHardness(Settings.copperOreHardness).setResistance(Settings.copperOreResistance).setBlockName("copper_ore");
-		copper_block = new SimpleOre(Material.iron).setHardness(Settings.copperBlockHardness).setResistance(Settings.copperBlockResistance).setBlockName("copper_block"); 
-		tin_ore = new SimpleOre(Material.rock).setHardness(Settings.tinOreHardness).setResistance(Settings.tinOreResistance).setBlockName("tin_ore");
-		tin_block = new SimpleOre(Material.iron).setHardness(Settings.tinBlockHardness).setResistance(Settings.tinBlockResistance).setBlockName("tin_block"); 
-		mythril_ore = new SimpleOre(Material.rock).setHardness(Settings.mythrilOreHardness).setResistance(Settings.mythrilOreResistance).setBlockName("mythril_ore");
-		mythril_block = new SimpleOre(Material.iron).setHardness(Settings.mythrilBlockHardness).setResistance(Settings.mythrilBlockResistance).setBlockName("mythril_block");
-		adamantium_ore = new SimpleOre(Material.rock).setHardness(Settings.adamantiumOreHardness).setResistance(Settings.adamantiumOreResistance).setBlockName("adamantium_ore");
-		adamantium_block = new SimpleOre(Material.iron).setHardness(Settings.adamantiumBlockHardness).setResistance(Settings.adamantiumBlockResistance).setBlockName("adamantium_block");
-		onyx_ore = new SimpleOre(Material.rock).setStackToDrop(new ItemStack(onyx_gem)).setHardness(Settings.onyxOreHardness).setResistance(Settings.onyxOreResistance).setBlockName("onyx_ore");
-		onyx_block = new SimpleOre(Material.iron).setHardness(Settings.onyxBlockHardness).setResistance(Settings.onyxBlockResistance).setBlockName("onyx_block");
+		copper_ore = new SimpleBlock(Material.rock).setHardness(Settings.copperOreHardness).setResistance(Settings.copperOreResistance).setBlockName("copper_ore");
+		copper_block = new SimpleBlock(Material.iron).setAsBeaconBase(true).setHardness(Settings.copperBlockHardness).setResistance(Settings.copperBlockResistance).setBlockName("copper_block"); 
+		tin_ore = new SimpleBlock(Material.rock).setHardness(Settings.tinOreHardness).setResistance(Settings.tinOreResistance).setBlockName("tin_ore");
+		tin_block = new SimpleBlock(Material.iron).setAsBeaconBase(true).setHardness(Settings.tinBlockHardness).setResistance(Settings.tinBlockResistance).setBlockName("tin_block"); 
+		mythril_ore = new SimpleBlock(Material.rock).setHardness(Settings.mythrilOreHardness).setResistance(Settings.mythrilOreResistance).setBlockName("mythril_ore");
+		mythril_block = new SimpleBlock(Material.iron).setAsBeaconBase(true).setHardness(Settings.mythrilBlockHardness).setResistance(Settings.mythrilBlockResistance).setBlockName("mythril_block");
+		adamantium_ore = new SimpleBlock(Material.rock).setHardness(Settings.adamantiumOreHardness).setResistance(Settings.adamantiumOreResistance).setBlockName("adamantium_ore");
+		adamantium_block = new SimpleBlock(Material.iron).setAsBeaconBase(true).setHardness(Settings.adamantiumBlockHardness).setResistance(Settings.adamantiumBlockResistance).setBlockName("adamantium_block");
+		onyx_ore = new SimpleBlock(Material.rock).setStackToDrop(new ItemStack(onyx_gem)).setHardness(Settings.onyxOreHardness).setResistance(Settings.onyxOreResistance).setBlockName("onyx_ore");
+		onyx_block = new SimpleBlock(Material.iron).setAsBeaconBase(true).setHardness(Settings.onyxBlockHardness).setResistance(Settings.onyxBlockResistance).setBlockName("onyx_block");
 		mythril_furnace = new MythrilFurnace(false).setHardness(Settings.mythrilFurnaceHardness).setResistance(Settings.mythrilFurnaceResistance).setBlockName("mythril_furnace");
 		mythril_furnace_lit = new MythrilFurnace(true).setHardness(Settings.mythrilFurnaceHardness).setLightLevel(Settings.mythrilFurnaceLightValue).setResistance(Settings.mythrilFurnaceResistance).setBlockName("mythril_furnace_lit");
 		onyx_furnace = new OnyxFurnace(false).setHardness(Settings.onyxFurnaceHardness).setResistance(Settings.onyxFurnaceResistance).setBlockName("onyx_furnace");

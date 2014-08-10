@@ -1,6 +1,15 @@
 package alexndr.SimpleOres.core.helpers;
 
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
+
+import javax.imageio.ImageIO;
+
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.IImageBuffer;
 import net.minecraft.client.renderer.ThreadDownloadImageData;
 import net.minecraft.client.renderer.texture.ITextureObject;
 import net.minecraft.util.ResourceLocation;
@@ -28,23 +37,6 @@ public class ProxyClient extends ProxyCommon
     {
     	FMLCommonHandler.instance().bus().register(new ZoomEventHelper());
     }
-    
-	/**
-	 * Adds capes for AleXndr and a select few plugin developers as a sign of appreciation.
-	 */
-    @Override
-    public void addModderCapes()
-	{
-    	String capeURL = "https://dl.dropboxusercontent.com/u/66466201/SimpleOres/SimpleOres%20Cape.png";
-		String[] devs = {"AleXndrTheGr8st", "akkamaddi", "TheOldOne822"};
-
-		ThreadDownloadImageData image = new ThreadDownloadImageData(capeURL, null, null);
-
-		for (String username : devs) 
-		{
-			Minecraft.getMinecraft().renderEngine.loadTexture(new ResourceLocation("cloaks/" + username), (ITextureObject) image);
-		}
-	}
     
     @Override
     public void setZoomAmounts()

@@ -9,6 +9,7 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.MathHelper;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import alexndr.SimpleOres.api.helpers.TabHelper;
 import alexndr.SimpleOres.core.SimpleOres;
@@ -16,16 +17,17 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class SimpleOre extends Block
+public class SimpleBlock extends Block
 {
 	private String modName = "simpleores";
+	private boolean isBeaconBase = false;
 	private ItemStack stackDrop = null;
 	private CreativeTabs tab = SimpleOres.tabSimpleBlocks;
 	
 	/**
 	 * Constructor for a basic block.
 	 */
-	public SimpleOre(Material material) 
+	public SimpleBlock(Material material) 
 	{
 		super(material);
 		this.setCreativeTab(TabHelper.getBlocksTab(tab));
@@ -44,7 +46,7 @@ public class SimpleOre extends Block
 	/**
 	 * The modID of the mod adding the block. Used to find textures. Defaults to "simpleores".
 	 */
-	public SimpleOre modId(String modId)
+	public SimpleBlock modId(String modId)
 	{
 		modName = modId;
 		return this;
@@ -53,7 +55,7 @@ public class SimpleOre extends Block
 	/**
 	 * Sets the creative tab for the block to appear in. Defaults to SimpleOres.tabSimpleBlocks.
 	 */
-	public SimpleOre setTab(CreativeTabs creativetab)
+	public SimpleBlock setTab(CreativeTabs creativetab)
 	{
 		tab = creativetab;
 		this.setCreativeTab(TabHelper.getBlocksTab(tab));
@@ -63,7 +65,7 @@ public class SimpleOre extends Block
 	/**
 	 * Sets an itemstack to drop when the block is destroyed. Only used if block drops something other than itself.
 	 */
-	public SimpleOre setStackToDrop(ItemStack stack)
+	public SimpleBlock setStackToDrop(ItemStack stack)
 	{
 		this.stackDrop = stack;
 		return this;
@@ -72,10 +74,20 @@ public class SimpleOre extends Block
 	/**
 	 * Registers the block in the GameRegistry, with the name given, and sends the name through to setUnlocalizedName in the super class.
 	 */
-	public SimpleOre setBlockName(String unlocalizedName)
+	public SimpleBlock setBlockName(String unlocalizedName)
 	{
 		super.setBlockName(unlocalizedName);
 		GameRegistry.registerBlock(this, unlocalizedName);
+		return this;
+	}
+	
+	/**
+	 * Registers the block as a suitable block to be used for the base of a beacon.
+	 * @return
+	 */
+	public SimpleBlock setAsBeaconBase(boolean setAsBase)
+	{
+		this.isBeaconBase = setAsBase;
 		return this;
 	}
 	
@@ -128,6 +140,12 @@ public class SimpleOre extends Block
         {
             return this.quantityDropped(par2Random);
         }
+    }
+    
+    @Override
+    public boolean isBeaconBase(IBlockAccess worldObj, int x, int y, int z, int beaconX, int beaconY, int beaconZ)
+    {
+    	return isBeaconBase;
     }
 	
 	protected boolean canSilkHarvest()

@@ -8,7 +8,7 @@ import alexndr.SimpleOres.api.content.SimpleArmor;
 import alexndr.SimpleOres.api.content.SimpleAxe;
 import alexndr.SimpleOres.api.content.SimpleHoe;
 import alexndr.SimpleOres.api.content.SimpleIngot;
-import alexndr.SimpleOres.api.content.SimpleOre;
+import alexndr.SimpleOres.api.content.SimpleBlock;
 import alexndr.SimpleOres.api.content.SimplePickaxe;
 import alexndr.SimpleOres.api.content.SimpleShovel;
 import alexndr.SimpleOres.api.content.SimpleSword;
@@ -58,9 +58,9 @@ public class Content
 	public static void doBlocks()
 	{
 		//Block Properties
-		bronze_block = new SimpleOre(Material.iron).modId("simpleoresfusion").setHardness(Settings.bronzeBlockHardness).setResistance(Settings.bronzeBlockResistance).setBlockName("bronze_block");
-		thyrium_block = new SimpleOre(Material.iron).modId("simpleoresfusion").setHardness(Settings.thyriumBlockHardness).setResistance(Settings.thyriumBlockResistance).setBlockName("thyrium_block");
-		sinisite_block = new SimpleOre(Material.iron).modId("simpleoresfusion").setHardness(Settings.sinisiteBlockHardness).setResistance(Settings.sinisiteBlockResistance).setBlockName("sinisite_block");
+		bronze_block = new SimpleBlock(Material.iron).setAsBeaconBase(true).modId("simpleoresfusion").setHardness(Settings.bronzeBlockHardness).setResistance(Settings.bronzeBlockResistance).setBlockName("bronze_block");
+		thyrium_block = new SimpleBlock(Material.iron).setAsBeaconBase(true).modId("simpleoresfusion").setHardness(Settings.thyriumBlockHardness).setResistance(Settings.thyriumBlockResistance).setBlockName("thyrium_block");
+		sinisite_block = new SimpleBlock(Material.iron).setAsBeaconBase(true).modId("simpleoresfusion").setHardness(Settings.sinisiteBlockHardness).setResistance(Settings.sinisiteBlockResistance).setBlockName("sinisite_block");
 		fusion_furnace = new FusionFurnace(false).setHardness(Settings.fusionFurnaceHardness).setResistance(Settings.fusionFurnaceResistance).setBlockName("fusion_furnace");
 		fusion_furnace_lit = new FusionFurnace(true).setHardness(Settings.fusionFurnaceHardness).setResistance(Settings.fusionFurnaceResistance).setLightLevel(Settings.fusionFurnaceLightValue).setBlockName("fusion_furnace_lit");
 		

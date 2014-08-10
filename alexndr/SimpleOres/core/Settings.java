@@ -9,7 +9,7 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 public class Settings 
 {
 	public static Configuration settings;
-
+	
 	/**
 	 * The method that loads/creates the settings file. Values can be changed from true to false depending on user preference, and certain other values can be set. This is called by the main SimpleOres class.
 	 */
@@ -34,6 +34,13 @@ public class Settings
 	    	enableCustomGeneration = settings.get("Toggles", "(Advanced) Enable Custom Generation?", false).getBoolean(enableCustomGeneration);
 	    	enableColoredGuis = settings.get("Toggles", "Enable Colored Gui's?", true).getBoolean(enableColoredGuis);
 	    	enableVerboseLogging = settings.get("Toggles", "Enable Verbose Logging?", false).getBoolean(enableColoredGuis);
+	    	
+	    	//Plugins
+	    	settings.addCustomCategoryComment("Plugins", "WARNING: Disabling a plugin that you have been using will delete all it's blocks and items from any world you load"
+	    			+ " while it is disabled. Only disable these if you are sure you don't want to use the plugin.");
+	    	enableFusionPlugin = settings.get("Plugins", "Enable Fusion Plugin?", true).getBoolean(enableFusionPlugin);
+	    	enableNetherrocksPlugin = settings.get("Plugins", "Enable Netherrocks Plugin?", true).getBoolean(enableNetherrocksPlugin);
+	    	enableAestheticsPlugin = settings.get("Plugins", "Enable Aesthetics Plugin? (Not Yet Implemented)", true).getBoolean(enableAestheticsPlugin);
 	    	
         	//Ore Spawn Rates 
         	copperSpawnRate = settings.get("Spawn Rates", "Copper Spawn Rate", 35).getInt();
@@ -79,7 +86,7 @@ public class Settings
         				+ "dimensionId, modId:host_block_name@blockMeta, modId:spawning_block_name@blockMeta, spawnRate, maxHeight, minHeight, veinSize."
         				+ "Additionally, dimensionId can be a range, or all dimensions. For a range, use 'lowerId:upperId' and for all use 'ALL'.");
         		
-        		String example = "1-5, minecraft:end_stone@0, minecraft:diamond_block@0, 500, 256, 0, 20";
+        		String example = "1:5, minecraft:end_stone@0, minecraft:diamond_block@0, 500, 256, 0, 20";
         		numCustomGenerationRules = settings.get("Custom Generation Rules", "Number of Custom Generation Rules", 0).getInt();	
         		exampleCustomRule = settings.get("Custom Generation Rules", "Example Custom Rule (not loaded)", example).getString();
         		
@@ -324,6 +331,9 @@ public class Settings
 	public static boolean enableSimpleOresTabs, enableSeparateTabs, enableColoredGuis;
 	public static boolean enableUpdateChecker, enableVerboseLogging, enableCustomGeneration;
 	public static boolean enableToolStatModification, enableArmorStatModification, enableBlockStatModification;
+	
+	//Plugins
+	public static boolean enableFusionPlugin, enableNetherrocksPlugin, enableAestheticsPlugin;
 		
 	//Ore Spawn Rates
 	public static int copperSpawnRate, tinSpawnRate, mythrilSpawnRate, adamantiumSpawnRate, onyxSpawnRate;

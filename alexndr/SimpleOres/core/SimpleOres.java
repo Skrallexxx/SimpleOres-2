@@ -69,7 +69,6 @@ public class SimpleOres
   	public void Init(FMLInitializationEvent event)
   	{
 		INSTANCE = this;
-  		proxy.addModderCapes();
   		proxy.registerClientTickHandler();
   		proxy.setZoomAmounts();
   		Recipes.initialize();

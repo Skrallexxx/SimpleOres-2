@@ -5,7 +5,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingJumpEvent;
-import alexndr.SimpleOres.api.helpers.LogHelper;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
 public class EventHelper 
@@ -33,10 +32,6 @@ public class EventHelper
 	    	    	{
 	    	        	event.setCanceled(true);
 	    	        	player.extinguish();
-	    	        	if(event.isCanceled())
-	    	        	{
-		    	        	LogHelper.verboseInfo("Netherrocks Plugin: Fire/Lava damage cancelled by wearing a full set of Fyrite Armor");
-	    	        	}
 	    	    	}
 	        	}
 	        }
@@ -66,10 +61,6 @@ public class EventHelper
 	    	    	if(event.source.equals(DamageSource.fall) && Settings.enableArmorEffects)
 	    	    	{
 	    	        	event.setCanceled(true);
-	    	        	if(event.isCanceled())
-	    	        	{
-		    	        	LogHelper.verboseInfo("Netherrocks Plugin: Fall damage cancelled by wearing a full set of Illumenite Armor");
-	    	        	}
 	    	    	}
 	        	}
 	        }
@@ -83,7 +74,6 @@ public class EventHelper
 						if(player.fallDistance < Settings.malachiteArmorMinFallHeight)
 						{
 							event.setCanceled(true);
-		    	        	LogHelper.verboseInfo("Netherrocks Plugin: Fall damage reduced by wearing a full set of Malachite Armor");
 						}
 					}
 				}
@@ -110,7 +100,6 @@ public class EventHelper
 					if(!player.isSneaking() && Settings.enableArmorEffects)
 					{
 						player.motionY += Settings.malachiteArmorJumpBoostAmount;
-	    	        	LogHelper.verboseInfo("Netherrocks Plugin: Player jump height modified by wearing a full set of Malachite Armor");
 					}
 				}
 			}

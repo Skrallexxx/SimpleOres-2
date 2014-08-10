@@ -2,7 +2,7 @@ package alexndr.SimpleOres.plugins.aesthetics;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import alexndr.SimpleOres.api.content.SimpleOre;
+import alexndr.SimpleOres.api.content.SimpleBlock;
 import alexndr.SimpleOres.api.content.SimpleStairs;
 import alexndr.SimpleOres.api.helpers.LogHelper;
 import cpw.mods.fml.common.Loader;
@@ -23,11 +23,11 @@ public class Content
 	{
 		if(Loader.isModLoaded("simpleores") && Settings.enableSimpleOresContent)
 		{
-			copper_bricks = new SimpleOre(Material.iron).modId("aestheticsplugin").setHardness(Settings.copperBricksHardness).setResistance(Settings.copperBricksResistance).setBlockName("coppe_bricks");
-			tin_bricks = new SimpleOre(Material.iron).modId("aestheticsplugin").setHardness(Settings.tinBricksHardness).setResistance(Settings.tinBricksResistance).setBlockName("tin_bricks");
-			mythril_bricks = new SimpleOre(Material.iron).modId("aestheticsplugin").setHardness(Settings.mythrilBricksHardness).setResistance(Settings.mythrilBricksResistance).setBlockName("mythril_bricks");
-			adamantium_bricks = new SimpleOre(Material.iron).modId("aestheticsplugin").setHardness(Settings.adamantiumBricksHardness).setResistance(Settings.adamantiumBricksResistance).setBlockName("adamantium_bricks");
-			onyx_bricks = new SimpleOre(Material.iron).modId("aestheticsplugin").setHardness(Settings.onyxBricksHardness).setResistance(Settings.onyxBricksResistance).setBlockName("onyx_bricks");
+			copper_bricks = new SimpleBlock(Material.iron).modId("aestheticsplugin").setHardness(Settings.copperBricksHardness).setResistance(Settings.copperBricksResistance).setBlockName("coppe_bricks");
+			tin_bricks = new SimpleBlock(Material.iron).modId("aestheticsplugin").setHardness(Settings.tinBricksHardness).setResistance(Settings.tinBricksResistance).setBlockName("tin_bricks");
+			mythril_bricks = new SimpleBlock(Material.iron).modId("aestheticsplugin").setHardness(Settings.mythrilBricksHardness).setResistance(Settings.mythrilBricksResistance).setBlockName("mythril_bricks");
+			adamantium_bricks = new SimpleBlock(Material.iron).modId("aestheticsplugin").setHardness(Settings.adamantiumBricksHardness).setResistance(Settings.adamantiumBricksResistance).setBlockName("adamantium_bricks");
+			onyx_bricks = new SimpleBlock(Material.iron).modId("aestheticsplugin").setHardness(Settings.onyxBricksHardness).setResistance(Settings.onyxBricksResistance).setBlockName("onyx_bricks");
 			copper_brick_stairs = new SimpleStairs(copper_bricks, 0).setBlockName("copper_brick_stairs");
 			tin_brick_stairs = new SimpleStairs(tin_bricks, 0).setBlockName("tin_brick_stairs");
 			mythril_brick_stairs = new SimpleStairs(mythril_bricks, 0).setBlockName("mythril_brick_stairs");

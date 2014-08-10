@@ -42,19 +42,70 @@ public class Netherrocks
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event)
 	{
-		MinecraftForge.EVENT_BUS.register(new EventHelper());
-		
-		//Configuration
-		Settings.loadSettings(event);
-		
-		//Content
-		setToolAndArmorStats();
-		Content.initialize();
-		Recipes.preInitialize();
+		if(CoreHelper.coreSettings.enableFusionPlugin)
+		{
+			MinecraftForge.EVENT_BUS.register(new EventHelper());
+			
+			//Configuration
+			Settings.loadSettings(event);
+			
+			//Content
+			setToolAndArmorStats();
+			Content.initialize();
+			Recipes.preInitialize();
+		}
 	}
+	
+	@EventHandler
+	public void Init(FMLInitializationEvent event)
+	{
+		if(CoreHelper.coreSettings.enableFusionPlugin)
+		{
+			Recipes.initialize();
+			INSTANCE = this;
+			if(CoreHelper.coreSettings.enableUpdateChecker){UpdateCheckerHelper.checkUpdates(ModInfo.VERSIONURL, ModInfo.ID, ModInfo.VERSION, ModInfo.UPDATEURL);}
+			
+			setAchievementTriggers();
+			
+			/**
+			 * Registering things such as the world generator, tile entities and GUI's. Adds localisations.
+			 * Thanks to @zot for the code for loading localisations automatically.
+			 */
+			NetworkRegistry.INSTANCE.registerGuiHandler(INSTANCE, proxy);
+			GameRegistry.registerWorldGenerator(new Generator(), 2);
+			GameRegistry.registerTileEntity(NetherFurnaceTileEntity.class, "NetherrocksNetherFurnace");
+			
+	        /**
+	         * Adds the textures for the worn armor models.
+	         */
+	        rendererFyrite = proxy.addArmor("fyrite");
+	        rendererMalachite = proxy.addArmor("malachite");
+	        rendererIllumenite = proxy.addArmor("illumenite");
+	        rendererDragonstone = proxy.addArmor("dragonstone");
+	        
+	        /**
+	         * Sets what item can be used to repair tools/armor of that type. ie. Copper Ingot to repair copper tools and items.
+	         */   
+	        toolMalachite.customCraftingMaterial = Content.malachite_ingot;
+	        toolAshstone.customCraftingMaterial = Content.ashstone_gem;
+	        toolDragonstone.customCraftingMaterial = Content.dragonstone_gem;
+	        toolArgonite.customCraftingMaterial = Content.argonite_ingot;
+	        toolFyrite.customCraftingMaterial = Content.fyrite_ingot;
+	        toolIllumenite.customCraftingMaterial = Content.illumenite_ingot;
+	        
+	        armorFyrite.customCraftingMaterial = Content.fyrite_ingot;
+	        armorMalachite.customCraftingMaterial = Content.malachite_ingot;
+	        armorIllumenite.customCraftingMaterial = Content.illumenite_ingot;
+	        armorDragonstone.customCraftingMaterial = Content.dragonstone_gem;
+			
+			LogHelper.info("Plugin Loader: Netherrocks Plugin loaded successfully.");
+		}
+	}
+	
 	
 	public void setToolAndArmorStats()
 	{
+		
 		toolFyrite = EnumHelper.addToolMaterial("FYRITE", Settings.fyriteMiningLevel, Settings.fyriteUsesNum, Settings.fyriteMiningSpeed, Settings.fyriteDamageVsEntity, Settings.fyriteEnchantability);
 		toolMalachite = EnumHelper.addToolMaterial("MALACHITE", Settings.malachiteMiningLevel, Settings.malachiteUsesNum, Settings.malachiteMiningSpeed, Settings.malachiteDamageVsEntity, Settings.malachiteEnchantability);
 		toolAshstone = EnumHelper.addToolMaterial("ASHSTONE", Settings.ashstoneMiningLevel, Settings.ashstoneUsesNum, Settings.ashstoneMiningSpeed, Settings.ashstoneDamageVsEntity, Settings.ashstoneEnchantability);
@@ -66,49 +117,6 @@ public class Netherrocks
 		armorMalachite = EnumHelper.addArmorMaterial("MALACHITE", Settings.malachiteArmorDurability, Settings.malachiteArmorDamageReduction, Settings.malachiteArmorEnchantability);
 		armorIllumenite = EnumHelper.addArmorMaterial("ILLUMENITE", Settings.illumeniteArmorDurability, Settings.illumeniteArmorDamageReduction, Settings.illumeniteArmorEnchantability);
 		armorDragonstone = EnumHelper.addArmorMaterial("DRAGONSTONE", Settings.dragonstoneArmorDurability, Settings.dragonstoneArmorDamageReduction, Settings.dragonstoneArmorEnchantability);
-	}
-	
-	@EventHandler
-	public void Init(FMLInitializationEvent event)
-	{
-		Recipes.initialize();
-		INSTANCE = this;
-		if(CoreHelper.coreSettings.enableUpdateChecker){UpdateCheckerHelper.checkUpdates(ModInfo.VERSIONURL, ModInfo.ID, ModInfo.VERSION, ModInfo.UPDATEURL);}
-		
-		setAchievementTriggers();
-		
-		/**
-		 * Registering things such as the world generator, tile entities and GUI's. Adds localisations.
-		 * Thanks to @zot for the code for loading localisations automatically.
-		 */
-		NetworkRegistry.INSTANCE.registerGuiHandler(INSTANCE, proxy);
-		GameRegistry.registerWorldGenerator(new Generator(), 2);
-		GameRegistry.registerTileEntity(NetherFurnaceTileEntity.class, "NetherrocksNetherFurnace");
-		
-        /**
-         * Adds the textures for the worn armor models.
-         */
-        rendererFyrite = proxy.addArmor("fyrite");
-        rendererMalachite = proxy.addArmor("malachite");
-        rendererIllumenite = proxy.addArmor("illumenite");
-        rendererDragonstone = proxy.addArmor("dragonstone");
-        
-        /**
-         * Sets what item can be used to repair tools/armor of that type. ie. Copper Ingot to repair copper tools and items.
-         */   
-        toolMalachite.customCraftingMaterial = Content.malachite_ingot;
-        toolAshstone.customCraftingMaterial = Content.ashstone_gem;
-        toolDragonstone.customCraftingMaterial = Content.dragonstone_gem;
-        toolArgonite.customCraftingMaterial = Content.argonite_ingot;
-        toolFyrite.customCraftingMaterial = Content.fyrite_ingot;
-        toolIllumenite.customCraftingMaterial = Content.illumenite_ingot;
-        
-        armorFyrite.customCraftingMaterial = Content.fyrite_ingot;
-        armorMalachite.customCraftingMaterial = Content.malachite_ingot;
-        armorIllumenite.customCraftingMaterial = Content.illumenite_ingot;
-        armorDragonstone.customCraftingMaterial = Content.dragonstone_gem;
-		
-		LogHelper.info("Plugin Loader: Netherrocks Plugin loaded successfully.");
 	}
 	
 	public static void setAchievementTriggers()

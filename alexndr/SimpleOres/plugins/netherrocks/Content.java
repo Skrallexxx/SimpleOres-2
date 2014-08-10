@@ -10,7 +10,7 @@ import alexndr.SimpleOres.api.content.SimpleArmor;
 import alexndr.SimpleOres.api.content.SimpleAxe;
 import alexndr.SimpleOres.api.content.SimpleHoe;
 import alexndr.SimpleOres.api.content.SimpleIngot;
-import alexndr.SimpleOres.api.content.SimpleOre;
+import alexndr.SimpleOres.api.content.SimpleBlock;
 import alexndr.SimpleOres.api.content.SimplePickaxe;
 import alexndr.SimpleOres.api.content.SimpleShovel;
 import alexndr.SimpleOres.api.content.SimpleSword;
@@ -35,18 +35,18 @@ public class Content
 	public static void doBlocks()
 	{
 		//Block Details
-		fyrite_ore = new SimpleOre(Material.rock).modId("netherrocks").setHardness(Settings.fyriteOreHardness).setResistance(Settings.fyriteOreResistance).setBlockName("fyrite_ore");
-		fyrite_block = new SimpleOre(Material.iron).modId("netherrocks").setHardness(Settings.fyriteBlockHardness).setResistance(Settings.fyriteBlockResistance).setBlockName("fyrite_block");
-		malachite_ore = new SimpleOre(Material.rock).modId("netherrocks").setHardness(Settings.malachiteOreHardness).setResistance(Settings.malachiteOreResistance).setBlockName("malachite_ore");
-		malachite_block = new SimpleOre(Material.iron).modId("netherrocks").setHardness(Settings.malachiteBlockHardness).setResistance(Settings.malachiteBlockResistance).setBlockName("malachite_block");
-		ashstone_ore = new SimpleOre(Material.rock).modId("netherrocks").setStackToDrop(new ItemStack(Content.ashstone_gem)).setHardness(Settings.ashstoneOreHardness).setResistance(Settings.ashstoneOreResistance).setBlockName("ashstone_ore");
-		ashstone_block = new SimpleOre(Material.iron).modId("netherrocks").setHardness(Settings.ashstoneBlockHardness).setResistance(Settings.ashstoneBlockResistance).setBlockName("ashstone_block");
-		illumenite_ore = new SimpleOre(Material.rock).modId("netherrocks").setHardness(Settings.illumeniteOreHardness).setResistance(Settings.illumeniteOreResistance).setLightLevel(Settings.illumeniteOreLightValue).setBlockName("illumenite_ore");
-		illumenite_block = new SimpleOre(Material.iron).modId("netherrocks").setHardness(Settings.illumeniteBlockHardness).setResistance(Settings.illumeniteBlockResistance).setLightLevel(Settings.illumeniteBlockLightValue).setBlockName("illumenite_block");
-		dragonstone_ore = new SimpleOre(Material.rock).modId("netherrocks").setStackToDrop(new ItemStack(Content.dragonstone_gem)).setHardness(Settings.dragonstoneOreHardness).setResistance(Settings.dragonstoneOreResistance).setBlockName("dragonstone_ore");
-		dragonstone_block = new SimpleOre(Material.iron).modId("netherrocks").setHardness(Settings.dragonstoneBlockHardness).setResistance(Settings.dragonstoneBlockResistance).setBlockName("dragonstone_block");
-		argonite_ore = new SimpleOre(Material.rock).modId("netherrocks").setHardness(Settings.argoniteOreHardness).setResistance(Settings.argoniteOreResistance).setBlockName("argonite_ore");
-		argonite_block = new SimpleOre(Material.iron).modId("netherrocks").setHardness(Settings.argoniteBlockHardness).setResistance(Settings.argoniteBlockResistance).setBlockName("argonite_block");
+		fyrite_ore = new SimpleBlock(Material.rock).modId("netherrocks").setHardness(Settings.fyriteOreHardness).setResistance(Settings.fyriteOreResistance).setBlockName("fyrite_ore");
+		fyrite_block = new SimpleBlock(Material.iron).setAsBeaconBase(true).modId("netherrocks").setHardness(Settings.fyriteBlockHardness).setResistance(Settings.fyriteBlockResistance).setBlockName("fyrite_block");
+		malachite_ore = new SimpleBlock(Material.rock).modId("netherrocks").setHardness(Settings.malachiteOreHardness).setResistance(Settings.malachiteOreResistance).setBlockName("malachite_ore");
+		malachite_block = new SimpleBlock(Material.iron).setAsBeaconBase(true).modId("netherrocks").setHardness(Settings.malachiteBlockHardness).setResistance(Settings.malachiteBlockResistance).setBlockName("malachite_block");
+		ashstone_ore = new SimpleBlock(Material.rock).modId("netherrocks").setStackToDrop(new ItemStack(Content.ashstone_gem)).setHardness(Settings.ashstoneOreHardness).setResistance(Settings.ashstoneOreResistance).setBlockName("ashstone_ore");
+		ashstone_block = new SimpleBlock(Material.iron).setAsBeaconBase(true).modId("netherrocks").setHardness(Settings.ashstoneBlockHardness).setResistance(Settings.ashstoneBlockResistance).setBlockName("ashstone_block");
+		illumenite_ore = new SimpleBlock(Material.rock).modId("netherrocks").setHardness(Settings.illumeniteOreHardness).setResistance(Settings.illumeniteOreResistance).setLightLevel(Settings.illumeniteOreLightValue).setBlockName("illumenite_ore");
+		illumenite_block = new SimpleBlock(Material.iron).setAsBeaconBase(true).modId("netherrocks").setHardness(Settings.illumeniteBlockHardness).setResistance(Settings.illumeniteBlockResistance).setLightLevel(Settings.illumeniteBlockLightValue).setBlockName("illumenite_block");
+		dragonstone_ore = new SimpleBlock(Material.rock).modId("netherrocks").setStackToDrop(new ItemStack(Content.dragonstone_gem)).setHardness(Settings.dragonstoneOreHardness).setResistance(Settings.dragonstoneOreResistance).setBlockName("dragonstone_ore");
+		dragonstone_block = new SimpleBlock(Material.iron).setAsBeaconBase(true).modId("netherrocks").setHardness(Settings.dragonstoneBlockHardness).setResistance(Settings.dragonstoneBlockResistance).setBlockName("dragonstone_block");
+		argonite_ore = new SimpleBlock(Material.rock).modId("netherrocks").setHardness(Settings.argoniteOreHardness).setResistance(Settings.argoniteOreResistance).setBlockName("argonite_ore");
+		argonite_block = new SimpleBlock(Material.iron).setAsBeaconBase(true).modId("netherrocks").setHardness(Settings.argoniteBlockHardness).setResistance(Settings.argoniteBlockResistance).setBlockName("argonite_block");
 		nether_furnace = new NetherFurnace(false).setHardness(Settings.netherFurnaceHardness).setResistance(Settings.netherFurnaceResistance).setBlockName("nether_furnace");
 		nether_furnace_lit = new NetherFurnace(true).setHardness(Settings.netherFurnaceHardness).setResistance(Settings.netherFurnaceResistance).setLightLevel(Settings.netherFurnaceLightValue).setBlockName("nether_furnace_lit");
 		

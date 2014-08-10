@@ -21,23 +21,31 @@ public class AestheticsPlugin
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event)
 	{
-		Settings.doSettings(event);
-		Content.initialize();
+		if(CoreHelper.coreSettings.enableAestheticsPlugin)
+		{
+			Settings.doSettings(event);
+			Content.initialize();
+		}
 	}
 	
 	@EventHandler
 	public void Init(FMLInitializationEvent event)
 	{
-		Recipes.initialize();
-		INSTANCE = this;
-		
-	  	if(CoreHelper.coreSettings.enableUpdateChecker){UpdateCheckerHelper.checkUpdates(ModInfo.VERSIONURL, ModInfo.ID, ModInfo.VERSION, ModInfo.UPDATEURL);}
-
+		if(CoreHelper.coreSettings.enableAestheticsPlugin)
+		{
+			Recipes.initialize();
+			INSTANCE = this;
+			
+		  	if(CoreHelper.coreSettings.enableUpdateChecker){UpdateCheckerHelper.checkUpdates(ModInfo.VERSIONURL, ModInfo.ID, ModInfo.VERSION, ModInfo.UPDATEURL);}
+		}
 	}
 	
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent event)
 	{
-		LogHelper.info("Plugin Loader: Aesthetics Plugin loaded successfully.");
+		if(CoreHelper.coreSettings.enableAestheticsPlugin)
+		{
+			LogHelper.info("Plugin Loader: Aesthetics Plugin loaded successfully.");
+		}
 	}
 }
