@@ -76,7 +76,9 @@ public class WorldGenHelper extends WorldGenerator
                             {
                                 double var45 = ((double)var44 + 0.5D - var24) / (var28 / 2.0D);
 
-                                if (var39 * var39 + var42 * var42 + var45 * var45 < 1.0D && par1World.getBlock(var38, var41, var44) == replacedBlock)
+                                if (var39 * var39 + var42 * var42 + var45 * var45 < 1.0D 
+                                	&& par1World.getBlock(var38, var41, var44).isReplaceableOreGen(par1World, par3, par4, par5, this.replacedBlock)
+
                                 {
                                     par1World.setBlock(var38, var41, var44, this.minableBlock, minableBlockMeta, 2);
                                 }
